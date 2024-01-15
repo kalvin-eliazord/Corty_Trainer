@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\Entity.h.obj",
+            "outputs": [
+                "C:\\Users\\kalvi\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\x64\\Debug\\vc143.pdb",
+                "x64\\Debug\\",
+                "C:\\Users\\kalvi\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\x64\\Debug\\Entity.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "Entity.h",
+                    "source-path": "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\entity.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
