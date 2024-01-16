@@ -1,12 +1,12 @@
 #pragma once
-#include <cstdint>
+#include "header.h"
 
 struct Vector3 { float x, y, z; };
 
-class Entity
+struct Entity
 {
-public:
-	char pad_0000[2664]; //0x0000
+	int64_t* vTablePtr; //0x0000
+	char pad_0008[2656]; //0x0008
 	int32_t N00000959; //0x0A68
 	int32_t health; //0x0A6C
 	char pad_0A70[152]; //0x0A70

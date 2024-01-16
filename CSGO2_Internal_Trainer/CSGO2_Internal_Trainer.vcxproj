@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EntityList.h" />
     <ClInclude Include="header.h" />
   </ItemGroup>
   <ItemGroup>

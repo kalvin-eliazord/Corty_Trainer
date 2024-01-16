@@ -1,33 +1,90 @@
 #include "header.h"
 
+bool IsGoodTarget(Entity* currEntPtr)
+{
+    intptr_t modBaseAddr{ (intptr_t)GetModuleHandleW(L"client.dll") };
+
+    Entity* localPlayer{ *(Entity**)(modBaseAddr + 0x16D5C80) };
+
+    const intptr_t isEntityCode{ *(intptr_t*)localPlayer };
+
+    if (currEntPtr == nullptr && (intptr_t)currEntPtr == NULL)
+        return false;
+
+    // check if this is a player
+    const intptr_t currIsEntCode{ *(intptr_t*)currEntPtr };
+
+    if (currIsEntCode != isEntityCode)
+        return false;
+
+    if (currEntPtr->health < 0)
+        return false;
+
+    if (localPlayer->team_variable == currEntPtr->team_variable)
+        return false;
+
+    return true;
+}
+
+std::vector<Entity*> GetTargetList(Entity* localPlayer, EntityList* entityList)
+{
+    std::vector<Entity*> target{};
+
+    //iterate entList
+    for (intptr_t i{ 0 }; i < 32; ++i)
+    {
+        //filter a good target
+        Entity* currEntPtr{ entityList->entity[i] };
+
+        if (!IsGoodTarget(currEntPtr))
+            continue;
+
+        target.push_back(currEntPtr);
+    }
+
+    return target;
+}
+
+Entity* GetNearestTarget(std::vector<Entity*>)
+{
+
+    return (Entity*)0x0;
+}
+
+Vector3 GetTargetAngle(Entity* target)
+{
+
+    return Vector3();
+}
+
 DWORD WINAPI MainThread(HMODULE hModule)
 {
     FILE* f;
     AllocConsole();
     freopen_s(&f, "CONOUT$", "w", stdout);
 
-    uintptr_t modBaseAddr{ (uintptr_t)GetModuleHandleW(L"client.dll") };
+    intptr_t modBaseAddr{ (intptr_t)GetModuleHandleW(L"client.dll") };
+
+
 
     Entity* localPlayer{ *(Entity**)(modBaseAddr + 0x16D5C80) };
     
-    int* entityNb{nullptr};
-
-    //iterate entList
-    for (int i{ 0 }; i < *entityNb; ++i)
-    {
-
-        //filter a good target
-    }
-
-    // calculate target angle
-
-    // change my angles to aim at target
-
+    EntityList* entityList{ (EntityList*)(modBaseAddr + 0x16D5C80) };
 
     while (!GetAsyncKeyState(VK_DELETE) & 1)
     {
-       // std::cout << localPlayer->health << "\r";
-        localPlayer->angles.x = 50.0f;
+        std::vector<Entity*> target{ GetTargetList(localPlayer, entityList) };
+
+        //TODO
+        Entity* nearestTarget{ GetNearestTarget(target) };
+
+        //TODO
+        // calculate target angle
+        GetTargetAngle(nearestTarget);
+        
+        //TODO
+        // change my angles to aim at target
+        Sleep(5);
     }
 
     if (f)
