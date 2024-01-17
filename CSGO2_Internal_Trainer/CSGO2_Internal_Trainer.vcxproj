@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="EntityList.h" />
     <ClInclude Include="header.h" />
+    <ClInclude Include="Offset.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />

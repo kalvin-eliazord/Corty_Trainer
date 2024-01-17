@@ -319,7 +319,8 @@
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\um\\imm.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\um\\ime_cmodes.h",
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.37.32822\\include\\vector",
-            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\entitylist.h"
+            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\entitylist.h",
+            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\offset.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

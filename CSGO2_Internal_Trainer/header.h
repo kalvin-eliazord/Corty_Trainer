@@ -5,3 +5,4 @@
 #include <vector>
 #include "Entity.h"
 #include "EntityList.h"
+#include "Offset.h"

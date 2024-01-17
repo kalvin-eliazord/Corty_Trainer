@@ -1,10 +1,13 @@
 #include "header.h"
 
+Entity* GetLocalPlayer()
+{
+   return *(Entity**)(Offset::clientModBaseAddr + Offset::localPlayer);
+}
+
 bool IsGoodTarget(Entity* currEntPtr)
 {
-    intptr_t modBaseAddr{ (intptr_t)GetModuleHandleW(L"client.dll") };
-
-    Entity* localPlayer{ *(Entity**)(modBaseAddr + 0x16D5C80) };
+    Entity* localPlayer{ GetLocalPlayer() };
 
     const intptr_t isEntityCode{ *(intptr_t*)localPlayer };
 
@@ -63,27 +66,29 @@ DWORD WINAPI MainThread(HMODULE hModule)
     AllocConsole();
     freopen_s(&f, "CONOUT$", "w", stdout);
 
-    intptr_t modBaseAddr{ (intptr_t)GetModuleHandleW(L"client.dll") };
-
-
-
-    Entity* localPlayer{ *(Entity**)(modBaseAddr + 0x16D5C80) };
+    Entity* localPlayer{ GetLocalPlayer()};
     
-    EntityList* entityList{ (EntityList*)(modBaseAddr + 0x16D5C80) };
+    EntityList* entityList{ (EntityList*)(Offset::clientModBaseAddr + 0x16D5C80) };
+
+    intptr_t* gameStatePtr{ (intptr_t*) (Offset::engineModBaseAddr + Offset::cPredictionBaseAddr + Offset::gameState) };
 
     while (!GetAsyncKeyState(VK_DELETE) & 1)
     {
-        std::vector<Entity*> target{ GetTargetList(localPlayer, entityList) };
+        if (*gameStatePtr == 8)
+        {
+            std::vector<Entity*> target{ GetTargetList(localPlayer, entityList) };
 
-        //TODO
-        Entity* nearestTarget{ GetNearestTarget(target) };
+            //TODO
+            Entity* nearestTarget{ GetNearestTarget(target) };
 
-        //TODO
-        // calculate target angle
-        GetTargetAngle(nearestTarget);
+            //TODO
+            // calculate target angle
+            GetTargetAngle(nearestTarget);
+
+            //TODO
+            // change my angles to aim at target
+        }
         
-        //TODO
-        // change my angles to aim at target
         Sleep(5);
     }
 
