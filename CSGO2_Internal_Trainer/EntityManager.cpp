@@ -2,5 +2,5 @@
 
 Entity* EntityManager::GetLocalPlayer()
 {
-	return *(Entity**)(Offset::clientModBaseAddr + Offset::localPlayer);
+	return *(Entity**)(Offset::Client::localPlayer);
 }

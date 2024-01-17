@@ -6,4 +6,5 @@
 #include "Entity.h"
 #include "EntityList.h"
 #include "EntityManager.h"
+#include "MemoryManager.h"
 #include "Offset.h"

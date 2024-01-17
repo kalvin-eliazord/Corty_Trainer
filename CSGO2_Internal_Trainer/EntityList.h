@@ -10,7 +10,7 @@ struct EntityList
 	std::vector<Entity*> GetTargetList(Entity* localPlayer, EntityList* entityList);
 	bool IsGoodTarget(Entity* currEntPtr);
 
-	int GetNbOfEntAlive();
+	int GetNbEntAlive();
 	void PushValidEntity();
 };
 

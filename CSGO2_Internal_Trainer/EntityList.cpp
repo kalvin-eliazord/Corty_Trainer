@@ -44,9 +44,57 @@ bool EntityList::IsGoodTarget(Entity* currEntPtr)
     return true;
 }
 
-int EntityList::GetNbOfEntAlive()
+int EntityList::GetNbEntAlive()
 {
-	return 0;
+    int t_AliveNb{ (int)MemoryManager::GetDynamicAddr(Offset::Client::cNetworkSerialiserPtr,
+{
+    0x20,
+    0x18,
+    0xA8,
+    0x8,
+    0x30,
+    0x0,
+    0x8,
+    0x8,
+    0x8,
+    0x38,
+    0x190,
+    0x68,
+    0x8,
+    0x8,
+    0x218,
+    0x18,
+    0x8,
+    0x50,
+    0x8,
+    0x20CC
+}) };
+
+    int ct_AliveNb{ (int)MemoryManager::GetDynamicAddr(Offset::Client::cNetworkSerialiserPtr,
+    {
+        0x20,
+        0x18,
+        0xA8,
+        0x8,
+        0x30,
+        0x0,
+        0x8,
+        0x8,
+        0x8,
+        0x38,
+        0x190,
+        0x68,
+        0x8,
+        0x8,
+        0x218,
+        0x18,
+        0x8,
+        0x50,
+        0x8,
+        0x20C8
+    }) };
+
+    return ct_AliveNb + t_AliveNb;
 }
 
 void EntityList::PushValidEntity()

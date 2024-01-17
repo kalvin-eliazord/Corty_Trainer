@@ -8,18 +8,28 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
     Entity* localPlayer{ EntityManager::GetLocalPlayer()};
     
-    intptr_t* entityListBaseAddr{ (intptr_t*)(Offset::clientModBaseAddr + Offset::entitiesList) };
-
+    intptr_t* entityListBaseAddr{ (intptr_t*)(Offset::Client::modBaseAddr + Offset::Client::entitiesList) };
+    EntityList* entitiesList{ (EntityList*)entityListBaseAddr };
     std::vector<Entity*> entityList{};
 
-    intptr_t* gameStatePtr{ (intptr_t*) (Offset::engineModBaseAddr + Offset::cPredictionBaseAddr + Offset::gameState) };
-
+    // To prevent read access violation errors.
+    intptr_t* gameStateIdPtr{Offset::Engine2::gameStateID};
     constexpr int inGameStateID{ 8 };
+
 
     while (!GetAsyncKeyState(VK_DELETE) & 1)
     {
-        if (*gameStatePtr == inGameStateID)
+        if (*gameStateIdPtr == inGameStateID)
         {
+            const int allEntAliveNb{ entitiesList->GetNbEntAlive()};
+
+            //test
+            std::cout << allEntAliveNb << "\t \r";
+
+           // for (int i{ 0 }; i < (allEntAliveNb * 2); ++i)
+            //{
+
+            //}
          //   std::vector<Entity*> target{ GetTargetList(localPlayer, entityList) };
 
             //TODO
@@ -31,6 +41,10 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
             //TODO
             // change my angles to aim at target
+        }
+        else
+        {
+            std::cout << "NOT IN GAME \t \r";
         }
         
         Sleep(5);
