@@ -55,7 +55,7 @@ int EntityList::GetNbEntAlive()
 
 bool EntityList::IsGoodTarget(Entity* entityPtr)
 {
-    Entity* localPlayer{ Entity::GetLocalPlayer() };
+    Entity* localPlayer{ LocalPlayer::Get() };
 
     const intptr_t lpEntityId{ *(intptr_t*)localPlayer };
 

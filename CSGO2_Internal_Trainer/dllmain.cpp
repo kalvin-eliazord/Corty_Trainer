@@ -7,9 +7,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
     freopen_s(&f, "CONOUT$", "w", stdout);
 
     // init addr
-    Entity* localPlayer{ Entity::GetLocalPlayer()};
+    Entity* localPlayer{ LocalPlayer::Get()};
     EntityList* entitiesList{ (EntityList*)Offset::Client::entitiesList };
-    std::vector<Entity*> targetList{};
 
     // To prevent read access violation errors.
     intptr_t* gameStateIdPtr{Offset::Engine2::gameStateID};
@@ -26,6 +25,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 nbEntAlive = entitiesList->GetNbEntAlive();
                 Sleep(5);
             }
+
+            std::vector<Entity*> targetList{};
 
             // filter good target
             for (int i{ 0 }; i < (nbEntAlive * 2); ++i)
@@ -45,19 +46,18 @@ DWORD WINAPI MainThread(HMODULE hModule)
             Aimbot aimbot{};
             // Filter the nearest entity
             for (int i{ 0 }; i < targetList.size(); ++i)
-                  nearestTargetIndex = aimbot.GetNearestTarget(targetList[i], i);
+            {
+                aimbot.SetNearestTarget(targetList[i], i);
+                nearestTargetIndex = aimbot.GetNearestTargetIndex();
+            }
 
             // calculate target angle
             if (nearestTargetIndex != -1)
             {
                 targetAngles = aimbot.GetTargetAngle(targetList[nearestTargetIndex]);
 
-                // right click to aim at
-                if (GetAsyncKeyState(0x02) & 1)
-                {
-                    localPlayer->angles.x = targetAngles.x;
-                    localPlayer->angles.y = targetAngles.y;
-                }
+                localPlayer->angles.x = targetAngles.x;
+                localPlayer->angles.y = targetAngles.y;
             }
 
         }

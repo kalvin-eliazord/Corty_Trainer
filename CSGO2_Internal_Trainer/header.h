@@ -9,3 +9,4 @@
 #include "MemoryManager.h"
 #include "Aimbot.h"
 #include "Offset.h"
+#include "LocalPlayer.h"

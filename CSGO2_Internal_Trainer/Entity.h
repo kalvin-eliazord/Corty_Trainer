@@ -16,6 +16,4 @@ struct Entity
 	char pad_0CE4[1128]; //0x0CE4
 	Vector3 angles; //0x114C
 	char pad_1158[2992]; //0x1158
-
-	static Entity* GetLocalPlayer();
 };

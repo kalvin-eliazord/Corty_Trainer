@@ -1,32 +1,41 @@
 #include "Aimbot.h"
 
-int Aimbot::GetNearestTarget(Entity* currEntity, int currEntityIndex)
+float Aimbot::GetClamp(const float p_fValueToClamp, const float p_fMin, const float p_fMax)
 {
-    Entity* localPlayer{Entity::GetLocalPlayer()};
+    const float fValueClamped{ p_fValueToClamp < p_fMin ? p_fMin : p_fValueToClamp };
+    return fValueClamped > p_fMax ? p_fMax : fValueClamped;
+}
 
-    float actualNearestTarget = {
+void Aimbot::SetNearestTarget(Entity* currEntity, int currEntityIndex)
+{
+    Entity* localPlayer{LocalPlayer::Get()};
+
+    float currDistance = {
         (localPlayer->body_pos.x - currEntity->body_pos.x) +
         (localPlayer->body_pos.y - currEntity->body_pos.y) +
         (localPlayer->body_pos.z - currEntity->body_pos.z)
     };
 
     // if the current entity is nearest then the old one, return the current entity index
-    if (actualNearestTarget < this->oldNearestTarget)
+    if (currDistance < this->oldDistance)
     {
-        this->oldNearestTarget = actualNearestTarget;
-        return currEntityIndex;
+        this->oldDistance = currDistance;
+        this->oldEntityIndex = currEntityIndex;
     }
+}
 
+int Aimbot::GetNearestTargetIndex()
+{
     return this->oldEntityIndex;
 }
 
 Vector3 Aimbot::GetTargetAngle(Entity* target)
 {
-    Entity* localPlayer{ Entity::GetLocalPlayer() };
+    Entity* localPlayer{ LocalPlayer::Get() };
 
     const Vector3 delta{
-         (localPlayer->body_pos.x - target->body_pos.x) +
-        (localPlayer->body_pos.y - target->body_pos.y) +
+         (localPlayer->body_pos.x - target->body_pos.x),
+        (localPlayer->body_pos.y - target->body_pos.y),
         (localPlayer->body_pos.z - target->body_pos.z)};
 
     const float hypotenuse{
@@ -36,8 +45,11 @@ Vector3 Aimbot::GetTargetAngle(Entity* target)
 
     Vector3 targetAngle{};
 
-    targetAngle.x = 0;
-    targetAngle.y = 0;
+    targetAngle.x = -asinf(delta.z / hypotenuse) * 57.2957795f;
+    targetAngle.y = atan2f(delta.y, delta.x) * 57.2957795f;
+
+    targetAngle.x = GetClamp(targetAngle.x, -89, 89);
+    targetAngle.y = GetClamp(targetAngle.y, -180.0f, 180.0f);
 
     return targetAngle;
 }

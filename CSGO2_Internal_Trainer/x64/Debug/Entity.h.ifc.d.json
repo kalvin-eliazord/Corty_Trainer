@@ -323,7 +323,8 @@
             "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\entitylist.h",
             "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\memorymanager.h",
             "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\aimbot.h",
-            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\offset.h"
+            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\offset.h",
+            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\localplayer.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

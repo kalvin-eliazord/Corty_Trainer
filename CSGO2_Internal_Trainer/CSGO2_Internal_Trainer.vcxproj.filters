@@ -41,6 +41,9 @@
     <ClInclude Include="Aimbot.h">
       <Filter>Aimbot</Filter>
     </ClInclude>
+    <ClInclude Include="LocalPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -55,11 +58,11 @@
     <ClCompile Include="Aimbot.cpp">
       <Filter>Aimbot</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="EntityList.cpp">
       <Filter>EntityList</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalPlayer.cpp">
+      <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
