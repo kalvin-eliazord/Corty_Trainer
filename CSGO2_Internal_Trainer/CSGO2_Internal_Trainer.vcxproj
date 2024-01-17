@@ -142,13 +142,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Aimbot.h" />
     <ClInclude Include="EntityList.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="header.h" />
+    <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Offset.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Aimbot.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Entity.h" />
+    <ClCompile Include="EntityList.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="MemoryManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,4 +5,5 @@
 #include <vector>
 #include "Entity.h"
 #include "EntityList.h"
+#include "EntityManager.h"
 #include "Offset.h"

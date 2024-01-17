@@ -5,5 +5,12 @@ struct Entity;
 
 struct EntityList
 {
-	Entity* entity[32];
+	std::vector<Entity*> entitiesList;
+
+	std::vector<Entity*> GetTargetList(Entity* localPlayer, EntityList* entityList);
+	bool IsGoodTarget(Entity* currEntPtr);
+
+	int GetNbOfEntAlive();
+	void PushValidEntity();
 };
+

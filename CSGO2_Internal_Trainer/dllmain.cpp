@@ -1,89 +1,33 @@
 #include "header.h"
 
-Entity* GetLocalPlayer()
-{
-   return *(Entity**)(Offset::clientModBaseAddr + Offset::localPlayer);
-}
-
-bool IsGoodTarget(Entity* currEntPtr)
-{
-    Entity* localPlayer{ GetLocalPlayer() };
-
-    const intptr_t isEntityCode{ *(intptr_t*)localPlayer };
-
-    if (currEntPtr == nullptr && (intptr_t)currEntPtr == NULL)
-        return false;
-
-    // check if this is a player
-    const intptr_t currIsEntCode{ *(intptr_t*)currEntPtr };
-
-    if (currIsEntCode != isEntityCode)
-        return false;
-
-    if (currEntPtr->health < 0)
-        return false;
-
-    if (localPlayer->team_variable == currEntPtr->team_variable)
-        return false;
-
-    return true;
-}
-
-std::vector<Entity*> GetTargetList(Entity* localPlayer, EntityList* entityList)
-{
-    std::vector<Entity*> target{};
-
-    //iterate entList
-    for (intptr_t i{ 0 }; i < 32; ++i)
-    {
-        //filter a good target
-        Entity* currEntPtr{ entityList->entity[i] };
-
-        if (!IsGoodTarget(currEntPtr))
-            continue;
-
-        target.push_back(currEntPtr);
-    }
-
-    return target;
-}
-
-Entity* GetNearestTarget(std::vector<Entity*>)
-{
-
-    return (Entity*)0x0;
-}
-
-Vector3 GetTargetAngle(Entity* target)
-{
-
-    return Vector3();
-}
-
 DWORD WINAPI MainThread(HMODULE hModule)
 {
     FILE* f;
     AllocConsole();
     freopen_s(&f, "CONOUT$", "w", stdout);
 
-    Entity* localPlayer{ GetLocalPlayer()};
+    Entity* localPlayer{ EntityManager::GetLocalPlayer()};
     
-    EntityList* entityList{ (EntityList*)(Offset::clientModBaseAddr + 0x16D5C80) };
+    intptr_t* entityListBaseAddr{ (intptr_t*)(Offset::clientModBaseAddr + Offset::entitiesList) };
+
+    std::vector<Entity*> entityList{};
 
     intptr_t* gameStatePtr{ (intptr_t*) (Offset::engineModBaseAddr + Offset::cPredictionBaseAddr + Offset::gameState) };
 
+    constexpr int inGameStateID{ 8 };
+
     while (!GetAsyncKeyState(VK_DELETE) & 1)
     {
-        if (*gameStatePtr == 8)
+        if (*gameStatePtr == inGameStateID)
         {
-            std::vector<Entity*> target{ GetTargetList(localPlayer, entityList) };
+         //   std::vector<Entity*> target{ GetTargetList(localPlayer, entityList) };
 
             //TODO
-            Entity* nearestTarget{ GetNearestTarget(target) };
+        //    Entity* nearestTarget{ GetNearestTarget(target) };
 
             //TODO
             // calculate target angle
-            GetTargetAngle(nearestTarget);
+      //      GetTargetAngle(nearestTarget);
 
             //TODO
             // change my angles to aim at target
