@@ -1,2 +1,12 @@
 ﻿  Scanning sources for module dependencies...
+  Entity.h
+  Compiling...
+  Entity.h
+  Aimbot.cpp
+  Entity.cpp
+  EntityList.cpp
+  MemoryManager.cpp
   dllmain.cpp
+  Generating Code...
+  LINK : C:\Users\kalvi\source\repos\CSGO2_Internal_Trainer\x64\Debug\CSGO2_Internal_Trainer.dll not found or not built by the last incremental link; performing full link
+  CSGO2_Internal_Trainer.vcxproj -> C:\Users\kalvi\source\repos\CSGO2_Internal_Trainer\x64\Debug\CSGO2_Internal_Trainer.dll

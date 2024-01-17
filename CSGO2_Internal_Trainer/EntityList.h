@@ -5,12 +5,8 @@ struct Entity;
 
 struct EntityList
 {
-	std::vector<Entity*> entitiesList;
-
-	std::vector<Entity*> GetTargetList(Entity* localPlayer, EntityList* entityList);
-	bool IsGoodTarget(Entity* currEntPtr);
+	Entity* entity[32];
 
 	int GetNbEntAlive();
-	void PushValidEntity();
+	bool IsGoodTarget(Entity* currEntPtr);
 };
-

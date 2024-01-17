@@ -1,49 +1,5 @@
 #include "EntityList.h"
 
-std::vector<Entity*> EntityList::GetTargetList(Entity* localPlayer, EntityList* entityList)
-{
-    std::vector<Entity*> target{};
-
-    /*
-    //iterate entList
-    for (intptr_t i{ 0 }; i < ; ++i)
-    {
-        //filter a good target
-        Entity* currEntPtr{ entityList->entity[i] };
-
-        if (!IsGoodTarget(currEntPtr))
-            continue;
-
-        target.push_back(currEntPtr);
-    }
-    */
-    return target;
-}
-
-bool EntityList::IsGoodTarget(Entity* currEntPtr)
-{
-    Entity* localPlayer{ EntityManager::GetLocalPlayer() };
-
-    const intptr_t isEntityCode{ *(intptr_t*)localPlayer };
-
-    if (currEntPtr == nullptr && (intptr_t)currEntPtr == NULL)
-        return false;
-
-    // check if this is a player
-    const intptr_t currIsEntCode{ *(intptr_t*)currEntPtr };
-
-    if (currIsEntCode != isEntityCode)
-        return false;
-
-    if (currEntPtr->health < 0)
-        return false;
-
-    if (localPlayer->team_variable == currEntPtr->team_variable)
-        return false;
-
-    return true;
-}
-
 int EntityList::GetNbEntAlive()
 {
     int t_AliveNb{ (int)MemoryManager::GetDynamicAddr(Offset::Client::cNetworkSerialiserPtr,
@@ -94,10 +50,31 @@ int EntityList::GetNbEntAlive()
         0x20C8
     }) };
 
-    return ct_AliveNb + t_AliveNb;
+    return (ct_AliveNb + t_AliveNb);
 }
 
-void EntityList::PushValidEntity()
+bool EntityList::IsGoodTarget(Entity* entityPtr)
 {
-	Entity* localPlayer{EntityManager::GetLocalPlayer()};
+    Entity* localPlayer{ Entity::GetLocalPlayer() };
+
+    const intptr_t lpEntityId{ *(intptr_t*)localPlayer };
+
+    if (entityPtr == nullptr && (intptr_t)entityPtr == NULL)
+        return false;
+
+    // Not an Entity
+    if (*(intptr_t*)entityPtr != lpEntityId)
+        return false;
+
+    // Entity dead
+    if (entityPtr->health < 0)
+        return false;
+
+    // Same team as LP
+    if (localPlayer->team_variable == entityPtr->team_variable)
+        return false;
+
+    // If Entity is behind the wall
+
+    return true;
 }

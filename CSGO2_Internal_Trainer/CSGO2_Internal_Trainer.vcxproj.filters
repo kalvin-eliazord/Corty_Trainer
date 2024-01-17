@@ -9,9 +9,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="EntityManager">
-      <UniqueIdentifier>{bd366a59-8bb2-47f4-8d7a-10d6282049aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EntityList">
       <UniqueIdentifier>{71e8eb89-83dd-4dfa-b3b8-614ea20d3af8}</UniqueIdentifier>
     </Filter>
@@ -32,9 +29,6 @@
     <ClInclude Include="header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EntityManager.h">
-      <Filter>EntityManager</Filter>
-    </ClInclude>
     <ClInclude Include="EntityList.h">
       <Filter>EntityList</Filter>
     </ClInclude>
@@ -52,12 +46,6 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>EntityManager</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityList.cpp">
-      <Filter>EntityList</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.h">
       <Filter>Entity</Filter>
     </ClCompile>
@@ -66,6 +54,12 @@
     </ClCompile>
     <ClCompile Include="Aimbot.cpp">
       <Filter>Aimbot</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityList.cpp">
+      <Filter>EntityList</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

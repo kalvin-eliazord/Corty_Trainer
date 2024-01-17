@@ -1,8 +1,15 @@
 #pragma once
 #include "header.h"
 
-namespace Aimbot
+struct Vector3;
+
+class Aimbot
 {
-	Entity* GetNearestTarget(std::vector<Entity*>);
+private:
+	float oldNearestTarget{ 10000.0f};
+	int oldEntityIndex{ -1 };
+
+public:
+	int GetNearestTarget(Entity* entity, int currEntityIndex);
 	Vector3 GetTargetAngle(Entity* target);
 };
