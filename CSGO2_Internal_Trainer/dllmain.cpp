@@ -56,10 +56,10 @@ DWORD WINAPI MainThread(HMODULE hModule)
             {
                 targetAngles = aimbot.GetTargetAngle(targetList[nearestTargetIndex]);
 
-                localPlayer->angles.x = targetAngles.x;
-                localPlayer->angles.y = targetAngles.y;
+                //BUG = ANGLES DOESNT CHANGE IG
+              //  localPlayer->angles.x = targetAngles.x;
+                //localPlayer->angles.y = targetAngles.y;
             }
-
         }
         else
         {

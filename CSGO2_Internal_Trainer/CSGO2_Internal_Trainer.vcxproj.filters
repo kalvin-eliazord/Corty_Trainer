@@ -42,7 +42,7 @@
       <Filter>Aimbot</Filter>
     </ClInclude>
     <ClInclude Include="LocalPlayer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,7 +62,7 @@
       <Filter>EntityList</Filter>
     </ClCompile>
     <ClCompile Include="LocalPlayer.cpp">
-      <Filter>main</Filter>
+      <Filter>Entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

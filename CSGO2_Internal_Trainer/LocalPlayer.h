@@ -5,4 +5,3 @@ struct LocalPlayer
 {
 	static Entity* Get();
 };
-
