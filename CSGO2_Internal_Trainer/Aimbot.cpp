@@ -10,11 +10,13 @@ void Aimbot::SetNearestTarget(Entity* currEntity, int currEntityIndex)
 {
     Entity* localPlayer{LocalPlayer::Get()};
 
-    float currDistance = {
+    Vector3 delta = {
         (localPlayer->body_pos.x - currEntity->body_pos.x) +
         (localPlayer->body_pos.y - currEntity->body_pos.y) +
         (localPlayer->body_pos.z - currEntity->body_pos.z)
     };
+
+    const float currDistance{ sqrt((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z)) };
 
     // if the current entity is nearest then the old one, return the current entity index
     if (currDistance < this->oldDistance)
@@ -38,18 +40,30 @@ Vector3 Aimbot::GetTargetAngle(Entity* target)
         (localPlayer->body_pos.y - target->body_pos.y),
         (localPlayer->body_pos.z - target->body_pos.z)};
 
-    const float hypotenuse{
+    const float hypotenuse{sqrt(
         (delta.x * delta.x) +
         (delta.y * delta.y) +
-        (delta.z * delta.z) };
+        (delta.z * delta.z)) };
 
     Vector3 targetAngle{};
 
-    targetAngle.x = -asinf(delta.z / hypotenuse) * 57.2957795f;
+    /*
+    targetAngle.x = atanf(delta.z / hypotenuse) * 57.2957795f;
     targetAngle.y = atan2f(delta.y, delta.x) * 57.2957795f;
 
     targetAngle.x = GetClamp(targetAngle.x, -89, 89);
-    targetAngle.y = GetClamp(targetAngle.y, -180.0f, 180.0f);
+
+    while (targetAngle.y < -180.0f)
+        targetAngle.y += 360.0f;
+
+    while (targetAngle.y > 180.0f)
+        targetAngle.y -= 360.0f;
+*/
+    targetAngle.x = -asinf(delta.z / hypotenuse) * 57.2957795f;
+    targetAngle.y = atanf(delta.y / delta.x) * 57.2957795f;
+
+    if (delta.x >= 0.0f)
+        targetAngle.y += 180.0f;
 
     return targetAngle;
 }

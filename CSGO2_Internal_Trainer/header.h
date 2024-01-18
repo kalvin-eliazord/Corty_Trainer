@@ -10,3 +10,4 @@
 #include "Aimbot.h"
 #include "Offset.h"
 #include "LocalPlayer.h"
+#include "EntityNameList.h"

@@ -11,25 +11,32 @@ DWORD WINAPI MainThread(HMODULE hModule)
     EntityList* entitiesList{ (EntityList*)Offset::Client::entitiesList };
 
     // To prevent read access violation errors.
-    intptr_t* gameStateIdPtr{Offset::Engine2::gameStateID};
+    intptr_t* gameStateIdPtr{Offset::Client::gameStateID};
     constexpr int inGameStateID{ 8 };
+
+    EntityNameList* entNameList{(EntityNameList*)0x02794ADF0880 };
+
+    int nbEntities{ NULL };
+
+    std::cout << "NOT IN GAME \t \r";
+
+    do 
+    {
+        nbEntities = entitiesList->GetNbEntAlive();
+        Sleep(5);
+    } while (!nbEntities);
 
     while (!GetAsyncKeyState(VK_DELETE) & 1)
     {
         if (*gameStateIdPtr == inGameStateID)
         {
-            int nbEntAlive{ NULL };
-
-            while (!nbEntAlive)
-            {
-                nbEntAlive = entitiesList->GetNbEntAlive();
-                Sleep(5);
-            }
+            system("CLS");
+            std::cout << "IN GAME \t \r";
 
             std::vector<Entity*> targetList{};
 
             // filter good target
-            for (int i{ 0 }; i < (nbEntAlive * 2); ++i)
+            for (int i{ 0 }; i < (nbEntities * 2); ++i)
             {
                 Entity* currEntity{ entitiesList->entity[i] };
 
@@ -44,6 +51,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
             int nearestTargetIndex{-1};
 
             Aimbot aimbot{};
+
             // Filter the nearest entity
             for (int i{ 0 }; i < targetList.size(); ++i)
             {
@@ -57,12 +65,20 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 targetAngles = aimbot.GetTargetAngle(targetList[nearestTargetIndex]);
 
                 //BUG = ANGLES DOESNT CHANGE IG
-              //  localPlayer->angles.x = targetAngles.x;
-                //localPlayer->angles.y = targetAngles.y;
+                float* lpPitch{(float*) (Offset::Client::modBaseAddr + 0x1880DC0) };
+                float* lpYaw{ (float*)(Offset::Client::modBaseAddr + 0x1880DC4) };
+
+                 *lpPitch = targetAngles.x;
+                 *lpYaw = targetAngles.y;
+
+                 //   localPlayer->angles.x = targetAngles.x;
+                   // localPlayer->angles.y = targetAngles.y;
             }
+
         }
         else
         {
+            system("CLS");
             std::cout << "NOT IN GAME \t \r";
         }
         
@@ -73,7 +89,6 @@ DWORD WINAPI MainThread(HMODULE hModule)
         fclose(f);
 
     FreeConsole();
-
     FreeLibraryAndExitThread(hModule, 0);
 
     return 0;

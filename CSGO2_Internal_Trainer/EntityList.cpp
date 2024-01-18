@@ -67,7 +67,7 @@ bool EntityList::IsGoodTarget(Entity* entityPtr)
         return false;
 
     // Entity dead
-    if (entityPtr->health < 0)
+    if (entityPtr->health == 0)
         return false;
 
     // Same team as LP

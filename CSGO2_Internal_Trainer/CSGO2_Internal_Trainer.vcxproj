@@ -147,6 +147,7 @@
     <ClInclude Include="header.h" />
     <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="MemoryManager.h" />
+    <ClInclude Include="EntityNameList.h" />
     <ClInclude Include="Offset.h" />
   </ItemGroup>
   <ItemGroup>
