@@ -64,15 +64,15 @@ DWORD WINAPI MainThread(HMODULE hModule)
             {
                 targetAngles = aimbot.GetTargetAngle(targetList[nearestTargetIndex]);
 
-                //BUG = ANGLES DOESNT CHANGE IG
-                float* lpPitch{(float*) (Offset::Client::modBaseAddr + 0x1880DC0) };
-                float* lpYaw{ (float*)(Offset::Client::modBaseAddr + 0x1880DC4) };
+                float* lpPitch{ (float*) (Offset::Client::lp_Input_Pitch) };
+                float* lpYaw  { (float*) (Offset::Client::lp_Input_Yaw) };
 
                  *lpPitch = targetAngles.x;
                  *lpYaw = targetAngles.y;
 
-                 //   localPlayer->angles.x = targetAngles.x;
-                   // localPlayer->angles.y = targetAngles.y;
+                 //BUG = ANGLES DOESNT CHANGE IG
+                // localPlayer->angles.x = targetAngles.x;
+                // localPlayer->angles.y = targetAngles.y;
             }
 
         }

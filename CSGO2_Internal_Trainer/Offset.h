@@ -11,6 +11,9 @@ namespace Offset
 		static intptr_t* cPredictionBaseAddr{ *(intptr_t**)(modBaseAddr + 0x16C8240) };
 		static intptr_t* gameStateID{ (intptr_t*)((intptr_t)cPredictionBaseAddr + 0xA0) };
 		static intptr_t cNetworkSerialiserPtr{ *(intptr_t*)(modBaseAddr + 0x181C808) };
+		static const float* lp_Input_Pitch{ (float*)(modBaseAddr + 0x1880DC0) };
+		static const float* lp_Input_Yaw  { (float*)(modBaseAddr + 0x1880DC4) };
+
 	};
 
 	namespace Engine2
