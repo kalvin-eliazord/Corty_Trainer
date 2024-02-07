@@ -47,23 +47,26 @@ Vector3 Aimbot::GetTargetAngle(Entity* target)
 
     Vector3 targetAngle{};
 
-    /*
-    targetAngle.x = atanf(delta.z / hypotenuse) * 57.2957795f;
-    targetAngle.y = atan2f(delta.y, delta.x) * 57.2957795f;
 
-    targetAngle.x = GetClamp(targetAngle.x, -89, 89);
+    /*
+
+
+ 
+*/
+
+    targetAngle.x = asinf(delta.z / hypotenuse) * -57.2957795f;
+    targetAngle.y = atanf(delta.y / delta.x) * 57.2957795f;
 
     while (targetAngle.y < -180.0f)
         targetAngle.y += 360.0f;
 
     while (targetAngle.y > 180.0f)
         targetAngle.y -= 360.0f;
-*/
-    targetAngle.x = -asinf(delta.z / hypotenuse) * 57.2957795f;
-    targetAngle.y = atanf(delta.y / delta.x) * 57.2957795f;
 
     if (delta.x >= 0.0f)
         targetAngle.y += 180.0f;
+
+    targetAngle.x = GetClamp(targetAngle.x, -89, 89);
 
     return targetAngle;
 }

@@ -11,8 +11,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
     EntityList* entitiesList{ (EntityList*)Offset::Client::entitiesList };
 
     // To prevent read access violation errors.
-    intptr_t* gameStateIdPtr{Offset::Client::gameStateID};
-    constexpr int inGameStateID{ 8 };
+    intptr_t* gameStateIdPtr{Offset::Engine2::gameStateID};
+    constexpr int inGame_GameStateId{ 8 };
 
     EntityNameList* entNameList{(EntityNameList*)0x02794ADF0880 };
 
@@ -20,15 +20,20 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
     std::cout << "NOT IN GAME \t \r";
 
-    do 
+    do
     {
-        nbEntities = entitiesList->GetNbEntAlive();
+        if (*gameStateIdPtr == inGame_GameStateId)
+        {
+            Sleep(2000);
+            nbEntities = entitiesList->GetNbEntAlive();
+        }
         Sleep(5);
-    } while (!nbEntities);
+    }
+    while (!nbEntities);
 
     while (!GetAsyncKeyState(VK_DELETE) & 1)
     {
-        if (*gameStateIdPtr == inGameStateID)
+        if (*gameStateIdPtr == inGame_GameStateId)
         {
             system("CLS");
             std::cout << "IN GAME \t \r";
@@ -67,12 +72,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 float* lpPitch{ (float*) (Offset::Client::lp_Input_Pitch) };
                 float* lpYaw  { (float*) (Offset::Client::lp_Input_Yaw) };
 
-                 *lpPitch = targetAngles.x;
-                 *lpYaw = targetAngles.y;
-
-                 //BUG = ANGLES DOESNT CHANGE IG
-                // localPlayer->angles.x = targetAngles.x;
-                // localPlayer->angles.y = targetAngles.y;
+                *lpPitch = targetAngles.x;
+                *lpYaw   = targetAngles.y;
             }
 
         }
@@ -80,6 +81,18 @@ DWORD WINAPI MainThread(HMODULE hModule)
         {
             system("CLS");
             std::cout << "NOT IN GAME \t \r";
+            nbEntities = NULL;
+
+            do
+            {
+                if (*gameStateIdPtr == inGame_GameStateId)
+                {
+                    Sleep(2000);
+                    nbEntities = entitiesList->GetNbEntAlive();
+                }
+
+                Sleep(5);
+            } while (!nbEntities);
         }
         
         Sleep(5);
@@ -108,4 +121,3 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     }
     return TRUE;
 }
-
