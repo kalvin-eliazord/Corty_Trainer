@@ -2,5 +2,5 @@
 
 Entity* LocalPlayer::Get()
 {
-    return *(Entity**)(Offset::Client::localPlayer);
+    return *(Entity**)(GameOffset::Client::localPlayer);
 }

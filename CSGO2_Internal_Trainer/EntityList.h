@@ -6,7 +6,10 @@ struct Entity;
 struct EntityList
 {
 	Entity* entity[32];
+	int nbEntities{};
 
-	int GetNbEntAlive();
+	std::vector<Entity*> GetTargetList();
+	int  GetNbEntAlive();
+	void SetNbEntAlive();
 	bool IsGoodTarget(Entity* currEntPtr);
 };

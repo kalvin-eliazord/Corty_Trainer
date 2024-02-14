@@ -1,108 +1,108 @@
 #include "header.h"
 
-DWORD WINAPI MainThread(HMODULE hModule)
+
+void CloseProgram(FILE* f, HMODULE hModule)
 {
-    FILE* f;
-    AllocConsole();
-    freopen_s(&f, "CONOUT$", "w", stdout);
-
-    // init addr
-    Entity* localPlayer{ LocalPlayer::Get()};
-    EntityList* entitiesList{ (EntityList*)Offset::Client::entitiesList };
-
-    // To prevent read access violation errors.
-    intptr_t* gameStateIdPtr{Offset::Engine2::gameStateID};
-    constexpr int inGame_GameStateId{ 8 };
-
-    EntityNameList* entNameList{(EntityNameList*)0x02794ADF0880 };
-
-    int nbEntities{ NULL };
-
-    std::cout << "NOT IN GAME \t \r";
-
-    do
-    {
-        if (*gameStateIdPtr == inGame_GameStateId)
-        {
-            Sleep(2000);
-            nbEntities = entitiesList->GetNbEntAlive();
-        }
-        Sleep(5);
-    }
-    while (!nbEntities);
-
-    while (!GetAsyncKeyState(VK_DELETE) & 1)
-    {
-        if (*gameStateIdPtr == inGame_GameStateId)
-        {
-            system("CLS");
-            std::cout << "IN GAME \t \r";
-
-            std::vector<Entity*> targetList{};
-
-            // filter good target
-            for (int i{ 0 }; i < (nbEntities * 2); ++i)
-            {
-                Entity* currEntity{ entitiesList->entity[i] };
-
-                 // check if the entity is valid
-                 if (entitiesList->IsGoodTarget(currEntity))
-                     targetList.push_back(currEntity);
-                 else
-                    continue;
-            }
-
-            Vector3 targetAngles{};
-            int nearestTargetIndex{-1};
-
-            Aimbot aimbot{};
-
-            // Filter the nearest entity
-            for (int i{ 0 }; i < targetList.size(); ++i)
-            {
-                aimbot.SetNearestTarget(targetList[i], i);
-                nearestTargetIndex = aimbot.GetNearestTargetIndex();
-            }
-
-            // calculate target angle
-            if (nearestTargetIndex != -1)
-            {
-                targetAngles = aimbot.GetTargetAngle(targetList[nearestTargetIndex]);
-
-                float* lpPitch{ (float*) (Offset::Client::lp_Input_Pitch) };
-                float* lpYaw  { (float*) (Offset::Client::lp_Input_Yaw) };
-
-                *lpPitch = targetAngles.x;
-                *lpYaw   = targetAngles.y;
-            }
-
-        }
-        else
-        {
-            system("CLS");
-            std::cout << "NOT IN GAME \t \r";
-            nbEntities = NULL;
-
-            do
-            {
-                if (*gameStateIdPtr == inGame_GameStateId)
-                {
-                    Sleep(2000);
-                    nbEntities = entitiesList->GetNbEntAlive();
-                }
-
-                Sleep(5);
-            } while (!nbEntities);
-        }
-        
-        Sleep(5);
-    }
-
     if (f)
         fclose(f);
 
     FreeConsole();
     FreeLibraryAndExitThread(hModule, 0);
+}
+
+DWORD WINAPI MainThread(HMODULE hModule)
+{
+    // Initialize a console
+    FILE* f;
+    AllocConsole();
+    freopen_s(&f, "CONOUT$", "w", stdout);
+
+    // Initialize game logic address
+    Entity* localPlayer{ LocalPlayer::Get()};
+    EntityList* entitiesList{ (EntityList*)GameOffset::Client::entitiesListPtr };
+
+    // Initialize a variable that will prevent read access violation errors
+    int* gameStateId{ (int*) (GameOffset::Client::gameStateIdPtr)};
+    constexpr int inGame_GameStateId{ 8 };
+
+    // Waiting for the game to start loop
+    std::cout << "NOT IN GAME, WAITING. \t \r";
+    do
+    {
+        if (GetAsyncKeyState(VK_DELETE) & 1)
+            CloseProgram(f, hModule);
+
+        if (*gameStateId == inGame_GameStateId)
+        {
+            Sleep(2000);
+            entitiesList->SetNbEntAlive();
+        }
+        Sleep(5);
+    }
+    while (!entitiesList->GetNbEntAlive());
+
+    // Hack loop
+    while (!GetAsyncKeyState(VK_DELETE) & 1)
+    {
+        // In game loop
+        if (*gameStateId == inGame_GameStateId)
+        {
+            std::cout << "IN GAME, HAVE FUN. \t \r";
+
+            // Retrieve the target list
+            std::vector<Entity*> targetList{ entitiesList->GetTargetList() };
+
+            if (!targetList.empty())
+            {
+                // To retrieve the target in the list
+                int nearestTargetIndex{ -1 };
+
+                TargetManager targetManager{};
+
+                // Filter the nearest target from local player
+                for (int i{ 0 }; i < targetList.size(); ++i)
+                {
+                    targetManager.SetNearestTarget(targetList[i], i);
+                    nearestTargetIndex = targetManager.GetNearestTargetIndex();
+                }
+
+                if (nearestTargetIndex != -1)
+                {
+                    // calculate target angle
+                    Vector3 targetAngles = targetManager.GetTargetAngle(targetList[nearestTargetIndex]);
+
+                    float* lpPitch{ (float*)(GameOffset::Client::lp_Pitch_Input) };
+                    float* lpYaw{ (float*)(GameOffset::Client::lp_Yaw_Input) };
+
+                    *lpPitch = targetAngles.x;
+                    *lpYaw   = targetAngles.y;
+                }
+            }
+           
+        }
+        // NOT in game loop
+        else
+        {
+            system("CLS");
+            std::cout << "NOT IN GAME, WAITING. \t \r";
+            entitiesList->nbEntities = NULL;
+
+            do
+            {
+                if (*gameStateId == inGame_GameStateId)
+                {
+                    Sleep(2000);
+                    entitiesList->SetNbEntAlive();
+                }
+
+                Sleep(5);
+            } while (!entitiesList->GetNbEntAlive());
+        }
+        
+        Sleep(5);
+    }
+
+    CloseProgram(f, hModule);
 
     return 0;
 }

@@ -1,56 +1,30 @@
 #include "EntityList.h"
 
+std::vector<Entity*> EntityList::GetTargetList()
+{
+    std::vector<Entity*> targetList{};
+
+    for (int i{ 0 }; i < (this->nbEntities * 2); ++i)
+    {
+        Entity* currEntity{ this->entity[i] };
+
+        if (!this->IsGoodTarget(currEntity))
+            continue;
+
+        targetList.push_back(currEntity);
+    }
+
+    return targetList;
+}
+
 int EntityList::GetNbEntAlive()
 {
-    int t_AliveNb{ (int)MemoryManager::GetDynamicAddr(Offset::Panorama::modBaseAddr,
+    return this->nbEntities;
+}
+
+void EntityList::SetNbEntAlive()
 {
-    0x499AA8,
-    0x608,
-    0x2B0,
-    0x8,
-    0xB8,
-    0x190,
-    0x148,
-    0x18,
-    0x30,
-    0x0,
-    0x78,
-    0x258,
-    0x8,
-    0x8,
-    0x110,
-    0x120,
-    0x8,
-    0x118,
-    0x8,
-    0x20CC
-}) };
-
-    int ct_AliveNb{ (int)MemoryManager::GetDynamicAddr(Offset::Panorama::modBaseAddr,
-    {
-    0x499AA8,
-    0x608,
-    0x2B0,
-    0x8,
-    0xB8,
-    0x190,
-    0x148,
-    0x18,
-    0x30,
-    0x0,
-    0x78,
-    0x258,
-    0x8,
-    0x8,
-    0x110,
-    0x120,
-    0x8,
-    0x118,
-    0x8,
-    0x20C8
-    }) };
-
-    return (ct_AliveNb + t_AliveNb);
+    this->nbEntities = *GameOffset::Server::nbEntitiesPtr;
 }
 
 bool EntityList::IsGoodTarget(Entity* entityPtr)

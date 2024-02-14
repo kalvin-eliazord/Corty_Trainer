@@ -322,10 +322,9 @@
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.37.32822\\include\\vector",
             "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\entitylist.h",
             "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\memorymanager.h",
-            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\aimbot.h",
+            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\targetmanager.h",
             "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\offset.h",
-            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\localplayer.h",
-            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\entitynamelist.h"
+            "c:\\users\\kalvi\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\localplayer.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

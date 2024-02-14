@@ -32,20 +32,17 @@
     <ClInclude Include="EntityList.h">
       <Filter>EntityList</Filter>
     </ClInclude>
-    <ClInclude Include="Offset.h">
+    <ClInclude Include="GameOffset.h">
       <Filter>Offset</Filter>
     </ClInclude>
     <ClInclude Include="MemoryManager.h">
       <Filter>MemoryManager</Filter>
     </ClInclude>
-    <ClInclude Include="Aimbot.h">
+    <ClInclude Include="TargetManager.h">
       <Filter>Aimbot</Filter>
     </ClInclude>
     <ClInclude Include="LocalPlayer.h">
       <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityNameList.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +55,7 @@
     <ClCompile Include="MemoryManager.cpp">
       <Filter>MemoryManager</Filter>
     </ClCompile>
-    <ClCompile Include="Aimbot.cpp">
+    <ClCompile Include="TargetManager.cpp">
       <Filter>Aimbot</Filter>
     </ClCompile>
     <ClCompile Include="EntityList.cpp">

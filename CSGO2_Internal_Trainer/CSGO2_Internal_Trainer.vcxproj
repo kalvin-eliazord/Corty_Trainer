@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -142,16 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Aimbot.h" />
+    <ClInclude Include="TargetManager.h" />
     <ClInclude Include="EntityList.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="MemoryManager.h" />
-    <ClInclude Include="EntityNameList.h" />
-    <ClInclude Include="Offset.h" />
+    <ClInclude Include="GameOffset.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Aimbot.cpp" />
+    <ClCompile Include="TargetManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Entity.h" />
     <ClCompile Include="EntityList.cpp" />
