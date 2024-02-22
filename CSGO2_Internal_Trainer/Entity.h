@@ -5,8 +5,6 @@
 #define MAKE_PAD(size) STR_MERGE(_pad, __COUNTER__)[size]
 #define DEFINE_MEMBER_N(type, name, GameOffset) struct {unsigned char MAKE_PAD(GameOffset); type name;}
 
-struct Vector3 { float x, y, z; };
-
 struct Entity
 {
 	union

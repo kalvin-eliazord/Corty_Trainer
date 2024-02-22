@@ -4,9 +4,11 @@
 #include <windows.h>
 #include <cstdint>
 #include <vector>
+#include "Vector3.h"
 #include "Entity.h"
 #include "EntityList.h"
 #include "MemoryManager.h"
 #include "TargetManager.h"
 #include "GameOffset.h"
 #include "LocalPlayer.h"
+#include "GameChecker.h"

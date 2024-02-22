@@ -4,7 +4,8 @@ std::vector<Entity*> EntityList::GetTargetList()
 {
     std::vector<Entity*> targetList{};
 
-    for (int i{ 0 }; i < (this->nbEntities * 2); ++i)
+    // *2 because there is one object generated for each entity in the list
+    for (int i{ 0 }; i < (this->nbEntAlive * 2); ++i)
     {
         Entity* currEntity{ this->entity[i] };
 
@@ -17,14 +18,39 @@ std::vector<Entity*> EntityList::GetTargetList()
     return targetList;
 }
 
-int EntityList::GetNbEntAlive()
+void EntityList::SetNbEntAlive(int pNbEntAlive)
 {
-    return this->nbEntities;
+    this->nbEntAlive = pNbEntAlive;
 }
 
 void EntityList::SetNbEntAlive()
 {
-    this->nbEntities = *GameOffset::Server::nbEntitiesPtr;
+    const int ct_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::nbEntitiesBaseAddrPtr,
+        {
+            0x598,
+            0x3A0,
+            0x1D8,
+            0x8,
+            0xB8,
+            0x20CC
+        }));
+
+    const int t_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::nbEntitiesBaseAddrPtr,
+        {
+            0x598,
+            0x3A0,
+            0x1D8,
+            0x8,
+            0xB8,
+            0x20C8
+        }));
+
+    this->nbEntAlive = ct_EntAlive + t_EntAlive;
+}
+
+int EntityList::GetNbEntAlive()
+{
+    return this->nbEntAlive;
 }
 
 bool EntityList::IsGoodTarget(Entity* entityPtr)
@@ -33,11 +59,12 @@ bool EntityList::IsGoodTarget(Entity* entityPtr)
 
     const intptr_t lpEntityId{ *(intptr_t*)localPlayer };
 
-    if (entityPtr == nullptr && (intptr_t)entityPtr == NULL)
-        return false;
-
     // Not an Entity
     if (*(intptr_t*)entityPtr != lpEntityId)
+        return false;
+
+    // iteration empty
+    if (entityPtr == nullptr && (intptr_t)entityPtr == NULL)
         return false;
 
     // Entity dead

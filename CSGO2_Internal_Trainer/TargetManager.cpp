@@ -6,22 +6,24 @@ float TargetManager::GetClamp(const float p_fValueToClamp, const float p_fMin, c
     return fValueClamped > p_fMax ? p_fMax : fValueClamped;
 }
 
-void TargetManager::SetNearestTarget(Entity* currEntity, int currEntityIndex)
+void TargetManager::SetNearestTarget(Entity* pTarget, int currEntityIndex)
 {
     Entity* localPlayer{LocalPlayer::Get()};
 
-    Vector3 delta = {
-        (localPlayer->body_pos.x - currEntity->body_pos.x) +
-        (localPlayer->body_pos.y - currEntity->body_pos.y) +
-        (localPlayer->body_pos.z - currEntity->body_pos.z)
-    };
+    Vector3 currTargetAngle{ GetTargetAngle(pTarget) };
 
-    const float currDistance{ sqrt((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z)) };
+    Vector3 currAngleDist{
+        (abs(localPlayer->angles.x - currTargetAngle.x)),
+        (abs(localPlayer->angles.y - currTargetAngle.y)),
+        (0) };
 
-    // if the current entity is nearest then the old one, return the current entity index
-    if (currDistance < this->oldDistance)
+    const float lpAngle{ abs(localPlayer->angles.x + localPlayer->angles.y) };
+    const float targetAngle{ currTargetAngle.x + currTargetAngle.y };
+
+    // to fix
+    if (currAngleDist < this->oldAngleDist)
     {
-        this->oldDistance = currDistance;
+        this->oldAngleDist = currAngleDist;
         this->oldEntityIndex = currEntityIndex;
     }
 }

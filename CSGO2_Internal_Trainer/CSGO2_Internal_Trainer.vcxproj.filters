@@ -24,6 +24,9 @@
     <Filter Include="Aimbot">
       <UniqueIdentifier>{ce9e06c8-7b88-4f9a-a607-a7ab92281124}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameChecker">
+      <UniqueIdentifier>{da62585f-ace7-4057-84a2-a14f7f9c6b5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h">
@@ -44,6 +47,12 @@
     <ClInclude Include="LocalPlayer.h">
       <Filter>Entity</Filter>
     </ClInclude>
+    <ClInclude Include="GameChecker.h">
+      <Filter>GameChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -63,6 +72,12 @@
     </ClCompile>
     <ClCompile Include="LocalPlayer.cpp">
       <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="GameChecker.cpp">
+      <Filter>GameChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
