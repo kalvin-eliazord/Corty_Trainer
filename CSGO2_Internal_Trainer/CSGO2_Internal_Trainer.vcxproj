@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BasicMath.h" />
     <ClInclude Include="GameChecker.h" />
     <ClInclude Include="TargetManager.h" />
     <ClInclude Include="EntityList.h" />
@@ -152,14 +153,13 @@
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameChecker.cpp" />
+    <ClCompile Include="BasicMath.cpp" />
     <ClCompile Include="TargetManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Entity.h" />
     <ClCompile Include="EntityList.cpp" />
     <ClCompile Include="LocalPlayer.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
-    <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,15 +1,15 @@
 #include "LocalPlayer.h"
 
-Entity* LocalPlayer::Get()
+intptr_t LocalPlayer::Get()
 {
-    return *(Entity**)(GameOffset::Client::localPlayer);
+    return *(intptr_t*)(GameOffset::Client::localPlayer);
 }
 
-void LocalPlayer::SetViewAngle(const float pPitch, const float pYaw)
+void LocalPlayer::SetViewAngle(const Vector3& targetAngle)
 {
     float* lpPitch{ (float*)(GameOffset::Client::lp_Pitch_Input) };
     float* lpYaw{ (float*)(GameOffset::Client::lp_Yaw_Input) };
 
-    *lpPitch = pPitch;
-    *lpYaw   = pYaw;
+    *lpPitch = targetAngle.x;
+    *lpYaw   = targetAngle.y;
 }

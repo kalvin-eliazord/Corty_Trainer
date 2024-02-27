@@ -6,11 +6,10 @@ struct Entity;
 struct EntityList
 {
 	Entity* entity[32];
-	int nbEntAlive{};
+	int nbEntAlive{NULL};
 
-	std::vector<Entity*> GetTargetList();
+	std::vector<Entity*> GetTargetList(Entity* pLocalPlayer);
 	int  GetNbEntAlive();
-	void  SetNbEntAlive(int pNbEntAlive);
-	void  SetNbEntAlive();
-	bool IsGoodTarget(Entity* currEntPtr);
+	void SetNbEntAlive(int pNbEntAlive);
+	bool IsGoodTarget(Entity* pLocalPlayer, Entity* currEntPtr);
 };

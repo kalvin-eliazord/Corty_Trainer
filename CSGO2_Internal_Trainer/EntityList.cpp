@@ -1,15 +1,21 @@
 #include "EntityList.h"
 
-std::vector<Entity*> EntityList::GetTargetList()
+std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer)
 {
     std::vector<Entity*> targetList{};
+
+    const int newNbEntAlive{ GetNbEntAlive() };
+
+    // Update number of entity to iterate
+    if(newNbEntAlive > this->nbEntAlive)
+        SetNbEntAlive(newNbEntAlive);
 
     // *2 because there is one object generated for each entity in the list
     for (int i{ 0 }; i < (this->nbEntAlive * 2); ++i)
     {
         Entity* currEntity{ this->entity[i] };
 
-        if (!this->IsGoodTarget(currEntity))
+        if (!this->IsGoodTarget(pLocalPlayer, currEntity))
             continue;
 
         targetList.push_back(currEntity);
@@ -23,13 +29,13 @@ void EntityList::SetNbEntAlive(int pNbEntAlive)
     this->nbEntAlive = pNbEntAlive;
 }
 
-void EntityList::SetNbEntAlive()
+int EntityList::GetNbEntAlive()
 {
     const int ct_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::nbEntitiesBaseAddrPtr,
         {
-            0x598,
-            0x3A0,
-            0x1D8,
+            0x198,
+            0x220,
+            0x78,
             0x8,
             0xB8,
             0x20CC
@@ -37,30 +43,24 @@ void EntityList::SetNbEntAlive()
 
     const int t_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::nbEntitiesBaseAddrPtr,
         {
-            0x598,
-            0x3A0,
-            0x1D8,
+            0x198,
+            0x220,
+            0x78,
             0x8,
             0xB8,
             0x20C8
         }));
 
-    this->nbEntAlive = ct_EntAlive + t_EntAlive;
+    return ct_EntAlive + t_EntAlive;
 }
 
-int EntityList::GetNbEntAlive()
+bool EntityList::IsGoodTarget(Entity* pLocalPlayer, Entity* entityPtr)
 {
-    return this->nbEntAlive;
-}
-
-bool EntityList::IsGoodTarget(Entity* entityPtr)
-{
-    Entity* localPlayer{ LocalPlayer::Get() };
-
-    const intptr_t lpEntityId{ *(intptr_t*)localPlayer };
+    const intptr_t playerEntityId{ *(intptr_t*)pLocalPlayer };
+    const intptr_t currIndexId{ *(intptr_t*)entityPtr };
 
     // Not an Entity
-    if (*(intptr_t*)entityPtr != lpEntityId)
+    if (currIndexId != playerEntityId)
         return false;
 
     // iteration empty
@@ -72,7 +72,7 @@ bool EntityList::IsGoodTarget(Entity* entityPtr)
         return false;
 
     // Same team as LP
-    if (localPlayer->team_variable == entityPtr->team_variable)
+    if (pLocalPlayer->team_variable == entityPtr->team_variable)
         return false;
 
     // If Entity is behind the wall

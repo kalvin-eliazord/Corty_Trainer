@@ -326,7 +326,8 @@
             "c:\\users\\corty\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\targetmanager.h",
             "c:\\users\\corty\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\gameoffset.h",
             "c:\\users\\corty\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\localplayer.h",
-            "c:\\users\\corty\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\gamechecker.h"
+            "c:\\users\\corty\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\gamechecker.h",
+            "c:\\users\\corty\\source\\repos\\csgo2_internal_trainer\\csgo2_internal_trainer\\basicmath.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

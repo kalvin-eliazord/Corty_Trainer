@@ -3,6 +3,6 @@
 
 namespace LocalPlayer
 {
-	Entity* Get();
-	void SetViewAngle(const float pPitch, const float pYaw);
+	intptr_t Get();
+	void SetViewAngle(const Vector3& targetAngle);
 };

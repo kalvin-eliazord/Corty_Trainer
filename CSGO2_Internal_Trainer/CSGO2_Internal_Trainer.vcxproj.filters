@@ -24,8 +24,11 @@
     <Filter Include="Aimbot">
       <UniqueIdentifier>{ce9e06c8-7b88-4f9a-a607-a7ab92281124}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameChecker">
-      <UniqueIdentifier>{da62585f-ace7-4057-84a2-a14f7f9c6b5f}</UniqueIdentifier>
+    <Filter Include="Vector3">
+      <UniqueIdentifier>{60216af8-acfd-458c-b532-cd64cd5f21ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BasicMath">
+      <UniqueIdentifier>{eb1279c2-e3b7-4e31-aa1b-5d51fb430925}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,10 +50,13 @@
     <ClInclude Include="LocalPlayer.h">
       <Filter>Entity</Filter>
     </ClInclude>
-    <ClInclude Include="GameChecker.h">
-      <Filter>GameChecker</Filter>
-    </ClInclude>
     <ClInclude Include="Vector3.h">
+      <Filter>Vector3</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicMath.h">
+      <Filter>BasicMath</Filter>
+    </ClInclude>
+    <ClInclude Include="GameChecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -73,11 +79,8 @@
     <ClCompile Include="LocalPlayer.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
-    <ClCompile Include="GameChecker.cpp">
-      <Filter>GameChecker</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector3.cpp">
-      <Filter>main</Filter>
+    <ClCompile Include="BasicMath.cpp">
+      <Filter>BasicMath</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

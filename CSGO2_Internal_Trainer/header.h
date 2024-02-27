@@ -12,3 +12,4 @@
 #include "GameOffset.h"
 #include "LocalPlayer.h"
 #include "GameChecker.h"
+#include "BasicMath.h"
