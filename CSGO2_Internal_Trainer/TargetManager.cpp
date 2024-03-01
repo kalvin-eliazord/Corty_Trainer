@@ -45,3 +45,17 @@ Vector3 TargetManager::GetTargetAngle(Entity* pLocalPlayer, Entity* target)
 
     return targetAngle;
 }
+
+void TargetManager::SetAngleSmoothing(Vector3& lpAngle, Vector3& pTargetAngle, const int pSmoothValue)
+{
+    float* lpPitch{ (float*)(GameOffset::Client::lp_Pitch_Input) };
+    float* lpYaw{ (float*)(GameOffset::Client::lp_Yaw_Input) };
+
+    while (lpAngle.x != pTargetAngle.x &&
+        lpAngle.y != pTargetAngle.y)
+    {
+        Vector3 deltaAngle{ BasicMath::GetDelta(pTargetAngle, lpAngle) };
+        *lpPitch += deltaAngle.x / pSmoothValue;
+        *lpYaw   += deltaAngle.y / pSmoothValue;
+    }
+}

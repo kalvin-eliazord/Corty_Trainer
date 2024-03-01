@@ -6,13 +6,14 @@ namespace GameOffset
 	namespace Client
 	{
 		static const intptr_t modBaseAddr         { (intptr_t)GetModuleHandleW(L"client.dll") };
-		static const intptr_t localPlayer      { modBaseAddr + 0x1736BC0 };
-		static const intptr_t* entitiesListPtr{ *(intptr_t**)(modBaseAddr + 0x1736BA8) };
-		static intptr_t nbEntitiesBaseAddrPtr{ *(intptr_t*)(modBaseAddr + 0x169A1A0) };
+		static const intptr_t localPlayer      { modBaseAddr + 0x173DBC0 };
+		static const intptr_t entitiesListBaseAddr{ (modBaseAddr + 0x173DBC0) };
+		static const intptr_t csgoHudBaseAddr{ *(intptr_t*)(modBaseAddr + 0x1976ED0) };
 
-		static float* lp_Pitch_Input{ (float*)(modBaseAddr + 0x19233E0) };
-		static float* lp_Yaw_Input  { (float*)(modBaseAddr + 0x19233E4) };
-		static int*   gameStateIdPtr{ (int*)(modBaseAddr + 0x17292B0) };
+		static float* lp_Pitch_Input{ (float*)(modBaseAddr + 0x1929730) };
+		static float* lp_Yaw_Input  { (float*)(modBaseAddr + 0x1929734) };
+		static int*   gameStateIdPtr{ (int*)(modBaseAddr + 0x1730080) };
+		static int*   gameTypeIdPtr{ (int*)(0x7FF993202509) };
 	}
 	
 	namespace Engine2

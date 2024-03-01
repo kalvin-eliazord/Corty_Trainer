@@ -2,7 +2,9 @@
 
 float BasicMath::GetMagnitude(const Vector3& pValue)
 {
-	return { (pValue.x + pValue.y + pValue.z) };
+	return { (pValue.x * pValue.x) +
+			 (pValue.y * pValue.y) +
+			 (pValue.z* pValue.z) };
 }
 
 float BasicMath::GetMagnitude(const Vector3& pV1, const Vector3& pV2)

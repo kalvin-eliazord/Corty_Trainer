@@ -31,22 +31,14 @@ void EntityList::SetNbEntAlive(int pNbEntAlive)
 
 int EntityList::GetNbEntAlive()
 {
-    const int ct_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::nbEntitiesBaseAddrPtr,
-        {
-            0x198,
-            0x220,
-            0x78,
-            0x8,
+    const int ct_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::csgoHudBaseAddr,
+        { 
             0xB8,
-            0x20CC
+            0x20CC 
         }));
 
-    const int t_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::nbEntitiesBaseAddrPtr,
+    const int t_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::csgoHudBaseAddr,
         {
-            0x198,
-            0x220,
-            0x78,
-            0x8,
             0xB8,
             0x20C8
         }));
@@ -56,19 +48,19 @@ int EntityList::GetNbEntAlive()
 
 bool EntityList::IsGoodTarget(Entity* pLocalPlayer, Entity* entityPtr)
 {
-    const intptr_t playerEntityId{ *(intptr_t*)pLocalPlayer };
-    const intptr_t currIndexId{ *(intptr_t*)entityPtr };
-
-    // Not an Entity
-    if (currIndexId != playerEntityId)
-        return false;
-
     // iteration empty
     if (entityPtr == nullptr && (intptr_t)entityPtr == NULL)
         return false;
 
+    //const intptr_t playerEntityId{ *(intptr_t*)pLocalPlayer };
+    //const intptr_t currIndexId{ *(intptr_t*)entityPtr };
+
+    // Not an Entity
+    //if (currIndexId != playerEntityId)
+      //  return false;
+
     // Entity dead
-    if (entityPtr->health == 0)
+    if (entityPtr->health < 1 or entityPtr->health > 100)
         return false;
 
     // Same team as LP
