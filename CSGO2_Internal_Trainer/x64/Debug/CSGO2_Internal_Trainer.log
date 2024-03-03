@@ -1,2 +1,12 @@
 ﻿  Scanning sources for module dependencies...
+  Entity.h
+  Compiling...
+  Entity.h
+  BasicMath.cpp
+  EntityList.cpp
+  LocalPlayer.cpp
+  MemoryManager.cpp
+  TargetManager.cpp
   dllmain.cpp
+  Generating Code...
+  CSGO2_Internal_Trainer.vcxproj -> C:\Users\Corty\source\repos\CSGO2_Internal_Trainer\x64\Debug\CSGO2_Internal_Trainer.dll

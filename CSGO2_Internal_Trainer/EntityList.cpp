@@ -1,19 +1,19 @@
 #include "EntityList.h"
 
-std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer)
+std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer, int pNbEntAlive)
 {
     std::vector<Entity*> targetList{};
 
     const int newNbEntAlive{ GetNbEntAlive() };
 
     // Update number of entity to iterate
-    if(newNbEntAlive > this->nbEntAlive)
-        SetNbEntAlive(newNbEntAlive);
+    if(newNbEntAlive > pNbEntAlive)
+        pNbEntAlive = newNbEntAlive;
 
     // *2 because there is one object generated for each entity in the list
-    for (int i{ 0 }; i < (this->nbEntAlive * 2); ++i)
+    for (int i{ 0 }; i < (pNbEntAlive * 2); ++i)
     {
-        Entity* currEntity{ this->entity[i] };
+        Entity* currEntity{ (this->entity[i]) };
 
         if (!this->IsGoodTarget(pLocalPlayer, currEntity))
             continue;
@@ -22,11 +22,6 @@ std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer)
     }
 
     return targetList;
-}
-
-void EntityList::SetNbEntAlive(int pNbEntAlive)
-{
-    this->nbEntAlive = pNbEntAlive;
 }
 
 int EntityList::GetNbEntAlive()
@@ -49,18 +44,18 @@ int EntityList::GetNbEntAlive()
 bool EntityList::IsGoodTarget(Entity* pLocalPlayer, Entity* entityPtr)
 {
     // iteration empty
-    if (entityPtr == nullptr && (intptr_t)entityPtr == NULL)
+    if (!entityPtr or !*(intptr_t*)entityPtr or !(intptr_t)entityPtr)
         return false;
 
-    //const intptr_t playerEntityId{ *(intptr_t*)pLocalPlayer };
-    //const intptr_t currIndexId{ *(intptr_t*)entityPtr };
+    //const intptr_t playerEntityId{ (intptr_t)pLocalPlayer };
+    //const intptr_t currEntId{ (intptr_t)entityPtr };
 
     // Not an Entity
-    //if (currIndexId != playerEntityId)
-      //  return false;
+   //if (currEntId != playerEntityId)
+     //   return false;
 
     // Entity dead
-    if (entityPtr->health < 1 or entityPtr->health > 100)
+    if (entityPtr->health < 1)
         return false;
 
     // Same team as LP

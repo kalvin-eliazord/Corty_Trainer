@@ -10,7 +10,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
     // Initialize game logic address
     Entity* localPlayer{ LocalPlayer::Get()};
     EntityList* entitiesListPtr{ (EntityList*)GameOffset::Client::entitiesListBaseAddr };
-    
+    int nbEntAlive{ 1 };
+
     // Aimbot options
     bool bTargetLock{ false };
     int smoothValue{ 0 };
@@ -43,7 +44,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         // Initialize a variable that will prevent read access violation errors
         if (*GameChecker::gameStateIdPtr == GameChecker::inGameId &&
-            entitiesListPtr->GetNbEntAlive() != NULL)
+            entitiesListPtr->GetNbEntAlive() > 1 && localPlayer)
         {
             if (bConsoleChanged or
                 *GameChecker::gameStateIdPtr != oldGameStateId or
@@ -53,8 +54,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 system("cls");
                 std::cout << "IN GAME, HAVE FUN. \n";
                 std::cout << "------------------- \n";
-                std::cout << "[[SMOOTH_VALUE]]-->" << smoothValue << "\n";
-                std::cout << "[[TARGET_LOCK ]]-->" << std::boolalpha << bTargetLock << "\n";
+                std::cout << "[[SMOOTH_VALUE]]-->" << "[[" << smoothValue << "]]" << "\n";
+                std::cout << "[[TARGET_LOCK ]]-->" << std::boolalpha << "[[" << bTargetLock << "]] " << "\n";
                 
                 oldGameStateId = GameChecker::inGameId;
                 bConsoleChanged = false;
@@ -62,7 +63,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
             }
 
             // Retrieve the target list
-            std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer) };
+            std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer, nbEntAlive) };
 
             if (!targetList.empty())
             {
@@ -70,12 +71,12 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 Entity* nearestTarget{ TargetManager::GetNearestTarget(localPlayer, targetList) };
                 Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
 
-                // Locking at enemy until he dead
+                // Locking at enemy until he dead or the option is turnt off
                 if (bTargetLock)
                 {
-                    while (nearestTarget->health > 0)
+                    while (nearestTarget->health > 0 or !GetAsyncKeyState(VK_F2)&1 or !GetAsyncKeyState(VK_DELETE) & 1)
                     {
-                        Vector3 targetAngleLocking{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
+                        Vector3 targetAngleLocked{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
 
                         // Right click to set lp angle
                         if (GetAsyncKeyState(0x02))
@@ -103,13 +104,15 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 system("cls");
                 std::cout << "WAITING FOR A GAME. \n";
                 std::cout << "------------------- \n";
-                std::cout << "[[SMOOTH_VALUE]]-->" << smoothValue << "\n";
-                std::cout << "[[TARGET_LOCK ]]-->" << std::boolalpha << bTargetLock << "\n";
+                std::cout << "[[SMOOTH_VALUE]]-->" << "[[" << smoothValue << "]]" << "\n";
+                std::cout << "[[TARGET_LOCK ]]-->" << std::boolalpha << "[[" << bTargetLock << "]] " << "\n";
 
                 bWaitingLobbyMsg = false;
                 bConsoleChanged = false;
                 oldGameStateId = GameChecker::notInGameId;
             }
+
+            localPlayer = LocalPlayer::Get();
         }
         Sleep(5);
     }

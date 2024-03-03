@@ -2,16 +2,20 @@
 
 float BasicMath::GetMagnitude(const Vector3& pValue)
 {
-	return { (pValue.x * pValue.x) +
-			 (pValue.y * pValue.y) +
-			 (pValue.z* pValue.z) };
+	return { ::sqrtf(
+		(pValue.x * pValue.x) +
+		(pValue.y * pValue.y) +
+		(pValue.z * pValue.z)) };
 }
 
 float BasicMath::GetMagnitude(const Vector3& pV1, const Vector3& pV2)
 {
 	const Vector3 delta{ BasicMath::GetDelta(pV1, pV2) };
 
-	return {(delta.x + delta.y + delta.z)};
+	return {(::sqrtf(
+		(delta.x * delta.x) +
+		(delta.y * delta.y) +
+		(delta.z * delta.z)))};
 }
 
 Vector3 BasicMath::GetDelta(const Vector3& pV1, const Vector3& pV2)

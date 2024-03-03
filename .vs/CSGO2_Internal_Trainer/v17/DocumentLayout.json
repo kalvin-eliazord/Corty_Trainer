@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\dllmain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\dllmain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\LocalPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\BasicMath.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\BasicMath.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\TargetManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\TargetManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameOffset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\GameOffset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\LocalPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\EntityList.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -31,24 +19,16 @@
       "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\EntityList.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameChecker.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\GameChecker.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\dllmain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\dllmain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\Entity.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\Entity.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\LocalPlayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\Vector3.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\Vector3.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\TargetManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\TargetManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameOffset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer.vcxproj|solutionrelative:CSGO2_Internal_Trainer\\GameOffset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -72,150 +52,85 @@
               "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\BasicMath.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\BasicMath.cpp",
               "RelativeToolTip": "CSGO2_Internal_Trainer\\BasicMath.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAbAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-01T15:38:20.212Z",
+              "WhenOpened": "2024-03-03T21:20:02.151Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TargetManager.cpp",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\TargetManager.cpp",
-              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\TargetManager.cpp",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\TargetManager.cpp",
-              "RelativeToolTip": "CSGO2_Internal_Trainer\\TargetManager.cpp",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAwB8AAAAsAAAA",
+              "DocumentIndex": 0,
+              "Title": "LocalPlayer.cpp",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.cpp",
+              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\LocalPlayer.cpp",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.cpp",
+              "RelativeToolTip": "CSGO2_Internal_Trainer\\LocalPlayer.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-01T15:36:57.405Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "GameChecker.h",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameChecker.h",
-              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\GameChecker.h",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameChecker.h",
-              "RelativeToolTip": "CSGO2_Internal_Trainer\\GameChecker.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-01T09:57:28.613Z",
+              "WhenOpened": "2024-03-03T15:44:07.34Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "GameOffset.h",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameOffset.h",
+              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\GameOffset.h",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameOffset.h",
+              "RelativeToolTip": "CSGO2_Internal_Trainer\\GameOffset.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABNAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-03T15:31:33.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Entity.h",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\Entity.h",
+              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\Entity.h",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\Entity.h",
+              "RelativeToolTip": "CSGO2_Internal_Trainer\\Entity.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-03T15:22:14.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "EntityList.h",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\EntityList.h",
               "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\EntityList.h",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\EntityList.h",
               "RelativeToolTip": "CSGO2_Internal_Trainer\\EntityList.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-03-01T13:16:56.329Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Entity.h",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\Entity.h",
-              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\Entity.h",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\Entity.h",
-              "RelativeToolTip": "CSGO2_Internal_Trainer\\Entity.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-01T09:42:21.105Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Vector3.h",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\Vector3.h",
-              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\Vector3.h",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\Vector3.h",
-              "RelativeToolTip": "CSGO2_Internal_Trainer\\Vector3.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-01T07:37:48.142Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TargetManager.h",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\TargetManager.h",
-              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\TargetManager.h",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\TargetManager.h",
-              "RelativeToolTip": "CSGO2_Internal_Trainer\\TargetManager.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-01T06:25:14.157Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "LocalPlayer.h",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.h",
-              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\LocalPlayer.h",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.h",
-              "RelativeToolTip": "CSGO2_Internal_Trainer\\LocalPlayer.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-01T06:25:00.003Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LocalPlayer.cpp",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.cpp",
-              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\LocalPlayer.cpp",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\LocalPlayer.cpp",
-              "RelativeToolTip": "CSGO2_Internal_Trainer\\LocalPlayer.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-02-27T20:02:14.058Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GameOffset.h",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameOffset.h",
-              "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\GameOffset.h",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\GameOffset.h",
-              "RelativeToolTip": "CSGO2_Internal_Trainer\\GameOffset.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-02-27T19:50:12.614Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "EntityList.cpp",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\EntityList.cpp",
               "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\EntityList.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\EntityList.cpp",
               "RelativeToolTip": "CSGO2_Internal_Trainer\\EntityList.cpp",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAADMAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-02-27T18:10:36.777Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "dllmain.cpp",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\dllmain.cpp",
               "RelativeDocumentMoniker": "CSGO2_Internal_Trainer\\dllmain.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CSGO2_Internal_Trainer\\CSGO2_Internal_Trainer\\dllmain.cpp",
               "RelativeToolTip": "CSGO2_Internal_Trainer\\dllmain.cpp",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAAE0AAAAyAAAA",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAAAFcAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-02-21T10:08:28.298Z",
               "EditorCaption": ""
