@@ -2,7 +2,7 @@
 
 Entity* LocalPlayer::Get()
 {
-    static Entity* localPlayerBaseAddr{ (Entity*)(GameOffset::Client::localPlayer) };
+    Entity* localPlayerBaseAddr{ *(Entity**)(GameOffset::Client::localPlayer) };
     return localPlayerBaseAddr;
 }
 

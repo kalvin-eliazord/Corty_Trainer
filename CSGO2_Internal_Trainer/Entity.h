@@ -11,7 +11,7 @@ struct Entity
 	{
 		//              Type     Name    GameOffset
 		DEFINE_MEMBER_N(int32_t, health, 0x334);
-		DEFINE_MEMBER_N(int32_t, team_variable, 0x3C8);
+		DEFINE_MEMBER_N(int8_t, team_variable, 0x3CB);
 		DEFINE_MEMBER_N(Vector3, body_pos, 0xD60);
 		DEFINE_MEMBER_N(Vector3, angles, 0x11A4);
 	};

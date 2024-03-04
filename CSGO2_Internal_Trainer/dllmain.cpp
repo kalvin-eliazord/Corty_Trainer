@@ -8,9 +8,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
     freopen_s(&f, "CONOUT$", "w", stdout);
     
     // Initialize game logic address
-    Entity* localPlayer{ LocalPlayer::Get()};
+    Entity* localPlayer{ LocalPlayer::Get() };
     EntityList* entitiesListPtr{ (EntityList*)GameOffset::Client::entitiesListBaseAddr };
-    int nbEntAlive{ 1 };
 
     // Aimbot options
     bool bTargetLock{ false };
@@ -44,7 +43,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         // Initialize a variable that will prevent read access violation errors
         if (*GameChecker::gameStateIdPtr == GameChecker::inGameId &&
-            entitiesListPtr->GetNbEntAlive() > 1 && localPlayer)
+            entitiesListPtr->GetNbEntAlive() > 1 && localPlayer->team_variable != 0)
         {
             if (bConsoleChanged or
                 *GameChecker::gameStateIdPtr != oldGameStateId or
@@ -63,7 +62,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
             }
 
             // Retrieve the target list
-            std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer, nbEntAlive) };
+             std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer) };
 
             if (!targetList.empty())
             {
@@ -71,7 +70,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 Entity* nearestTarget{ TargetManager::GetNearestTarget(localPlayer, targetList) };
                 Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
 
-                // Locking at enemy until he dead or the option is turnt off
+                // Locking at enemy until he dead
                 if (bTargetLock)
                 {
                     while (nearestTarget->health > 0 or !GetAsyncKeyState(VK_F2)&1 or !GetAsyncKeyState(VK_DELETE) & 1)

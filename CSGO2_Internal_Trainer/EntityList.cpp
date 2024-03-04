@@ -1,17 +1,10 @@
 #include "EntityList.h"
 
-std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer, int pNbEntAlive)
+std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer)
 {
     std::vector<Entity*> targetList{};
 
-    const int newNbEntAlive{ GetNbEntAlive() };
-
-    // Update number of entity to iterate
-    if(newNbEntAlive > pNbEntAlive)
-        pNbEntAlive = newNbEntAlive;
-
-    // *2 because there is one object generated for each entity in the list
-    for (int i{ 0 }; i < (pNbEntAlive * 2); ++i)
+    for (int i{ 0 }; i < 32; ++i)
     {
         Entity* currEntity{ (this->entity[i]) };
 
@@ -46,13 +39,6 @@ bool EntityList::IsGoodTarget(Entity* pLocalPlayer, Entity* entityPtr)
     // iteration empty
     if (!entityPtr or !*(intptr_t*)entityPtr or !(intptr_t)entityPtr)
         return false;
-
-    //const intptr_t playerEntityId{ (intptr_t)pLocalPlayer };
-    //const intptr_t currEntId{ (intptr_t)entityPtr };
-
-    // Not an Entity
-   //if (currEntId != playerEntityId)
-     //   return false;
 
     // Entity dead
     if (entityPtr->health < 1)
