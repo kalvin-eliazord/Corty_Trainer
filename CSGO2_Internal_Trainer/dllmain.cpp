@@ -10,6 +10,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     // Initialize game logic address
     Entity* localPlayer{ LocalPlayer::Get() };
     EntityList* entitiesListPtr{ (EntityList*)GameOffset::Client::entitiesListBaseAddr };
+    int8_t* gameTypePtr{ GameOffset::Client::gameTypeIdPtr };
 
     // Aimbot options
     bool bTargetLock{ false };
@@ -43,7 +44,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         // Initialize a variable that will prevent read access violation errors
         if (*GameChecker::gameStateIdPtr == GameChecker::inGameId &&
-            entitiesListPtr->GetNbEntAlive() > 1 && localPlayer->team_variable != 0)
+            entitiesListPtr->GetNbEntAlive() > 1 &&
+            localPlayer->team_variable != 0)
         {
             if (bConsoleChanged or
                 *GameChecker::gameStateIdPtr != oldGameStateId or
@@ -62,11 +64,11 @@ DWORD WINAPI MainThread(HMODULE hModule)
             }
 
             // Retrieve the target list
-             std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer) };
+             std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer, gameTypePtr) };
 
             if (!targetList.empty())
             {
-                // Nearest target from lp crosshair
+                // Get Nearest target from lp crosshair
                 Entity* nearestTarget{ TargetManager::GetNearestTarget(localPlayer, targetList) };
                 Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
 

@@ -2,18 +2,24 @@
 
 Entity* TargetManager::GetNearestTarget(Entity* pLocalPlayer, std::vector<Entity*> pTargetList)
 {
-    float oldAngleDist{ FLT_MAX };
+    float oldCoefDist{ FLT_MAX };
     Entity* nearestTarget{ nullptr };
 
     for (auto currTarget : pTargetList)
     {
-        Vector3 currTargetAngle{ GetTargetAngle(pLocalPlayer, currTarget) };
-
+        // crossHair Distance
+        const Vector3 currTargetAngle{ GetTargetAngle(pLocalPlayer, currTarget) };
         const float newAngleDist{ BasicMath::GetMagnitude(pLocalPlayer->angles, currTargetAngle)};
 
-        if (newAngleDist < oldAngleDist)
+        // body position distance
+        const float newBodyPosDist{ BasicMath::GetMagnitude(pLocalPlayer->body_pos, currTarget->body_pos) };
+
+        // Based on crosshair + body position distance
+        const float newCoefDist{ (newAngleDist * 0.6f) + (newBodyPosDist * 0.4f) };
+
+        if (newCoefDist < oldCoefDist)
         {
-            oldAngleDist = newAngleDist;
+            oldCoefDist   = newCoefDist;
             nearestTarget = currTarget;
         }
     }
@@ -29,12 +35,14 @@ float TargetManager::GetClamp(const float p_fValueToClamp, const float p_fMin, c
 
 Vector3 TargetManager::GetTargetAngle(Entity* pLocalPlayer, Entity* target)
 {
-    const Vector3 delta{ BasicMath::GetDelta(pLocalPlayer->body_pos, target->body_pos) };
 
+    const Vector3 delta{ BasicMath::GetDelta(pLocalPlayer->body_pos, target->body_pos) };
+    
     const float magnitude{ BasicMath::GetMagnitude(delta) };
 
     Vector3 targetAngle{};
 
+    //old w accroupie bug
     targetAngle.x = atanf(delta.z / magnitude) * 57.2957795f;
     targetAngle.y = atanf(delta.y / delta.x) * 57.2957795f;
 

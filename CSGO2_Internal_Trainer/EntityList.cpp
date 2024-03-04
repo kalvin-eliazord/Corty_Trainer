@@ -1,6 +1,6 @@
 #include "EntityList.h"
 
-std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer)
+std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer, int8_t* pGameType)
 {
     std::vector<Entity*> targetList{};
 
@@ -8,7 +8,7 @@ std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer)
     {
         Entity* currEntity{ (this->entity[i]) };
 
-        if (!this->IsGoodTarget(pLocalPlayer, currEntity))
+        if (!this->IsGoodTarget(pLocalPlayer, currEntity, pGameType))
             continue;
 
         targetList.push_back(currEntity);
@@ -34,7 +34,7 @@ int EntityList::GetNbEntAlive()
     return ct_EntAlive + t_EntAlive;
 }
 
-bool EntityList::IsGoodTarget(Entity* pLocalPlayer, Entity* entityPtr)
+bool EntityList::IsGoodTarget(Entity* pLocalPlayer, Entity* entityPtr, int8_t* pGameType)
 {
     // iteration empty
     if (!entityPtr or !*(intptr_t*)entityPtr or !(intptr_t)entityPtr)
@@ -44,9 +44,15 @@ bool EntityList::IsGoodTarget(Entity* pLocalPlayer, Entity* entityPtr)
     if (entityPtr->health < 1)
         return false;
 
-    // Same team as LP
-    if (pLocalPlayer->team_variable == entityPtr->team_variable)
-        return false;
+    constexpr int8_t deathmatchType{ 39 };
+
+    // don't check for team if there is no team
+    if (*pGameType != deathmatchType)
+    {
+        // Same team as LP
+        if (pLocalPlayer->team_variable == entityPtr->team_variable)
+            return false;
+    }
 
     // If Entity is behind the wall
 
