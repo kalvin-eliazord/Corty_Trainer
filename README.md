@@ -1,6 +1,11 @@
 # CS2 Internal Trainer
 A C++ dynamic-linked library aimbot for the CS2 game.
 
+## Features
+- Aimbot 
+	- Smoothing
+	- Target Locking
+
 ## What is aimbot ?
 This is a cheating functionality that will allow a player to aim at a target automatically.
 
