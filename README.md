@@ -12,5 +12,5 @@ This is a functionality that will allow a player to aim at a target automaticall
 - Add ESP features
 - Add no recoil
 
-## Disclaimer
+## Disclaimers
 ⚠️ This project is for learning purposes only and strictly prohibited for any illegal activities. Users bear full responsibility for any issues. ⚠️
