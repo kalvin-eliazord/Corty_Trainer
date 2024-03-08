@@ -1,3 +1,2 @@
 ﻿  Scanning sources for module dependencies...
-  TargetManager.cpp
-  CSGO2_Internal_Trainer.vcxproj -> C:\Users\Corty\source\repos\CS2_Internal_Trainer\x64\Debug\CS2_Internal_Trainer.dll
+  dllmain.cpp

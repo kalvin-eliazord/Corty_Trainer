@@ -16,6 +16,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     Entity* targetLocked{ nullptr };
     bool bTargetLock{ false };
     int smoothValue{ 0 };
+    int fovValue{ 50 };
 
     // Console updater
     bool bConsoleChanged{ false };
@@ -43,10 +44,22 @@ DWORD WINAPI MainThread(HMODULE hModule)
             bConsoleChanged = true;
         }
 
+        if (GetAsyncKeyState(VK_F5) & 1 && fovValue > 0)
+        {
+            fovValue -= 10;
+            bConsoleChanged = true;
+        }
+
+        if (GetAsyncKeyState(VK_F6) & 1)
+        {
+            fovValue += 10;
+            bConsoleChanged = true;
+        }
+
         // Initialize a variable that will prevent read access violation errors
         if (*GameChecker::gameStateIdPtr == GameChecker::inGameId &&
             entitiesListPtr->GetNbEntAlive() > 1 &&
-            localPlayer->team_variable != 0)
+            localPlayer && localPlayer->team_variable != 0  )
         {
             if (bConsoleChanged or
                 *GameChecker::gameStateIdPtr != oldGameStateId or
@@ -57,6 +70,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 std::cout << "IN GAME, HAVE FUN. \n";
                 std::cout << "------------------- \n";
                 std::cout << "SMOOTH VALUE: press F3 (-) or press F4 (+) \n" << "-->[[" << smoothValue << "]]" << "\n";
+                std::cout << "FOV: press F5 (-) or press F6 (+) \n" << "-->[[" << fovValue << "]]" << "\n";
                 std::cout << "TARGET LOCKING: press F2 \n" << std::boolalpha << "-->[[" << bTargetLock << "]] " << "\n";
                 
                 oldGameStateId = GameChecker::inGameId;
@@ -73,15 +87,23 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 Entity* nearestTarget{ TargetManager::GetNearestTarget(localPlayer, targetList) };
                 Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
 
+                const Vector3 delta_lp_target_angle{ BasicMath::GetDelta(localPlayer->angles, targetAngle) };
+
                 if (bTargetLock)
                 {
                     if (targetLocked)
                     {
                         Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(localPlayer, targetLocked) };
 
-                        // Right click to set lp angle
-                        if (GetAsyncKeyState(0x02))
-                            LocalPlayer::SetViewAngle(localPlayer->angles, targetLockedAngle, smoothValue);
+                        // If the fov is right you can aim at enemy
+                        if (::fabs(delta_lp_target_angle.x) < fovValue)
+                        {
+                            if (::fabs(delta_lp_target_angle.y) < fovValue)
+                            {
+                                if (GetAsyncKeyState(0x02))
+                                    LocalPlayer::SetViewAngle(localPlayer->angles, targetAngle, smoothValue);
+                            }
+                        }
 
                         // Locking at enemy until he dead
                         if (targetLocked->health < 1)
@@ -94,9 +116,15 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 }
                 else
                 {
-                    // Right click to set lp angle
-                    if (GetAsyncKeyState(0x02))
-                        LocalPlayer::SetViewAngle(localPlayer->angles, targetAngle, smoothValue);
+                    // If the fov is right you can aim at enemy
+                    if (::fabs(delta_lp_target_angle.x) < fovValue)
+                    {
+                        if (::fabs(delta_lp_target_angle.y) < fovValue)
+                        {
+                            if (GetAsyncKeyState(0x02))
+                                LocalPlayer::SetViewAngle(localPlayer->angles, targetAngle, smoothValue);
+                        }
+                    }
                 }
             }
         }
@@ -114,6 +142,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 std::cout << "WAITING FOR A GAME. \n";
                 std::cout << "------------------- \n";
                 std::cout << "SMOOTH VALUE: press F3 (-) or press F4 (+) \n" << "-->[[" << smoothValue << "]]" << "\n";
+                std::cout << "FOV: press F5 (-) or press F6 (+) \n" << "-->[[" << fovValue << "]]" << "\n";
                 std::cout << "TARGET LOCKING: press F2 \n" << std::boolalpha << "-->[[" << bTargetLock << "]] " << "\n";
 
                 bWaitingLobbyMsg = false;
