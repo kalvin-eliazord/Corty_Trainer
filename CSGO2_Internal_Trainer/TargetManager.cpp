@@ -59,11 +59,11 @@ void TargetManager::SetAngleSmoothing(Vector3& lpAngle, Vector3& pTargetAngle, c
     float* lpPitch{ (float*)(GameOffset::Client::lp_Pitch_Input) };
     float* lpYaw{ (float*)(GameOffset::Client::lp_Yaw_Input) };
 
-    while (lpAngle.x != pTargetAngle.x &&
-        lpAngle.y != pTargetAngle.y)
-    {
-        Vector3 deltaAngle{ BasicMath::GetDelta(pTargetAngle, lpAngle) };
+    Vector3 deltaAngle{ BasicMath::GetDelta(pTargetAngle, lpAngle) };
+
+    if (lpAngle.x != pTargetAngle.x)
         *lpPitch += deltaAngle.x / pSmoothValue;
+
+    if (lpAngle.y != pTargetAngle.y)
         *lpYaw   += deltaAngle.y / pSmoothValue;
-    }
 }

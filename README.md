@@ -5,7 +5,6 @@ a C++ dynamic-linked library cheat for the CS2 game with the aimbot function.
 This is a functionality that will allow a player to aim at a target automatically.
 
 ## To-do:
-- Fix smoothing
 - Add trace line game function
 - Add trampoline hook
 - Add ESP features
