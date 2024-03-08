@@ -13,6 +13,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     int8_t* gameTypePtr{ GameOffset::Client::gameTypeIdPtr };
 
     // Aimbot options
+    Entity* targetLocked{ nullptr };
     bool bTargetLock{ false };
     int smoothValue{ 0 };
 
@@ -55,8 +56,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 system("cls");
                 std::cout << "IN GAME, HAVE FUN. \n";
                 std::cout << "------------------- \n";
-                std::cout << "[[SMOOTH_VALUE]]-->" << "[[" << smoothValue << "]]" << "\n";
-                std::cout << "[[TARGET_LOCK ]]-->" << std::boolalpha << "[[" << bTargetLock << "]] " << "\n";
+                std::cout << "SMOOTH VALUE: press F3 (-) or press F4 (+) \n" << "-->[[" << smoothValue << "]]" << "\n";
+                std::cout << "TARGET LOCKING: press F2 \n" << std::boolalpha << "-->[[" << bTargetLock << "]] " << "\n";
                 
                 oldGameStateId = GameChecker::inGameId;
                 bConsoleChanged = false;
@@ -72,16 +73,23 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 Entity* nearestTarget{ TargetManager::GetNearestTarget(localPlayer, targetList) };
                 Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
 
-                // Locking at enemy until he dead
                 if (bTargetLock)
                 {
-                    while (nearestTarget->health > 0 or !GetAsyncKeyState(VK_F2)&1 or !GetAsyncKeyState(VK_DELETE) & 1)
+                    if (targetLocked)
                     {
-                        Vector3 targetAngleLocked{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
+                        Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(localPlayer, targetLocked) };
 
                         // Right click to set lp angle
                         if (GetAsyncKeyState(0x02))
-                            LocalPlayer::SetViewAngle(localPlayer->angles, targetAngle, smoothValue);
+                            LocalPlayer::SetViewAngle(localPlayer->angles, targetLockedAngle, smoothValue);
+
+                        // Locking at enemy until he dead
+                        if (targetLocked->health < 1)
+                            targetLocked = nullptr;
+                    }
+                    else
+                    {
+                        targetLocked = nearestTarget;
                     }
                 }
                 else
@@ -105,8 +113,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 system("cls");
                 std::cout << "WAITING FOR A GAME. \n";
                 std::cout << "------------------- \n";
-                std::cout << "[[SMOOTH_VALUE]]-->" << "[[" << smoothValue << "]]" << "\n";
-                std::cout << "[[TARGET_LOCK ]]-->" << std::boolalpha << "[[" << bTargetLock << "]] " << "\n";
+                std::cout << "SMOOTH VALUE: press F3 (-) or press F4 (+) \n" << "-->[[" << smoothValue << "]]" << "\n";
+                std::cout << "TARGET LOCKING: press F2 \n" << std::boolalpha << "-->[[" << bTargetLock << "]] " << "\n";
 
                 bWaitingLobbyMsg = false;
                 bConsoleChanged = false;

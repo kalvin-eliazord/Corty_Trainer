@@ -15,7 +15,7 @@ Entity* TargetManager::GetNearestTarget(Entity* pLocalPlayer, std::vector<Entity
         const float newBodyPosDist{ BasicMath::GetMagnitude(pLocalPlayer->body_pos, currTarget->body_pos) };
 
         // Based on crosshair + body position distance
-        const float newCoefDist{ (newAngleDist * 0.6f) + (newBodyPosDist * 0.4f) };
+        const float newCoefDist{ (newAngleDist * 0.9f) + (newBodyPosDist * 0.1f) };
 
         if (newCoefDist < oldCoefDist)
         {
