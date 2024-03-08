@@ -11,6 +11,7 @@ This is a functionality that will allow a player to aim at a target automaticall
 - Add trampoline hook
 - Add ESP features
 - Add no recoil
+- Improve readability + code structure
 
 ## Disclaimers
 ⚠️ This project is for learning purposes only and strictly prohibited for any illegal activities. Users bear full responsibility for any issues. ⚠️
