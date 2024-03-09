@@ -5,6 +5,7 @@ A C++ dynamic-linked library aimbot for the CS2 game.
 - Aimbot 
 	- Smoothing
 	- Target Locking
+	- FOV
 
 ## What is aimbot ?
 This is a cheating functionality that will allow a player to aim at a target automatically.
