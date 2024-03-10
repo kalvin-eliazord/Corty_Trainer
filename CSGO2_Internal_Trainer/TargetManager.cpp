@@ -49,16 +49,31 @@ Vector3 TargetManager::GetTargetAngle(Entity* pLocalPlayer, Entity* target)
     return targetAngle;
 }
 
-void TargetManager::SetAngleSmoothing(Vector3& lpAngle, Vector3& pTargetAngle, const int pSmoothValue)
+void TargetManager::SetAngleSmoothing(Vector3& pTargetAngle, const int pSmoothValue)
 {
-    float* lpPitch{ (float*)(GameOffset::Client::lp_Pitch_Input) };
-    float* lpYaw{ (float*)(GameOffset::Client::lp_Yaw_Input) };
+    float* lp_Pitch{ (float*)(GameOffset::Client::lp_Pitch_Input) };
+    float* lp_Yaw{ (float*)(GameOffset::Client::lp_Yaw_Input) };
 
-    Vector3 deltaAngle{ BasicMath::GetDelta(pTargetAngle, lpAngle) };
+    Vector3 lp_Angle{ *lp_Pitch, *lp_Yaw, 0 };
 
-    if (lpAngle.x != pTargetAngle.x)
-        *lpPitch += deltaAngle.x / pSmoothValue;
+    Vector3 deltaAngle{ BasicMath::GetDelta(pTargetAngle, lp_Angle) };
 
-    if (lpAngle.y != pTargetAngle.y)
-        *lpYaw   += deltaAngle.y / pSmoothValue;
+    if (deltaAngle.y > 180)
+    {
+        deltaAngle.y -= 360;
+    }
+    if (deltaAngle.y < -180)
+    {
+        deltaAngle.y += 360;
+    }
+
+    //system("cls");
+   // std::cout << "DeltaAngle X: " << deltaAngle.x << " Y:" << deltaAngle.y << "\t \n";
+    //std::cout << "pTargetAngle X: " << pTargetAngle.x << " Y:" << pTargetAngle.y << "\t \n";
+
+    if (*lp_Pitch != pTargetAngle.x)
+        *lp_Pitch += deltaAngle.x / pSmoothValue;
+
+    if (*lp_Yaw != pTargetAngle.y)
+        *lp_Yaw += deltaAngle.y / pSmoothValue;
 }

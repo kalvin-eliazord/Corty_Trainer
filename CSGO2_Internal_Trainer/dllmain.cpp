@@ -44,7 +44,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
             bConsoleChanged = true;
         }
 
-        if (GetAsyncKeyState(VK_F5) & 1 && fovValue > 0)
+        if (GetAsyncKeyState(VK_F5) & 1 && fovValue > 10)
         {
             fovValue -= 10;
             bConsoleChanged = true;
@@ -96,12 +96,12 @@ DWORD WINAPI MainThread(HMODULE hModule)
                         Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(localPlayer, targetLocked) };
 
                         // If the fov is right you can aim at enemy
-                        if (::fabs(delta_lp_target_angle.x) < fovValue)
+                        if ((delta_lp_target_angle.x) < fovValue or -delta_lp_target_angle.x > -fovValue)
                         {
-                            if (::fabs(delta_lp_target_angle.y) < fovValue)
+                            if ((delta_lp_target_angle.y) < fovValue or -delta_lp_target_angle.y > -fovValue)
                             {
                                 if (GetAsyncKeyState(0x02))
-                                    LocalPlayer::SetViewAngle(localPlayer->angles, targetAngle, smoothValue);
+                                    LocalPlayer::SetViewAngle(targetLockedAngle, smoothValue);
                             }
                         }
 
@@ -117,12 +117,12 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 else
                 {
                     // If the fov is right you can aim at enemy
-                    if (::fabs(delta_lp_target_angle.x) < fovValue)
+                    if ((delta_lp_target_angle.x) < fovValue)
                     {
-                        if (::fabs(delta_lp_target_angle.y) < fovValue)
+                        if ((delta_lp_target_angle.y) < fovValue )
                         {
                             if (GetAsyncKeyState(0x02))
-                                LocalPlayer::SetViewAngle(localPlayer->angles, targetAngle, smoothValue);
+                                LocalPlayer::SetViewAngle(targetAngle, smoothValue);
                         }
                     }
                 }

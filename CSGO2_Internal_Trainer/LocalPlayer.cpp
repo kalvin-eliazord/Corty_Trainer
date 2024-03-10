@@ -6,11 +6,11 @@ Entity* LocalPlayer::Get()
     return localPlayerBaseAddr;
 }
 
-void LocalPlayer::SetViewAngle(Vector3& lpAngle, Vector3& targetAngle, const int pSmoothValue)
+void LocalPlayer::SetViewAngle(Vector3& targetAngle, const int pSmoothValue)
 {
     if (pSmoothValue != 0)
     {
-        TargetManager::SetAngleSmoothing(lpAngle, targetAngle, pSmoothValue);
+        TargetManager::SetAngleSmoothing(targetAngle, pSmoothValue);
     }
     else
     {
