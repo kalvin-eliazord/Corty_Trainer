@@ -67,13 +67,18 @@ void TargetManager::SetAngleSmoothing(Vector3& pTargetAngle, const int pSmoothVa
         deltaAngle.y += 360;
     }
 
-    //system("cls");
-   // std::cout << "DeltaAngle X: " << deltaAngle.x << " Y:" << deltaAngle.y << "\t \n";
-    //std::cout << "pTargetAngle X: " << pTargetAngle.x << " Y:" << pTargetAngle.y << "\t \n";
-
     if (*lp_Pitch != pTargetAngle.x)
         *lp_Pitch += deltaAngle.x / pSmoothValue;
 
     if (*lp_Yaw != pTargetAngle.y)
         *lp_Yaw += deltaAngle.y / pSmoothValue;
+
+    if (*lp_Yaw < -180)
+    {
+        *lp_Yaw = 179.99999f;
+    }
+    if (*lp_Yaw > 180)
+    {
+        *lp_Yaw = -179.99999f;
+    }
 }

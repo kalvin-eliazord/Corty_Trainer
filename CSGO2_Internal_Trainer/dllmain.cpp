@@ -117,9 +117,9 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 else
                 {
                     // If the fov is right you can aim at enemy
-                    if ((delta_lp_target_angle.x) < fovValue)
+                    if ((delta_lp_target_angle.x) < fovValue or -delta_lp_target_angle.x > -fovValue)
                     {
-                        if ((delta_lp_target_angle.y) < fovValue )
+                        if ((delta_lp_target_angle.y) < fovValue or -delta_lp_target_angle.y > -fovValue)
                         {
                             if (GetAsyncKeyState(0x02))
                                 LocalPlayer::SetViewAngle(targetAngle, smoothValue);
