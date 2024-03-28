@@ -7,8 +7,11 @@ DWORD WINAPI MainThread(HMODULE hModule)
     AllocConsole();
     freopen_s(&f, "CONOUT$", "w", stdout);
     
-    // Initialize game logic address
-    Entity* localPlayer{ LocalPlayer::Get() };
+    // Get signatures
+    char* entityListSignature{ (char*)"\x48\x8D\x00\x00\x00\x00\x00\x48\x3B\x00\x74\x00\x48\x85\x00\x74\x00\xF7\x05\x66\x72\x5F\x00" };
+    GameOffset::GetGamePointers(entityListSignature, entityListSignature, (wchar_t*)L"client.dll");
+
+     Entity* localPlayer{ LocalPlayer::Get() };
     EntityList* entitiesListPtr{ (EntityList*)GameOffset::Client::entitiesListBaseAddr };
     int8_t* gameTypePtr{ GameOffset::Client::gameTypeIdPtr };
 
@@ -24,6 +27,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     bool bStartingInGame{ true };
     int oldGameStateId{ *GameChecker::gameStateIdPtr };
 
+    
     while (!GetAsyncKeyState(VK_DELETE) & 1)
     {
         // Aimbot options keybind
@@ -152,6 +156,11 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
             localPlayer = LocalPlayer::Get();
         }
+        Sleep(5);
+    }
+    
+    while (!GetAsyncKeyState(VK_DELETE) & 1)
+    {
         Sleep(5);
     }
 

@@ -82,5 +82,8 @@
     <ClCompile Include="BasicMath.cpp">
       <Filter>BasicMath</Filter>
     </ClCompile>
+    <ClCompile Include="GameOffset.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

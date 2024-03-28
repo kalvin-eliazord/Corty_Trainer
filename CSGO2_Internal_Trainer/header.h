@@ -9,6 +9,7 @@
 #include "EntityList.h"
 #include "MemoryManager.h"
 #include "TargetManager.h"
+#include "dbghelp.h"
 #include "GameOffset.h"
 #include "LocalPlayer.h"
 #include "GameChecker.h"

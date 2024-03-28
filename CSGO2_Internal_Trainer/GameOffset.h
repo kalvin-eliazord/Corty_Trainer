@@ -3,6 +3,11 @@
 
 namespace GameOffset
 {
+	int   GetPatternLen(char* pPattern);
+	char* GetPatternMatch(char* pPattern, char* pMask, char* pSrc, intptr_t pRegionSize);
+	char* ScanModuleRegion(char* pPattern, char* pMask, char* pSrc, intptr_t pSrcSize);
+	void  GetGamePointers(char* pPattern, char* pMask, wchar_t* pModName);
+
 	namespace Client
 	{
 		static const intptr_t modBaseAddr         { (intptr_t)GetModuleHandleW(L"client.dll") };

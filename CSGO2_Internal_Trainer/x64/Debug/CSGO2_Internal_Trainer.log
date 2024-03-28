@@ -1,3 +1,18 @@
 ﻿  Scanning sources for module dependencies...
-  LINK : C:\Users\Corty\source\repos\CS2_Internal_Trainer\x64\Debug\CS2_Internal_Trainer.dll not found or not built by the last incremental link; performing full link
-  CSGO2_Internal_Trainer.vcxproj -> C:\Users\Corty\source\repos\CS2_Internal_Trainer\x64\Debug\CS2_Internal_Trainer.dll
+  Entity.h
+  Compiling...
+  Entity.h
+  BasicMath.cpp
+  EntityList.cpp
+  GameOffset.cpp
+  LocalPlayer.cpp
+C:\Users\Corty\source\repos\CS2_Internal_Trainer\CSGO2_Internal_Trainer\GameChecker.h(6,30): error C2653: 'GameOffset': is not a class or namespace name
+  (compiling source file 'GameOffset.cpp')
+  
+  MemoryManager.cpp
+  TargetManager.cpp
+  dllmain.cpp
+C:\Users\Corty\source\repos\CS2_Internal_Trainer\CSGO2_Internal_Trainer\dllmain.cpp(161,5): warning C4138: '*/' found outside of comment
+C:\Users\Corty\source\repos\CS2_Internal_Trainer\CSGO2_Internal_Trainer\dllmain.cpp(161,6): error C2059: syntax error: '/'
+C:\Users\Corty\source\repos\CS2_Internal_Trainer\CSGO2_Internal_Trainer\dllmain.cpp(163,5): error C2143: syntax error: missing ';' before '{'
+  Generating Code...
