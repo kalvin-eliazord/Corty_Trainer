@@ -8,12 +8,17 @@ DWORD WINAPI MainThread(HMODULE hModule)
     freopen_s(&f, "CONOUT$", "w", stdout);
     
     // Get signatures
-    char* entityListSignature{ (char*)"\x48\x8D\x00\x00\x00\x00\x00\x48\x3B\x00\x74\x00\x48\x85\x00\x74\x00\xF7\x05\x66\x72\x5F\x00" };
-    GameOffset::GetGamePointers(entityListSignature, entityListSignature, (wchar_t*)L"client.dll");
+    char* entityListSign{ (char*)"\x88\x4C\?\?\xFE\x7F\?\?\x20" };
+    EntityList* entitiesListPtr{ (EntityList*)GameOffset::GetGamePointers(entityListSign, entityListSign, (wchar_t*)L"client.dll") };;
 
-     Entity* localPlayer{ LocalPlayer::Get() };
-    EntityList* entitiesListPtr{ (EntityList*)GameOffset::Client::entitiesListBaseAddr };
-    int8_t* gameTypePtr{ GameOffset::Client::gameTypeIdPtr };
+    char* localPlayerSign{ (char*)"\?\x28\x86\x75\?\x02\?\?\?\x62\x65" };
+    Entity* localPlayer{(Entity*) GameOffset::GetGamePointers(localPlayerSign, localPlayerSign, (wchar_t*)L"client.dll") };
+    
+    char* oldGameStateIdSign{ (char*)"\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xFF\x2D" };
+    int oldGameStateId{ *(int*)GameOffset::GetGamePointers(oldGameStateIdSign, oldGameStateIdSign, (wchar_t*)L"client.dll") };
+    
+    // signature todo
+    int8_t* gameTypePtr{ nullptr };
 
     // Aimbot options
     Entity* targetLocked{ nullptr };
@@ -25,8 +30,6 @@ DWORD WINAPI MainThread(HMODULE hModule)
     bool bConsoleChanged{ false };
     bool bWaitingLobbyMsg{ true };
     bool bStartingInGame{ true };
-    int oldGameStateId{ *GameChecker::gameStateIdPtr };
-
     
     while (!GetAsyncKeyState(VK_DELETE) & 1)
     {
@@ -156,11 +159,6 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
             localPlayer = LocalPlayer::Get();
         }
-        Sleep(5);
-    }
-    
-    while (!GetAsyncKeyState(VK_DELETE) & 1)
-    {
         Sleep(5);
     }
 

@@ -3,13 +3,11 @@
 int GameOffset::GetPatternLen(char* pPattern)
 {
 	int count = 0;
-	while (pPattern[count] != '\0' && pPattern[count + 1]  != '\0')
+	while (pPattern[count] != '\0')
 		count++;
 
 	return count;
 }
-
-
 
 char* GameOffset::GetPatternMatch(char* pPattern, char* pMask, char* pSrc, intptr_t pRegionSize)
 {
@@ -21,7 +19,7 @@ char* GameOffset::GetPatternMatch(char* pPattern, char* pMask, char* pSrc, intpt
 
 		for (int j{ 0 }; j < patternLen; ++j)
 		{
-			if (pMask[j] != '\x00' && pPattern[j] != *(char*)((intptr_t)pSrc + i + j))
+			if (pMask[j] != '\?' && pPattern[j] != *(char*)((intptr_t)pSrc + i + j))
 			{
 				bFound = false;
 				break;
@@ -34,7 +32,7 @@ char* GameOffset::GetPatternMatch(char* pPattern, char* pMask, char* pSrc, intpt
 	return nullptr;
 }
 
-char* GameOffset::ScanModuleRegion(char* pPattern, char* pMask, char* pSrc, intptr_t pSrcSize)
+char* GameOffset::ScanModuleRegion(char* pPattern, char* pMask, char* pSrc, size_t pSrcSize)
 {
 	MEMORY_BASIC_INFORMATION mbi{};
 
@@ -52,31 +50,13 @@ char* GameOffset::ScanModuleRegion(char* pPattern, char* pMask, char* pSrc, intp
 	return nullptr;
 }
 
-void GameOffset::GetGamePointers(char* pPattern, char* pMask, wchar_t* pModName)
+char* GameOffset::GetGamePointers(char* pPattern, char* pMask, wchar_t* pModName)
 {
-	char* modBase{ (char*)GetModuleHandleW(pModName) };
+	MODULEINFO moduleInfo;
+	GetModuleInformation(GetCurrentProcess(), Client::modBaseAddr, &moduleInfo, sizeof(moduleInfo));
+	SIZE_T moduleSize = moduleInfo.SizeOfImage;
 
-	if (modBase)
-	{
-		PIMAGE_NT_HEADERS ntHeaders = ImageNtHeader(modBase);
-		if (ntHeaders != NULL)
-		{
-			PIMAGE_SECTION_HEADER lastSection = IMAGE_FIRST_SECTION(ntHeaders);
-			ULONG sectionCount = ntHeaders->FileHeader.NumberOfSections;
-			for (ULONG i = 0; i < sectionCount - 1; i++)
-			{
-				lastSection++;
-				// Find the last section of the module
-			}
-			ULONG_PTR moduleSize = (ULONG_PTR)lastSection->VirtualAddress + lastSection->SizeOfRawData;
-			// moduleSize now contains the size of the loaded module's image in memory
+	char* patternMatch = ScanModuleRegion(pPattern, pMask, (char*)Client::modBaseAddr, moduleSize);
 
-			if (moduleSize)
-			{
-				char* patternMatch{ ScanModuleRegion(pPattern, pMask, (char*)modBase, (intptr_t)(moduleSize)) };
-				if(patternMatch)
-					std::cout << patternMatch;
-			}
-		}
-	}
+	return patternMatch;
 }
