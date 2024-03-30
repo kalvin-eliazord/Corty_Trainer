@@ -17,23 +17,6 @@ std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer, int8_t* pGa
     return targetList;
 }
 
-int EntityList::GetNbEntAlive()
-{
-    const int ct_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::csgoHudBaseAddr,
-        { 
-            0xB8,
-            0x20CC 
-        }));
-
-    const int t_EntAlive = static_cast<int>(MemoryManager::GetDynamicAddr(GameOffset::Client::csgoHudBaseAddr,
-        {
-            0xB8,
-            0x20C8
-        }));
-
-    return ct_EntAlive + t_EntAlive;
-}
-
 bool EntityList::IsGoodTarget(Entity* pLocalPlayer, Entity* entityPtr, int8_t* pGameType)
 {
     // iteration empty

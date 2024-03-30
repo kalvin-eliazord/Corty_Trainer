@@ -1,3 +1,21 @@
 ﻿  Scanning sources for module dependencies...
-  LINK : C:\Users\Corty\source\repos\CS2_Internal_Trainer\x64\Debug\CS2_Internal_Trainer.dll not found or not built by the last incremental link; performing full link
-  CSGO2_Internal_Trainer.vcxproj -> C:\Users\Corty\source\repos\CS2_Internal_Trainer\x64\Debug\CS2_Internal_Trainer.dll
+  Entity.h
+  Compiling...
+  Entity.h
+  BasicMath.cpp
+  GameOffset.cpp
+  TargetManager.cpp
+  dllmain.cpp
+  EntityList.cpp
+C:\Users\Corty\source\repos\CS2_Internal_Trainer\CSGO2_Internal_Trainer\GameOffset.h(19,20): error C2143: syntax error: missing ';' before '*'
+  (compiling source file 'EntityList.cpp')
+  
+C:\Users\Corty\source\repos\CS2_Internal_Trainer\CSGO2_Internal_Trainer\GameOffset.h(19,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'EntityList.cpp')
+  
+C:\Users\Corty\source\repos\CS2_Internal_Trainer\CSGO2_Internal_Trainer\GameOffset.h(19,35): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'EntityList.cpp')
+  
+  LocalPlayer.cpp
+  MemoryManager.cpp
+  Generating Code...

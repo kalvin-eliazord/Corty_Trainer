@@ -2,9 +2,6 @@
 #include <iostream>
 #include <math.h>
 #include <windows.h>
-#include <windows.h>
-#include <dbghelp.h>
-#include <psapi.h>
 #include <cstdint>
 #include <vector>
 #include "Vector3.h"
@@ -12,7 +9,7 @@
 #include "EntityList.h"
 #include "MemoryManager.h"
 #include "TargetManager.h"
-#include "GameOffset.h"
 #include "LocalPlayer.h"
-#include "GameChecker.h"
 #include "BasicMath.h"
+#include "GameOffset.h"
+#include "GameChecker.h"

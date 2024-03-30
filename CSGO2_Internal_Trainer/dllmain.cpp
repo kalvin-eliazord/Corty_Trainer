@@ -2,25 +2,22 @@
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
+    if (!GameOffset::UpdatePointers()) return 0;
+
+    EntityList* entitiesListPtr{ GameOffset::Client::entityListPtr };
+    Entity* localPlayer{ GameOffset::Client::localPlayerPtr };
+
+    GameChecker::gameStateIdPtr = GameOffset::Client::gameStateIdPtr;
+    GameChecker::gameTypePtr = GameOffset::Client::gameTypeIdPtr;
+
+    int oldGameStateId{ *GameChecker::gameStateIdPtr };
+
     // Initialize a console
     FILE* f;
     AllocConsole();
     freopen_s(&f, "CONOUT$", "w", stdout);
-    
-    // Get signatures
-    char* entityListSign{ (char*)"\x88\x4C\?\?\xFE\x7F\?\?\x20" };
-    EntityList* entitiesListPtr{ (EntityList*)GameOffset::GetGamePointers(entityListSign, entityListSign, (wchar_t*)L"client.dll") };;
 
-    char* localPlayerSign{ (char*)"\?\x28\x86\x75\?\x02\?\?\?\x62\x65" };
-    Entity* localPlayer{(Entity*) GameOffset::GetGamePointers(localPlayerSign, localPlayerSign, (wchar_t*)L"client.dll") };
-    
-    char* oldGameStateIdSign{ (char*)"\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xFF\x2D" };
-    int oldGameStateId{ *(int*)GameOffset::GetGamePointers(oldGameStateIdSign, oldGameStateIdSign, (wchar_t*)L"client.dll") };
-    
-    // signature todo
-    int8_t* gameTypePtr{ nullptr };
-
-    // Aimbot options
+   // Aimbot options
     Entity* targetLocked{ nullptr };
     bool bTargetLock{ false };
     int smoothValue{ 0 };
@@ -65,7 +62,6 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         // Initialize a variable that will prevent read access violation errors
         if (*GameChecker::gameStateIdPtr == GameChecker::inGameId &&
-            entitiesListPtr->GetNbEntAlive() > 1 &&
             localPlayer && localPlayer->team_variable != 0  )
         {
             if (bConsoleChanged or
@@ -86,7 +82,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
             }
 
             // Retrieve the target list
-             std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer, gameTypePtr) };
+             std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer, GameChecker::gameTypePtr) };
 
             if (!targetList.empty())
             {
@@ -161,7 +157,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
         }
         Sleep(5);
     }
-
+    
     if(f)
         fclose(f);
 
