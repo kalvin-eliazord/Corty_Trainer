@@ -2,14 +2,12 @@
 #include <iostream>
 #include <math.h>
 #include <windows.h>
-#include <cstdint>
 #include <vector>
 #include "Vector3.h"
 #include "Entity.h"
 #include "EntityList.h"
-#include "MemoryManager.h"
 #include "TargetManager.h"
 #include "LocalPlayer.h"
 #include "BasicMath.h"
-#include "GameOffset.h"
+#include "GamePointer.h"
 #include "GameChecker.h"

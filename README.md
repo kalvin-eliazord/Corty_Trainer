@@ -7,6 +7,8 @@ A C++ dynamic-linked library aimbot for the CS2 game.
 	- Target Locking
 	- FOV
 
+- Pattern Scanning
+
 ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/949388fe-4f7f-4958-9357-47835f5b7737)
 
 ## What is aimbot ?

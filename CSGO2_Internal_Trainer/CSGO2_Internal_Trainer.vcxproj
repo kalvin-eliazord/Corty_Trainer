@@ -150,19 +150,17 @@
     <ClInclude Include="EntityList.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="LocalPlayer.h" />
-    <ClInclude Include="MemoryManager.h" />
-    <ClInclude Include="GameOffset.h" />
+    <ClInclude Include="GamePointer.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicMath.cpp" />
-    <ClCompile Include="GameOffset.cpp" />
+    <ClCompile Include="GamePointer.cpp" />
     <ClCompile Include="TargetManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Entity.h" />
     <ClCompile Include="EntityList.cpp" />
     <ClCompile Include="LocalPlayer.cpp" />
-    <ClCompile Include="MemoryManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

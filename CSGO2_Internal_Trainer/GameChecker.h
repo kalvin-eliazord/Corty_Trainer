@@ -3,8 +3,8 @@
 
 namespace GameChecker
 {
-	int* gameStateIdPtr{ nullptr };
-	int8_t* gameTypePtr{nullptr};
+	static int* gameStateIdPtr{ nullptr };
+	static int8_t* gameTypePtr{ nullptr};
 	int inline constexpr inGameId{ 8 };
 	int inline constexpr notInGameId{ 4 };
 };

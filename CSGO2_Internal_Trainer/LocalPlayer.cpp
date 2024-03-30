@@ -2,7 +2,7 @@
 
 Entity* LocalPlayer::Get()
 {
-    Entity* localPlayerBaseAddr{ nullptr };
+    Entity* localPlayerBaseAddr{ *(Entity**)GamePointer::localPlayerPtr };
     return localPlayerBaseAddr;
 }
 
@@ -14,8 +14,8 @@ void LocalPlayer::SetViewAngle(Vector3& targetAngle, const int pSmoothValue)
     }
     else
     {
-        float* lpPitch{ (float*)(GameOffset::Client::lp_Pitch_Input) };
-        float* lpYaw{ (float*)(GameOffset::Client::lp_Yaw_Input) };
+        float* lpPitch{ (float*)(GamePointer::lp_Pitch_Input) };
+        float* lpYaw{ (float*)(GamePointer::lp_Yaw_Input) };
 
         *lpPitch = targetAngle.x;
         *lpYaw = targetAngle.y;

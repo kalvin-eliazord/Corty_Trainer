@@ -18,9 +18,6 @@
     <Filter Include="Offset">
       <UniqueIdentifier>{344327c1-58f2-4c88-a135-f35006b7d3d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MemoryManager">
-      <UniqueIdentifier>{568a089d-e934-4cb9-816a-7f12be9ea5a3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Aimbot">
       <UniqueIdentifier>{ce9e06c8-7b88-4f9a-a607-a7ab92281124}</UniqueIdentifier>
     </Filter>
@@ -38,11 +35,8 @@
     <ClInclude Include="EntityList.h">
       <Filter>EntityList</Filter>
     </ClInclude>
-    <ClInclude Include="GameOffset.h">
+    <ClInclude Include="GamePointer.h">
       <Filter>Offset</Filter>
-    </ClInclude>
-    <ClInclude Include="MemoryManager.h">
-      <Filter>MemoryManager</Filter>
     </ClInclude>
     <ClInclude Include="TargetManager.h">
       <Filter>Aimbot</Filter>
@@ -67,9 +61,6 @@
     <ClCompile Include="Entity.h">
       <Filter>Entity</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryManager.cpp">
-      <Filter>MemoryManager</Filter>
-    </ClCompile>
     <ClCompile Include="TargetManager.cpp">
       <Filter>Aimbot</Filter>
     </ClCompile>
@@ -82,7 +73,7 @@
     <ClCompile Include="BasicMath.cpp">
       <Filter>BasicMath</Filter>
     </ClCompile>
-    <ClCompile Include="GameOffset.cpp">
+    <ClCompile Include="GamePointer.cpp">
       <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>

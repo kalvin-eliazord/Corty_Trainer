@@ -1,5 +1,6 @@
 #pragma once
 #include "header.h"
+
 namespace BasicMath
 {
 	float GetMagnitude(const Vector3& pValue);
