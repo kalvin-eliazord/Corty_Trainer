@@ -1,7 +1,6 @@
 #pragma once
-#include "header.h"
-
-struct Entity;
+#include <vector>
+#include "Entity.h"
 
 struct EntityList
 {

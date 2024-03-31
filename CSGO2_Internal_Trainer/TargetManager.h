@@ -1,5 +1,8 @@
 #pragma once
-#include "header.h"
+#include <vector>
+#include "LocalPlayer.h"
+#include "Entity.h"
+#include "BasicMath.h"
 
 namespace TargetManager
 {

@@ -144,17 +144,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AimbotOptions.h" />
     <ClInclude Include="BasicMath.h" />
+    <ClInclude Include="CheatManager.h" />
+    <ClInclude Include="ConsoleManager.h" />
     <ClInclude Include="GameChecker.h" />
     <ClInclude Include="TargetManager.h" />
     <ClInclude Include="EntityList.h" />
-    <ClInclude Include="header.h" />
     <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="GamePointer.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicMath.cpp" />
+    <ClCompile Include="CheatManager.cpp" />
+    <ClCompile Include="ConsoleManager.cpp" />
     <ClCompile Include="GamePointer.cpp" />
     <ClCompile Include="TargetManager.cpp" />
     <ClCompile Include="dllmain.cpp" />

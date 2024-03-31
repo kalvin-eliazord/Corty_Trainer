@@ -1,5 +1,4 @@
 #include "GamePointer.h"
-#include <Psapi.h>
 
 char* GamePointer::GetPatternMatch(char* pPattern, char* pMask, char* pSrc, intptr_t pRegionSize)
 {
@@ -61,43 +60,43 @@ intptr_t* GamePointer::GetGamePointer(char* pPattern, wchar_t* pModName)
 	return patternMatch;
 }
 
-bool GamePointer::UpdatePointers()
+bool GamePointer::InitializePointers()
 {
 	// Get signatures
 	char* entityListSign{ (char*)"\x88\x4C\x00\x00\xFE\x7F\x00\x00\x20" };
 	entityListPtr = *(intptr_t**)(GetGamePointer(entityListSign, (wchar_t*)L"client.dll"));
 	if (!entityListPtr) return false;
 
-	localPlayerPtr = (Entity*)((intptr_t)entityListPtr + Offset::lpBaseAddr);
+	localPlayerPtr = (intptr_t*)((intptr_t)entityListPtr + Offset::lpBaseAddr);
 	if (!localPlayerPtr) return false;
 
-	 char* cPredictionSign{ (char*)"\x98\xA6\x5B\xE7" };
-	intptr_t* cPredictionBaseAddr{ GetGamePointer(cPredictionSign, (wchar_t*)L"client.dll") };
+	 char* cPredictionSign{ (char*)"\x38\xF8\xB3\x00\xFE\x7F\x00\x00\xA0" };
+	intptr_t* cPredictionBaseAddr{ GetGamePointer(cPredictionSign, (wchar_t*)L"client.dll")};
 	if (!cPredictionBaseAddr) return false;
 
-	gameStateIdPtr = (int*)((intptr_t)cPredictionBaseAddr + Offset::gameStateId);
+	gameStateIdPtr = (int*)((intptr_t)cPredictionBaseAddr - Offset::gameStateId);
 	if (!gameStateIdPtr) return false;
 
-	char* csGoInputSign{ (char*)"\x78\x00\x5E\xE7\x00\x7F\x00\x00\x88" };
-	csGoInputBaseAddr = (GetGamePointer(csGoInputSign, (wchar_t*)L"client.dll"));
-	if (!csGoInputBaseAddr) return false;
+	char* csGoTeamPreviewCamSign{ (char*)"\xD3\xC8\x00\x00\x00\x00\x00\x00\xD3\xC8" };
+	intptr_t* csGoTeamPreviewCam{ (intptr_t*)((intptr_t)GetGamePointer(csGoTeamPreviewCamSign, (wchar_t*)L"client.dll") - 1) };
+	if (!csGoTeamPreviewCam) return false;
 
-	lp_Pitch_Input = (float*)((intptr_t)csGoInputBaseAddr - Offset::lp_Pitch);
+	lp_Pitch_Input = (float*)((intptr_t)csGoTeamPreviewCam - Offset::lp_Pitch);
 	if (!lp_Pitch_Input) return false;
 
-	lp_Yaw_Input = (float*)((intptr_t)csGoInputBaseAddr - Offset::lp_Yaw);
+	lp_Yaw_Input = (float*)((intptr_t)csGoTeamPreviewCam - Offset::lp_Yaw);
 	if (!lp_Yaw_Input) return false;
 
 	return true;
 }
 
-bool GamePointer::UpdatePointersInGame()
+bool GamePointer::InitializePointersInGame()
 {
-	char* baseAddrNearGameTypeSign{ (char*)"\x90\x9D\x63\xE7\xFE\x7F" };
+	char* baseAddrNearGameTypeSign{ (char*)"\x50\x1A\x00\x00\xFE\x7F\x00\x00\x30\x84\xA8" };
 	intptr_t* baseAddrNearGameType = GetGamePointer(baseAddrNearGameTypeSign, (wchar_t*)L"client.dll");
 	if (!baseAddrNearGameType) return false;
 
-	gameTypeIdPtr = (int8_t*)((intptr_t)baseAddrNearGameType - Offset::gameTypeId);
+	gameTypeIdPtr = (int8_t*)((intptr_t)baseAddrNearGameType + Offset::gameTypeId);
 	if (!gameTypeIdPtr) return false;
 
 	return true;

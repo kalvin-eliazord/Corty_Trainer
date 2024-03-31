@@ -1,13 +1,2 @@
 #pragma once
-#include <iostream>
-#include <math.h>
-#include <windows.h>
-#include <vector>
-#include "Vector3.h"
-#include "Entity.h"
-#include "EntityList.h"
-#include "TargetManager.h"
-#include "LocalPlayer.h"
-#include "BasicMath.h"
-#include "GamePointer.h"
-#include "GameChecker.h"
+

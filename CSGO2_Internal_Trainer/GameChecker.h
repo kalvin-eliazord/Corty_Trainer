@@ -1,10 +1,10 @@
 #pragma once
-#include "header.h"
+#include <cstdint>
 
 namespace GameChecker
 {
-	static int* gameStateIdPtr{ nullptr };
-	static int8_t* gameTypePtr{ nullptr};
+	inline int* gameStateIdPtr{ nullptr };
+	inline int8_t* gameTypePtr{ nullptr };
 	int inline constexpr inGameId{ 8 };
 	int inline constexpr notInGameId{ 4 };
 };
