@@ -49,7 +49,7 @@ Vector3 TargetManager::GetTargetAngle(Entity* pLocalPlayer, Entity* target)
     return targetAngle;
 }
 
-void TargetManager::SetAngleSmoothing(Vector3& pTargetAngle, const int pSmoothValue)
+void TargetManager::SetViewAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue)
 {
     float* lp_Pitch{ LocalPlayer::GetPitchPtr()};
     float* lp_Yaw{ LocalPlayer::GetYawPtr() };

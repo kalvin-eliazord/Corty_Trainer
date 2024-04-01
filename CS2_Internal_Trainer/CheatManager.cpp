@@ -11,6 +11,7 @@ bool CheatManager::StartAimbot()
 	GameChecker::gameStateIdPtr = GamePointer::gameStateIdPtr;
 	int oldGameStateId{ *GameChecker::gameStateIdPtr };
 
+	// Cheat loop
 	while (!GetAsyncKeyState(VK_DELETE) & 1)
 	{
 		// Aimbot options keybind
@@ -43,6 +44,7 @@ bool CheatManager::StartAimbot()
 		// Checking var that will prevent read access violation errors
 		if (*GameChecker::gameStateIdPtr == GameChecker::inGameId && localPlayer && localPlayer->team_variable != 0)
 		{
+			// IN game
 			if (consoleManager.bConsoleChanged or
 				*GameChecker::gameStateIdPtr != oldGameStateId or
 				consoleManager.bStartingInGame)
@@ -54,8 +56,8 @@ bool CheatManager::StartAimbot()
 
 				GameChecker::gameTypePtr = GamePointer::gameTypeIdPtr;
 				oldGameStateId = GameChecker::inGameId;
-				consoleManager.bConsoleChanged = false;
 				consoleManager.bStartingInGame = false;
+				consoleManager.bConsoleChanged = false;
 			}
 
 			// Retrieve the target list
@@ -86,7 +88,7 @@ bool CheatManager::StartAimbot()
 								if (GetAsyncKeyState(0x02))
 								{
 									if (AimbotOptions::smoothValue != 0)
-										TargetManager::SetAngleSmoothing(targetAngle, AimbotOptions::smoothValue);
+										TargetManager::SetViewAngleSmooth(targetAngle, AimbotOptions::smoothValue);
 									else
 										LocalPlayer::SetViewAngle(targetLockedAngle);
 								}
@@ -111,7 +113,7 @@ bool CheatManager::StartAimbot()
 							if (GetAsyncKeyState(0x02))
 							{
 								if (AimbotOptions::smoothValue != 0)
-									TargetManager::SetAngleSmoothing(targetAngle, AimbotOptions::smoothValue);
+									TargetManager::SetViewAngleSmooth(targetAngle, AimbotOptions::smoothValue);
 								else
 									LocalPlayer::SetViewAngle(targetAngle);
 							}
@@ -131,12 +133,13 @@ bool CheatManager::StartAimbot()
 				// Print all aimbot options current status
 				consoleManager.PrintCheatOptions();
 
+				oldGameStateId = GameChecker::notInGameId;
 				consoleManager.bWaitingLobbyMsg = false;
 				consoleManager.bConsoleChanged = false;
-				oldGameStateId = GameChecker::notInGameId;
 			}
-
-			localPlayer = LocalPlayer::Get();
+			
+			if(!localPlayer)
+				localPlayer = LocalPlayer::Get();
 		}
 		Sleep(5);
 	}

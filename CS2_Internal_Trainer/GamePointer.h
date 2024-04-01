@@ -5,8 +5,9 @@
 
 namespace GamePointer
 {
-	char* GetPatternMatch(char* pPattern, char* pMask, char* pSrc, intptr_t pRegionSize);
-	char* ScanModuleRegion(char* pPattern, char* pMask, char* pSrc, size_t pSrcSize);
+	char* GetPatternMatch(char* pPattern, char* pSrc, intptr_t pRegionSize);
+	char* ScanModRegion(char* pPattern, char* pSrc, size_t pSrcSize);
+	SIZE_T GetModuleSize(HMODULE pModule);
 	intptr_t* GetGamePointer(char* pPattern, wchar_t* pModName);
 	bool InitializePointers();
 	bool InitializePointersInGame();
@@ -24,7 +25,7 @@ namespace GamePointer
 		constexpr inline intptr_t gameTypeId{ 0xB60 };
 		constexpr inline intptr_t gameStateId{ 0x128 };
 		constexpr inline intptr_t lpBaseAddr{ 0x8 };
-		constexpr inline intptr_t lp_Pitch{ 0x418 };
-		constexpr inline intptr_t lp_Yaw{ 0x414 };
+		constexpr inline intptr_t lp_Pitch{ 0xB0 };
+		constexpr inline intptr_t lp_Yaw{ 0xAC };
 	}
 };
