@@ -14,9 +14,6 @@
     <Filter Include="Vector3">
       <UniqueIdentifier>{60216af8-acfd-458c-b532-cd64cd5f21ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BasicMath">
-      <UniqueIdentifier>{eb1279c2-e3b7-4e31-aa1b-5d51fb430925}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CheatManager">
       <UniqueIdentifier>{eddc6c9d-e584-487f-9b5d-c3210eeb84d9}</UniqueIdentifier>
     </Filter>
@@ -52,9 +49,6 @@
     <ClInclude Include="Vector3.h">
       <Filter>Vector3</Filter>
     </ClInclude>
-    <ClInclude Include="BasicMath.h">
-      <Filter>BasicMath</Filter>
-    </ClInclude>
     <ClInclude Include="AimbotOptions.h">
       <Filter>AimbotOptions</Filter>
     </ClInclude>
@@ -84,9 +78,6 @@
     <ClCompile Include="EntityList.cpp">
       <Filter>EntityList</Filter>
     </ClCompile>
-    <ClCompile Include="BasicMath.cpp">
-      <Filter>BasicMath</Filter>
-    </ClCompile>
     <ClCompile Include="CheatManager.cpp">
       <Filter>CheatManager</Filter>
     </ClCompile>
@@ -98,6 +89,12 @@
     </ClCompile>
     <ClCompile Include="LocalPlayer.cpp">
       <Filter>LocalPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="AimbotOptions.cpp">
+      <Filter>AimbotOptions</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Vector3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

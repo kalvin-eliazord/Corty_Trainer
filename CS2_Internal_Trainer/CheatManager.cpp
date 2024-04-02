@@ -2,147 +2,113 @@
 
 bool CheatManager::StartAimbot()
 {
-	// Initializing a usable console
-	ConsoleManager consoleManager{};
-
 	EntityList* entitiesListPtr{ (EntityList*)GamePointer::entityListPtr };
 	Entity* localPlayer{ LocalPlayer::Get() };
 
-	GameChecker::gameStateIdPtr = GamePointer::gameStateIdPtr;
-	int oldGameStateId{ *GameChecker::gameStateIdPtr };
+	if (!GameChecker::oldGameStateId)
+		GameChecker::oldGameStateId = *GamePointer::gameStateIdPtr;
 
-	// Cheat loop
-	while (!GetAsyncKeyState(VK_DELETE) & 1)
+	// Aimbot options keybind
+	AimbotOptions::OptionsCheck();
+
+	// Checking var that will prevent read access violation errors
+	if (*GamePointer::gameStateIdPtr == GameChecker::inGameId && localPlayer && localPlayer->team_variable != 0)
 	{
-		// Aimbot options keybind
-		if (GetAsyncKeyState(VK_F4) & 1)
+		// IN game
+		if (ConsoleManager::bConsoleChanged or
+			*GamePointer::gameStateIdPtr != GameChecker::oldGameStateId or
+			ConsoleManager::bInGameStart)
 		{
-			++AimbotOptions::smoothValue;
-			consoleManager.bConsoleChanged = true;
-		}
-		else if (GetAsyncKeyState(VK_F3) & 1 && AimbotOptions::smoothValue > 0)
-		{
-			--AimbotOptions::smoothValue;
-			consoleManager.bConsoleChanged = true;
-		}
-		else if (GetAsyncKeyState(VK_F2) & 1)
-		{
-			AimbotOptions::bTargetLock = !AimbotOptions::bTargetLock;
-			consoleManager.bConsoleChanged = true;
-		}
-		else if (GetAsyncKeyState(VK_F5) & 1 && AimbotOptions::fovValue > 10)
-		{
-			AimbotOptions::fovValue -= 10;
-			consoleManager.bConsoleChanged = true;
-		}
-		else if (GetAsyncKeyState(VK_F6) & 1)
-		{
-			AimbotOptions::fovValue += 10;
-			consoleManager.bConsoleChanged = true;
+			// Print all aimbot options current status
+			ConsoleManager::PrintCheatOptions();
+
+			if (!GamePointer::InitializePointersInGame()) return false;
+
+			GameChecker::oldGameStateId = GameChecker::inGameId;
+			ConsoleManager::bInGameStart = false;
+			ConsoleManager::bConsoleChanged = false;
 		}
 
-		// Checking var that will prevent read access violation errors
-		if (*GameChecker::gameStateIdPtr == GameChecker::inGameId && localPlayer && localPlayer->team_variable != 0)
+		// Retrieve the target list
+		std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer, GamePointer::gameTypeIdPtr) };
+
+		if (!targetList.empty())
 		{
-			// IN game
-			if (consoleManager.bConsoleChanged or
-				*GameChecker::gameStateIdPtr != oldGameStateId or
-				consoleManager.bStartingInGame)
+			// Get Nearest target from lp crosshair
+			Entity* nearestTarget{ TargetManager::GetNearestTarget(localPlayer, targetList) };
+			Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
+
+			const Vector3 delta_lp_target_angle{ localPlayer->angles - targetAngle };
+
+			if (AimbotOptions::bTargetLock)
 			{
-				// Print all aimbot options current status
-				consoleManager.PrintCheatOptions();
-
-				if (!GamePointer::InitializePointersInGame()) return false;
-
-				GameChecker::gameTypePtr = GamePointer::gameTypeIdPtr;
-				oldGameStateId = GameChecker::inGameId;
-				consoleManager.bStartingInGame = false;
-				consoleManager.bConsoleChanged = false;
-			}
-
-			// Retrieve the target list
-			std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer, GameChecker::gameTypePtr) };
-
-			if (!targetList.empty())
-			{
-				// Get Nearest target from lp crosshair
-				Entity* nearestTarget{ TargetManager::GetNearestTarget(localPlayer, targetList) };
-				Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
-
-				const Vector3 delta_lp_target_angle{ BasicMath::GetDelta(localPlayer->angles, targetAngle) };
-
-				if (AimbotOptions::bTargetLock)
+				// If there is a target
+				if (AimbotOptions::targetLocked != nullptr)
 				{
-					// If there is a target
-					if (AimbotOptions::targetLocked != nullptr)
-					{
-						Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(localPlayer, AimbotOptions::targetLocked) };
+					Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(localPlayer, AimbotOptions::targetLocked) };
 
-						// If the fov is right you can aim at enemy
-						if ((delta_lp_target_angle.x) < AimbotOptions::fovValue or 
-							-delta_lp_target_angle.x > -AimbotOptions::fovValue)
+					// Checking if target is in FOV
+					if ((delta_lp_target_angle.x) < AimbotOptions::fovValue or
+						-delta_lp_target_angle.x > -AimbotOptions::fovValue)
+					{
+						if ((delta_lp_target_angle.y) < AimbotOptions::fovValue or
+							-delta_lp_target_angle.y > -AimbotOptions::fovValue)
 						{
-							if ((delta_lp_target_angle.y) < AimbotOptions::fovValue or
-								-delta_lp_target_angle.y > -AimbotOptions::fovValue)
+							if (GetAsyncKeyState(VK_RBUTTON))
 							{
-								if (GetAsyncKeyState(0x02))
-								{
-									if (AimbotOptions::smoothValue != 0)
-										TargetManager::SetViewAngleSmooth(targetAngle, AimbotOptions::smoothValue);
-									else
-										LocalPlayer::SetViewAngle(targetLockedAngle);
-								}
+								if (AimbotOptions::smoothValue != 0)
+									TargetManager::SetViewAngleSmooth(targetLockedAngle, AimbotOptions::smoothValue);
+								else
+									LocalPlayer::SetViewAngle(targetLockedAngle);
 							}
 						}
-						// Locking at enemy until he die
-						if (AimbotOptions::targetLocked->health < 1)
-							AimbotOptions::targetLocked = nullptr;
 					}
-					else
-					{
-						AimbotOptions::targetLocked = nearestTarget;
-					}
+					// Locking at enemy until he die
+					if (AimbotOptions::targetLocked->health < 1)
+						AimbotOptions::targetLocked = nullptr;
 				}
 				else
 				{
-					// If the fov is right you can aim at enemy
-					if ((delta_lp_target_angle.x) < AimbotOptions::fovValue or -delta_lp_target_angle.x > -AimbotOptions::fovValue)
+					AimbotOptions::targetLocked = nearestTarget;
+				}
+			}
+			else
+			{
+				// Checking if target is in FOV
+				if ((delta_lp_target_angle.x) < AimbotOptions::fovValue or -delta_lp_target_angle.x > -AimbotOptions::fovValue)
+				{
+					if ((delta_lp_target_angle.y) < AimbotOptions::fovValue or -delta_lp_target_angle.y > -AimbotOptions::fovValue)
 					{
-						if ((delta_lp_target_angle.y) < AimbotOptions::fovValue or -delta_lp_target_angle.y > -AimbotOptions::fovValue)
+						if (GetAsyncKeyState(VK_RBUTTON))
 						{
-							if (GetAsyncKeyState(0x02))
-							{
-								if (AimbotOptions::smoothValue != 0)
-									TargetManager::SetViewAngleSmooth(targetAngle, AimbotOptions::smoothValue);
-								else
-									LocalPlayer::SetViewAngle(targetAngle);
-							}
+							if (AimbotOptions::smoothValue != 0)
+								TargetManager::SetViewAngleSmooth(targetAngle, AimbotOptions::smoothValue);
+							else
+								LocalPlayer::SetViewAngle(targetAngle);
 						}
 					}
 				}
 			}
 		}
-		// NOT in game
-		else
-		{
-			// If we launch the prog into the lobby 
-			// or if we return in lobby after a game 
-			// or if we change the value console
-			if (consoleManager.bWaitingLobbyMsg or consoleManager.bConsoleChanged or oldGameStateId != *GameChecker::gameStateIdPtr)
-			{
-				// Print all aimbot options current status
-				consoleManager.PrintCheatOptions();
-
-				oldGameStateId = GameChecker::notInGameId;
-				consoleManager.bWaitingLobbyMsg = false;
-				consoleManager.bConsoleChanged = false;
-			}
-			
-			if(!localPlayer)
-				localPlayer = LocalPlayer::Get();
-		}
-		Sleep(5);
 	}
+	// NOT in game
+	else
+	{
+		if (ConsoleManager::bLobbyStart or ConsoleManager::bConsoleChanged or GameChecker::oldGameStateId != *GamePointer::gameStateIdPtr)
+		{
+			// Print all aimbot options current status
+			ConsoleManager::PrintCheatOptions();
+
+			GameChecker::oldGameStateId = GameChecker::notInGameId;
+			ConsoleManager::bLobbyStart = false;
+			ConsoleManager::bConsoleChanged = false;
+		}
+
+		if (!localPlayer)
+			localPlayer = LocalPlayer::Get();
+	}
+
+	Sleep(5);
 
 	return true;
 }

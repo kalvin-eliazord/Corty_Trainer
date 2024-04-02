@@ -2,19 +2,19 @@
 #include <iostream>
 #include <Windows.h>
 #include "GameChecker.h"
+#include "CheatManager.h"
 #include "AimbotOptions.h"
 
-struct ConsoleManager
+namespace ConsoleManager
 {
-    FILE* file{};
+    inline FILE* file{nullptr};
 
     // Console info updates
-    bool bConsoleChanged{ false };
-    bool bWaitingLobbyMsg{ true };
-    bool bStartingInGame{ true };
+    inline bool bConsoleChanged{ false };
+    inline bool bInGameStart{ true };
+    inline bool bLobbyStart{ true };
 
-    ConsoleManager();
-    ~ConsoleManager();
-
+    void InitConsole();
+    void DestroyConsole();
     void PrintCheatOptions();
 };

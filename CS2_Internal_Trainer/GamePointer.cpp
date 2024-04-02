@@ -90,8 +90,8 @@ bool GamePointer::InitializePointers()
 	gameStateIdPtr = (int*)((intptr_t)cPredictionBaseAddr - Offset::gameStateId);
 	if (!gameStateIdPtr) return false;
 
-	char* csGoInputBaseAddrPat{ (char*)"\x78\x52\x51\x00\x00\x7F\x00\x00\x88" };
-	intptr_t* csGoInputBaseAddr{ (intptr_t*)((intptr_t)GetGamePointer(csGoInputBaseAddrPat, (wchar_t*)L"client.dll")) };
+	char* csGoInputBaseAddrPat{ (char*)"\x78\x52\x00\x00\x00\x7F\x00\x00\x88" };
+	intptr_t* csGoInputBaseAddr{ GetGamePointer(csGoInputBaseAddrPat, (wchar_t*)L"client.dll") };
 	if (!csGoInputBaseAddr) return false;
 
 	lp_Pitch_Input = (float*)((intptr_t)csGoInputBaseAddr - Offset::lp_Pitch);

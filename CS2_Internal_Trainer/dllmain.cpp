@@ -5,12 +5,35 @@
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
-	// Init a usable console
-	ConsoleManager consoleManager{};
-
-	// Init game pointers used for aimbot
+	// Init game pointers used for cheats
 	if (GamePointer::InitializePointers())
-		CheatManager::StartAimbot();
+	{
+		ConsoleManager::InitConsole();
+
+		while (!GetAsyncKeyState(VK_DELETE) & 1)
+		{
+			if (GetAsyncKeyState(VK_F8) & 1)
+			{
+				CheatManager::bNoRecoil = !CheatManager::bNoRecoil;
+				ConsoleManager::PrintCheatOptions();
+			}
+			else if (GetAsyncKeyState(VK_F9) & 1)
+			{
+				CheatManager::bAimbot = !CheatManager::bAimbot;
+				ConsoleManager::PrintCheatOptions();
+			}
+
+			if (CheatManager::bAimbot)
+				CheatManager::StartAimbot();
+
+			if (CheatManager::bNoRecoil)
+				CheatManager::StartNoRecoil();
+
+			Sleep(5);
+		}
+	}
+
+	ConsoleManager::DestroyConsole();
 
 	FreeLibraryAndExitThread(hModule, 0);
 

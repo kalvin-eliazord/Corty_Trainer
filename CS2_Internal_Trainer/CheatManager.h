@@ -3,16 +3,17 @@
 #include "EntityList.h"
 #include "TargetManager.h"
 #include "LocalPlayer.h"
-#include "BasicMath.h"
 #include "GamePointer.h"
 #include "ConsoleManager.h"
 #include "AimbotOptions.h"
 
 namespace CheatManager
 {
-	inline bool bAimbot{ true };
-	//bool bESP {true};
+	inline bool bAimbot{ false };
+	//inline bool bNoRecoil{ false };
+	//inline bool bESP {false};
 
 	bool StartAimbot();
-	//void StartEsp();
+	//bool StartNoRecoil();
+	//bool StartEsp();
 };
