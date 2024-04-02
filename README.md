@@ -9,7 +9,7 @@ A C++ dynamic-linked library aimbot for the CS2 game.
 
 - Pattern Scanning
 
-![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/949388fe-4f7f-4958-9357-47835f5b7737)
+![corty_trainer](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/0ae9538e-c681-4966-a998-1c8cd599e8b6)
 
 ## What is aimbot ?
 This is a cheating functionality that will allow a player to aim at a target automatically.
