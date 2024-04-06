@@ -3,7 +3,7 @@
 #include "ConsoleManager.h"
 #include "CheatManager.h"
 
-DWORD WINAPI MainThread(HMODULE hModule)
+int32_t WINAPI MainThread(HMODULE hModule)
 {
 	// Init game pointers used for cheats
 	if (GamePointer::InitializePointers())
@@ -12,12 +12,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
 		while (!GetAsyncKeyState(VK_DELETE) & 1)
 		{
-			if (GetAsyncKeyState(VK_F8) & 1)
-			{
-				CheatManager::bNoRecoil = !CheatManager::bNoRecoil;
-				ConsoleManager::PrintCheatOptions();
-			}
-			else if (GetAsyncKeyState(VK_F9) & 1)
+			if (GetAsyncKeyState(VK_F9) & 1)
 			{
 				CheatManager::bAimbot = !CheatManager::bAimbot;
 				ConsoleManager::PrintCheatOptions();
@@ -25,9 +20,6 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
 			if (CheatManager::bAimbot)
 				CheatManager::StartAimbot();
-
-			if (CheatManager::bNoRecoil)
-				CheatManager::StartNoRecoil();
 
 			Sleep(5);
 		}
@@ -41,7 +33,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule,
-	DWORD  ul_reason_for_call,
+	int32_t  ul_reason_for_call,
 	LPVOID lpReserved
 )
 {

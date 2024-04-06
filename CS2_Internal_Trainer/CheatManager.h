@@ -10,10 +10,8 @@
 namespace CheatManager
 {
 	inline bool bAimbot{ false };
-	//inline bool bNoRecoil{ false };
 	//inline bool bESP {false};
 
 	bool StartAimbot();
-	//bool StartNoRecoil();
 	//bool StartEsp();
 };

@@ -42,7 +42,6 @@ void ConsoleManager::PrintCheatOptions()
 	else
 		std::cout << "GAME STATUS: WAITING FOR A GAME \n";
 
-	std::cout << "NO RECOIL: press F8 " << std::boolalpha << "-->[[" << CheatManager::bNoRecoil << "]] \n";
 	std::cout << "AIMBOT   : press F9 " << std::boolalpha << "-->[[" << CheatManager::bAimbot   << "]] \n";
 
 	if (CheatManager::bAimbot)

@@ -2,17 +2,16 @@
 
 bool CheatManager::StartAimbot()
 {
-	EntityList* entitiesListPtr{ (EntityList*)GamePointer::entityListPtr };
+	EntityList* entitiesListPtr{ (EntityList*)GamePointer::entityListBasePtr };
 	Entity* localPlayer{ LocalPlayer::Get() };
 
 	if (!GameChecker::oldGameStateId)
 		GameChecker::oldGameStateId = *GamePointer::gameStateIdPtr;
 
-	// Aimbot options keybind
 	AimbotOptions::OptionsCheck();
 
 	// Checking var that will prevent read access violation errors
-	if (*GamePointer::gameStateIdPtr == GameChecker::inGameId && localPlayer && localPlayer->team_variable != 0)
+	if (*GamePointer::gameStateIdPtr == GameChecker::inGameId && localPlayer->team_variable != 0)
 	{
 		// IN game
 		if (ConsoleManager::bConsoleChanged or

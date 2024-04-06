@@ -4,9 +4,10 @@ std::vector<Entity*> EntityList::GetTargetList(Entity* pLocalPlayer, int8_t* pGa
 {
     std::vector<Entity*> targetList{};
 
-    for (int i{ 0 }; i < 32; ++i)
+    for (int i{ 0 }; i < 64; ++i)
     {
-        Entity* currEntity{ (this->entity[i]) };
+        // error because Im iterating the controller list and testing the pawn list
+        Entity* currEntity{ (this->entity[i] + 0x78) };
 
         if (!this->IsGoodTarget(pLocalPlayer, currEntity, pGameType))
             continue;
