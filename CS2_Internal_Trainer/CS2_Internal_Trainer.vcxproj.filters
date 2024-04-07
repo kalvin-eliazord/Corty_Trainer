@@ -5,9 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="EntityList">
-      <UniqueIdentifier>{71e8eb89-83dd-4dfa-b3b8-614ea20d3af8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entity">
       <UniqueIdentifier>{3dc26f74-e32f-4e67-b66c-124572380352}</UniqueIdentifier>
     </Filter>
@@ -35,11 +32,14 @@
     <Filter Include="LocalPlayer">
       <UniqueIdentifier>{9941c7ff-1164-46f5-ac67-ceeeabba9abd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{71e8eb89-83dd-4dfa-b3b8-614ea20d3af8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pawn">
+      <UniqueIdentifier>{968435d4-1c74-4de9-9745-d0e26f139c7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EntityList.h">
-      <Filter>EntityList</Filter>
-    </ClInclude>
     <ClInclude Include="GamePointer.h">
       <Filter>GamePointer</Filter>
     </ClInclude>
@@ -64,6 +64,12 @@
     <ClInclude Include="LocalPlayer.h">
       <Filter>LocalPlayer</Filter>
     </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Pawn.h">
+      <Filter>Pawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -74,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="TargetManager.cpp">
       <Filter>TargetManager</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityList.cpp">
-      <Filter>EntityList</Filter>
     </ClCompile>
     <ClCompile Include="CheatManager.cpp">
       <Filter>CheatManager</Filter>
@@ -95,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>Vector3</Filter>
+    </ClCompile>
+    <ClCompile Include="Pawn.cpp">
+      <Filter>Pawn</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

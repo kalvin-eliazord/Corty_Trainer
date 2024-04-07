@@ -5,9 +5,13 @@
 
 namespace TargetManager
 {
+	bool IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, int8_t* pGameType);
+	std::vector<Pawn*> GetTargetList(Pawn* pLocalPlayer, int8_t* pGameType);
+
 	float GetMagnitude(Vector3 pVec);
-	Entity* GetNearestTarget(Entity* pLocalPlayer, std::vector<Entity*> pTargetList);
-	Vector3 GetTargetAngle(Entity* pLocalPlayer, Entity* target);
+	Pawn* GetNearestTarget(Pawn* pLocalPlayer, std::vector<Pawn*> pTargetList);
+	Vector3 GetTargetAngle(Pawn* pLocalPlayer, Pawn* target);
+
 	void SetViewAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue);
 	float NormalizePitch(const float pPitch);
 	float NormalizeYaw(float pYaw);

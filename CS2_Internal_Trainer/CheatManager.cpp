@@ -2,8 +2,7 @@
 
 bool CheatManager::StartAimbot()
 {
-	EntityList* entitiesListPtr{ (EntityList*)GamePointer::entityListBasePtr };
-	Entity* localPlayer{ LocalPlayer::Get() };
+	Entity localPlayer(reinterpret_cast<intptr_t*>(LocalPlayer::Get()));
 
 	if (!GameChecker::oldGameStateId)
 		GameChecker::oldGameStateId = *GamePointer::gameStateIdPtr;
@@ -11,7 +10,7 @@ bool CheatManager::StartAimbot()
 	AimbotOptions::OptionsCheck();
 
 	// Checking var that will prevent read access violation errors
-	if (*GamePointer::gameStateIdPtr == GameChecker::inGameId && localPlayer->team_variable != 0)
+	if (*GamePointer::gameStateIdPtr == GameChecker::inGameId)
 	{
 		// IN game
 		if (ConsoleManager::bConsoleChanged or
@@ -29,22 +28,22 @@ bool CheatManager::StartAimbot()
 		}
 
 		// Retrieve the target list
-		std::vector<Entity*> targetList{ entitiesListPtr->GetTargetList(localPlayer, GamePointer::gameTypeIdPtr) };
+		std::vector<Pawn*> targetList{ TargetManager::GetTargetList(localPlayer.pawnBase, GamePointer::gameTypeIdPtr) };
 
 		if (!targetList.empty())
 		{
 			// Get Nearest target from lp crosshair
-			Entity* nearestTarget{ TargetManager::GetNearestTarget(localPlayer, targetList) };
-			Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer, nearestTarget) };
+			Pawn* nearestTarget{ TargetManager::GetNearestTarget(localPlayer.pawnBase, targetList) };
+			Vector3 targetAngle{ TargetManager::GetTargetAngle(localPlayer.pawnBase, nearestTarget) };
 
-			const Vector3 delta_lp_target_angle{ localPlayer->angles - targetAngle };
+			const Vector3 delta_lp_target_angle{ localPlayer.pawnBase->angles - targetAngle };
 
 			if (AimbotOptions::bTargetLock)
 			{
 				// If there is a target
 				if (AimbotOptions::targetLocked != nullptr)
 				{
-					Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(localPlayer, AimbotOptions::targetLocked) };
+					Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(localPlayer.pawnBase, AimbotOptions::targetLocked) };
 
 					// Checking if target is in FOV
 					if ((delta_lp_target_angle.x) < AimbotOptions::fovValue or
@@ -102,9 +101,6 @@ bool CheatManager::StartAimbot()
 			ConsoleManager::bLobbyStart = false;
 			ConsoleManager::bConsoleChanged = false;
 		}
-
-		if (!localPlayer)
-			localPlayer = LocalPlayer::Get();
 	}
 
 	Sleep(5);

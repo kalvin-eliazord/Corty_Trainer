@@ -101,7 +101,7 @@ bool GamePointer::InitializePointers()
 	entityListBasePtr = *(intptr_t**)(reinterpret_cast<intptr_t>(cGameEntityBaseAddrPtr) + 0x10);
 	if (!entityListBasePtr) return false;
 
-	localPlayerPtr = GetSignatureResult(Signature::LocalPlayerPawn, hClientMod);
+	localPlayerPtr = GetSignatureResult(Signature::LocalPlayerController, hClientMod);
 	if (!localPlayerPtr) return false;
 
 	intptr_t* lpInputBasePtr{ *(intptr_t**)GetSignatureResult(Signature::LpInputBase, hClientMod) };

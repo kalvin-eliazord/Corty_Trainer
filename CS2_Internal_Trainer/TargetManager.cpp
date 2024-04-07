@@ -1,5 +1,51 @@
 #include "TargetManager.h"
 
+bool TargetManager::IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, int8_t* pGameType)
+{
+    // iteration empty
+    if (!entityPtr or !*(intptr_t*)entityPtr or !(intptr_t)entityPtr)
+        return false;
+
+    // Entity dead
+    if (entityPtr->pawnBase->health < 1)
+        return false;
+
+    constexpr int8_t deathmatchType{ 39 };
+
+    // don't check for team if there is no team
+    if (*pGameType != deathmatchType)
+    {
+        // Same team as LP
+        if (pLocalPlayer->team_variable == entityPtr->pawnBase->team_variable)
+            return false;
+    }
+
+    // If Entity is behind the wall
+    //bSpottedMask
+
+    return true;
+}
+
+std::vector<Pawn*> TargetManager::GetTargetList(Pawn* pLocalPlayer, int8_t* pGameType)
+{
+    std::vector<Pawn*> targetsPawn{};
+    intptr_t* entityListBase{ GamePointer::entityListBasePtr };
+
+    for (int i{ 1 }; i < 64; ++i)
+    {
+        Entity currEntity(reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(entityListBase) + i * 0x78));
+
+        if (!currEntity.isPawnInit) continue;
+
+        if (!IsGoodTarget(pLocalPlayer, &currEntity, pGameType))
+            continue;
+
+        targetsPawn.push_back(currEntity.pawnBase);
+    }
+
+    return targetsPawn;
+}
+
 float TargetManager::NormalizePitch(const float pPitch)
 {
     if (pPitch < -89) return -89;
@@ -25,10 +71,33 @@ float TargetManager::GetMagnitude(Vector3 pVec)
                    (pVec.z * pVec.z));
 }
 
-Entity* TargetManager::GetNearestTarget(Entity* pLocalPlayer, std::vector<Entity*> pTargetList)
+Vector3 TargetManager::GetTargetAngle(Pawn* pLocalPlayer, Pawn* target)
+{
+    Vector3 targetAngle{NULL};
+
+    if (target == nullptr) return targetAngle;
+
+    const Vector3 deltaPos{ pLocalPlayer->body_pos - target->body_pos };
+
+    const float magnitudePos{ GetMagnitude(deltaPos) };
+
+    constexpr float radToDegree{ 57.2957795f };
+
+    targetAngle.x = atanf(deltaPos.z / magnitudePos) * radToDegree;
+    targetAngle.y = atanf(deltaPos.y / deltaPos.x) * radToDegree;
+
+    if (deltaPos.x >= 0.0f)
+        targetAngle.y += 180.0f;
+
+    targetAngle.x = NormalizePitch(targetAngle.x);
+
+    return targetAngle;
+}
+
+Pawn* TargetManager::GetNearestTarget(Pawn* pLocalPlayer, std::vector<Pawn*> pTargetList)
 {
     float oldCoef{ FLT_MAX };
-    Entity* nearestTarget{ nullptr };
+    Pawn* nearestTarget{ nullptr };
 
     for (auto currTarget : pTargetList)
     {
@@ -50,26 +119,6 @@ Entity* TargetManager::GetNearestTarget(Entity* pLocalPlayer, std::vector<Entity
     }
 
     return nearestTarget;
-}
-
-Vector3 TargetManager::GetTargetAngle(Entity* pLocalPlayer, Entity* target)
-{
-    const Vector3 deltaPos{ pLocalPlayer->body_pos - target->body_pos };
-    
-    const float magnitudePos{ GetMagnitude(deltaPos) };
-
-    Vector3 targetAngle{};
-    constexpr float radToDegree{ 57.2957795f };
-
-    targetAngle.x = atanf(deltaPos.z / magnitudePos) * radToDegree;
-    targetAngle.y = atanf(deltaPos.y / deltaPos.x) * radToDegree;
-
-    if (deltaPos.x >= 0.0f)
-        targetAngle.y += 180.0f;
-
-    targetAngle.x = NormalizePitch(targetAngle.x);
-
-    return targetAngle;
 }
 
 void TargetManager::SetViewAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue)

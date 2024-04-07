@@ -1,10 +1,10 @@
 #pragma once
-#include "Entity.h"
+#include "Vector3.h"
 #include "GamePointer.h"
 
 namespace LocalPlayer
 {
-	Entity* Get();
+	intptr_t* Get();
 	float* GetPitchPtr();
 	float* GetYawPtr();
 	void SetViewAngle(Vector3& targetAngle);

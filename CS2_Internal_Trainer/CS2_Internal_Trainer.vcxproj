@@ -149,9 +149,10 @@
     <ClInclude Include="AimbotOptions.h" />
     <ClInclude Include="CheatManager.h" />
     <ClInclude Include="ConsoleManager.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="GameChecker.h" />
+    <ClInclude Include="Pawn.h" />
     <ClInclude Include="TargetManager.h" />
-    <ClInclude Include="EntityList.h" />
     <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="GamePointer.h" />
     <ClInclude Include="Vector3.h" />
@@ -160,11 +161,12 @@
     <ClCompile Include="AimbotOptions.cpp" />
     <ClCompile Include="CheatManager.cpp" />
     <ClCompile Include="ConsoleManager.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GamePointer.cpp" />
+    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="TargetManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Entity.h" />
-    <ClCompile Include="EntityList.cpp" />
     <ClCompile Include="LocalPlayer.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>

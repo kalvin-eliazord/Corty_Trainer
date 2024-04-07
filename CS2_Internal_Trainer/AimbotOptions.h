@@ -1,10 +1,10 @@
 #pragma once
-#include "Entity.h"
+#include "Pawn.h"
 #include "ConsoleManager.h"
 
 namespace AimbotOptions
 {
-    inline Entity* targetLocked{ nullptr };
+    inline Pawn* targetLocked{ nullptr };
     inline bool bTargetLock{ false };
     inline int smoothValue{ 0 };
     inline int fovValue{ 50 };

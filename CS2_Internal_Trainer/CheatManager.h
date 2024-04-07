@@ -1,6 +1,5 @@
 #pragma once
 #include <Windows.h>
-#include "EntityList.h"
 #include "TargetManager.h"
 #include "LocalPlayer.h"
 #include "GamePointer.h"
