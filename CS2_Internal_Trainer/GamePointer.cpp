@@ -2,10 +2,11 @@
 
 intptr_t* GamePointer::GetPointerBaseAddress(intptr_t* pSignatureMatch)
 {
-	const int32_t signatureOffset{ *(int32_t*)(reinterpret_cast<intptr_t>(pSignatureMatch) + 3) };
+	// In order to extract the offset only we need to add 3 bytes
+	const int32_t signatureOffset{ *reinterpret_cast<int_least32_t*>(reinterpret_cast<intptr_t>(pSignatureMatch) + 3) };
 
-	// to obtain the pointer base Address
-	intptr_t* pointerBaseAddr{ (intptr_t*)(reinterpret_cast<intptr_t>(pSignatureMatch) + signatureOffset + 7) };
+	// In order to access the pointer base Address we need to add 7 bytes
+	intptr_t* pointerBaseAddr{ reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(pSignatureMatch) + signatureOffset + 7) };
 	
 	return pointerBaseAddr;
 }
@@ -41,7 +42,7 @@ intptr_t* GamePointer::CompareSignatureWithBytes(const char* pPattern, char* pSr
 		}
 
 		if (bFound)
-			return reinterpret_cast<intptr_t*>(pSrc + i); // In order to get the offset only we need to add 3 bytes
+			return reinterpret_cast<intptr_t*>(pSrc + i);
 	}
 	return NULL;
 }
@@ -83,7 +84,7 @@ intptr_t* GamePointer::GetSignatureResult(const char* pPattern, const HMODULE pM
 	moduleSize = GetModuleSize(pModule);
 
 	if (moduleSize)
-		signatureMatch = ScanModuleRegion(pPattern, (char*)pModule, moduleSize);
+		signatureMatch = ScanModuleRegion(pPattern, reinterpret_cast<char*>(pModule), moduleSize);
 
 	if (!signatureMatch) return nullptr;
 
@@ -95,22 +96,22 @@ bool GamePointer::InitializePointers()
 	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
 	if (!hClientMod) return false;
 	
-	intptr_t* cGameEntityBaseAddrPtr{ *(intptr_t**)GetSignatureResult(Signature::entityList, hClientMod) };
+	intptr_t* cGameEntityBaseAddrPtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::entityList, hClientMod)) };
 	if (!cGameEntityBaseAddrPtr) return false;
 
-	entityListBasePtr = *(intptr_t**)(reinterpret_cast<intptr_t>(cGameEntityBaseAddrPtr) + 0x10);
+	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cGameEntityBaseAddrPtr) + 0x10);
 	if (!entityListBasePtr) return false;
 
 	localPlayerPtr = GetSignatureResult(Signature::LocalPlayerController, hClientMod);
 	if (!localPlayerPtr) return false;
 
-	intptr_t* lpInputBasePtr{ *(intptr_t**)GetSignatureResult(Signature::LpInputBase, hClientMod) };
+	intptr_t* lpInputBasePtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::LpInputBase, hClientMod)) };
 	if (!lpInputBasePtr) return false;
 
-	lp_Pitch_Input = (float*)((reinterpret_cast<intptr_t>(lpInputBasePtr) + Offset::lp_Pitch));
+	lp_Pitch_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(lpInputBasePtr) + Offset::lp_Pitch));
 	if (!lp_Pitch_Input) return false;
 
-	lp_Yaw_Input = (float*)((reinterpret_cast<intptr_t>(lpInputBasePtr) + Offset::lp_Yaw));
+	lp_Yaw_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(lpInputBasePtr) + Offset::lp_Yaw));
 	if (!lp_Yaw_Input) return false;
 
 	const HMODULE hInputMod{ GetModuleHandleW(L"inputsystem.dll") };
@@ -119,10 +120,10 @@ bool GamePointer::InitializePointers()
 	intptr_t* inputBaseAddrPtr{ GetSignatureResult(Signature::InputSystem, hInputMod)};
 	if (!inputBaseAddrPtr) return false;
 
-	intptr_t* cPredictionBasePtr{ *(intptr_t**)(reinterpret_cast<intptr_t>(inputBaseAddrPtr) - Offset::cPrediction) };
+	intptr_t* cPredictionBasePtr{ *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(inputBaseAddrPtr) - Offset::cPrediction) };
 	if (!cPredictionBasePtr) return false;
 
-	gameStateIdPtr = reinterpret_cast<int*>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::gameStateId);
+	gameStateIdPtr = reinterpret_cast<int_least8_t*>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::gameStateId);
 	if (!gameStateIdPtr) return false;
 
 	return true;
@@ -130,13 +131,15 @@ bool GamePointer::InitializePointers()
 
 bool GamePointer::InitializePointersInGame()
 {
+	if (gameTypeIdPtr) return true;
+
 	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
 	if (!hClientMod) return false;
 
-	intptr_t* weaponListBasePtr{ *(intptr_t**)GetSignatureResult(Signature::WeaponList, hClientMod) };
+	intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::WeaponList, hClientMod)) };
 	if (!weaponListBasePtr) return false;
 
-	gameTypeIdPtr = reinterpret_cast<char*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
+	gameTypeIdPtr = reinterpret_cast<int_least8_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
 	if (!gameTypeIdPtr) return false;
 
 	return true;

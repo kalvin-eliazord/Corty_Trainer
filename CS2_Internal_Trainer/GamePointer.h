@@ -21,8 +21,8 @@ namespace GamePointer
 	inline float* lp_Pitch_Input{ nullptr };
 	inline float* lp_Yaw_Input  {nullptr };
 
-	inline int* gameStateIdPtr{ nullptr };
-	inline char* gameTypeIdPtr{ nullptr };
+	inline int_least8_t* gameStateIdPtr{ nullptr };
+	inline int_least8_t* gameTypeIdPtr{ nullptr };
 
 	namespace Offset
 	{

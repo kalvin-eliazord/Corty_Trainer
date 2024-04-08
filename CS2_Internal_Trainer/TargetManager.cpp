@@ -1,16 +1,16 @@
 #include "TargetManager.h"
 
-bool TargetManager::IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, char* pGameTypeId)
+bool TargetManager::IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, int_least8_t* pGameTypeId)
 {
     // iteration empty
-    if (!entityPtr or !*(intptr_t*)entityPtr or !(intptr_t)entityPtr)
+    if (!entityPtr or !*reinterpret_cast<intptr_t*>(entityPtr) or !reinterpret_cast<intptr_t>(entityPtr))
         return false;
 
     // Entity dead
     if (entityPtr->pawnBase->health < 1)
         return false;
 
-    constexpr char deathmatchId{ 0x27 };
+    constexpr int_least8_t deathmatchId{ 0x27 };
 
     // don't check for team if there is no team
     if (*pGameTypeId != deathmatchId)
@@ -26,58 +26,57 @@ bool TargetManager::IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, char* pG
     return true;
 }
 
-std::vector<Pawn*> TargetManager::GetTargetList(Pawn* pLocalPlayer, char* pGameTypeId)
+std::vector<Pawn*> TargetManager::GetTargetsPawn(Pawn* pLocalPlayer, int_least8_t* pGameTypeId)
 {
-    std::vector<Pawn*> targetsPawn{};
+    std::vector<Pawn*> targetsPos{};
     intptr_t* entityListBase{ GamePointer::entityListBasePtr };
+    constexpr int paddingBetweenEnt{ 0x78 };
 
     for (int i{ 1 }; i < 64; ++i)
     {
-        Entity currEntity(reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(entityListBase) + i * 0x78));
+        Entity currEntity(reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(entityListBase) + i * paddingBetweenEnt));
 
         if (!currEntity.isPawnInit) continue;
 
         if (!IsGoodTarget(pLocalPlayer, &currEntity, pGameTypeId))
             continue;
 
-        targetsPawn.push_back(currEntity.pawnBase);
+        targetsPos.push_back(currEntity.pawnBase);
     }
 
-    return targetsPawn;
+    return targetsPos;
 }
 
 float TargetManager::NormalizePitch(const float pPitch)
 {
-    if (pPitch < -89) return -89;
+    if (pPitch < -89.f) return -89.f;
 
-    if (pPitch > 89) return 89;
+    if (pPitch > 89.f) return 89.f;
 
     return pPitch;
 }
 
 float TargetManager::NormalizeYaw(float pYaw)
 {
-    while (pYaw > 180) pYaw -= 360;
+    while (pYaw > 180.f) pYaw -= 360.f;
 
-    while (pYaw < -180) pYaw += 360;
+    while (pYaw < -180.f) pYaw += 360.f;
 
     return pYaw;
 }
 
-float TargetManager::GetMagnitude(Vector3 pVec)
+float TargetManager::GetMagnitude(const Vector3& pVec)
 {
     return ::sqrtf((pVec.x * pVec.x) +
                    (pVec.y * pVec.y) + 
                    (pVec.z * pVec.z));
 }
 
-Vector3 TargetManager::GetTargetAngle(Pawn* pLocalPlayer, Pawn* target)
+Vector3 TargetManager::GetTargetAngle(Vector3& pLpPos, Vector3& pTargetPos)
 {
     Vector3 targetAngle{NULL};
 
-    if (target == nullptr) return targetAngle;
-
-    const Vector3 deltaPos{ pLocalPlayer->body_pos - target->body_pos };
+    const Vector3 deltaPos{ pLpPos - pTargetPos };
 
     const float magnitudePos{ GetMagnitude(deltaPos) };
 
@@ -94,19 +93,20 @@ Vector3 TargetManager::GetTargetAngle(Pawn* pLocalPlayer, Pawn* target)
     return targetAngle;
 }
 
-Pawn* TargetManager::GetNearestTarget(Pawn* pLocalPlayer, std::vector<Pawn*> pTargetList)
+Pawn* TargetManager::GetNearestTarget(Pawn* localPlayerPawn, std::vector<Pawn*> pTargetsPawn)
 {
     float oldCoef{ FLT_MAX };
     Pawn* nearestTarget{ nullptr };
 
-    for (auto currTarget : pTargetList)
+    for (auto currTarget : pTargetsPawn)
     {
-        const Vector3 currTargetAngle{ GetTargetAngle(pLocalPlayer, currTarget) };
-
-        Vector3 deltaAngle{ pLocalPlayer->angles - currTargetAngle };
+        // Get angle distance
+        const Vector3 currTargetAngle{ GetTargetAngle(localPlayerPawn->body_pos, currTarget->body_pos) };
+        const Vector3 deltaAngle{ localPlayerPawn->angles - currTargetAngle };
         const float currAngleDist{ GetMagnitude(deltaAngle) };
 
-        Vector3 deltaPosition{ pLocalPlayer->body_pos - currTarget->body_pos };
+        // Get body position distance
+        const Vector3 deltaPosition{ localPlayerPawn->body_pos - currTarget->body_pos };
         const float currBodyPosDist{ GetMagnitude(deltaPosition) };
 
         const float currCoef{ currAngleDist * 0.8f + currBodyPosDist * 0.2f};
