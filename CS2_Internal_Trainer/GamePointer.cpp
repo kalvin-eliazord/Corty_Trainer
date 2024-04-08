@@ -136,7 +136,7 @@ bool GamePointer::InitializePointersInGame()
 	intptr_t* weaponListBasePtr{ *(intptr_t**)GetSignatureResult(Signature::WeaponList, hClientMod) };
 	if (!weaponListBasePtr) return false;
 
-	gameTypeIdPtr = reinterpret_cast<int8_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
+	gameTypeIdPtr = reinterpret_cast<char*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
 	if (!gameTypeIdPtr) return false;
 
 	return true;

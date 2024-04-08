@@ -1,6 +1,6 @@
 #include "TargetManager.h"
 
-bool TargetManager::IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, int8_t* pGameType)
+bool TargetManager::IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, char* pGameTypeId)
 {
     // iteration empty
     if (!entityPtr or !*(intptr_t*)entityPtr or !(intptr_t)entityPtr)
@@ -10,10 +10,10 @@ bool TargetManager::IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, int8_t* 
     if (entityPtr->pawnBase->health < 1)
         return false;
 
-    constexpr int8_t deathmatchType{ 39 };
+    constexpr char deathmatchId{ 0x27 };
 
     // don't check for team if there is no team
-    if (*pGameType != deathmatchType)
+    if (*pGameTypeId != deathmatchId)
     {
         // Same team as LP
         if (pLocalPlayer->team_variable == entityPtr->pawnBase->team_variable)
@@ -26,7 +26,7 @@ bool TargetManager::IsGoodTarget(Pawn* pLocalPlayer, Entity* entityPtr, int8_t* 
     return true;
 }
 
-std::vector<Pawn*> TargetManager::GetTargetList(Pawn* pLocalPlayer, int8_t* pGameType)
+std::vector<Pawn*> TargetManager::GetTargetList(Pawn* pLocalPlayer, char* pGameTypeId)
 {
     std::vector<Pawn*> targetsPawn{};
     intptr_t* entityListBase{ GamePointer::entityListBasePtr };
@@ -37,7 +37,7 @@ std::vector<Pawn*> TargetManager::GetTargetList(Pawn* pLocalPlayer, int8_t* pGam
 
         if (!currEntity.isPawnInit) continue;
 
-        if (!IsGoodTarget(pLocalPlayer, &currEntity, pGameType))
+        if (!IsGoodTarget(pLocalPlayer, &currEntity, pGameTypeId))
             continue;
 
         targetsPawn.push_back(currEntity.pawnBase);
