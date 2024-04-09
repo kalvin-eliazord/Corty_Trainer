@@ -68,7 +68,7 @@
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\TargetManager.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\TargetManager.cpp",
               "RelativeToolTip": "CS2_Internal_Trainer\\TargetManager.cpp",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAwwBsAAAAKAAAA",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAwwBsAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-04-09T18:16:45.083Z",
               "EditorCaption": ""
@@ -83,8 +83,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\Pawn.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-09T18:18:53.552Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T18:18:53.552Z"
             },
             {
               "$type": "Document",
@@ -96,8 +95,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\Entity.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-09T18:18:52.291Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T18:18:52.291Z"
             },
             {
               "$type": "Document",
@@ -109,8 +107,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\Aimbot.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-09T18:15:27.922Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T18:15:27.922Z"
             },
             {
               "$type": "Document",
@@ -122,8 +119,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\Aimbot.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-09T16:16:28.544Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T16:16:28.544Z"
             },
             {
               "$type": "Document",
@@ -135,8 +131,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\LocalPlayer.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-09T16:09:11.501Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T16:09:11.501Z"
             },
             {
               "$type": "Document",
@@ -148,8 +143,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\LocalPlayer.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-09T16:08:56.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T16:08:56.559Z"
             },
             {
               "$type": "Document",
@@ -161,8 +155,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\Controller.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-09T15:59:26.67Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T15:59:26.67Z"
             },
             {
               "$type": "Document",
@@ -174,8 +167,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\GamePointer.cpp",
               "ViewState": "AQIAAIgAAAAAAAAAAAAawLIAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-09T15:57:47.779Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T15:57:47.779Z"
             },
             {
               "$type": "Document",
@@ -187,8 +179,7 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\dllmain.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-09T15:55:59.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-09T15:55:59.037Z"
             }
           ]
         }

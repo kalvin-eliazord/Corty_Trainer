@@ -25,7 +25,7 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex, int_least8_t
 
     constexpr int_least8_t lpIndex{ 1 };
 
-    // Not spotted by entity AND entity not spotted me
+    // Notgit  spotted by entity AND entity not spotted me
     if (pEntityPtr->GetPawnBase()->spottedId != lpIndex &&
         localPlayer->spottedId != pEntIndex)
         return false;
