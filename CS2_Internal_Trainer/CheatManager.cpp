@@ -5,6 +5,8 @@ bool CheatManager::Start()
 	ConsoleManager::InitConsole();
 	ConsoleManager::PrintCheatOptions();
 
+	Sleep(2000); // Prevent crash when starting too fast
+
 	while (!GetAsyncKeyState(VK_DELETE) & 1)
 	{
 		if (AimbotOptions::IsOptionChanged())
