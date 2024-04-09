@@ -1,22 +1,35 @@
 #include "Entity.h"
 
 Entity::Entity(intptr_t* pContBase)
-	: contBase(*(Controller**)pContBase) 
+	: controllerBase(*reinterpret_cast<Controller**>(pContBase))
 {
-	if (this->SetPawnBase())
-		this->isPawnInit = true;
+	if(this->controllerBase)
+		this->SetPawnBase();
 }
 
-bool Entity::SetPawnBase()
+void Entity::SetPawnBase()
 {
-	if (!contBase) return false;
+	constexpr int paddingBetweenEnt{ 0x78 };
 
-	this->pawnBase =  *(Pawn**)(
-		reinterpret_cast<intptr_t>(GamePointer::entityListBasePtr) 
-		+ 0x78 
-		* (contBase->pawnOffset & 0x1FF)); // Thanks Aimstar for the inspiration
+	this->pawnBase = *reinterpret_cast<Pawn**>(
+		reinterpret_cast<intptr_t>(GamePointer::entityListBasePtr)
+		+ paddingBetweenEnt
+		* (controllerBase->pawnOffset & 0x1FF)); // Thanks @Aimstar
 
-	if (!pawnBase) return false;
+	this->IsPawnInit = true;
+}
 
-	return true;
+Pawn* Entity::GetPawnBase()
+{
+	return this->pawnBase;
+}
+
+bool Entity::GetIsPawnInit()
+{
+	return this->IsPawnInit;
+}
+
+Controller* Entity::GetControllerBase()
+{
+	return this->controllerBase;
 }

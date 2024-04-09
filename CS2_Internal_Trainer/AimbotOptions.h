@@ -1,14 +1,17 @@
 #pragma once
 #include "Pawn.h"
-#include "ConsoleManager.h"
+#include <Windows.h>
 
 namespace AimbotOptions
 {
     inline Pawn* targetLocked{ nullptr };
+
     inline bool bTargetLock{ false };
+    inline bool bAimbot{ true };
+
     inline int smoothValue{ 0 };
     inline int fovValue{ 50 };
 
-    void OptionsCheck();
+    bool IsOptionChanged();
     bool IsTargetInFov(Vector3& pLocalPlayerAngle, Vector3& pTargetAngle);
 };

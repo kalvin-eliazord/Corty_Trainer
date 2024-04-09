@@ -115,6 +115,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <BuildStlModules>false</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Aimbot.h" />
     <ClInclude Include="AimbotOptions.h" />
     <ClInclude Include="CheatManager.h" />
     <ClInclude Include="ConsoleManager.h" />
@@ -158,12 +160,12 @@
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Aimbot.cpp" />
     <ClCompile Include="AimbotOptions.cpp" />
     <ClCompile Include="CheatManager.cpp" />
     <ClCompile Include="ConsoleManager.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GamePointer.cpp" />
-    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="TargetManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Entity.h" />

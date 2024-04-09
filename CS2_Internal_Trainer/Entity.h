@@ -1,15 +1,18 @@
 #pragma once
-#include <iostream>
 #include "GamePointer.h"
 #include "Controller.h"
 #include "Pawn.h"
 
-struct Entity
+class Entity
 {
-	Controller* contBase{};
+private:
+	Controller* controllerBase{};
 	Pawn* pawnBase{};
-	bool isPawnInit{false};
-
+	bool IsPawnInit{ false };
+public:
 	Entity(intptr_t* pContPtr);
-	bool SetPawnBase();
+	void SetPawnBase();
+	Pawn* GetPawnBase();
+	bool GetIsPawnInit();
+	Controller* GetControllerBase();
 };

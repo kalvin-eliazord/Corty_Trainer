@@ -1,8 +1,13 @@
 #include "LocalPlayer.h"
 
-intptr_t* LocalPlayer::Get()
+Controller* LocalPlayer::GetController()
 {
-	return reinterpret_cast<intptr_t*>(GamePointer::localPlayerPtr);
+	return reinterpret_cast<Controller*>(GamePointer::localPlayerContPtr);
+}
+
+Pawn* LocalPlayer::GetPawn()
+{
+	return reinterpret_cast<Pawn*>(GamePointer::localPlayerPawnPtr);
 }
 
 float* LocalPlayer::GetPitchPtr()

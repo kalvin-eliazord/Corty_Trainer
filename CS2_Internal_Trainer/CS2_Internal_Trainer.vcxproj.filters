@@ -38,6 +38,9 @@
     <Filter Include="Pawn">
       <UniqueIdentifier>{968435d4-1c74-4de9-9745-d0e26f139c7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Aimbot">
+      <UniqueIdentifier>{ff6bb25b-7531-46ac-9dcf-d6fd8e56ff69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePointer.h">
@@ -70,6 +73,9 @@
     <ClInclude Include="Pawn.h">
       <Filter>Pawn</Filter>
     </ClInclude>
+    <ClInclude Include="Aimbot.h">
+      <Filter>Aimbot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -99,11 +105,11 @@
     <ClCompile Include="Vector3.cpp">
       <Filter>Vector3</Filter>
     </ClCompile>
-    <ClCompile Include="Pawn.cpp">
-      <Filter>Pawn</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Aimbot.cpp">
+      <Filter>Aimbot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

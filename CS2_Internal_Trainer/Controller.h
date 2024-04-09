@@ -10,6 +10,6 @@ struct Controller
 	{
 		DEFINE_MEMBER_N(char*, name, 0x638); 
 		DEFINE_MEMBER_N(int, pawnOffset, 0x7e4);
-		DEFINE_MEMBER_N(int, isAliveStatus, 0x7ec);
+		//DEFINE_MEMBER_N(int, isAliveStatus, 0x7ec);
 	};
 };

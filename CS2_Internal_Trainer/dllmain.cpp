@@ -1,28 +1,18 @@
-#include <windows.h>
-#include "GamePointer.h"
-#include "ConsoleManager.h"
 #include "CheatManager.h"
 
-int32_t WINAPI MainThread(HMODULE hModule)
+DWORD WINAPI MainThread(HMODULE hModule)
 {
-	// Init game pointers used for cheats
-	if (GamePointer::InitializePointers())
+	// Init game pointers used for the aimbot
+	GameChecker::bGamePointerInit = (GamePointer::InitializePointers() ? true : false);
+	
+	if (GameChecker::bGamePointerInit)
+		GameChecker::bGamePointerInit = CheatManager::Start();
+
+	if (!GameChecker::bGamePointerInit)
 	{
-		ConsoleManager::InitConsole();
+		ConsoleManager::PrintErrorPtrInit();
 
-		while (!GetAsyncKeyState(VK_DELETE) & 1)
-		{
-			if (GetAsyncKeyState(VK_F9) & 1)
-			{
-				CheatManager::bAimbot = !CheatManager::bAimbot;
-				ConsoleManager::PrintCheatOptions();
-			}
-
-			if (CheatManager::bAimbot)
-				CheatManager::StartAimbot();
-
-			Sleep(5);
-		}
+		while (!GetAsyncKeyState(VK_DELETE) & 1) Sleep(5);
 	}
 
 	ConsoleManager::DestroyConsole();
@@ -33,7 +23,7 @@ int32_t WINAPI MainThread(HMODULE hModule)
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule,
-	int32_t  ul_reason_for_call,
+	DWORD  ul_reason_for_call,
 	LPVOID lpReserved
 )
 {

@@ -91,36 +91,20 @@ intptr_t* GamePointer::GetSignatureResult(const char* pPattern, const HMODULE pM
 	return GetPointerBaseAddress(signatureMatch);
 }
 
-bool GamePointer::InitializePointers()
+bool GamePointer::GetGameTypeIdPtr(HMODULE hModule)
 {
-	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
-	if (!hClientMod) return false;
-	
-	intptr_t* cGameEntityBaseAddrPtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::entityList, hClientMod)) };
-	if (!cGameEntityBaseAddrPtr) return false;
+	intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::WeaponList, hModule)) };
+	if (!weaponListBasePtr) return false;
 
-	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cGameEntityBaseAddrPtr) + 0x10);
-	if (!entityListBasePtr) return false;
+	gameTypeIdPtr = reinterpret_cast<int_least8_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
+	if (!gameTypeIdPtr) return false;
 
-	localPlayerPtr = GetSignatureResult(Signature::LocalPlayerController, hClientMod);
-	if (!localPlayerPtr) return false;
+	return true;
+}
 
-	intptr_t* lpInputBasePtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::LpInputBase, hClientMod)) };
-	if (!lpInputBasePtr) return false;
-
-	lp_Pitch_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(lpInputBasePtr) + Offset::lp_Pitch));
-	if (!lp_Pitch_Input) return false;
-
-	lp_Yaw_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(lpInputBasePtr) + Offset::lp_Yaw));
-	if (!lp_Yaw_Input) return false;
-
-	const HMODULE hInputMod{ GetModuleHandleW(L"inputsystem.dll") };
-	if (!hInputMod) return false;
-
-	intptr_t* inputBaseAddrPtr{ GetSignatureResult(Signature::InputSystem, hInputMod)};
-	if (!inputBaseAddrPtr) return false;
-
-	intptr_t* cPredictionBasePtr{ *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(inputBaseAddrPtr) - Offset::cPrediction) };
+bool GamePointer::GetGameStateIdPtr(HMODULE hModule)
+{
+	intptr_t* cPredictionBasePtr{ GetSignatureResult(Signature::CPrediction, hModule) };
 	if (!cPredictionBasePtr) return false;
 
 	gameStateIdPtr = reinterpret_cast<int_least8_t*>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::gameStateId);
@@ -129,18 +113,79 @@ bool GamePointer::InitializePointers()
 	return true;
 }
 
-bool GamePointer::InitializePointersInGame()
+bool GamePointer::GetViewAnglesPtr(HMODULE hModule)
+{
+	intptr_t* inputSystemBasePtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::InputSystem, hModule)) };
+	if (!inputSystemBasePtr) return false;
+
+	lp_Pitch_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(inputSystemBasePtr) + Offset::lp_Pitch));
+	if (!lp_Pitch_Input) return false;
+
+	lp_Yaw_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(inputSystemBasePtr) + Offset::lp_Yaw));
+	if (!lp_Yaw_Input) return false;
+
+	return true;
+}
+
+bool GamePointer::GetLocalPlayerPawnPtr(HMODULE hModule)
+{
+	intptr_t* cPredictionBasePtr = GetSignatureResult(Signature::CPrediction, hModule);
+	if (!cPredictionBasePtr) return false;
+
+	localPlayerPawnPtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::lp_Pawn);
+	if (!localPlayerPawnPtr) return false;
+
+	return true;
+}
+
+bool GamePointer::GetLocalPlayerContPtr(HMODULE hModule)
+{
+	localPlayerContPtr = GetSignatureResult(Signature::LocalPlayerController, hModule);
+	if (!localPlayerContPtr) return false;
+
+	return true;
+}
+
+bool GamePointer::GetEntListBaseAddrPtr(HMODULE hModule)
+{
+	intptr_t* cGameEntityBaseAddrPtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::EntityList, hModule)) };
+	if (!cGameEntityBaseAddrPtr) return false;
+
+	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cGameEntityBaseAddrPtr) + 0x10);
+	if (!entityListBasePtr) return false;
+
+	return true;
+}
+
+bool GamePointer::InitializePointers()
+{
+	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
+	if (!hClientMod) return false;
+	
+	if (!GetEntListBaseAddrPtr(hClientMod)) return false;
+
+	if (!GetLocalPlayerContPtr(hClientMod)) return false;
+
+	if (!GetViewAnglesPtr(hClientMod)) return false;
+
+	const HMODULE hInputMod{ GetModuleHandleW(L"inputsystem.dll") };
+	if (!hInputMod) return false;
+
+	if (!GetGameStateIdPtr(hClientMod)) return false;
+
+	return true;
+}
+
+bool GamePointer::InitGameTypeIdPtr()
 {
 	if (gameTypeIdPtr) return true;
 
 	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
 	if (!hClientMod) return false;
 
-	intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::WeaponList, hClientMod)) };
-	if (!weaponListBasePtr) return false;
+	if (!GetGameTypeIdPtr(hClientMod)) return false;
 
-	gameTypeIdPtr = reinterpret_cast<int_least8_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
-	if (!gameTypeIdPtr) return false;
+	if (!GetLocalPlayerPawnPtr(hClientMod)) return false;
 
 	return true;
 }

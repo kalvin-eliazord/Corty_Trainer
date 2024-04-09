@@ -1,18 +1,18 @@
 #pragma once
-#include <vector>
 #include "LocalPlayer.h"
 #include "Entity.h"
+#include <vector>
 
 namespace TargetManager
 {
-	std::vector<Pawn*> GetTargetsPawn(Pawn* pLocalPlayerPawn, int_least8_t* pGameTypeId);
-	bool IsGoodTarget(Pawn* pLocalPlayerPawn, Entity* entityPtr, int_least8_t* pGameTypeId);
+	std::vector<Pawn*> GetTargetsPawn(intptr_t* pEntListBasePtr, int_least8_t* pGameTypeId);
+	bool IsGoodTarget(Entity* pEntityPtr, int pEntIndex, int_least8_t* pGameTypeId);
 
-	Pawn* GetNearestTarget(Pawn* pLocalPlayerPawn, std::vector<Pawn*> pTargetsPawn);
-	Vector3 GetTargetAngle(Vector3& pLocalPlayerPawn, Vector3& pTargetsPawn);
+	Pawn* GetNearestTarget(std::vector<Pawn*> pTargetsPawn);
+	Vector3 GetTargetAngle(Vector3& pTargetsPawn);
 	float GetMagnitude(const Vector3& pVec);
 
-	void SetViewAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue);
-	float NormalizePitch(const float pPitch);
+	void SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue);
+	float NormalizePitch(float pPitch);
 	float NormalizeYaw(float pYaw);
 };
