@@ -44,7 +44,7 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex, int_least8_t
 	constexpr int_least8_t deathmatchId{ 0x27 };
 
 	// No Team check when there is no team
-	if (*pGameTypeId != deathmatchId)
+	if (*pGameTypeId != deathmatchId && *pGameTypeId != deathmatchId+1)
 	{
 		if (lpPawn->team_variable == entityPawn->team_variable)
 			return false;
