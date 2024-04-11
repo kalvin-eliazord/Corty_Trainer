@@ -1,14 +1,14 @@
 #include "GamePointer.h"
 
-intptr_t* GamePointer::GetPointerBaseAddress(intptr_t* pSignatureMatch)
+intptr_t* GamePointer::GetPatternPointer(intptr_t* pPatternMatch)
 {
 	// In order to extract the offset only we need to add 3 bytes
-	const int32_t signatureOffset{ *reinterpret_cast<int_least32_t*>(reinterpret_cast<intptr_t>(pSignatureMatch) + 3) };
+	const int_least32_t patternOffset{ *reinterpret_cast<int_least32_t*>(reinterpret_cast<intptr_t>(pPatternMatch) + 3) };
 
 	// In order to access the pointer base Address we need to add 7 bytes
-	intptr_t* pointerBaseAddr{ reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(pSignatureMatch) + signatureOffset + 7) };
+	intptr_t* patternPointer{ reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(pPatternMatch) + patternOffset + 7) };
 	
-	return pointerBaseAddr;
+	return patternPointer;
 }
 
 int GamePointer::GetNumberHex(const char* pPattern)
@@ -23,7 +23,7 @@ int GamePointer::GetNumberHex(const char* pPattern)
 	return count;
 }
 
-intptr_t* GamePointer::CompareSignatureWithBytes(const char* pPattern, char* pSrc, intptr_t pRegionSize)
+intptr_t* GamePointer::ScanRegion(const char* pPattern, char* pSrc, intptr_t pRegionSize)
 {
 	const int patternLen{ GetNumberHex(pPattern)};
 
@@ -47,7 +47,7 @@ intptr_t* GamePointer::CompareSignatureWithBytes(const char* pPattern, char* pSr
 	return NULL;
 }
 
-intptr_t* GamePointer::ScanModuleRegion(const char* pPattern, char* pSrc, size_t pSrcSize)
+intptr_t* GamePointer::SearchGoodModRegion(const char* pPattern, char* pSrc, size_t pSrcSize)
 {
 	MEMORY_BASIC_INFORMATION mbi{};
 
@@ -57,7 +57,7 @@ intptr_t* GamePointer::ScanModuleRegion(const char* pPattern, char* pSrc, size_t
 		if (!VirtualQuery(currRegion, &mbi, sizeof(mbi)) || mbi.Protect == PAGE_NOACCESS || mbi.State != MEM_COMMIT)
 			continue;
 
-		intptr_t* patternMatch = { CompareSignatureWithBytes(pPattern, currRegion, mbi.RegionSize) };
+		intptr_t* patternMatch = { ScanRegion(pPattern, currRegion, mbi.RegionSize) };
 
 		if (patternMatch) return patternMatch;
 	}
@@ -76,24 +76,22 @@ SIZE_T GamePointer::GetModuleSize(HMODULE pModule)
 	return moduleSize;
 }
 
-intptr_t* GamePointer::GetSignatureResult(const char* pPattern, const HMODULE pModule)
+intptr_t* GamePointer::GetPatternMatch(const char* pPattern, const HMODULE pModule)
 {
-	SIZE_T moduleSize{ NULL };
-	intptr_t* signatureMatch{ nullptr };
+	SIZE_T moduleSize{ GetModuleSize(pModule) };
+	if (!moduleSize) return nullptr;
 
-	moduleSize = GetModuleSize(pModule);
+	intptr_t* patternMatch{ SearchGoodModRegion(pPattern, reinterpret_cast<char*>(pModule), moduleSize) };
 
-	if (moduleSize)
-		signatureMatch = ScanModuleRegion(pPattern, reinterpret_cast<char*>(pModule), moduleSize);
-
-	if (!signatureMatch) return nullptr;
-
-	return GetPointerBaseAddress(signatureMatch);
+	return patternMatch;
 }
 
 bool GamePointer::GetGameTypeIdPtr(HMODULE hModule)
 {
-	intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::WeaponList, hModule)) };
+	intptr_t* patternMatch {GetPatternMatch(Signature::WeaponList, hModule)};
+	if (!patternMatch) return false;
+
+	intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
 	if (!weaponListBasePtr) return false;
 
 	gameTypeIdPtr = reinterpret_cast<int_least8_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
@@ -104,7 +102,10 @@ bool GamePointer::GetGameTypeIdPtr(HMODULE hModule)
 
 bool GamePointer::GetGameStateIdPtr(HMODULE hModule)
 {
-	intptr_t* cPredictionBasePtr{ GetSignatureResult(Signature::CPrediction, hModule) };
+	intptr_t* patternMatch{ GetPatternMatch(Signature::CPrediction, hModule) };
+	if (!patternMatch) return false;
+
+	intptr_t* cPredictionBasePtr{ GetPatternPointer(patternMatch) };
 	if (!cPredictionBasePtr) return false;
 
 	gameStateIdPtr = reinterpret_cast<int_least8_t*>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::gameStateId);
@@ -115,7 +116,10 @@ bool GamePointer::GetGameStateIdPtr(HMODULE hModule)
 
 bool GamePointer::GetViewAnglesPtr(HMODULE hModule)
 {
-	intptr_t* inputSystemBasePtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::InputSystem, hModule)) };
+	intptr_t* patternMatch{ GetPatternMatch(Signature::InputSystem, hModule) };
+	if (!patternMatch) return false;
+
+	intptr_t* inputSystemBasePtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
 	if (!inputSystemBasePtr) return false;
 
 	lp_Pitch_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(inputSystemBasePtr) + Offset::lp_Pitch));
@@ -129,7 +133,10 @@ bool GamePointer::GetViewAnglesPtr(HMODULE hModule)
 
 bool GamePointer::GetLocalPlayerPawnPtr(HMODULE hModule)
 {
-	intptr_t* cPredictionBasePtr = GetSignatureResult(Signature::CPrediction, hModule);
+	intptr_t* patternMatch{ GetPatternMatch(Signature::CPrediction, hModule) };
+	if (!patternMatch) return false;
+
+	intptr_t* cPredictionBasePtr{ GetPatternPointer(patternMatch) };
 	if (!cPredictionBasePtr) return false;
 
 	localPlayerPawnPtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::lp_Pawn);
@@ -140,7 +147,10 @@ bool GamePointer::GetLocalPlayerPawnPtr(HMODULE hModule)
 
 bool GamePointer::GetLocalPlayerContPtr(HMODULE hModule)
 {
-	localPlayerContPtr = GetSignatureResult(Signature::LocalPlayerController, hModule);
+	intptr_t* patternMatch{ GetPatternMatch(Signature::LocalPlayerController, hModule) };
+	if (!patternMatch) return false;
+
+	localPlayerContPtr = GetPatternPointer(patternMatch);
 	if (!localPlayerContPtr) return false;
 
 	return true;
@@ -148,10 +158,13 @@ bool GamePointer::GetLocalPlayerContPtr(HMODULE hModule)
 
 bool GamePointer::GetEntListBaseAddrPtr(HMODULE hModule)
 {
-	intptr_t* cGameEntityBaseAddrPtr{ *reinterpret_cast<intptr_t**>(GetSignatureResult(Signature::EntityList, hModule)) };
+	intptr_t* patternMatch{ GetPatternMatch(Signature::EntityList, hModule) };
+	if (!patternMatch) return false;
+
+	intptr_t* cGameEntityBaseAddrPtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
 	if (!cGameEntityBaseAddrPtr) return false;
 
-	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cGameEntityBaseAddrPtr) + 0x10);
+	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cGameEntityBaseAddrPtr) + Offset::entityList);
 	if (!entityListBasePtr) return false;
 
 	return true;

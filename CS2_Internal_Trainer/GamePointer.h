@@ -5,11 +5,11 @@
 
 namespace GamePointer
 {
-	intptr_t* GetPointerBaseAddress(intptr_t* pSignatureMatch);
+	intptr_t* GetPatternPointer(intptr_t* pPatternMatch);
 	int GetNumberHex (const char* pPattern);
-	intptr_t* CompareSignatureWithBytes(const char* pPattern, char* pSrc, intptr_t pRegionSize);
-	intptr_t* ScanModuleRegion(const char* pPattern, char* pSrc, size_t pSrcSize);
-	intptr_t* GetSignatureResult(const char* pPattern, const HMODULE pModName);
+	intptr_t* ScanRegion(const char* pPattern, char* pSrc, intptr_t pRegionSize);
+	intptr_t* SearchGoodModRegion(const char* pPattern, char* pSrc, size_t pSrcSize);
+	intptr_t* GetPatternMatch(const char* pPattern, const HMODULE pModName);
 
 	bool GetGameTypeIdPtr(HMODULE hModule);
 	bool GetGameStateIdPtr(HMODULE hModule);
@@ -34,6 +34,7 @@ namespace GamePointer
 
 	namespace Offset
 	{
+		constexpr inline intptr_t entityList{ 0x10 };
 		constexpr inline intptr_t gameStateId{ 0xA0 };
 		constexpr inline intptr_t gameTypeId{ 0x32 };
 		constexpr inline intptr_t lp_Pitch{ 0x5390 };
