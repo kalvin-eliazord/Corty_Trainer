@@ -47,7 +47,7 @@ void ConsoleManager::PrintCheatOptions()
 {
 	system("cls");
 	PrintMyName();
-
+	std::cout << "-->[[ RIGHT CLICK TO USE THE AIMBOT! ]] <-- \n";
 	std::cout << "AIMBOT: press F9 " << std::boolalpha << "-->[[" << AimbotOptions::bAimbot << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
 	std::cout << "SMOOTH VALUE: press F3 (-) or press F4 (+) \n" << "-->[[" << AimbotOptions::smoothValue << "]] \n";
