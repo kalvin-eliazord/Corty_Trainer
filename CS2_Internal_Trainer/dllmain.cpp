@@ -31,8 +31,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 
 	if (ul_reason_for_call == DLL_PROCESS_ATTACH)
 		hMainThread = CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)&MainThread, hModule, NULL, nullptr);
-
-	if (ul_reason_for_call == DLL_THREAD_DETACH)
+	else if(ul_reason_for_call == DLL_THREAD_DETACH)
 	{
 		if (hMainThread)
 			CloseHandle(hMainThread);

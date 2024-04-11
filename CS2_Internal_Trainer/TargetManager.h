@@ -1,11 +1,13 @@
 #pragma once
 #include "LocalPlayer.h"
 #include "Entity.h"
+#include "AimbotOptions.h"
 #include <vector>
 
 namespace TargetManager
 {
 	std::vector<Pawn*> GetTargetsPawn(intptr_t* pEntListBasePtr, int_least8_t* pGameTypeId);
+	bool IsTargetInFov(Vector3& pTargetAngle);
 	bool IsGoodTarget(Entity* pEntityPtr, int pEntIndex, int_least8_t* pGameTypeId);
 
 	Pawn* GetNearestTarget(std::vector<Pawn*> pTargetsPawn);
