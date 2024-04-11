@@ -16,7 +16,7 @@ void Entity::SetPawnBase()
 		+ paddingBetweenEnt
 		* (controllerBase->pawnOffset & 0x1FF)); // Thanks @Aimstar
 
-	this->IsPawnInit = true;
+	this->IsPawnInit = (pawnBase ? true : false);
 }
 
 Pawn* Entity::GetPawnBase()
