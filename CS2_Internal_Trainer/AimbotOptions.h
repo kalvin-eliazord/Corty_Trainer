@@ -13,5 +13,4 @@ namespace AimbotOptions
     inline int fovValue{ 50 };
 
     bool IsOptionChanged();
-    bool IsTargetInFov(Vector3& pLocalPlayerAngle, Vector3& pTargetAngle);
 };

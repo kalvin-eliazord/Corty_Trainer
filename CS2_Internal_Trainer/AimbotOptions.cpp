@@ -36,21 +36,3 @@ bool AimbotOptions::IsOptionChanged()
 
 	return false;
 }
-
-bool AimbotOptions::IsTargetInFov(Vector3& pLocalPlayerAngle, Vector3& pTargetAngle)
-{
-	const Vector3 deltaAngle { pLocalPlayerAngle - pTargetAngle };
-
-	// Checking if target is in FOV
-	if ((deltaAngle.x) < AimbotOptions::fovValue or
-		-deltaAngle.x > -AimbotOptions::fovValue)
-	{
-		if ((deltaAngle.y) < AimbotOptions::fovValue or
-			-deltaAngle.y > -AimbotOptions::fovValue)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
