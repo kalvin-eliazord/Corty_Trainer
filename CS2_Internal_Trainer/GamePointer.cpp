@@ -7,7 +7,7 @@ intptr_t* GamePointer::GetPatternPointer(intptr_t* pPatternMatch)
 
 	// In order to access the pointer base Address we need to add 7 bytes
 	intptr_t* patternPointer{ reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(pPatternMatch) + patternOffset + 7) };
-	
+
 	return patternPointer;
 }
 
@@ -25,7 +25,7 @@ int GamePointer::GetNumberHex(const char* pPattern)
 
 intptr_t* GamePointer::ScanRegion(const char* pPattern, char* pSrc, intptr_t pRegionSize)
 {
-	const int patternLen{ GetNumberHex(pPattern)};
+	const int patternLen{ GetNumberHex(pPattern) };
 
 	for (int i{ 0 }; i < pRegionSize; ++i)
 	{
@@ -86,9 +86,19 @@ intptr_t* GamePointer::GetPatternMatch(const char* pPattern, const HMODULE pModu
 	return patternMatch;
 }
 
+bool GamePointer::GetSteamOverlayPtr(HMODULE hModule)
+{
+	intptr_t* patternMatch{ GetPatternMatch(Signature::SteamOverlay, hModule) };
+	if (!patternMatch) return false;
+
+	SteamOverlayPtr = patternMatch;
+
+	return true;
+}
+
 bool GamePointer::GetGameTypeIdPtr(HMODULE hModule)
 {
-	intptr_t* patternMatch {GetPatternMatch(Signature::WeaponList, hModule)};
+	intptr_t* patternMatch{ GetPatternMatch(Signature::WeaponList, hModule) };
 	if (!patternMatch) return false;
 
 	intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
@@ -174,7 +184,7 @@ bool GamePointer::InitializePointers()
 {
 	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
 	if (!hClientMod) return false;
-	
+
 	if (!GetEntListBaseAddrPtr(hClientMod)) return false;
 
 	if (!GetLocalPlayerContPtr(hClientMod)) return false;
@@ -185,6 +195,11 @@ bool GamePointer::InitializePointers()
 	if (!hInputMod) return false;
 
 	if (!GetGameStateIdPtr(hClientMod)) return false;
+
+	const HMODULE hGameOver{ GetModuleHandleW(L"gameoverlayrenderer64.dll") };
+	if (!hGameOver) return false;
+
+	if (!GetSteamOverlayPtr(hGameOver)) return false;
 
 	return true;
 }
