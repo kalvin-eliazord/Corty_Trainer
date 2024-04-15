@@ -1,5 +1,5 @@
 #pragma once
-#include <windows.h>
+#include <Windows.h>
 #include <Psapi.h>
 #include <cstdint>
 
@@ -17,21 +17,26 @@ namespace GamePointer
 	bool GetViewAnglesPtr(HMODULE hModule);
 	bool GetLocalPlayerPawnPtr(HMODULE hModule);
 	bool GetLocalPlayerContPtr(HMODULE hModule);
+	bool GetCGameEntityPtr(HMODULE hModule);
 	bool GetEntListBaseAddrPtr(HMODULE hModule);
 
 	SIZE_T GetModuleSize(HMODULE pModule);
 	bool InitializePointers();
 	bool InitGameTypeIdPtr();
 
-	inline intptr_t* SteamOverlayPtr{ nullptr };
-	inline intptr_t* localPlayerPawnPtr{ nullptr };
-	inline intptr_t* entityListBasePtr{ nullptr };
-	inline intptr_t* localPlayerContPtr{ nullptr };
-	inline float* lp_Pitch_Input{ nullptr };
-	inline float* lp_Yaw_Input{ nullptr };
+	inline intptr_t* SteamOverlayPtr{};
 
-	inline int_least8_t* gameStateIdPtr{ nullptr };
-	inline int_least8_t* gameTypeIdPtr{ nullptr };
+	inline intptr_t* CGameEntityPtr{};
+	inline intptr_t* entityListBasePtr{};
+
+	inline intptr_t* localPlayerPawnPtr{};
+	inline intptr_t* localPlayerContPtr{};
+
+	inline float* lp_Pitch_Input{};
+	inline float* lp_Yaw_Input{};
+
+	inline int16_t* gameStateIdPtr{};
+	inline int16_t* gameTypeIdPtr{};
 
 	namespace Offset
 	{

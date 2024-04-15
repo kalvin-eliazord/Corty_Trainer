@@ -104,7 +104,7 @@ bool GamePointer::GetGameTypeIdPtr(HMODULE hModule)
 	intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
 	if (!weaponListBasePtr) return false;
 
-	gameTypeIdPtr = reinterpret_cast<int_least8_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
+	gameTypeIdPtr = reinterpret_cast<int16_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
 	if (!gameTypeIdPtr) return false;
 
 	return true;
@@ -118,7 +118,7 @@ bool GamePointer::GetGameStateIdPtr(HMODULE hModule)
 	intptr_t* cPredictionBasePtr{ GetPatternPointer(patternMatch) };
 	if (!cPredictionBasePtr) return false;
 
-	gameStateIdPtr = reinterpret_cast<int_least8_t*>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::gameStateId);
+	gameStateIdPtr = reinterpret_cast<int16_t*>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::gameStateId);
 	if (!gameStateIdPtr) return false;
 
 	return true;
@@ -168,14 +168,21 @@ bool GamePointer::GetLocalPlayerContPtr(HMODULE hModule)
 
 bool GamePointer::GetEntListBaseAddrPtr(HMODULE hModule)
 {
+	if (!CGameEntityPtr) return false;
+
+	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(CGameEntityPtr) + Offset::entityList);
+	if (!entityListBasePtr) return false;
+
+	return true;
+}
+
+bool GamePointer::GetCGameEntityPtr(HMODULE hModule)
+{
 	intptr_t* patternMatch{ GetPatternMatch(Signature::EntityList, hModule) };
 	if (!patternMatch) return false;
 
-	intptr_t* cGameEntityBaseAddrPtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
-	if (!cGameEntityBaseAddrPtr) return false;
-
-	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cGameEntityBaseAddrPtr) + Offset::entityList);
-	if (!entityListBasePtr) return false;
+	CGameEntityPtr = *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch));
+	if (!CGameEntityPtr) return false;
 
 	return true;
 }
@@ -184,6 +191,8 @@ bool GamePointer::InitializePointers()
 {
 	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
 	if (!hClientMod) return false;
+
+	if (!GetCGameEntityPtr(hClientMod)) return false;
 
 	if (!GetEntListBaseAddrPtr(hClientMod)) return false;
 
