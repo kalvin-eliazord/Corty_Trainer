@@ -47,12 +47,13 @@ void ConsoleManager::PrintCheatOptions()
 {
 	system("cls");
 	PrintMyName();
-	std::cout << "-->[[ RIGHT CLICK TO USE THE AIMBOT! ]] <-- \n";
-	std::cout << "AIMBOT: press F9 " << std::boolalpha << "-->[[" << AimbotOptions::bAimbot << "]] \n";
+	std::cout << "--> [[ RIGHT CLICK TO USE THE AIMBOT! ]] <-- \n";
+	std::cout << "AIMBOT: press F9 " << std::boolalpha << "-->[[" << CheatOptions::bAimbot << "]] \n";
+	std::cout << "ESP   : press F8 " << std::boolalpha << "-->[[" << CheatOptions::bESP << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
-	std::cout << "SMOOTH VALUE: press F3 (-) or press F4 (+) \n" << "-->[[" << AimbotOptions::smoothValue << "]] \n";
-	std::cout << "FOV: press F5 (-) or press F6 (+) \n" << "-->[[" << AimbotOptions::fovValue << "]] \n";
-	std::cout << "TARGET LOCKING: press F2 \n" << std::boolalpha << "-->[[" << AimbotOptions::bTargetLock << "]] \n";
+	std::cout << "SMOOTH VALUE  : press F3 (-) or press F4 (+) " << "-->[[" << CheatOptions::smoothValue << "]] \n";
+	std::cout << "FOV           : press F5 (-) or press F6 (+) " << "-->[[" << CheatOptions::fovValue << "]] \n";
+	std::cout << "TARGET LOCKING: press F2 " << std::boolalpha << "                       -->[[" << CheatOptions::bTargetLock << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
-	std::cout << "--> press SUPPR to exit <-- \n";
+	std::cout << "--> [[ press SUPPR to exit] ] <-- \n";
 }

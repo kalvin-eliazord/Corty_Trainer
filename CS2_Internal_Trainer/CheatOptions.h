@@ -1,13 +1,15 @@
 #pragma once
-#include "Pawn.h"
 #include <Windows.h>
+#include "Entity.h"
 
-namespace AimbotOptions
+namespace CheatOptions
 {
-    inline Pawn* targetLocked{ nullptr };
+    inline Entity* entLocked{ nullptr };
 
     inline bool bTargetLock{ false };
     inline bool bAimbot{ true };
+    inline bool bESP{ true };
+    //inline bool bRCS{ true };
 
     inline int smoothValue{ 0 };
     inline int fovValue{ 50 };

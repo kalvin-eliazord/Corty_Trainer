@@ -17,7 +17,7 @@ private:
 	bool HookSource();
 
 public:
-	TrampHook(intptr_t* pSrcAddr, intptr_t pStolenBytesSize, intptr_t* pDstAddr);
+	TrampHook(intptr_t* pSrcAddr,  intptr_t* pDstAddr, int pStolenBytesSize);
 	void Unhook();
 	~TrampHook();
 	intptr_t* GetGateway();

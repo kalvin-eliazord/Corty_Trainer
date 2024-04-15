@@ -183,7 +183,7 @@ bool MyD3d11::GetDeviceContextRenderTarget(IDXGISwapChain* pSwapchain)
 
 bool MyD3d11::InitD3DDraw(IDXGISwapChain* pSwapchain)
 {
-	this->pSwapchain = pSwapchain;
+	pSwapchain = pSwapchain;
 
 	if (!GetDeviceContextRenderTarget(pSwapchain)) return false;
 

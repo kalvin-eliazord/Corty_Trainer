@@ -5,47 +5,50 @@
 
 namespace GamePointer
 {
-	intptr_t* GetPatternPointer(intptr_t* pPatternMatch);
-	int GetNumberHex(const char* pPattern);
-	intptr_t* ScanRegion(const char* pPattern, char* pSrc, intptr_t pRegionSize);
-	intptr_t* SearchGoodModRegion(const char* pPattern, char* pSrc, size_t pSrcSize);
-	intptr_t* GetPatternMatch(const char* pPattern, const HMODULE pModName);
-
-	bool GetSteamOverlayPtr(HMODULE hModule);
-	bool GetGameTypeIdPtr(HMODULE hModule);
-	bool GetGameStateIdPtr(HMODULE hModule);
-	bool GetViewAnglesPtr(HMODULE hModule);
-	bool GetLocalPlayerPawnPtr(HMODULE hModule);
-	bool GetLocalPlayerContPtr(HMODULE hModule);
-	bool GetCGameEntityPtr(HMODULE hModule);
-	bool GetEntListBaseAddrPtr(HMODULE hModule);
-
-	SIZE_T GetModuleSize(HMODULE pModule);
-	bool InitializePointers();
-	bool InitGameTypeIdPtr();
-
 	inline intptr_t* SteamOverlayPtr{};
 
 	inline intptr_t* CGameEntityPtr{};
 	inline intptr_t* entityListBasePtr{};
 
-	inline intptr_t* localPlayerPawnPtr{};
+	inline float* lp_Yaw_Input{};
+	inline float* lp_Pitch_Input{};
 	inline intptr_t* localPlayerContPtr{};
 
-	inline float* lp_Pitch_Input{};
-	inline float* lp_Yaw_Input{};
-
-	inline int16_t* gameStateIdPtr{};
 	inline int16_t* gameTypeIdPtr{};
+	inline int16_t* gameStateIdPtr{};
+
+	bool InitializePointers();
+	bool InitGameTypeIdPtr();
+	SIZE_T GetModuleSize(HMODULE pModule);
+
+	bool GetSteamOverlayPtr(HMODULE hModule);
+
+	bool GetCGameEntityPtr(HMODULE hModule);
+	bool GetEntListBaseAddrPtr(HMODULE hModule);
+
+	bool GetGameTypeIdPtr(HMODULE hModule);
+	bool GetGameStateIdPtr(HMODULE hModule);
+
+	bool GetViewAnglesPtr(HMODULE hModule);
+	bool GetLocalPlayerContPtr(HMODULE hModule);
+
+	intptr_t* GetPatternMatch(const char* pPattern, const HMODULE pModName);
+	intptr_t* SearchGoodModRegion(const char* pPattern, char* pSrc, size_t pSrcSize);
+	intptr_t* ScanRegion(const char* pPattern, char* pSrc, intptr_t pRegionSize);
+	intptr_t* GetPatternPointer(intptr_t* pPatternMatch);
+	int GetNumberHex(const char* pPattern);
 
 	namespace Offset
 	{
-		constexpr inline intptr_t entityList{ 0x10 };
-		constexpr inline intptr_t gameStateId{ 0xA0 };
-		constexpr inline intptr_t gameTypeId{ 0x32 };
-		constexpr inline intptr_t lp_Pitch{ 0x5390 };
-		constexpr inline intptr_t lp_Yaw{ 0x5394 };
-		constexpr inline intptr_t lp_Pawn{ 0x138 };
+		constexpr inline DWORD Lp_Yaw{ 0x5394 };
+		constexpr inline DWORD Lp_Pawn{ 0x138 };
+		constexpr inline DWORD EntityList{ 0x10 };
+		constexpr inline DWORD GameTypeId{ 0x32 };
+		constexpr inline DWORD Lp_Pitch{ 0x5390 };
+		constexpr inline DWORD BoneArray{ 0x1E0 };
+		constexpr inline DWORD GameStateId{ 0xA0 };
+		constexpr inline DWORD bSpottedId{ 0x16A4 };
+		constexpr inline DWORD GameSceneNode{ 0x318 };
 	}
 
 	namespace Signature

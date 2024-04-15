@@ -1,6 +1,6 @@
 #pragma once
-#include <cstdint>
 #include "Vector3.h"
+#include <cstdint>
 
 #define STR_MERGE_IMPL(a, b) a##b
 #define STR_MERGE(a, b) STR_MERGE_IMPL(a, b)
@@ -12,10 +12,10 @@ struct Pawn
 	union
 	{
 		//              Type     Name    offset
-		DEFINE_MEMBER_N(int_least32_t, health, 0x334);
-		DEFINE_MEMBER_N(int_least8_t, team_variable, 0x3CB);
+		DEFINE_MEMBER_N(intptr_t, gameSceneNode, 0x1E0);
+		DEFINE_MEMBER_N(int, health, 0x334);
+		DEFINE_MEMBER_N(int8_t, team_variable, 0x3CB);
 		DEFINE_MEMBER_N(Vector3, body_pos, 0xD60);
-		DEFINE_MEMBER_N(Vector3, angles, 0x11A4);
-		DEFINE_MEMBER_N(int_least8_t, spottedId, 0x16A4); //0x1698 + 0xC
+		DEFINE_MEMBER_N(Vector3, angles, 0x1578);
 	};
 };

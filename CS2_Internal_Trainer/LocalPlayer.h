@@ -5,9 +5,10 @@
 
 namespace LocalPlayer
 {
-	Controller* GetController();
 	Pawn* GetPawn();
-	float* GetPitchPtr();
 	float* GetYawPtr();
+	Entity GetEntity();
+	float* GetPitchPtr();
+	Controller* GetController();
 	void SetViewAngle(Vector3& targetAngle);
 };

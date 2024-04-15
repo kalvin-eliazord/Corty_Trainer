@@ -1,6 +1,6 @@
 #include "TrampHook.h"
 
-TrampHook::TrampHook(intptr_t* pSrcAddr, intptr_t pStolenBytesSize, intptr_t* pDstAddr)
+TrampHook::TrampHook(intptr_t* pSrcAddr, intptr_t* pDstAddr, int pStolenBytesSize)
 	: srcAddr{ pSrcAddr }
 	, stolenBSize{pStolenBytesSize}
 	, dstAddr{ pDstAddr }
@@ -38,6 +38,7 @@ bool TrampHook::InitGateway()
 
 	if (!gatewayAddr) return false;
 
+	// Put stolen bytes into gateway
 	memcpy(gatewayAddr, srcAddr, stolenBSize);
 
 	BYTE jmpSrc[14]
@@ -47,11 +48,14 @@ bool TrampHook::InitGateway()
 	};
 
 	// Set JMP to source
-	const intptr_t srcJmpBackAddr{ reinterpret_cast<intptr_t>(srcAddr + stolenBSize) };
+	const intptr_t srcJmpBackAddr{ reinterpret_cast<intptr_t>(srcAddr) + stolenBSize };
 	memcpy(jmpSrc + 6, &srcJmpBackAddr, 8);
 
 	// Put JMP in gateway
-	memcpy(gatewayAddr + stolenBSize, jmpSrc, jmpSize);
+	memcpy(
+		reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(gatewayAddr) + stolenBSize)
+		, &jmpSrc
+		, jmpSize);
 
 	return true;
 }
@@ -70,8 +74,8 @@ bool TrampHook::HookSource()
 	// Set JMP to destination
 	memcpy(jmpDst + 6, &dstAddr, 8);
 
-	// Nop source
-	memset(srcAddr, 0x90, jmpSize);
+	// Nop source stolen bytes
+	memset(srcAddr, 0x90, stolenBSize);
 
 	// Put JMP in source
 	memcpy(srcAddr, jmpDst, jmpSize);

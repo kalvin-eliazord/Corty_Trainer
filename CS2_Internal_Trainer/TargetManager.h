@@ -1,20 +1,25 @@
 #pragma once
 #include "LocalPlayer.h"
 #include "Entity.h"
-#include "AimbotOptions.h"
+#include "CheatOptions.h"
 #include <vector>
+#include <bitset>
 
 namespace TargetManager
 {
-	std::vector<Pawn*> GetTargetsPawn(intptr_t* pEntListBasePtr, int_least8_t* pGameTypeId);
+	Controller* GetCTarget();
+	std::vector<Controller*> GetCTargetsEnts();
+
 	bool IsTargetInFov(Vector3& pTargetAngle);
-	bool IsGoodTarget(Entity* pEntityPtr, int pEntIndex, int_least8_t* pGameTypeId);
+	bool IsGameDeathMatch(int16_t* pGameTypeId);
+	bool ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex);
+	bool IsGoodTarget(Entity* pEntity, int pEntIndex);
 
-	Pawn* GetNearestTarget(std::vector<Pawn*> pTargetsPawn);
-	Vector3 GetTargetAngle(Vector3& pTargetsPawn);
 	float GetMagnitude(const Vector3& pVec);
+	Vector3 GetTargetAngle(const Vector3& pTargetPos);
+	Controller* GetNearestCTarget(std::vector<Controller*> pTargetsEnts);
 
-	void SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue);
 	float NormalizePitch(float pPitch);
 	float NormalizeYaw(float pYaw);
+	void SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue);
 };

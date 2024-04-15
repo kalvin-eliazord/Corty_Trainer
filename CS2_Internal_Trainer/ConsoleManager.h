@@ -1,5 +1,5 @@
 #pragma once
-#include "AimbotOptions.h"
+#include "CheatOptions.h"
 #include <iostream>
 
 namespace ConsoleManager

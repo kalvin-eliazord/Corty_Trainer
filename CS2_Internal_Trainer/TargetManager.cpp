@@ -6,17 +6,17 @@ bool TargetManager::IsTargetInFov(Vector3& pTargetAngle)
 
 	Vector3 deltaAngle{};
 
-	if(localPlayerAngle.y > pTargetAngle.y)
+	if (localPlayerAngle.y > pTargetAngle.y)
 		deltaAngle = pTargetAngle - localPlayerAngle;
 	else
 		deltaAngle = localPlayerAngle - pTargetAngle;
 
 	// Checking if target is in FOV
-	if ((deltaAngle.x) < AimbotOptions::fovValue or
-		-deltaAngle.x > -AimbotOptions::fovValue)
+	if ((deltaAngle.x) < CheatOptions::fovValue or
+		-deltaAngle.x > -CheatOptions::fovValue)
 	{
-		if ((deltaAngle.y) < AimbotOptions::fovValue or
-			-deltaAngle.y > -AimbotOptions::fovValue)
+		if ((deltaAngle.y) < CheatOptions::fovValue or
+			-deltaAngle.y > -CheatOptions::fovValue)
 		{
 			return true;
 		}
@@ -25,14 +25,31 @@ bool TargetManager::IsTargetInFov(Vector3& pTargetAngle)
 	return false;
 }
 
-bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex, int_least8_t* pGameTypeId)
+bool TargetManager::IsGameDeathMatch(int16_t* pGameTypeId)
+{
+	constexpr int deathmatchId{ 0x27 };
+	constexpr int deathmatchId2{ 0x2B };
+
+	if (*pGameTypeId != deathmatchId &&
+		*pGameTypeId != deathmatchId + 1 &&
+		*pGameTypeId != deathmatchId2)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 {
 	if (!pEntityPtr->GetIsPawnInit())
 		return false;
 
 	Pawn* lpPawn{ LocalPlayer::GetPawn() };
-	Pawn* entityPawn{ pEntityPtr->GetPawnBase() };
+	if (!lpPawn) return false;
 
+	Pawn* entityPawn{ pEntityPtr->GetPawnBase() };
+	
 	// If this is the localPlayer
 	if (lpPawn == entityPawn)
 		return false;
@@ -41,20 +58,14 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex, int_least8_t
 	if (entityPawn->health < 1)
 		return false;
 
-	constexpr int_least8_t deathmatchId{ 0x27 };
-
 	// No Team check when there is no team
-	if (*pGameTypeId != deathmatchId && *pGameTypeId != deathmatchId+1)
+	if(!IsGameDeathMatch(GamePointer::gameTypeIdPtr))
 	{
 		if (lpPawn->team_variable == entityPawn->team_variable)
 			return false;
 	}
 
-	constexpr int_least8_t localPlayerIndex{ 1 };
-
-	// Not spotted by entity AND entity not spotted me
-	if (entityPawn->spottedId != localPlayerIndex &&
-		lpPawn->spottedId != pEntIndex)
+	if (!ImSpottedAndEntitySpotted(pEntityPtr, pEntIndex))
 		return false;
 
 	Vector3 targetAngle{ GetTargetAngle(entityPawn->angles) };
@@ -64,25 +75,85 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex, int_least8_t
 	return true;
 }
 
-std::vector<Pawn*> TargetManager::GetTargetsPawn(intptr_t* pEntListBasePtr, int_least8_t* pGameTypeId)
+bool TargetManager::ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex)
 {
-	std::vector<Pawn*> targetsPawn{};
-	constexpr int paddingBetweenEnt{ 0x78 };
+	constexpr int localPlayerId{ 0 };
 
-	for (int i{ 1 }; i < 64; ++i)
+	std::bitset<64> lpSpottedId{ LocalPlayer::GetEntity().GetSpottedId() };
+	std::bitset<64> currEntSpottedId{ pCurrEnt->GetSpottedId() };
+
+	// Not spotted by entity AND entity not spotted me
+	if (!(lpSpottedId.test(pEntIndex) || currEntSpottedId.test(localPlayerId)))
+		return false;
+
+	return true;
+}
+
+Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEnt)
+{
+	float oldCoef{ FLT_MAX };
+	Pawn* lpPawn{ LocalPlayer::GetPawn() };
+	Entity* nearestTarget{ nullptr };
+
+	for (auto currCTarget : pTargetsEnt)
 	{
-		Entity currEntity(reinterpret_cast<intptr_t*>(
-			reinterpret_cast<intptr_t>(pEntListBasePtr)
-			+ i
-			* paddingBetweenEnt));
+		Entity currEnt(currCTarget);
+		
+		// Get angle distance
+		const Vector3 currTargetAngle{ GetTargetAngle(currEnt.GetPawnBase()->body_pos) };
+		const Vector3 deltaAngle{ lpPawn->angles - currTargetAngle };
+		const float currAngleDist{ GetMagnitude(deltaAngle) };
 
-		if (!IsGoodTarget(&currEntity, i, pGameTypeId))
-			continue;
+		// Get body position distance
+		const Vector3 deltaPosition{ lpPawn->body_pos - currEnt.GetPawnBase()->body_pos };
+		const float currBodyPosDist{ GetMagnitude(deltaPosition) };
 
-		targetsPawn.push_back(currEntity.GetPawnBase());
+		const float currCoef{ currAngleDist * 0.8f + currBodyPosDist * 0.2f };
+
+		if (oldCoef > currCoef)
+		{
+			oldCoef = currCoef;
+			nearestTarget = &currEnt;
+		}
 	}
 
-	return targetsPawn;
+	if (!nearestTarget)
+		return nullptr;
+
+	return nearestTarget->GetControllerBase();
+}
+
+std::vector<Controller*> TargetManager::GetCTargetsEnts()
+{
+	intptr_t* entListBasePtr{ GamePointer::entityListBasePtr };
+	std::vector<Controller*> cTargetsEntities{};
+
+	for (int i{ 0 }; i < 64; ++i)
+	{
+		Entity currEntity(*reinterpret_cast<Controller**>(
+			reinterpret_cast<intptr_t>(entListBasePtr)
+			+ (i + 1)
+			* 0x78));
+
+		if (!IsGoodTarget(&currEntity, i))
+			continue;
+
+		cTargetsEntities.push_back(currEntity.GetControllerBase());
+	}
+
+	return cTargetsEntities;
+}
+
+Controller* TargetManager::GetCTarget()
+{
+	// Get targets
+	std::vector<Controller*> targetsEnts{ TargetManager::GetCTargetsEnts() };
+	if (targetsEnts.empty()) return nullptr;
+
+	if (targetsEnts.size() > 1)
+		return TargetManager::GetNearestCTarget(targetsEnts);
+
+	return targetsEnts[0];
 }
 
 float TargetManager::NormalizePitch(float pPitch)
@@ -108,7 +179,7 @@ float TargetManager::GetMagnitude(const Vector3& pVec)
 		(pVec.z * pVec.z));
 }
 
-Vector3 TargetManager::GetTargetAngle(Vector3& pTargetPos)
+Vector3 TargetManager::GetTargetAngle(const Vector3& pTargetPos)
 {
 	Vector3 targetAngle{ NULL };
 	Vector3 lpPos{ LocalPlayer::GetPawn()->body_pos };
@@ -119,8 +190,8 @@ Vector3 TargetManager::GetTargetAngle(Vector3& pTargetPos)
 
 	constexpr float radToDegree{ 57.2957795f };
 
-	targetAngle.x = atanf(deltaPos.z / magnitudePos) * radToDegree;
-	targetAngle.y = atanf(deltaPos.y / deltaPos.x) * radToDegree;
+	targetAngle.x = atan2f(deltaPos.y , deltaPos.x) * radToDegree;
+	targetAngle.y = -atanf(deltaPos.z / magnitudePos) * radToDegree;
 
 	if (deltaPos.x >= 0.0f)
 		targetAngle.y += 180.0f;
@@ -128,35 +199,6 @@ Vector3 TargetManager::GetTargetAngle(Vector3& pTargetPos)
 	targetAngle.x = NormalizePitch(targetAngle.x);
 
 	return targetAngle;
-}
-
-Pawn* TargetManager::GetNearestTarget(std::vector<Pawn*> pTargetsPawn)
-{
-	float oldCoef{ FLT_MAX };
-	Pawn* lpPawn{ LocalPlayer::GetPawn() };
-	Pawn* nearestTarget{ nullptr };
-
-	for (auto currTarget : pTargetsPawn)
-	{
-		// Get angle distance
-		const Vector3 currTargetAngle{ GetTargetAngle(currTarget->body_pos) };
-		const Vector3 deltaAngle{ lpPawn->angles - currTargetAngle };
-		const float currAngleDist{ GetMagnitude(deltaAngle) };
-
-		// Get body position distance
-		const Vector3 deltaPosition{ lpPawn->body_pos - currTarget->body_pos };
-		const float currBodyPosDist{ GetMagnitude(deltaPosition) };
-
-		const float currCoef{ currAngleDist * 0.8f + currBodyPosDist * 0.2f };
-
-		if (oldCoef > currCoef)
-		{
-			oldCoef = currCoef;
-			nearestTarget = currTarget;
-		}
-	}
-
-	return nearestTarget;
 }
 
 void TargetManager::SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue)

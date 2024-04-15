@@ -104,7 +104,7 @@ bool GamePointer::GetGameTypeIdPtr(HMODULE hModule)
 	intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
 	if (!weaponListBasePtr) return false;
 
-	gameTypeIdPtr = reinterpret_cast<int16_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::gameTypeId));
+	gameTypeIdPtr = reinterpret_cast<int16_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::GameTypeId));
 	if (!gameTypeIdPtr) return false;
 
 	return true;
@@ -118,7 +118,7 @@ bool GamePointer::GetGameStateIdPtr(HMODULE hModule)
 	intptr_t* cPredictionBasePtr{ GetPatternPointer(patternMatch) };
 	if (!cPredictionBasePtr) return false;
 
-	gameStateIdPtr = reinterpret_cast<int16_t*>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::gameStateId);
+	gameStateIdPtr = reinterpret_cast<int16_t*>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::GameStateId);
 	if (!gameStateIdPtr) return false;
 
 	return true;
@@ -132,25 +132,11 @@ bool GamePointer::GetViewAnglesPtr(HMODULE hModule)
 	intptr_t* inputSystemBasePtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
 	if (!inputSystemBasePtr) return false;
 
-	lp_Pitch_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(inputSystemBasePtr) + Offset::lp_Pitch));
+	lp_Pitch_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(inputSystemBasePtr) + Offset::Lp_Pitch));
 	if (!lp_Pitch_Input) return false;
 
-	lp_Yaw_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(inputSystemBasePtr) + Offset::lp_Yaw));
+	lp_Yaw_Input = reinterpret_cast<float*>((reinterpret_cast<intptr_t>(inputSystemBasePtr) + Offset::Lp_Yaw));
 	if (!lp_Yaw_Input) return false;
-
-	return true;
-}
-
-bool GamePointer::GetLocalPlayerPawnPtr(HMODULE hModule)
-{
-	intptr_t* patternMatch{ GetPatternMatch(Signature::CPrediction, hModule) };
-	if (!patternMatch) return false;
-
-	intptr_t* cPredictionBasePtr{ GetPatternPointer(patternMatch) };
-	if (!cPredictionBasePtr) return false;
-
-	localPlayerPawnPtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(cPredictionBasePtr) + Offset::lp_Pawn);
-	if (!localPlayerPawnPtr) return false;
 
 	return true;
 }
@@ -170,7 +156,7 @@ bool GamePointer::GetEntListBaseAddrPtr(HMODULE hModule)
 {
 	if (!CGameEntityPtr) return false;
 
-	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(CGameEntityPtr) + Offset::entityList);
+	entityListBasePtr = *reinterpret_cast<intptr_t**>(reinterpret_cast<intptr_t>(CGameEntityPtr) + Offset::EntityList);
 	if (!entityListBasePtr) return false;
 
 	return true;
@@ -221,8 +207,6 @@ bool GamePointer::InitGameTypeIdPtr()
 	if (!hClientMod) return false;
 
 	if (!GetGameTypeIdPtr(hClientMod)) return false;
-
-	if (!GetLocalPlayerPawnPtr(hClientMod)) return false;
 
 	return true;
 }
