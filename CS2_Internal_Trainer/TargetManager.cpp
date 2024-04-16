@@ -88,8 +88,9 @@ bool TargetManager::ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex)
 Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEnt)
 {
 	float oldCoef{ FLT_MAX };
+	Controller* nearestCTarget{ nullptr };
+
 	Pawn* lpPawn{ LocalPlayer::GetPawn() };
-	Entity* nearestTarget{ nullptr };
 
 	for (auto currCTarget : pTargetsEnt)
 	{
@@ -109,14 +110,11 @@ Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEn
 		if (oldCoef > currCoef)
 		{
 			oldCoef = currCoef;
-			nearestTarget = &currEnt;
+			nearestCTarget = currEnt.GetControllerBase();
 		}
 	}
 
-	if (!nearestTarget)
-		return nullptr;
-
-	return nearestTarget->GetControllerBase();
+	return nearestCTarget;
 }
 
 std::vector<Controller*> TargetManager::GetCTargetsEnts()
@@ -142,7 +140,7 @@ std::vector<Controller*> TargetManager::GetCTargetsEnts()
 
 Controller* TargetManager::GetCTarget()
 {
-	// Get targets
+	// Get controller targets
 	std::vector<Controller*> targetsEnts{ TargetManager::GetCTargetsEnts() };
 	if (targetsEnts.empty()) return nullptr;
 
@@ -186,7 +184,7 @@ Vector3 TargetManager::GetTargetAngle(Vector3 pTargetPos)
 	targetAngle.x = -asinf(deltaPos.z / magnitudePos) * radToDegree;
 	targetAngle.y = atan2f(deltaPos.y , deltaPos.x) * radToDegree;
 
-	targetAngle.x = NormalizePitch(targetAngle.x);
+	NormalizePitch(targetAngle.x);
 
 	return targetAngle;
 }

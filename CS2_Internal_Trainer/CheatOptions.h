@@ -4,7 +4,7 @@
 
 namespace CheatOptions
 {
-    inline Entity* entLocked{ nullptr };
+    inline Controller* cBaseLocked{ nullptr };
 
     inline bool bTargetLock{ false };
     inline bool bAimbot{ true };

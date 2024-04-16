@@ -7,5 +7,5 @@ namespace AimbotManager
 {
 	bool Start();
 	bool TargetLockShot();
-	bool TargetShot(Entity* pTarget);
+	bool TargetShot(Entity pTarget);
 };
