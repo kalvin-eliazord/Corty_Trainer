@@ -16,7 +16,7 @@ namespace TargetManager
 	bool IsGoodTarget(Entity* pEntity, int pEntIndex);
 
 	float GetMagnitude(const Vector3& pVec);
-	Vector3 GetTargetAngle(const Vector3& pTargetPos);
+	Vector3 GetTargetAngle(Vector3 pTargetPos);
 	Controller* GetNearestCTarget(std::vector<Controller*> pTargetsEnts);
 
 	float NormalizePitch(float pPitch);

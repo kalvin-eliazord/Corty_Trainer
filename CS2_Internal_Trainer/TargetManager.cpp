@@ -150,7 +150,7 @@ Controller* TargetManager::GetCTarget()
 	std::vector<Controller*> targetsEnts{ TargetManager::GetCTargetsEnts() };
 	if (targetsEnts.empty()) return nullptr;
 
-	if (targetsEnts.size() > 1)
+	if(targetsEnts.size() > 1)
 		return TargetManager::GetNearestCTarget(targetsEnts);
 
 	return targetsEnts[0];
@@ -179,22 +179,19 @@ float TargetManager::GetMagnitude(const Vector3& pVec)
 		(pVec.z * pVec.z));
 }
 
-Vector3 TargetManager::GetTargetAngle(const Vector3& pTargetPos)
+Vector3 TargetManager::GetTargetAngle(Vector3 pTargetPos)
 {
 	Vector3 targetAngle{ NULL };
 	Vector3 lpPos{ LocalPlayer::GetPawn()->body_pos };
 
-	const Vector3 deltaPos{ lpPos - pTargetPos };
+	const Vector3 deltaPos{ pTargetPos - lpPos  };
 
 	const float magnitudePos{ GetMagnitude(deltaPos) };
 
-	constexpr float radToDegree{ 57.2957795f };
+	constexpr float radToDegree{ 57.295776f };
 
-	targetAngle.x = atan2f(deltaPos.y , deltaPos.x) * radToDegree;
-	targetAngle.y = -atanf(deltaPos.z / magnitudePos) * radToDegree;
-
-	if (deltaPos.x >= 0.0f)
-		targetAngle.y += 180.0f;
+	targetAngle.x = -asinf(deltaPos.z / magnitudePos) * radToDegree;
+	targetAngle.y = atan2f(deltaPos.y , deltaPos.x) * radToDegree;
 
 	targetAngle.x = NormalizePitch(targetAngle.x);
 

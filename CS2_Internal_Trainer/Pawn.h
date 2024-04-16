@@ -12,10 +12,9 @@ struct Pawn
 	union
 	{
 		//              Type     Name    offset
-		DEFINE_MEMBER_N(intptr_t, gameSceneNode, 0x1E0);
 		DEFINE_MEMBER_N(int, health, 0x334);
 		DEFINE_MEMBER_N(int8_t, team_variable, 0x3CB);
-		DEFINE_MEMBER_N(Vector3, body_pos, 0xD60);
+		DEFINE_MEMBER_N(Vector3, body_pos, 0x12ec);
 		DEFINE_MEMBER_N(Vector3, angles, 0x1578);
 	};
 };
