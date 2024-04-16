@@ -16,7 +16,7 @@ bool AimbotManager::Start()
 	if (CheatOptions::bTargetLock && CheatOptions::entLocked)
 		TargetLockShot();
 	else
-		TargetShot(&cEntity); // Default target option
+		TargetShot(&cEntity);
 
 	return true;
 }
@@ -24,6 +24,7 @@ bool AimbotManager::Start()
 bool AimbotManager::TargetShot(Entity* pTarget)
 {
 	Vector3 targetAngle{ TargetManager::GetTargetAngle(pTarget->GetHeadPos()) };
+	if (!TargetManager::IsTargetInFov(targetAngle)) return false;
 
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
@@ -39,6 +40,7 @@ bool AimbotManager::TargetShot(Entity* pTarget)
 bool AimbotManager::TargetLockShot()
 {
 	Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(CheatOptions::entLocked->GetHeadPos()) };
+	if (!TargetManager::IsTargetInFov(targetLockedAngle)) return false;
 
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{

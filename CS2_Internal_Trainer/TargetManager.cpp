@@ -68,10 +68,6 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 	if (!ImSpottedAndEntitySpotted(pEntityPtr, pEntIndex))
 		return false;
 
-	Vector3 targetAngle{ GetTargetAngle(entityPawn->angles) };
-	if (!IsTargetInFov(targetAngle))
-		return false;
-
 	return true;
 }
 
@@ -156,20 +152,18 @@ Controller* TargetManager::GetCTarget()
 	return targetsEnts[0];
 }
 
-float TargetManager::NormalizePitch(float pPitch)
+void TargetManager::NormalizePitch(float& pPitch)
 {
 	pPitch = (pPitch < -89.0f) ? -89.0f : pPitch;
 
-	return (pPitch > 89.f) ? 89.0f : pPitch;
+	pPitch = (pPitch > 89.f) ? 89.0f : pPitch;
 }
 
-float TargetManager::NormalizeYaw(float pYaw)
+void TargetManager::NormalizeYaw(float& pYaw)
 {
 	while (pYaw > 180.f) pYaw -= 360.f;
 
 	while (pYaw < -180.f) pYaw += 360.f;
-
-	return pYaw;
 }
 
 float TargetManager::GetMagnitude(const Vector3& pVec)
@@ -178,7 +172,6 @@ float TargetManager::GetMagnitude(const Vector3& pVec)
 		(pVec.y * pVec.y) +
 		(pVec.z * pVec.z));
 }
-
 Vector3 TargetManager::GetTargetAngle(Vector3 pTargetPos)
 {
 	Vector3 targetAngle{ NULL };
@@ -207,7 +200,7 @@ void TargetManager::SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue)
 
 	Vector3 deltaAngle{ pTargetAngle - lp_Angle };
 
-	deltaAngle.y = NormalizeYaw(deltaAngle.y);
+	NormalizeYaw(deltaAngle.y);
 
 	if (*lp_Pitch != pTargetAngle.x)
 		*lp_Pitch += deltaAngle.x / pSmoothValue;

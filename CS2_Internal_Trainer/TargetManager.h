@@ -19,7 +19,7 @@ namespace TargetManager
 	Vector3 GetTargetAngle(Vector3 pTargetPos);
 	Controller* GetNearestCTarget(std::vector<Controller*> pTargetsEnts);
 
-	float NormalizePitch(float pPitch);
-	float NormalizeYaw(float pYaw);
+	void NormalizePitch(float& pPitch);
+	void NormalizeYaw(float& pYaw);
 	void SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue);
 };
