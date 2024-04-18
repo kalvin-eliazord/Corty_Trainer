@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <Psapi.h>
 #include <cstdint>
+#include <map>
+#include <string>
 
 namespace GamePointer
 {
@@ -17,20 +19,23 @@ namespace GamePointer
 	inline int16_t* gameTypeIdPtr{};
 	inline int16_t* gameStateIdPtr{};
 
-	bool InitializePointers();
+	inline std::map<std::string, intptr_t> pointersValue;
+
+	bool CheckPointers();
 	bool InitGameTypeIdPtr();
+	bool InitializePointers();
 	SIZE_T GetModuleSize(HMODULE pModule);
 
-	bool GetSteamOverlayPtr(HMODULE hModule);
+	void GetSteamOverlayPtr(HMODULE hModule);
 
-	bool GetCGameEntityPtr(HMODULE hModule);
-	bool GetEntListBaseAddrPtr(HMODULE hModule);
+	void GetCGameEntityPtr(HMODULE hModule);
+	void GetEntListBaseAddrPtr(HMODULE hModule);
 
-	bool GetGameTypeIdPtr(HMODULE hModule);
-	bool GetGameStateIdPtr(HMODULE hModule);
+	void GetGameTypeIdPtr(HMODULE hModule);
+	void GetGameStateIdPtr(HMODULE hModule);
 
-	bool GetViewAnglesPtr(HMODULE hModule);
-	bool GetLocalPlayerContPtr(HMODULE hModule);
+	void GetViewAnglesPtr(HMODULE hModule);
+	void GetLocalPlayerContPtr(HMODULE hModule);
 
 	intptr_t* GetPatternMatch(const char* pPattern, const HMODULE pModName);
 	intptr_t* SearchGoodModRegion(const char* pPattern, char* pSrc, size_t pSrcSize);
@@ -56,7 +61,7 @@ namespace GamePointer
 		static constexpr char SteamOverlay[]{ "\x48\x89\x6C\x24\x18\x48\x89\x74\x24\x20\x41\x56\x48\x83\xEC\x20\x41\x8B\xE8\x8B\xF2\x4C\x8B\xF1\x41\xF6\xC0\x01" };
 		static constexpr char InputSystem[]{ "\x48\x8B\?\?\?\?\?\x48\x8D\?\?\?\x45\x33\?\xE8\?\?\?\?\xF2\x0F" };
 		static constexpr char CPrediction[]{ "\x48\x8D\?\?\?\?\?\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x83\xEC\?\x8B\x0D" };
-		static constexpr char EntityList[]{ "\x48\x8B\x0D\?\?\?\?\x48\x89\x7C\x24\?\x8B\xFA\xC1\xEB" };
+		static constexpr char CGameEntity[]{ "\x48\x8B\x0D\?\?\?\?\x48\x89\x7C\x24\?\x8B\xFA\xC1\xEB" };
 		static constexpr char LocalPlayerController[]{ "\x48\x8B\x05\?\?\?\?\x48\x85\xC0\x74\?\x8B\x88" };
 		static constexpr char ViewAngles[]{ "\x48\x8B\x0D\?\?\?\?\x48\x8B\x01\x48\xFF\x60\x30" };
 		static constexpr char WeaponList[]{ "\x48\x89\x0D\?\?\?\?\x48\x83\xC4\x28\x48\xFF\?\?\?\?\?\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8B\?\?\?\?\?\x48\x8D\x0D\?\?\?\?\xE9\?\?\?\?\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8D\x0D\?\?\?\?\xE9\?\?\?\?\xCC\xCC\xCC\xCC\x48\x83\xEC\x28" };

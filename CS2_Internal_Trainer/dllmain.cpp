@@ -2,7 +2,7 @@
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
-	// Init game pointers used for the aimbot
+	// Initialize game pointers used by the cheat
 	GameChecker::bGamePointerInit = (GamePointer::InitializePointers() ? true : false);
 	
 	if (GameChecker::bGamePointerInit)
@@ -10,7 +10,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
 	if (!GameChecker::bGamePointerInit)
 	{
-		ConsoleManager::PrintErrorPtrInit();
+		ConsoleManager::PrintErrorPtrInit(GamePointer::pointersValue);
 
 		while (!GetAsyncKeyState(VK_DELETE) & 1) Sleep(5);
 	}
@@ -22,17 +22,14 @@ DWORD WINAPI MainThread(HMODULE hModule)
 	return 0;
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule,
-	DWORD  ul_reason_for_call,
-	LPVOID lpReserved
-)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
-	HANDLE hMainThread{ nullptr };
-
 	if (ul_reason_for_call == DLL_PROCESS_ATTACH)
-		hMainThread = CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)&MainThread, hModule, NULL, nullptr);
-	else if(ul_reason_for_call == DLL_THREAD_DETACH)
 	{
+		DisableThreadLibraryCalls(hModule);
+
+		HANDLE hMainThread{ CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)&MainThread, hModule, NULL, nullptr) };
+
 		if (hMainThread)
 			CloseHandle(hMainThread);
 	}

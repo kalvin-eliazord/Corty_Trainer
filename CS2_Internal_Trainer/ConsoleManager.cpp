@@ -30,7 +30,7 @@ void ConsoleManager::PrintMyName()
 }
 
 
-void ConsoleManager::PrintErrorPtrInit()
+void ConsoleManager::PrintErrorPtrInit(std::map <std::string, intptr_t > pPointers)
 {
 	if (!file)
 		InitConsole();
@@ -39,6 +39,12 @@ void ConsoleManager::PrintErrorPtrInit()
 	PrintMyName();
 
 	std::cout << " >> Pointer initialization error << \n";
+
+	for (auto pointer : pPointers)
+	{
+		std::cout << pointer.first << "= " << pointer.second << "\n";
+	}
+
 	std::cout << "-------------------------------------------------------------- \n";
 	std::cout << "--> press SUPPR to exit <-- \n";
 }
