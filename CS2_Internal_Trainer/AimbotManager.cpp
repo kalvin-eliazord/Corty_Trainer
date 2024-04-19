@@ -7,11 +7,11 @@ bool AimbotManager::Start()
 
 	Entity cEntity (cTarget);
 
-	if (!CheatOptions::bTargetLock)
-		CheatOptions::cBaseLocked = cEntity.GetControllerBase();
+	if (!CheatHKeys::bTargetLock)
+		CheatHKeys::cBaseLocked = cEntity.GetControllerBase();
 
 	// Target locking option
-	if (CheatOptions::bTargetLock && CheatOptions::cBaseLocked)
+	if (CheatHKeys::bTargetLock && CheatHKeys::cBaseLocked)
 		TargetLockShot();
 	else
 		TargetShot(cEntity);
@@ -21,13 +21,19 @@ bool AimbotManager::Start()
 
 bool AimbotManager::TargetShot(Entity pTarget)
 {
-	Vector3 targetAngle{ TargetManager::GetTargetAngle(pTarget.GetHeadPos()) };
+	Vector3 targetAngle{};
+
+	if (CheatHKeys::bHeadPos)
+		targetAngle = TargetManager::GetTargetAngle(pTarget.GetHeadPos());
+	else
+		targetAngle = TargetManager::GetTargetAngle(pTarget.GetPelvisPos());
+
 	if (!TargetManager::IsTargetInFov(targetAngle)) return false;
 
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
-		if (CheatOptions::smoothValue)
-			TargetManager::SetViewAngleSmooth(targetAngle, CheatOptions::smoothValue);
+		if (CheatHKeys::smoothValue)
+			TargetManager::SetViewAngleSmooth(targetAngle, CheatHKeys::smoothValue);
 		else
 			LocalPlayer::SetViewAngle(targetAngle);
 	}
@@ -37,23 +43,28 @@ bool AimbotManager::TargetShot(Entity pTarget)
 
 bool AimbotManager::TargetLockShot()
 {
-	Entity cTargetLocked (CheatOptions::cBaseLocked);
+	Entity targetLocked (CheatHKeys::cBaseLocked);
 
-	Vector3 targetLockedAngle{ TargetManager::GetTargetAngle(cTargetLocked.GetHeadPos()) };
+	Vector3 targetLockedAngle{};
+
+	if (CheatHKeys::bHeadPos)
+		targetLockedAngle = TargetManager::GetTargetAngle(targetLocked.GetHeadPos());
+	else
+		targetLockedAngle = TargetManager::GetTargetAngle(targetLocked.GetPelvisPos());
 
 	if (!TargetManager::IsTargetInFov(targetLockedAngle)) return false;
 
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
-		if (CheatOptions::smoothValue)
-			TargetManager::SetViewAngleSmooth(targetLockedAngle, CheatOptions::smoothValue);
+		if (CheatHKeys::smoothValue)
+			TargetManager::SetViewAngleSmooth(targetLockedAngle, CheatHKeys::smoothValue);
 		else
 			LocalPlayer::SetViewAngle(targetLockedAngle);
 	}
 
 	// Locking at target until he die
-	if (cTargetLocked.GetPawnBase()->health < 1)
-		CheatOptions::cBaseLocked = nullptr;
+	if (targetLocked.GetPawnBase()->health < 1)
+		CheatHKeys::cBaseLocked = nullptr;
 
 	return true;
 }

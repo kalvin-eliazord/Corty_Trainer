@@ -1,5 +1,5 @@
 #pragma once
-#include "CheatOptions.h"
+#include "CheatHKeys.h"
 #include <iostream>
 #include <vector>
 
@@ -15,6 +15,7 @@ namespace ConsoleManager
     void InitConsole();
     void PrintMyName();
     void DestroyConsole();
+    std::string GetTargetedPart();
     void PrintCheatOptions();
     void PrintErrorPtrInit(std::map <std::string, intptr_t > pAddresses);
 };

@@ -41,25 +41,29 @@ void ConsoleManager::PrintErrorPtrInit(std::map <std::string, intptr_t > pPointe
 	std::cout << " >> Pointer initialization error << \n";
 
 	for (auto pointer : pPointers)
-	{
 		std::cout << pointer.first << "= " << pointer.second << "\n";
-	}
 
 	std::cout << "-------------------------------------------------------------- \n";
 	std::cout << "--> press SUPPR to exit <-- \n";
+}
+
+std::string ConsoleManager::GetTargetedPart()
+{
+	 return CheatHKeys::bHeadPos ? "HEAD" : "PELVIS";
 }
 
 void ConsoleManager::PrintCheatOptions()
 {
 	system("cls");
 	PrintMyName();
-	std::cout << "--> [[ RIGHT CLICK TO USE THE AIMBOT! ]] <-- \n";
-	std::cout << "AIMBOT: press F9 " << std::boolalpha << "-->[[" << CheatOptions::bAimbot << "]] \n";
-	std::cout << "ESP   : press F8 " << std::boolalpha << "-->[[" << CheatOptions::bESP << "]] \n";
+	std::cout << "--> [[ RIGHT CLICK to use the aimbot ]]  <-- \n";
+	std::cout << "F1 to SWITCH targeted part --> [[" << GetTargetedPart() << "]] \n";
+	std::cout << "AIMBOT: press F9 " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
+	std::cout << "ESP   : press F8 " << std::boolalpha << "-->[[" << CheatHKeys::bESP << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
-	std::cout << "SMOOTH VALUE  : press F3 (-) or press F4 (+) " << "-->[[" << CheatOptions::smoothValue << "]] \n";
-	std::cout << "FOV           : press F5 (-) or press F6 (+) " << "-->[[" << CheatOptions::fovValue << "]] \n";
-	std::cout << "TARGET LOCKING: press F2 " << std::boolalpha << "                    -->[[" << CheatOptions::bTargetLock << "]] \n";
+	std::cout << "SMOOTH VALUE  : press F3 (-) or press F4 (+) " << "-->[[" << CheatHKeys::smoothValue << "]] \n";
+	std::cout << "FOV           : press F5 (-) or press F6 (+) " << "-->[[" << CheatHKeys::fovValue << "]] \n";
+	std::cout << "TARGET LOCKING: press F2 " << std::boolalpha << "                    -->[[" << CheatHKeys::bTargetLock << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
 	std::cout << "--> [[ press SUPPR to exit] ] <-- \n";
 }

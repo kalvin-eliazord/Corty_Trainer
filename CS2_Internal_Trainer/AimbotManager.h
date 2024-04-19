@@ -1,7 +1,7 @@
 #pragma once
 #include "LocalPlayer.h"
 #include "TargetManager.h"
-#include "CheatOptions.h"
+#include "CheatHKeys.h"
 
 namespace AimbotManager
 {

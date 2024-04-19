@@ -17,6 +17,7 @@ public:
 	Pawn* GetPawnBase();
 	bool GetIsPawnInit();
 	Vector3 GetHeadPos();
+	Vector3 GetPelvisPos();
 	Entity(Controller* pSrc);
 	intptr_t* GetBoneArrayBase();
 	std::bitset<64> GetSpottedId();

@@ -61,12 +61,22 @@ intptr_t* Entity::GetBoneArrayBase()
 
 Vector3 Entity::GetHeadPos()
 {
-	Vector3 headBonePos;
 	BoneJoint* boneJoinBase{ reinterpret_cast<BoneJoint*>(GetBoneArrayBase()) };
 
 	BoneJoint* headBoneJoint{ reinterpret_cast<BoneJoint*>(reinterpret_cast<intptr_t>(boneJoinBase) + (6 * sizeof(BoneJoint))) };
-	headBonePos = headBoneJoint->pos;
+
+	Vector3 headBonePos{ headBoneJoint->pos };
+
 	headBonePos.z -= 1.f;
 
 	return headBonePos;
+}
+
+Vector3 Entity::GetPelvisPos()
+{
+	BoneJoint* boneJoinBase{ reinterpret_cast<BoneJoint*>(GetBoneArrayBase()) };
+
+	Vector3 pelvisBonePos{ boneJoinBase->pos };
+
+	return pelvisBonePos;
 }
