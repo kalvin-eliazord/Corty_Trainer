@@ -12,14 +12,13 @@ bool CheatHKeys::IsOptionChanged()
 		CheatHKeys::bTargetLock = !CheatHKeys::bTargetLock;
 		return true;
 	}
-	else if (GetAsyncKeyState(VK_F3) & 1)
+	else if (GetAsyncKeyState(VK_F3) & 1 &&
+		CheatHKeys::smoothValue > 0)
 	{
 		--CheatHKeys::smoothValue;
 		return true;
-
 	}
-	else if (GetAsyncKeyState(VK_F4) & 1 &&
-		CheatHKeys::smoothValue > 0)
+	else if (GetAsyncKeyState(VK_F4))
 	{
 		++CheatHKeys::smoothValue;
 		return true;
