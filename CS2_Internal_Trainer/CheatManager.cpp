@@ -4,16 +4,16 @@ MyD3d11 myD3d11;
 
 HRESULT __stdcall hkPresent(IDXGISwapChain* pChain, UINT SyncInterval, UINT Flags)
 {
-	if (CheatOptions::bESP)
+	if (CheatHKeys::bESP)
 	{
-		if (!myD3d11.pDevice || myD3d11.pSwapchain != pChain)
+		if (!myD3d11.mDevice || myD3d11.mSwapChain != pChain)
 			myD3d11.InitD3DDraw(pChain);
 
 		//enable this to test or debug viewport
 		myD3d11.TestRender();
 	}
 
-	return myD3d11.oPresentGateway(pChain, SyncInterval, Flags);
+	return myD3d11.tPresentGateway(pChain, SyncInterval, Flags);
 }
 
 bool CheatManager::Start()
@@ -28,13 +28,13 @@ bool CheatManager::Start()
 		reinterpret_cast<intptr_t*>(hkPresent),
 		28);
 
-	myD3d11.oPresentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
+	myD3d11.tPresentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
 
 	Sleep(1500); // Prevent crash when game values aren't loaded yet
 
 	while (!GetAsyncKeyState(VK_DELETE) & 1)
 	{
-		if (CheatOptions::IsOptionChanged())
+		if (CheatHKeys::IsOptionChanged())
 			ConsoleManager::PrintCheatOptions();
 
 		// IN game
@@ -42,7 +42,7 @@ bool CheatManager::Start()
 		{
 			if (!GamePointer::InitGameTypeIdPtr()) return false;
 
-			if (CheatOptions::bAimbot) AimbotManager::Start();
+			if (CheatHKeys::bAimbot) AimbotManager::Start();
 		}
 
 		Sleep(5);

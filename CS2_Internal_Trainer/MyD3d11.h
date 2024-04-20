@@ -26,31 +26,30 @@ struct Vertex
 class MyD3d11
 {
 public:
-	ID3D11Device* pDevice = nullptr;
-	IDXGISwapChain* pSwapchain = nullptr; // ->Present()
-	ID3D11DeviceContext* pContext = nullptr;
+	ID3D11Device* mDevice{ nullptr };
+	ID3D11DeviceContext* mContext{ nullptr };
+	IDXGISwapChain* mSwapChain{ nullptr}; // ->Present()
 
-	ID3D11RenderTargetView* pRenderTargetView = nullptr;
+	ID3D11RenderTargetView* mRenderTargetView { nullptr};
+	ID3D11InputLayout* mVertexLayout { nullptr};
 
-	ID3D11VertexShader* pVertexShader = nullptr;
-	ID3D11InputLayout* pVertexLayout = nullptr;
+	ID3D11PixelShader* mPixelShader { nullptr};
+	ID3D11VertexShader* mVertexShader{ nullptr };
 
-	ID3D11PixelShader* pPixelShader = nullptr;
+	ID3D11Buffer* mVertexBuffer { nullptr};
+	ID3D11Buffer* mIndexBuffer { nullptr};
+	ID3D11Buffer* mConstantBuffer { nullptr};
 
-	ID3D11Buffer* pVertexBuffer = nullptr;
-	ID3D11Buffer* pIndexBuffer = nullptr;
-	ID3D11Buffer* pConstantBuffer = nullptr;
+	HWND mHwnd;
+	RECT mHwndRect;
 
-	HWND hWnd;
-	RECT windowRect;
-
-	D3D11_VIEWPORT pViewports[D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE]{ 0 };
+	D3D11_VIEWPORT mViewports[D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE]{ 0 };
 	D3D11_VIEWPORT myViewport;
 	DirectX::XMMATRIX mOrtho;
 
 	using TPresent = HRESULT(__stdcall*)(IDXGISwapChain* pThis, UINT SyncInterval, UINT Flags);
 	void* oPresent;					
-	TPresent oPresentGateway;
+	TPresent tPresentGateway;
 
 	bool Set_oPresent();
 

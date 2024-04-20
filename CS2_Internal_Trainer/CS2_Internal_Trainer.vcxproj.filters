@@ -35,14 +35,14 @@
     <Filter Include="D3d11">
       <UniqueIdentifier>{70e8c3e6-db57-4755-a464-88e101053d45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CheatOptions">
-      <UniqueIdentifier>{78cb799b-a320-4ee2-9e64-0bec0066bdd9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CEntity">
       <UniqueIdentifier>{3dc26f74-e32f-4e67-b66c-124572380352}</UniqueIdentifier>
     </Filter>
     <Filter Include="MyVector">
       <UniqueIdentifier>{60216af8-acfd-458c-b532-cd64cd5f21ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CheatHKeys">
+      <UniqueIdentifier>{78cb799b-a320-4ee2-9e64-0bec0066bdd9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,8 +55,8 @@
     <ClInclude Include="Vector3.h">
       <Filter>MyVector</Filter>
     </ClInclude>
-    <ClInclude Include="CheatOptions.h">
-      <Filter>CheatOptions</Filter>
+    <ClInclude Include="CheatHKeys.h">
+      <Filter>CheatHKeys</Filter>
     </ClInclude>
     <ClInclude Include="CheatManager.h">
       <Filter>CheatManager</Filter>
@@ -117,8 +117,8 @@
     <ClCompile Include="LocalPlayer.cpp">
       <Filter>LocalPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="CheatOptions.cpp">
-      <Filter>CheatOptions</Filter>
+    <ClCompile Include="CheatHKeys.cpp">
+      <Filter>CheatHKeys</Filter>
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>MyVector</Filter>

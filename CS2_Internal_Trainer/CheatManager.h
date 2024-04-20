@@ -1,6 +1,6 @@
 #pragma once
 #include "AimbotManager.h"
-#include "CheatOptions.h"
+#include "CheatHKeys.h"
 #include "ConsoleManager.h"
 #include "GameChecker.h"
 #include "GamePointer.h"

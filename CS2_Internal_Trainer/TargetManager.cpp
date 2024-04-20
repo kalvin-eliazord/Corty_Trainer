@@ -12,11 +12,11 @@ bool TargetManager::IsTargetInFov(Vector3& pTargetAngle)
 		deltaAngle = localPlayerAngle - pTargetAngle;
 
 	// Checking if target is in FOV
-	if ((deltaAngle.x) < CheatOptions::fovValue or
-		-deltaAngle.x > -CheatOptions::fovValue)
+	if ((deltaAngle.x) < CheatHKeys::fovValue or
+		-deltaAngle.x > -CheatHKeys::fovValue)
 	{
-		if ((deltaAngle.y) < CheatOptions::fovValue or
-			-deltaAngle.y > -CheatOptions::fovValue)
+		if ((deltaAngle.y) < CheatHKeys::fovValue or
+			-deltaAngle.y > -CheatHKeys::fovValue)
 		{
 			return true;
 		}

@@ -1,7 +1,7 @@
 #pragma once
 #include "LocalPlayer.h"
 #include "Entity.h"
-#include "CheatOptions.h"
+#include "CheatHKeys.h"
 #include <vector>
 #include <bitset>
 
