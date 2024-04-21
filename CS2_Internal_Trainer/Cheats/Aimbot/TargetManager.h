@@ -12,14 +12,14 @@ namespace TargetManager
 
 	bool IsTargetInFov(Vector3& pTargetAngle);
 	bool IsGameDeathMatch(int16_t* pGameTypeId);
-	bool ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex);
 	bool IsGoodTarget(Entity* pEntity, int pEntIndex);
+	bool ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex);
 
 	float GetMagnitude(const Vector3& pVec);
 	Vector3 GetTargetAngle(Vector3 pTargetPos);
 	Controller* GetNearestCTarget(std::vector<Controller*> pTargetsEnts);
 
-	void NormalizePitch(float& pPitch);
 	void NormalizeYaw(float& pYaw);
+	void NormalizePitch(float& pPitch);
 	void SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue);
 };

@@ -177,11 +177,11 @@ Vector3 TargetManager::GetTargetAngle(Vector3 pTargetPos)
 
 	const Vector3 deltaPos{ pTargetPos - lpPos  };
 
-	const float magnitudePos{ GetMagnitude(deltaPos) };
+	const float distPos{ GetMagnitude(deltaPos) };
 
 	constexpr float radToDegree{ 57.295776f };
 
-	targetAngle.x = -asinf(deltaPos.z / magnitudePos) * radToDegree;
+	targetAngle.x = -asinf(deltaPos.z / distPos) * radToDegree;
 	targetAngle.y = atan2f(deltaPos.y , deltaPos.x) * radToDegree;
 
 	NormalizePitch(targetAngle.x);
