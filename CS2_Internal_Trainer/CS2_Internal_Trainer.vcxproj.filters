@@ -8,138 +8,150 @@
     <Filter Include="CheatManager">
       <UniqueIdentifier>{eddc6c9d-e584-487f-9b5d-c3210eeb84d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConsoleManager">
-      <UniqueIdentifier>{bb4a1223-a56d-473b-afca-f00dec9d0d94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePointer">
-      <UniqueIdentifier>{344327c1-58f2-4c88-a135-f35006b7d3d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameChecker">
-      <UniqueIdentifier>{1e0f911a-87f3-44c6-b0fe-f028e37639c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TargetManager">
-      <UniqueIdentifier>{ce9e06c8-7b88-4f9a-a607-a7ab92281124}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="LocalPlayer">
-      <UniqueIdentifier>{9941c7ff-1164-46f5-ac67-ceeeabba9abd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Aimbot">
       <UniqueIdentifier>{ff6bb25b-7531-46ac-9dcf-d6fd8e56ff69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HWindow">
-      <UniqueIdentifier>{15cafc39-e559-40e8-847b-0c2325d8b724}</UniqueIdentifier>
     </Filter>
     <Filter Include="Hook">
       <UniqueIdentifier>{985bc006-a3bb-452f-bd8f-615a30eff199}</UniqueIdentifier>
     </Filter>
-    <Filter Include="D3d11">
-      <UniqueIdentifier>{70e8c3e6-db57-4755-a464-88e101053d45}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CEntity">
       <UniqueIdentifier>{3dc26f74-e32f-4e67-b66c-124572380352}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MyVector">
+    <Filter Include="GameUtils">
+      <UniqueIdentifier>{344327c1-58f2-4c88-a135-f35006b7d3d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logs">
+      <UniqueIdentifier>{bb4a1223-a56d-473b-afca-f00dec9d0d94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEntity\MyVector">
       <UniqueIdentifier>{60216af8-acfd-458c-b532-cd64cd5f21ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CheatHKeys">
+    <Filter Include="Aimbot\TargetManager">
+      <UniqueIdentifier>{9c4d2419-b3b5-40b7-a752-9a56c4ec284b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUtils\GamePointer">
+      <UniqueIdentifier>{ef6194eb-b835-44b6-836b-bc17db24061f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEntity\LocalPlayer">
+      <UniqueIdentifier>{9941c7ff-1164-46f5-ac67-ceeeabba9abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEntity\Bone">
+      <UniqueIdentifier>{b6cc7f44-d3bf-4ef6-bd0d-49db00a98cc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEntity\Pawn">
+      <UniqueIdentifier>{b832fa50-cc97-4d80-bc9a-bb2cad9acc8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEntity\Controller">
+      <UniqueIdentifier>{370f2403-0780-4997-832d-aa16fce10b6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logs\CheatHKeys">
       <UniqueIdentifier>{78cb799b-a320-4ee2-9e64-0bec0066bdd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ESP">
+      <UniqueIdentifier>{a7f72354-e5b1-4258-922c-e67298d1e17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ESP\D3d11">
+      <UniqueIdentifier>{70e8c3e6-db57-4755-a464-88e101053d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ESP\D3d11\HWindow">
+      <UniqueIdentifier>{15cafc39-e559-40e8-847b-0c2325d8b724}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GamePointer.h">
-      <Filter>GamePointer</Filter>
+    <ClInclude Include="CEntity\Vector3.h">
+      <Filter>CEntity\MyVector</Filter>
     </ClInclude>
-    <ClInclude Include="TargetManager.h">
-      <Filter>TargetManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>MyVector</Filter>
-    </ClInclude>
-    <ClInclude Include="CheatHKeys.h">
-      <Filter>CheatHKeys</Filter>
-    </ClInclude>
-    <ClInclude Include="CheatManager.h">
-      <Filter>CheatManager</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleManager.h">
-      <Filter>ConsoleManager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameChecker.h">
-      <Filter>GameChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="LocalPlayer.h">
-      <Filter>LocalPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="AimbotManager.h">
-      <Filter>Aimbot</Filter>
-    </ClInclude>
-    <ClInclude Include="HWindow.h">
-      <Filter>HWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="MyD3d11.h">
-      <Filter>D3d11</Filter>
-    </ClInclude>
-    <ClInclude Include="TrampHook.h">
+    <ClInclude Include="Hook\TrampHook.h">
       <Filter>Hook</Filter>
     </ClInclude>
-    <ClInclude Include="MyShaders.h">
-      <Filter>D3d11</Filter>
+    <ClInclude Include="GameUtils\GameChecker.h">
+      <Filter>GameUtils</Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h">
+    <ClInclude Include="Logs\ConsoleManager.h">
+      <Filter>Logs</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUtils\GamePointer.h">
+      <Filter>GameUtils\GamePointer</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity\LocalPlayer.h">
+      <Filter>CEntity\LocalPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity\Entity.h">
       <Filter>CEntity</Filter>
     </ClInclude>
-    <ClInclude Include="Pawn.h">
-      <Filter>CEntity</Filter>
+    <ClInclude Include="CEntity\BoneJoint.h">
+      <Filter>CEntity\Bone</Filter>
     </ClInclude>
-    <ClInclude Include="BoneJoint.h">
-      <Filter>CEntity</Filter>
+    <ClInclude Include="CEntity\Pawn.h">
+      <Filter>CEntity\Pawn</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity\Controller.h">
+      <Filter>CEntity\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Logs\CheatHKeys.h">
+      <Filter>Logs\CheatHKeys</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\Aimbot\AimbotManager.h">
+      <Filter>Aimbot</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\ESP\D3D11\MyShaders.h">
+      <Filter>ESP\D3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\ESP\D3D11\MyD3d11.h">
+      <Filter>ESP\D3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\ESP\D3D11\MyD3d11_VMT.h">
+      <Filter>ESP\D3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\ESP\D3D11\HWindow.h">
+      <Filter>ESP\D3d11\HWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\CheatManager.h">
+      <Filter>CheatManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\Aimbot\TargetManager.h">
+      <Filter>Aimbot\TargetManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.h">
-      <Filter>CEntity</Filter>
+    <ClCompile Include="Logs\ConsoleManager.cpp">
+      <Filter>Logs</Filter>
     </ClCompile>
-    <ClCompile Include="TargetManager.cpp">
-      <Filter>TargetManager</Filter>
+    <ClCompile Include="CEntity\Vector3.cpp">
+      <Filter>CEntity\MyVector</Filter>
     </ClCompile>
-    <ClCompile Include="CheatManager.cpp">
-      <Filter>CheatManager</Filter>
+    <ClCompile Include="GameUtils\GamePointer.cpp">
+      <Filter>GameUtils\GamePointer</Filter>
     </ClCompile>
-    <ClCompile Include="GamePointer.cpp">
-      <Filter>GamePointer</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleManager.cpp">
-      <Filter>ConsoleManager</Filter>
-    </ClCompile>
-    <ClCompile Include="LocalPlayer.cpp">
-      <Filter>LocalPlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="CheatHKeys.cpp">
-      <Filter>CheatHKeys</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector3.cpp">
-      <Filter>MyVector</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>CEntity</Filter>
-    </ClCompile>
-    <ClCompile Include="AimbotManager.cpp">
-      <Filter>Aimbot</Filter>
-    </ClCompile>
-    <ClCompile Include="HWindow.cpp">
-      <Filter>HWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="MyD3d11.cpp">
-      <Filter>D3d11</Filter>
-    </ClCompile>
-    <ClCompile Include="TrampHook.cpp">
+    <ClCompile Include="Hook\TrampHook.cpp">
       <Filter>Hook</Filter>
     </ClCompile>
-    <ClCompile Include="MyD3d11_VMT.h">
-      <Filter>D3d11</Filter>
+    <ClCompile Include="CEntity\LocalPlayer.cpp">
+      <Filter>CEntity\LocalPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntity\Entity.cpp">
+      <Filter>CEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Logs\CheatHKeys.cpp">
+      <Filter>Logs\CheatHKeys</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheats\ESP\D3D11\HWindow.cpp">
+      <Filter>ESP\D3d11\HWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheats\ESP\D3D11\MyD3d11.cpp">
+      <Filter>ESP\D3d11</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheats\CheatManager.cpp">
+      <Filter>CheatManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheats\Aimbot\TargetManager.cpp">
+      <Filter>Aimbot\TargetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheats\Aimbot\AimbotManager.cpp">
+      <Filter>Aimbot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

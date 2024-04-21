@@ -1,4 +1,8 @@
+#include "Windows.h"
 #include "CheatManager.h"
+#include "GamePointer.h"
+#include "ConsoleManager.h"
+#include "GameChecker.h"
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {

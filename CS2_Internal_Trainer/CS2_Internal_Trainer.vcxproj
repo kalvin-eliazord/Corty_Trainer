@@ -72,8 +72,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\GameUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)CEntity;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\GameUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)CEntity;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -151,39 +154,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AimbotManager.h" />
-    <ClInclude Include="BoneJoint.h" />
-    <ClInclude Include="CheatHKeys.h" />
-    <ClInclude Include="CheatManager.h" />
-    <ClInclude Include="ConsoleManager.h" />
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="MyD3d11.h" />
-    <ClInclude Include="GameChecker.h" />
-    <ClInclude Include="MyShaders.h" />
-    <ClInclude Include="TrampHook.h" />
-    <ClInclude Include="HWindow.h" />
-    <ClInclude Include="Pawn.h" />
-    <ClInclude Include="TargetManager.h" />
-    <ClInclude Include="LocalPlayer.h" />
-    <ClInclude Include="GamePointer.h" />
-    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="CEntity\BoneJoint.h" />
+    <ClInclude Include="CEntity\Controller.h" />
+    <ClInclude Include="CEntity\Entity.h" />
+    <ClInclude Include="CEntity\LocalPlayer.h" />
+    <ClInclude Include="CEntity\Pawn.h" />
+    <ClInclude Include="CEntity\Vector3.h" />
+    <ClInclude Include="Cheats\Aimbot\AimbotManager.h" />
+    <ClInclude Include="Cheats\Aimbot\TargetManager.h" />
+    <ClInclude Include="Cheats\CheatManager.h" />
+    <ClInclude Include="Cheats\ESP\D3D11\HWindow.h" />
+    <ClInclude Include="Cheats\ESP\D3D11\MyD3d11.h" />
+    <ClInclude Include="Cheats\ESP\D3D11\MyD3d11_VMT.h" />
+    <ClInclude Include="Cheats\ESP\D3D11\MyShaders.h" />
+    <ClInclude Include="GameUtils\GameChecker.h" />
+    <ClInclude Include="GameUtils\GamePointer.h" />
+    <ClInclude Include="Hook\TrampHook.h" />
+    <ClInclude Include="Logs\CheatHKeys.h" />
+    <ClInclude Include="Logs\ConsoleManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AimbotManager.cpp" />
-    <ClCompile Include="CheatHKeys.cpp" />
-    <ClCompile Include="CheatManager.cpp" />
-    <ClCompile Include="ConsoleManager.cpp" />
-    <ClCompile Include="MyD3d11.cpp" />
-    <ClCompile Include="MyD3d11_VMT.h" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="GamePointer.cpp" />
-    <ClCompile Include="TrampHook.cpp" />
-    <ClCompile Include="HWindow.cpp" />
-    <ClCompile Include="TargetManager.cpp" />
+    <ClCompile Include="CEntity\Entity.cpp" />
+    <ClCompile Include="CEntity\LocalPlayer.cpp" />
+    <ClCompile Include="CEntity\Vector3.cpp" />
+    <ClCompile Include="Cheats\Aimbot\AimbotManager.cpp" />
+    <ClCompile Include="Cheats\Aimbot\TargetManager.cpp" />
+    <ClCompile Include="Cheats\CheatManager.cpp" />
+    <ClCompile Include="Cheats\ESP\D3D11\HWindow.cpp" />
+    <ClCompile Include="Cheats\ESP\D3D11\MyD3d11.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="Entity.h" />
-    <ClCompile Include="LocalPlayer.cpp" />
-    <ClCompile Include="Vector3.cpp" />
+    <ClCompile Include="GameUtils\GamePointer.cpp" />
+    <ClCompile Include="Hook\TrampHook.cpp" />
+    <ClCompile Include="Logs\CheatHKeys.cpp" />
+    <ClCompile Include="Logs\ConsoleManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
