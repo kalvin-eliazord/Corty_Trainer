@@ -167,11 +167,13 @@
     <ClInclude Include="Cheats\ESP\D3D11\MyD3d11.h" />
     <ClInclude Include="Cheats\ESP\D3D11\MyD3d11_VMT.h" />
     <ClInclude Include="Cheats\ESP\D3D11\MyShaders.h" />
-    <ClInclude Include="GameUtils\GameChecker.h" />
-    <ClInclude Include="GameUtils\GamePointer.h" />
+    <ClInclude Include="GameUtils\GameState.h" />
+    <ClInclude Include="GameUtils\GamePointers.h" />
     <ClInclude Include="Hook\TrampHook.h" />
     <ClInclude Include="Logs\CheatHKeys.h" />
     <ClInclude Include="Logs\ConsoleManager.h" />
+    <ClInclude Include="GameUtils\Offset.h" />
+    <ClInclude Include="GameUtils\Pointer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CEntity\Entity.cpp" />
@@ -183,7 +185,7 @@
     <ClCompile Include="Cheats\ESP\D3D11\HWindow.cpp" />
     <ClCompile Include="Cheats\ESP\D3D11\MyD3d11.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="GameUtils\GamePointer.cpp" />
+    <ClCompile Include="GameUtils\GamePointers.cpp" />
     <ClCompile Include="Hook\TrampHook.cpp" />
     <ClCompile Include="Logs\CheatHKeys.cpp" />
     <ClCompile Include="Logs\ConsoleManager.cpp" />

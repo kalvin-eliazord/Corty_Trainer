@@ -1,20 +1,26 @@
 #include "Windows.h"
 #include "CheatManager.h"
-#include "GamePointer.h"
+#include "GamePointers.h"
 #include "ConsoleManager.h"
-#include "GameChecker.h"
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
-	// Initialize game pointers used by the cheat
-	GameChecker::bGamePointerInit = (GamePointer::InitializePointers() ? true : false);
-	
-	if (GameChecker::bGamePointerInit)
-		GameChecker::bGamePointerInit = CheatManager::Start();
+	GamePointers gamePointers;
 
-	if (!GameChecker::bGamePointerInit)
+	// Initialize game pointers used by the cheat
+	gamePointers.InitializePointers();
+
+	if (gamePointers.Get_bPointersInit())
 	{
-		ConsoleManager::PrintErrorPtrInit(GamePointer::pointersValue);
+		const bool bInGamePtrInit{ CheatManager::Start() };
+
+		gamePointers.Set_bPointersInit(bInGamePtrInit);
+	}
+
+	// Pointer initialization error
+	if (!gamePointers.Get_bPointersInit())
+	{
+		ConsoleManager::PrintErrorPtrInit(gamePointers.GetPointersState());
 
 		while (!GetAsyncKeyState(VK_DELETE) & 1) Sleep(5);
 	}

@@ -1,5 +1,7 @@
 #pragma once
-#include "GamePointer.h"
+#include "BoneJoint.h"
+#include "Pointer.h"
+#include "Offset.h"
 #include "Controller.h"
 #include "Pawn.h"
 #include "Vector3.h"

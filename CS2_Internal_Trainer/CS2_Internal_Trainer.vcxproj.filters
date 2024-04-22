@@ -53,7 +53,7 @@
     <Filter Include="ESP\D3d11">
       <UniqueIdentifier>{70e8c3e6-db57-4755-a464-88e101053d45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ESP\D3d11\HWindow">
+    <Filter Include="ESP\HWindow">
       <UniqueIdentifier>{15cafc39-e559-40e8-847b-0c2325d8b724}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -64,13 +64,13 @@
     <ClInclude Include="Hook\TrampHook.h">
       <Filter>Hook</Filter>
     </ClInclude>
-    <ClInclude Include="GameUtils\GameChecker.h">
+    <ClInclude Include="GameUtils\GameState.h">
       <Filter>GameUtils</Filter>
     </ClInclude>
     <ClInclude Include="Logs\ConsoleManager.h">
       <Filter>Logs</Filter>
     </ClInclude>
-    <ClInclude Include="GameUtils\GamePointer.h">
+    <ClInclude Include="GameUtils\GamePointers.h">
       <Filter>GameUtils\GamePointer</Filter>
     </ClInclude>
     <ClInclude Include="CEntity\LocalPlayer.h">
@@ -104,13 +104,19 @@
       <Filter>ESP\D3d11</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\ESP\D3D11\HWindow.h">
-      <Filter>ESP\D3d11\HWindow</Filter>
+      <Filter>ESP\HWindow</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\CheatManager.h">
       <Filter>CheatManager</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\Aimbot\TargetManager.h">
       <Filter>Aimbot\TargetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUtils\Offset.h">
+      <Filter>GameUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUtils\Pointer.h">
+      <Filter>GameUtils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +129,7 @@
     <ClCompile Include="CEntity\Vector3.cpp">
       <Filter>CEntity\MyVector</Filter>
     </ClCompile>
-    <ClCompile Include="GameUtils\GamePointer.cpp">
+    <ClCompile Include="GameUtils\GamePointers.cpp">
       <Filter>GameUtils\GamePointer</Filter>
     </ClCompile>
     <ClCompile Include="Hook\TrampHook.cpp">
@@ -139,7 +145,7 @@
       <Filter>Logs\CheatHKeys</Filter>
     </ClCompile>
     <ClCompile Include="Cheats\ESP\D3D11\HWindow.cpp">
-      <Filter>ESP\D3d11\HWindow</Filter>
+      <Filter>ESP\HWindow</Filter>
     </ClCompile>
     <ClCompile Include="Cheats\ESP\D3D11\MyD3d11.cpp">
       <Filter>ESP\D3d11</Filter>

@@ -21,10 +21,10 @@ bool CheatManager::Start()
 	ConsoleManager::InitConsole();
 	ConsoleManager::PrintCheatOptions();
 
-	if (!gMyD3d11.Set_oPresent()) return false;
+	//if (!gMyD3d11.Set_oPresent()) return false;
 
 	TrampHook tHook(
-		GamePointer::SteamOverlayPtr, //gMyD3d11.oPresent
+		Pointer::steamOverlay, //gMyD3d11.oPresent
 		reinterpret_cast<intptr_t*>(hkPresent),
 		28);
 
@@ -32,15 +32,17 @@ bool CheatManager::Start()
 
 	Sleep(1500); // Prevent crash when game values aren't loaded yet
 
+	GamePointers gamePointers{};
+
 	while (!GetAsyncKeyState(VK_DELETE) & 1)
 	{
 		if (CheatHKeys::IsOptionChanged())
 			ConsoleManager::PrintCheatOptions();
 
 		// IN game
-		if (*GamePointer::gameStateIdPtr == GameChecker::inGameId)
+		if (*Pointer::gameStateId == GameState::inGameId)
 		{
-			if (!GamePointer::InitGameTypeIdPtr()) return false;
+			if (!gamePointers.InitGameTypeIdPtr()) return false;
 
 			if (CheatHKeys::bAimbot) AimbotManager::Start();
 		}

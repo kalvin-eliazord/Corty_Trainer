@@ -1,5 +1,5 @@
 #pragma once
-#include "GamePointer.h"
+#include "Pointer.h"
 #include "Entity.h"
 #include "Pawn.h"
 #include "Controller.h"

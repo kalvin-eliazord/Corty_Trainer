@@ -1,18 +1,15 @@
 #include "Entity.h"
-#include <bitset>
-#include "BoneJoint.h"
 
 Entity::Entity(Controller* pSrc)
 	: cBase(pSrc)
 {
-	if (cBase)
-		SetPawnBase();
+	if (cBase) SetPawnBase();
 }
 
 void Entity::SetPawnBase()
 {
 	intptr_t* cGameEntityBase{ reinterpret_cast<intptr_t*>(
-	reinterpret_cast<intptr_t>(GamePointer::CGameEntityPtr) + 0x10) };
+	reinterpret_cast<intptr_t>(Pointer::cGameEntity) + 0x10) };
 
 	const int32_t pawnListOffset{ 8 * ((cBase->pawnOffset & 0x7FFF) >> 9) };
 
@@ -45,18 +42,18 @@ bool Entity::GetIsPawnInit()
 
 std::bitset<64> Entity::GetSpottedId()
 {
-	intptr_t bSpottedIdAddr{ reinterpret_cast<intptr_t>(pawnBase) + GamePointer::Offset::bSpottedId };
+	intptr_t bSpottedIdAddr{ reinterpret_cast<intptr_t>(pawnBase) + Offset::bSpottedId };
 
 	return *reinterpret_cast<std::bitset<64>*>(bSpottedIdAddr);
 }
 
 intptr_t* Entity::GetBoneArrayBase()
 {
-	intptr_t gameSceneNodePtr{ reinterpret_cast<intptr_t>(pawnBase) + GamePointer::Offset::GameSceneNode };
+	intptr_t gameSceneNodePtr{ reinterpret_cast<intptr_t>(pawnBase) + Offset::GameSceneNode };
 
 	gameSceneNodePtr = *reinterpret_cast<intptr_t*>(gameSceneNodePtr);
 
-	return *reinterpret_cast<intptr_t**>(gameSceneNodePtr + GamePointer::Offset::BoneArray);
+	return *reinterpret_cast<intptr_t**>(gameSceneNodePtr + Offset::BoneArray);
 }
 
 Vector3 Entity::GetHeadPos()

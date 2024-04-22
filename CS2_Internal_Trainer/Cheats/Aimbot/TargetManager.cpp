@@ -59,7 +59,7 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 		return false;
 
 	// No Team check when there is no team
-	if(!IsGameDeathMatch(GamePointer::gameTypeIdPtr))
+	if(!IsGameDeathMatch(Pointer::gameTypeId))
 	{
 		if (lpPawn->team_variable == entityPawn->team_variable)
 			return false;
@@ -119,7 +119,7 @@ Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEn
 
 std::vector<Controller*> TargetManager::GetCTargetsEnts()
 {
-	intptr_t* entListBasePtr{ GamePointer::entityListBasePtr };
+	intptr_t* entListBasePtr{ Pointer::entityListBase };
 	std::vector<Controller*> cTargetsEntities{};
 
 	for (int i{ 0 }; i < 64; ++i)

@@ -1,6 +1,8 @@
 #pragma once
-#include "LocalPlayer.h"
 #include "Entity.h"
+#include "Controller.h"
+#include "Pawn.h"
+#include "LocalPlayer.h"
 #include "CheatHKeys.h"
 #include <vector>
 #include <bitset>

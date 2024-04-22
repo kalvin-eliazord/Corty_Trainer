@@ -2,7 +2,7 @@
 
 Entity LocalPlayer::GetEntity()
 {
-	static Entity localPlayer(*reinterpret_cast<Controller**>(GamePointer::localPlayerContPtr));
+	static Entity localPlayer(*reinterpret_cast<Controller**>(Pointer::lp_Controller));
 
 	return localPlayer;
 }
@@ -19,14 +19,14 @@ Pawn* LocalPlayer::GetPawn()
 
 float* LocalPlayer::GetPitchPtr()
 {
-	static float* pitchPtr { static_cast<float*>(GamePointer::lp_Pitch_Input) };
+	static float* pitchPtr { static_cast<float*>(Pointer::lp_Pitch) };
 
 	return pitchPtr;
 }
 
 float* LocalPlayer::GetYawPtr()
 {
-	static float* yawPtr { static_cast<float*>(GamePointer::lp_Yaw_Input) };
+	static float* yawPtr { static_cast<float*>(Pointer::lp_Yaw) };
 
 	return yawPtr;
 }
