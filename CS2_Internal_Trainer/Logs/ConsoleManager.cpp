@@ -29,7 +29,6 @@ void ConsoleManager::PrintMyName()
 	std::cout << "-------------------------------------------------------------- \n";
 }
 
-
 void ConsoleManager::PrintErrorPtrInit(std::map <std::string, intptr_t > pPointers)
 {
 	if (!file)

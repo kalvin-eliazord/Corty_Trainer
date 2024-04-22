@@ -1,6 +1,7 @@
 #pragma once
 #include "CheatHKeys.h"
 #include <iostream>
+#include <map>
 #include <vector>
 
 namespace ConsoleManager

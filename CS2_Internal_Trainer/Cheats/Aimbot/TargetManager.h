@@ -7,6 +7,8 @@
 
 namespace TargetManager
 {
+	inline Controller* cTargetLocked{ nullptr };
+
 	Controller* GetCTarget();
 	std::vector<Controller*> GetCTargetsEnts();
 

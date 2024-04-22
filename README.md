@@ -6,6 +6,7 @@ A C++ dynamic-linked library aimbot for the CS2 game.
 	- Smoothing
 	- Target Locking
 	- FOV
+	- Head or Pelvis focus
 
 - Pattern Scanning
 
@@ -19,7 +20,6 @@ This is a cheating functionality that will allow a player to aim at a target aut
 - Add ESP features (I'm on it)
 - Add Triggerbot
 - Add no recoil
-
 
 ## Disclaimers
 ⚠️ This project is for learning purposes only and strictly prohibited for any illegal activities. Users bear full responsibility for any issues. ⚠️

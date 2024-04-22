@@ -1,19 +1,19 @@
 #include "CheatManager.h"
 
-MyD3d11 myD3d11;
+static MyD3d11 gMyD3d11;
 
 HRESULT __stdcall hkPresent(IDXGISwapChain* pChain, UINT SyncInterval, UINT Flags)
 {
 	if (CheatHKeys::bESP)
 	{
-		if (!myD3d11.mDevice || myD3d11.mSwapChain != pChain)
-			myD3d11.InitD3DDraw(pChain);
+		if (!gMyD3d11.mDevice || gMyD3d11.mSwapChain != pChain)
+			gMyD3d11.InitD3DDraw(pChain);
 
 		//enable this to test or debug viewport
-		myD3d11.TestRender();
+		gMyD3d11.TestRender();
 	}
 
-	return myD3d11.tPresentGateway(pChain, SyncInterval, Flags);
+	return gMyD3d11.tPresentGateway(pChain, SyncInterval, Flags);
 }
 
 bool CheatManager::Start()
@@ -21,14 +21,14 @@ bool CheatManager::Start()
 	ConsoleManager::InitConsole();
 	ConsoleManager::PrintCheatOptions();
 
-	if (!myD3d11.Set_oPresent()) return false;
+	if (!gMyD3d11.Set_oPresent()) return false;
 
 	TrampHook tHook(
-		GamePointer::SteamOverlayPtr, //myD3d11.oPresent
+		GamePointer::SteamOverlayPtr, //gMyD3d11.oPresent
 		reinterpret_cast<intptr_t*>(hkPresent),
 		28);
 
-	myD3d11.tPresentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
+	gMyD3d11.tPresentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
 
 	Sleep(1500); // Prevent crash when game values aren't loaded yet
 

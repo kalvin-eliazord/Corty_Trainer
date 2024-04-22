@@ -1,19 +1,9 @@
 #include "GamePointer.h"
 
-intptr_t* GamePointer::GetPatternPointer(intptr_t* pPatternMatch)
-{
-	// In order to extract the offset only we need to add 3 bytes
-	const int_least32_t patternOffset{ *reinterpret_cast<int_least32_t*>(reinterpret_cast<intptr_t>(pPatternMatch) + 3) };
-
-	// In order to access the pointer base Address we need to add 7 bytes
-	intptr_t* patternPointer{ reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(pPatternMatch) + patternOffset + 7) };
-
-	return patternPointer;
-}
-
 int GamePointer::GetNumberHex(const char* pPattern)
 {
 	int count{ 0 };
+
 	while (*pPattern != '\0' || *pPattern == '\?')
 	{
 		++count;
@@ -74,6 +64,17 @@ SIZE_T GamePointer::GetModuleSize(HMODULE pModule)
 	moduleSize = moduleInfo.SizeOfImage;
 
 	return moduleSize;
+}
+
+intptr_t* GamePointer::GetPatternPointer(intptr_t* pPatternMatch)
+{
+	// In order to extract the offset only we need to add 3 bytes
+	const int32_t patternOffset{ *reinterpret_cast<int_least32_t*>(reinterpret_cast<intptr_t>(pPatternMatch) + 3) };
+
+	// In order to access the pointer base Address we need to add 7 bytes
+	intptr_t* patternPointer{ reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(pPatternMatch) + patternOffset + 7) };
+
+	return patternPointer;
 }
 
 intptr_t* GamePointer::GetPatternMatch(const char* pPattern, const HMODULE pModule)
@@ -239,7 +240,7 @@ bool GamePointer::InitGameTypeIdPtr()
 
 	GetGameTypeIdPtr(hClientMod);
 
-	if (!CheckPointers) return false;
+	if (!CheckPointers()) return false;
 
 	return true;
 }

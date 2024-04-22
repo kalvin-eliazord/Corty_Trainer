@@ -8,10 +8,10 @@ bool AimbotManager::Start()
 	Entity cEntity (cTarget);
 
 	if (!CheatHKeys::bTargetLock)
-		CheatHKeys::cBaseLocked = cEntity.GetControllerBase();
+		TargetManager::cTargetLocked = cEntity.GetControllerBase();
 
 	// Target locking option
-	if (CheatHKeys::bTargetLock && CheatHKeys::cBaseLocked)
+	if (CheatHKeys::bTargetLock && TargetManager::cTargetLocked)
 		ShotLockedTarget();
 	else
 		ShotTarget(cEntity);
@@ -43,7 +43,7 @@ bool AimbotManager::ShotTarget(Entity pTarget)
 
 bool AimbotManager::ShotLockedTarget()
 {
-	Entity targetLocked (CheatHKeys::cBaseLocked);
+	Entity targetLocked (TargetManager::cTargetLocked);
 
 	Vector3 targetLockedAngle{};
 
@@ -64,7 +64,7 @@ bool AimbotManager::ShotLockedTarget()
 
 	// Locking at target until he die
 	if (targetLocked.GetPawnBase()->health < 1)
-		CheatHKeys::cBaseLocked = nullptr;
+		TargetManager::cTargetLocked = nullptr;
 
 	return true;
 }

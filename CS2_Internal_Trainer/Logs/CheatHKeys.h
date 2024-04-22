@@ -1,11 +1,8 @@
 #pragma once
 #include <Windows.h>
-#include "Entity.h"
 
 namespace CheatHKeys
 {
-    inline Controller* cBaseLocked{ nullptr };
-
     inline bool bTargetLock{ false };
     inline bool bHeadPos{ true };
     inline bool bAimbot{ true };

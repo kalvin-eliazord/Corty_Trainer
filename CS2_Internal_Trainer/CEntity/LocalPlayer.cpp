@@ -2,12 +2,14 @@
 
 Entity LocalPlayer::GetEntity()
 {
-	return Entity (*reinterpret_cast<Controller**>(GamePointer::localPlayerContPtr));
+	static Entity localPlayer(*reinterpret_cast<Controller**>(GamePointer::localPlayerContPtr));
+
+	return localPlayer;
 }
 
 Controller* LocalPlayer::GetController()
 {
-	return reinterpret_cast<Controller*>(GamePointer::localPlayerContPtr);
+	return GetEntity().GetControllerBase();
 }
 
 Pawn* LocalPlayer::GetPawn()
@@ -17,19 +19,20 @@ Pawn* LocalPlayer::GetPawn()
 
 float* LocalPlayer::GetPitchPtr()
 {
-	return static_cast<float*>(GamePointer::lp_Pitch_Input);
+	static float* pitchPtr { static_cast<float*>(GamePointer::lp_Pitch_Input) };
+
+	return pitchPtr;
 }
 
 float* LocalPlayer::GetYawPtr()
 {
-	return static_cast<float*>(GamePointer::lp_Yaw_Input);
+	static float* yawPtr { static_cast<float*>(GamePointer::lp_Yaw_Input) };
+
+	return yawPtr;
 }
 
-void LocalPlayer::SetViewAngle(Vector3& targetAngle)
+void LocalPlayer::SetViewAngle(const Vector3& targetAngle)
 {
-	float* lpPitch{ GetPitchPtr() };
-	float* lpYaw{ GetYawPtr() };
-
-	*lpPitch = targetAngle.x;
-	*lpYaw = targetAngle.y;
+	*GetPitchPtr() = targetAngle.x;
+	*GetYawPtr() = targetAngle.y;
 }

@@ -12,5 +12,5 @@ namespace LocalPlayer
 	Entity GetEntity();
 	float* GetPitchPtr();
 	Controller* GetController();
-	void SetViewAngle(Vector3& targetAngle);
+	void SetViewAngle(const Vector3& targetAngle);
 };
