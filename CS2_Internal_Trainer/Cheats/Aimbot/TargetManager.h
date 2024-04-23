@@ -12,7 +12,7 @@ namespace TargetManager
 	inline Controller* cTargetLocked{ nullptr };
 
 	Controller* GetCTarget();
-	std::vector<Controller*> GetCTargetsEnts();
+	std::vector<Controller*> GetCTargets();
 
 	bool IsTargetInFov(Vector3& pTargetAngle);
 	bool IsGameDeathMatch(int16_t* pGameTypeId);
@@ -25,5 +25,5 @@ namespace TargetManager
 
 	void NormalizeYaw(float& pYaw);
 	void NormalizePitch(float& pPitch);
-	void SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue);
+	void SetLpAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue);
 };

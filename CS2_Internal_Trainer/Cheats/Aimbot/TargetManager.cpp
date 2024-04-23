@@ -12,14 +12,10 @@ bool TargetManager::IsTargetInFov(Vector3& pTargetAngle)
 		deltaAngle = localPlayerAngle - pTargetAngle;
 
 	// Checking if target is in FOV
-	if ((deltaAngle.x) < CheatHKeys::fovValue or
-		-deltaAngle.x > -CheatHKeys::fovValue)
+	if ((deltaAngle.x < CheatHKeys::fovValue) or (-deltaAngle.x > -CheatHKeys::fovValue) &&
+		(deltaAngle.y < CheatHKeys::fovValue) or (-deltaAngle.y > -CheatHKeys::fovValue))
 	{
-		if ((deltaAngle.y) < CheatHKeys::fovValue or
-			-deltaAngle.y > -CheatHKeys::fovValue)
-		{
-			return true;
-		}
+		return true;
 	}
 
 	return false;
@@ -31,7 +27,7 @@ bool TargetManager::IsGameDeathMatch(int16_t* pGameTypeId)
 	constexpr int deathmatchId2{ 0x2B };
 
 	if (*pGameTypeId != deathmatchId &&
-		*pGameTypeId != deathmatchId + 1 &&
+		*pGameTypeId != (deathmatchId + 1) &&
 		*pGameTypeId != deathmatchId2)
 	{
 		return false;
@@ -49,7 +45,7 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 	if (!lpPawn) return false;
 
 	Pawn* entityPawn{ pEntityPtr->GetPawnBase() };
-	
+
 	// If this is the localPlayer
 	if (lpPawn == entityPawn)
 		return false;
@@ -59,7 +55,7 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 		return false;
 
 	// No Team check when there is no team
-	if(!IsGameDeathMatch(Pointer::gameTypeId))
+	if (!IsGameDeathMatch(Pointer::gameTypeId))
 	{
 		if (lpPawn->team_variable == entityPawn->team_variable)
 			return false;
@@ -95,21 +91,21 @@ Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEn
 	for (auto currCTarget : pTargetsEnt)
 	{
 		Entity currEnt(currCTarget);
-		
+
 		// Get angle distance
 		const Vector3 currTargetAngle{ GetTargetAngle(currEnt.GetPawnBase()->body_pos) };
 		const Vector3 deltaAngle{ lpPawn->angles - currTargetAngle };
-		const float currAngleDist{ GetMagnitude(deltaAngle) };
+		const float angleDistance{ GetMagnitude(deltaAngle) };
 
 		// Get body position distance
 		const Vector3 deltaPosition{ lpPawn->body_pos - currEnt.GetPawnBase()->body_pos };
-		const float currBodyPosDist{ GetMagnitude(deltaPosition) };
+		const float bodyPosDist{ GetMagnitude(deltaPosition) };
 
-		const float currCoef{ currAngleDist * 0.8f + currBodyPosDist * 0.2f };
+		const float currDistCoef{ angleDistance * 0.8f + bodyPosDist * 0.2f };
 
-		if (oldCoef > currCoef)
+		if (oldCoef > currDistCoef)
 		{
-			oldCoef = currCoef;
+			oldCoef = currDistCoef;
 			nearestCTarget = currEnt.GetControllerBase();
 		}
 	}
@@ -117,7 +113,7 @@ Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEn
 	return nearestCTarget;
 }
 
-std::vector<Controller*> TargetManager::GetCTargetsEnts()
+std::vector<Controller*> TargetManager::GetCTargets()
 {
 	intptr_t* entListBasePtr{ Pointer::entityListBase };
 	std::vector<Controller*> cTargetsEntities{};
@@ -141,10 +137,10 @@ std::vector<Controller*> TargetManager::GetCTargetsEnts()
 Controller* TargetManager::GetCTarget()
 {
 	// Get controller targets
-	std::vector<Controller*> targetsEnts{ TargetManager::GetCTargetsEnts() };
+	std::vector<Controller*> targetsEnts{ TargetManager::GetCTargets() };
 	if (targetsEnts.empty()) return nullptr;
 
-	if(targetsEnts.size() > 1)
+	if (targetsEnts.size() > 1)
 		return TargetManager::GetNearestCTarget(targetsEnts);
 
 	return targetsEnts[0];
@@ -175,21 +171,21 @@ Vector3 TargetManager::GetTargetAngle(Vector3 pTargetPos)
 	Vector3 targetAngle{ NULL };
 	Vector3 lpPos{ LocalPlayer::GetPawn()->body_pos };
 
-	const Vector3 deltaPos{ pTargetPos - lpPos  };
+	const Vector3 deltaPos{ pTargetPos - lpPos };
 
 	const float distPos{ GetMagnitude(deltaPos) };
 
 	constexpr float radToDegree{ 57.295776f };
 
 	targetAngle.x = -asinf(deltaPos.z / distPos) * radToDegree;
-	targetAngle.y = atan2f(deltaPos.y , deltaPos.x) * radToDegree;
+	targetAngle.y = atan2f(deltaPos.y, deltaPos.x) * radToDegree;
 
 	NormalizePitch(targetAngle.x);
 
 	return targetAngle;
 }
 
-void TargetManager::SetViewAngleSmooth(Vector3& pTargetAngle, int pSmoothValue)
+void TargetManager::SetLpAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue)
 {
 	float* lp_Pitch{ LocalPlayer::GetPitchPtr() };
 	float* lp_Yaw{ LocalPlayer::GetYawPtr() };

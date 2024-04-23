@@ -5,16 +5,16 @@ bool AimbotManager::Start()
 	Controller* cTarget{ TargetManager::GetCTarget() };
 	if (!cTarget) return false;
 
-	Entity cEntity (cTarget);
+	Entity entTarget (cTarget);
 
 	if (!CheatHKeys::bTargetLock)
-		TargetManager::cTargetLocked = cEntity.GetControllerBase();
+		TargetManager::cTargetLocked = entTarget.GetControllerBase();
 
-	// Target locking option
+	// Target locking feature
 	if (CheatHKeys::bTargetLock && TargetManager::cTargetLocked)
 		ShotLockedTarget();
 	else
-		ShotTarget(cEntity);
+		ShotTarget(entTarget);
 
 	return true;
 }
@@ -33,7 +33,7 @@ bool AimbotManager::ShotTarget(Entity pTarget)
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
 		if (CheatHKeys::smoothValue)
-			TargetManager::SetViewAngleSmooth(targetAngle, CheatHKeys::smoothValue);
+			TargetManager::SetLpAngleSmooth(targetAngle, CheatHKeys::smoothValue);
 		else
 			LocalPlayer::SetViewAngle(targetAngle);
 	}
@@ -57,7 +57,7 @@ bool AimbotManager::ShotLockedTarget()
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
 		if (CheatHKeys::smoothValue)
-			TargetManager::SetViewAngleSmooth(targetLockedAngle, CheatHKeys::smoothValue);
+			TargetManager::SetLpAngleSmooth(targetLockedAngle, CheatHKeys::smoothValue);
 		else
 			LocalPlayer::SetViewAngle(targetLockedAngle);
 	}

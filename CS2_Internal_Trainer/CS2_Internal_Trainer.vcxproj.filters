@@ -103,9 +103,6 @@
     <ClInclude Include="Cheats\ESP\D3D11\MyD3d11_VMT.h">
       <Filter>ESP\D3d11</Filter>
     </ClInclude>
-    <ClInclude Include="Cheats\ESP\D3D11\HWindow.h">
-      <Filter>ESP\HWindow</Filter>
-    </ClInclude>
     <ClInclude Include="Cheats\CheatManager.h">
       <Filter>CheatManager</Filter>
     </ClInclude>
@@ -117,6 +114,9 @@
     </ClInclude>
     <ClInclude Include="GameUtils\Pointer.h">
       <Filter>GameUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\ESP\HWindow.h">
+      <Filter>ESP\HWindow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +144,6 @@
     <ClCompile Include="Logs\CheatHKeys.cpp">
       <Filter>Logs\CheatHKeys</Filter>
     </ClCompile>
-    <ClCompile Include="Cheats\ESP\D3D11\HWindow.cpp">
-      <Filter>ESP\HWindow</Filter>
-    </ClCompile>
     <ClCompile Include="Cheats\ESP\D3D11\MyD3d11.cpp">
       <Filter>ESP\D3d11</Filter>
     </ClCompile>
@@ -158,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="Cheats\Aimbot\AimbotManager.cpp">
       <Filter>Aimbot</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheats\ESP\HWindow.cpp">
+      <Filter>ESP\HWindow</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
