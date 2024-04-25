@@ -1,5 +1,5 @@
 # CS2 Internal Trainer
-A C++ dynamic-linked library aimbot for the CS2 game.
+An updated C++ dynamic-linked library aimbot for the CS2 game.
 
 ## Features
 - Aimbot 
