@@ -20,6 +20,7 @@ This is a cheating functionality that will allow a player to aim at a target aut
 - Add ESP features (I'm on it)
 - Add Triggerbot
 - Add No Recoil
+- No more hardcoded offset (full pattern scanning)
 
 ## Disclaimers
 ⚠️ This project is for learning purposes only and strictly prohibited for any illegal activities. Users bear full responsibility for any issues. ⚠️

@@ -9,6 +9,6 @@ namespace Offset
 	inline constexpr uint32_t Lp_Pitch{ 0x5390 };
 	inline constexpr uint32_t BoneArray{ 0x1E0 };
 	inline constexpr uint32_t GameStateId{ 0xA0 };
-	inline constexpr uint32_t bSpottedId{ 0x16A4 };
+	inline constexpr uint32_t bSpottedId{ 0x2278+0xC };
 	inline constexpr uint32_t GameSceneNode{ 0x318 };
 }

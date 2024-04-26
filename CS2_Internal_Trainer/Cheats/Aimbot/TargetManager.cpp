@@ -93,12 +93,12 @@ Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEn
 		Entity currEnt(currCTarget);
 
 		// Get angle distance
-		const Vector3 currTargetAngle{ GetTargetAngle(currEnt.GetPawnBase()->body_pos) };
+		const Vector3 currTargetAngle{ GetTargetAngle(currEnt.GetPawnBase()->lastClipCameraPos) };
 		const Vector3 deltaAngle{ lpPawn->angles - currTargetAngle };
 		const float angleDistance{ GetMagnitude(deltaAngle) };
 
 		// Get body position distance
-		const Vector3 deltaPosition{ lpPawn->body_pos - currEnt.GetPawnBase()->body_pos };
+		const Vector3 deltaPosition{ lpPawn->lastClipCameraPos - currEnt.GetPawnBase()->lastClipCameraPos };
 		const float bodyPosDist{ GetMagnitude(deltaPosition) };
 
 		const float currDistCoef{ angleDistance * 0.8f + bodyPosDist * 0.2f };
@@ -169,7 +169,7 @@ float TargetManager::GetMagnitude(const Vector3& pVec)
 Vector3 TargetManager::GetTargetAngle(Vector3 pTargetPos)
 {
 	Vector3 targetAngle{ NULL };
-	Vector3 lpPos{ LocalPlayer::GetPawn()->body_pos };
+	Vector3 lpPos{ LocalPlayer::GetPawn()->lastClipCameraPos };
 
 	const Vector3 deltaPos{ pTargetPos - lpPos };
 

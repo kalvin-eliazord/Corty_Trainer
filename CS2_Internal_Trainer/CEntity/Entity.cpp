@@ -61,6 +61,7 @@ Vector3 Entity::GetHeadPos()
 	BoneJoint* boneJoinBase{ reinterpret_cast<BoneJoint*>(GetBoneArrayBase()) };
 
 	BoneJoint* headBoneJoint{ reinterpret_cast<BoneJoint*>(reinterpret_cast<intptr_t>(boneJoinBase) + (6 * sizeof(BoneJoint))) };
+	if (!headBoneJoint) return Vector3();
 
 	Vector3 headBonePos{ headBoneJoint->pos };
 
