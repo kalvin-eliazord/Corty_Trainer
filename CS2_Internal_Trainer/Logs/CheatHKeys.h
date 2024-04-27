@@ -5,7 +5,7 @@ namespace CheatHKeys
 {
     inline bool bTargetLock{ false };
     inline bool bHeadPos{ true };
-    inline bool bAimbot{ true };
+    inline bool bAimbot{ false };
     inline bool bESP{ true };
 
     //inline bool bRCS{ true };

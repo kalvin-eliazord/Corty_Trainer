@@ -30,7 +30,7 @@ TrampHook::~TrampHook()
 
 bool TrampHook::InitGateway()
 {
-	gatewayAddr = reinterpret_cast<intptr_t*>(VirtualAlloc(
+	gatewayAddr = static_cast<intptr_t*>(VirtualAlloc(
 		NULL,
 		stolenBSize + jmpSize,
 		MEM_COMMIT | MEM_RESERVE,

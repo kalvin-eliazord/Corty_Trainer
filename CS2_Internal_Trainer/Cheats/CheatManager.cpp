@@ -24,9 +24,9 @@ bool CheatManager::Start()
 	//if (!gMyD3d11.Set_oPresent()) return false;
 
 	TrampHook tHook(
-		Pointer::steamOverlay, //gMyD3d11.oPresent
+		Pointer::steamOverlay, 
 		reinterpret_cast<intptr_t*>(hkPresent),
-		28);
+		28); // stolen bytes size
 
 	gMyD3d11.tPresentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
 

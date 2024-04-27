@@ -3,56 +3,84 @@
   "WorkspaceRootPath": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\Pawn.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\CEntity\\Pawn.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\CheatHKeys.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Logs\\CheatHKeys.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\CheatHKeys.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Logs\\CheatHKeys.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\Entity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\CEntity\\Entity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\CheatManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Cheats\\CheatManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\AimbotManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Cheats\\Aimbot\\AimbotManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\Offset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\GameUtils\\Offset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\LocalPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\CEntity\\LocalPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\Entity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\CEntity\\Entity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Hook\\TrampHook.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Hook\\TrampHook.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Hook\\TrampHook.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Hook\\TrampHook.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\GamePointers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\GameUtils\\GamePointers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\dllmain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\dllmain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\GamePointers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\GameUtils\\GamePointers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\Offset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\GameUtils\\Offset.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\CheatManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Cheats\\CheatManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\Pawn.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\CEntity\\Pawn.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\ESP\\D3D11\\MyD3d11.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Cheats\\ESP\\D3D11\\MyD3d11.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Logs\\ConsoleManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\Pointer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\GameUtils\\Pointer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\GamePointers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\GameUtils\\GamePointers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Hook\\TrampHook.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\Hook\\TrampHook.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\LocalPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\CEntity\\LocalPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\dllmain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9361A7BC-F8AF-420B-A79E-66E1AEFB153F}|CS2_Internal_Trainer\\CS2_Internal_Trainer.vcxproj|solutionrelative:CS2_Internal_Trainer\\dllmain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,7 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -72,7 +100,7 @@
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Cheats\\Aimbot\\AimbotManager.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\AimbotManager.cpp",
               "RelativeToolTip": "CS2_Internal_Trainer\\Cheats\\Aimbot\\AimbotManager.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAABAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-04-22T12:37:29.038Z",
               "IsPinned": true,
@@ -80,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 13,
               "Title": "Pawn.h",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\Pawn.h",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\CEntity\\Pawn.h",
@@ -89,21 +117,32 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-04-26T18:25:44.202Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "Offset.h",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\Offset.h",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\GameUtils\\Offset.h",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\Offset.h",
               "RelativeToolTip": "CS2_Internal_Trainer\\GameUtils\\Offset.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAuAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-04-26T17:54:37.838Z",
-              "IsPinned": true,
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConsoleManager.cpp",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp",
+              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp",
+              "RelativeToolTip": "CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAAEEAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-27T14:32:20.462Z",
               "EditorCaption": ""
             },
             {
@@ -120,20 +159,106 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CheatHKeys.cpp",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\CheatHKeys.cpp",
+              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Logs\\CheatHKeys.cpp",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\CheatHKeys.cpp",
+              "RelativeToolTip": "CS2_Internal_Trainer\\Logs\\CheatHKeys.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-27T14:31:06.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CheatHKeys.h",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\CheatHKeys.h",
+              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Logs\\CheatHKeys.h",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\CheatHKeys.h",
+              "RelativeToolTip": "CS2_Internal_Trainer\\Logs\\CheatHKeys.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-04-27T14:30:57.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TrampHook.h",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Hook\\TrampHook.h",
+              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Hook\\TrampHook.h",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Hook\\TrampHook.h",
+              "RelativeToolTip": "CS2_Internal_Trainer\\Hook\\TrampHook.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-04-27T14:24:00.475Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CheatManager.h",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\CheatManager.h",
+              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Cheats\\CheatManager.h",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\CheatManager.h",
+              "RelativeToolTip": "CS2_Internal_Trainer\\Cheats\\CheatManager.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-04-27T12:06:56.261Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "CheatManager.cpp",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\CheatManager.cpp",
+              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Cheats\\CheatManager.cpp",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\CheatManager.cpp",
+              "RelativeToolTip": "CS2_Internal_Trainer\\Cheats\\CheatManager.cpp",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAC4AAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-27T12:07:20.158Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MyD3d11.h",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\ESP\\D3D11\\MyD3d11.h",
+              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Cheats\\ESP\\D3D11\\MyD3d11.h",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\ESP\\D3D11\\MyD3d11.h",
+              "RelativeToolTip": "CS2_Internal_Trainer\\Cheats\\ESP\\D3D11\\MyD3d11.h",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAAEkAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-04-27T12:05:55.571Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ConsoleManager.h",
+              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.h",
+              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Logs\\ConsoleManager.h",
+              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.h",
+              "RelativeToolTip": "CS2_Internal_Trainer\\Logs\\ConsoleManager.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-04-27T11:49:42.399Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Entity.cpp",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\Entity.cpp",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\CEntity\\Entity.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\Entity.cpp",
               "RelativeToolTip": "CS2_Internal_Trainer\\CEntity\\Entity.cpp",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAuwDoAAAAaAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAADkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-26T18:09:23.313Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-26T18:09:23.313Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 18,
               "Title": "LocalPlayer.cpp",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\CEntity\\LocalPlayer.cpp",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\CEntity\\LocalPlayer.cpp",
@@ -141,51 +266,35 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\CEntity\\LocalPlayer.cpp",
               "ViewState": "AQIAAAUAAAAAAAAAAAAmwBQAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-26T18:02:05.465Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-26T18:02:05.465Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "Pointer.h",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\Pointer.h",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\GameUtils\\Pointer.h",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\Pointer.h",
               "RelativeToolTip": "CS2_Internal_Trainer\\GameUtils\\Pointer.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAfAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-26T17:54:41.005Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-26T17:54:41.005Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 7,
               "Title": "TrampHook.cpp",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Hook\\TrampHook.cpp",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Hook\\TrampHook.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Hook\\TrampHook.cpp",
               "RelativeToolTip": "CS2_Internal_Trainer\\Hook\\TrampHook.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC4AAABYAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC4AAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-26T15:18:40.005Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-26T15:18:40.005Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ConsoleManager.cpp",
-              "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp",
-              "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp",
-              "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp",
-              "RelativeToolTip": "CS2_Internal_Trainer\\Logs\\ConsoleManager.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-25T14:12:14.358Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 17,
               "Title": "TargetManager.h",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.h",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.h",
@@ -193,12 +302,11 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.h",
               "ViewState": "AQIAAAkAAAAAAAAAAAArwBsAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-22T14:25:12.318Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-22T14:25:12.318Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 19,
               "Title": "dllmain.cpp",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\dllmain.cpp",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\dllmain.cpp",
@@ -206,47 +314,43 @@
               "RelativeToolTip": "CS2_Internal_Trainer\\dllmain.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-22T12:51:08.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-22T12:51:08.18Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "TargetManager.cpp",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.cpp",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.cpp",
               "RelativeToolTip": "CS2_Internal_Trainer\\Cheats\\Aimbot\\TargetManager.cpp",
-              "ViewState": "AQIAAJMAAAAAAAAAAAAAALMAAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIwAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-22T12:39:04.788Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-22T12:39:04.788Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "GamePointers.cpp",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\GamePointers.cpp",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\GameUtils\\GamePointers.cpp",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\GamePointers.cpp",
               "RelativeToolTip": "CS2_Internal_Trainer\\GameUtils\\GamePointers.cpp",
-              "ViewState": "AQIAAEwAAAAAAAAAAAAmwHAAAAAZAAAA",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAmwFAAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-22T11:37:42.215Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-22T11:37:42.215Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "GamePointers.h",
               "DocumentMoniker": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\GamePointers.h",
               "RelativeDocumentMoniker": "CS2_Internal_Trainer\\GameUtils\\GamePointers.h",
               "ToolTip": "C:\\Users\\Corty\\source\\repos\\CS2_Internal_Trainer\\CS2_Internal_Trainer\\GameUtils\\GamePointers.h",
               "RelativeToolTip": "CS2_Internal_Trainer\\GameUtils\\GamePointers.h",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABkAAAA2AAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABkAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-22T11:37:06.35Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-22T11:37:06.35Z"
             }
           ]
         }

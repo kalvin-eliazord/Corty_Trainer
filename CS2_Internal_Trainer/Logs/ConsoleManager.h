@@ -16,7 +16,7 @@ namespace ConsoleManager
     void InitConsole();
     void PrintMyName();
     void DestroyConsole();
-    std::string GetTargetedPart();
     void PrintCheatOptions();
+    std::string GetTargetedPart();
     void PrintErrorPtrInit(std::map <std::string, intptr_t > pAddresses);
 };

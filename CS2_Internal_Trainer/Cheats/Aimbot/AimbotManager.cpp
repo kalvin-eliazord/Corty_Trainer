@@ -5,7 +5,7 @@ bool AimbotManager::Start()
 	Controller* cTarget{ TargetManager::GetCTarget() };
 	if (!cTarget) return false;
 
-	Entity entTarget (cTarget);
+	Entity entTarget(cTarget);
 
 	if (!CheatHKeys::bTargetLock)
 		TargetManager::cTargetLocked = entTarget.GetControllerBase();
@@ -30,20 +30,17 @@ bool AimbotManager::ShotTarget(Entity pTarget)
 
 	if (!TargetManager::IsTargetInFov(targetAngle)) return false;
 
-	if (GetAsyncKeyState(VK_RBUTTON))
-	{
-		if (CheatHKeys::smoothValue)
-			TargetManager::SetLpAngleSmooth(targetAngle, CheatHKeys::smoothValue);
-		else
-			LocalPlayer::SetViewAngle(targetAngle);
-	}
+	if (CheatHKeys::smoothValue)
+		TargetManager::SetLpAngleSmooth(targetAngle, CheatHKeys::smoothValue);
+	else
+		LocalPlayer::SetViewAngle(targetAngle);
 
 	return true;
 }
 
 bool AimbotManager::ShotLockedTarget()
 {
-	Entity targetLocked (TargetManager::cTargetLocked);
+	Entity targetLocked(TargetManager::cTargetLocked);
 
 	Vector3 targetLockedAngle{};
 
@@ -54,13 +51,10 @@ bool AimbotManager::ShotLockedTarget()
 
 	if (!TargetManager::IsTargetInFov(targetLockedAngle)) return false;
 
-	if (GetAsyncKeyState(VK_RBUTTON))
-	{
-		if (CheatHKeys::smoothValue)
-			TargetManager::SetLpAngleSmooth(targetLockedAngle, CheatHKeys::smoothValue);
-		else
-			LocalPlayer::SetViewAngle(targetLockedAngle);
-	}
+	if (CheatHKeys::smoothValue)
+		TargetManager::SetLpAngleSmooth(targetLockedAngle, CheatHKeys::smoothValue);
+	else
+		LocalPlayer::SetViewAngle(targetLockedAngle);
 
 	// Locking at target until he die
 	if (targetLocked.GetPawnBase()->health < 1)
