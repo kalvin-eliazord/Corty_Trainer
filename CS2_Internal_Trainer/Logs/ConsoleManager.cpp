@@ -25,7 +25,7 @@ void ConsoleManager::PrintMyName()
  \____/\___/|_|   \__|\__, |   \_/_|  \__,_|_|_| |_|\___|_|   
                        __/ |                                  
                       |___/                 
-		)" << "\n";
+		)" << '\n';
 	std::cout << "-------------------------------------------------------------- \n";
 }
 
@@ -44,9 +44,9 @@ void ConsoleManager::PrintErrorPtrInit(std::map <std::string, intptr_t > pPointe
 		if (!pointer.second)
 			std::cout << "[!] ";
 		else
-			std::cout << "[+]";
+			std::cout << "[+] ";
 
-			std::cout << pointer.first << " = " << pointer.second << "\n";
+			std::cout << pointer.first << " = " << pointer.second << '\n';
 	}
 
 	std::cout << "-------------------------------------------------------------- \n";

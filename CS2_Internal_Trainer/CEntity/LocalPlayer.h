@@ -8,8 +8,8 @@
 namespace LocalPlayer
 {
 	Pawn* GetPawn();
-	float* GetYawPtr();
 	Entity GetEntity();
+	float* GetYawPtr();
 	float* GetPitchPtr();
 	Controller* GetController();
 	void SetViewAngle(const Vector3& targetAngle);

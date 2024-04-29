@@ -19,6 +19,8 @@ void TrampHook::Unhook()
 
 		memcpy(srcAddr, gatewayAddr, stolenBSize);
 
+		VirtualFree(gatewayAddr, 0, MEM_RELEASE);
+
 		VirtualProtect(srcAddr, stolenBSize, oldProtect, &oldProtect);
 	}
 }
