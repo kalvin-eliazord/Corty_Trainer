@@ -10,7 +10,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 	// Initialize game pointers used by the cheat
 	gamePointers.InitializePointers();
 
-	if (gamePointers.Get_bPointersInit())
+	if (gamePointers.GetArePointersInit())
 	{
 		const bool bInGamePtrInit{ CheatManager::Start() };
 
@@ -18,7 +18,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 	}
 
 	// Pointer initialization error
-	if (!gamePointers.Get_bPointersInit())
+	if (!gamePointers.GetArePointersInit())
 	{
 		ConsoleManager::PrintErrorPtrInit(gamePointers.GetPointersState());
 

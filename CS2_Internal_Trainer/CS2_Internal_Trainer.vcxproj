@@ -166,7 +166,7 @@
     <ClInclude Include="Cheats\ESP\D3D11\MyD3d11.h" />
     <ClInclude Include="Cheats\ESP\D3D11\MyD3d11_VMT.h" />
     <ClInclude Include="Cheats\ESP\D3D11\MyShaders.h" />
-    <ClInclude Include="Cheats\ESP\HWindow.h" />
+    <ClInclude Include="Cheats\ESP\MyD3dUtils.h" />
     <ClInclude Include="GameUtils\GameState.h" />
     <ClInclude Include="GameUtils\GamePointers.h" />
     <ClInclude Include="Hook\TrampHook.h" />
@@ -183,7 +183,7 @@
     <ClCompile Include="Cheats\Aimbot\TargetManager.cpp" />
     <ClCompile Include="Cheats\CheatManager.cpp" />
     <ClCompile Include="Cheats\ESP\D3D11\MyD3d11.cpp" />
-    <ClCompile Include="Cheats\ESP\HWindow.cpp" />
+    <ClCompile Include="Cheats\ESP\MyD3dUtils.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="GameUtils\GamePointers.cpp" />
     <ClCompile Include="Hook\TrampHook.cpp" />

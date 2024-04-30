@@ -7,63 +7,55 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 
-#include "HWindow.h"
+#include "MyD3dUtils.h"
 #include "MyShaders.h"
 #include "MyD3d11_VMT.h"
 
-const D3DCOLORVALUE red{ 1.0f, 0.0f, 0.0f, 1.0f };
-const D3DCOLORVALUE green{ 0.0f, 1.0f, 0.0f, 1.0f };
-const D3DCOLORVALUE blue{ 0.0f, 0.0f, 1.0f, 1.0f };
-const D3DCOLORVALUE magenta{ 1.0f, 0.0f, 1.0f, 1.0f };
-const D3DCOLORVALUE yellow{ 1.0f, 1.0f, 0.0f, 1.0f };
-
-struct Vertex
-{
-	DirectX::XMFLOAT3 pos;
-	D3DCOLORVALUE color;
-};
-
 class MyD3d11
 {
+private:
+	bool SetViewport();
+	void SetOrthoMatrix(D3D11_VIEWPORT pViewport);
+	bool SetDeviceContext(IDXGISwapChain* pSwapchain);
+	bool SetInputLayout(ID3D10Blob* pCompiledShaderBlob);
+
 public:
-	ID3D11Device* mDevice{ nullptr };
-	ID3D11DeviceContext* mContext{ nullptr };
-	IDXGISwapChain* mSwapChain{ nullptr}; // ->Present()
+	ID3D11Device* m_device{ nullptr };
+	ID3D11DeviceContext* m_context{ nullptr };
+	IDXGISwapChain* m_swapChain{ nullptr }; // ->Present()
 
-	ID3D11RenderTargetView* mRenderTargetView { nullptr};
-	ID3D11InputLayout* mVertexLayout { nullptr};
+	// Shadering
+	ID3D11PixelShader* m_pixelShader{ nullptr };
+	ID3D11VertexShader* m_vertexShader{ nullptr };
+	ID3D11InputLayout* m_vInputLayout{ nullptr };
+	ID3D11Buffer* m_vertexBuffer{ nullptr };
+	ID3D11Buffer* m_constantBuffer{ nullptr };
 
-	ID3D11PixelShader* mPixelShader { nullptr};
-	ID3D11VertexShader* mVertexShader{ nullptr };
+	//ID3D11RenderTargetView* m_renderTargetView { nullptr}; UNUSED -> USING THE RENDER TARGET OF THE GAME
 
-	ID3D11Buffer* mVertexBuffer { nullptr};
-	ID3D11Buffer* mIndexBuffer { nullptr};
-	ID3D11Buffer* mConstantBuffer { nullptr};
+//	ID3D11Buffer* m_IndexBuffer { nullptr}; UNUSED -> optimizing rendering purpose
 
-	HWND mHwnd;
-	RECT mHwndRect;
+	HWND m_hwnd;
+	RECT m_hRect;
 
-	D3D11_VIEWPORT mViewports[D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE]{ 0 };
-	D3D11_VIEWPORT myViewport;
-	DirectX::XMMATRIX mOrtho;
+	D3D11_VIEWPORT m_viewports[D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE]{ 0 };
+	D3D11_VIEWPORT m_viewport;
+	DirectX::XMMATRIX m_orthoMatrix;
 
+	// Hooking
 	using TPresent = HRESULT(__stdcall*)(IDXGISwapChain* pThis, UINT SyncInterval, UINT Flags);
-	void* oPresent;					
-	TPresent tPresentGateway;
+	void* o_Present;
+	TPresent t_presentGateway;
+	bool Set_oPresent(); // UNUSED = patternScanning steamOverlay to get the addr of present
 
-	bool Set_oPresent();
-
-	// Graphic pipeline process
-	bool CompileShader(const char* szShader, const char* szEntrypoint, const char* szTarget, ID3D10Blob** pBlob);
+	// Setup for graphic pipeline
+	void BeginDraw();
 	bool CompileShaders();
-	bool GetViewport();
-	bool SetupOrtho();
-
-	bool GetDeviceContextRenderTarget(IDXGISwapChain* pSwapchain);
-	bool InitD3DDraw(IDXGISwapChain* pSwapchain);
+	bool SetConstantBuffer();
+	bool InitDraw(IDXGISwapChain* pSwapchain);
+	bool CompileShader(const char* szShader, const char* szEntrypoint, const char* szTarget, ID3D10Blob** pBlob);
 
 	//  DRAW
-	void BeginDraw();
 	void DrawLine(float x, float y, float x2, float y2, D3DCOLORVALUE color);
 	void DrawLineWH(float x, float y, float width, float height, D3DCOLORVALUE color); //uses 1 vertex + width and height
 	void DrawBox(float x, float y, float width, float height, D3DCOLORVALUE color);

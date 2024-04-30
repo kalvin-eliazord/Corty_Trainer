@@ -53,7 +53,7 @@
     <Filter Include="Features\ESP\D3d11">
       <UniqueIdentifier>{70e8c3e6-db57-4755-a464-88e101053d45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Features\ESP\HWindow">
+    <Filter Include="Features\ESP\D3d11\Utils">
       <UniqueIdentifier>{15cafc39-e559-40e8-847b-0c2325d8b724}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -100,9 +100,6 @@
     <ClInclude Include="Cheats\ESP\D3D11\MyD3d11.h">
       <Filter>Features\ESP\D3d11</Filter>
     </ClInclude>
-    <ClInclude Include="Cheats\ESP\D3D11\MyD3d11_VMT.h">
-      <Filter>Features\ESP\D3d11</Filter>
-    </ClInclude>
     <ClInclude Include="Cheats\Aimbot\TargetManager.h">
       <Filter>Features\Aimbot\TargetManager</Filter>
     </ClInclude>
@@ -112,11 +109,14 @@
     <ClInclude Include="GameUtils\Pointer.h">
       <Filter>GameUtils</Filter>
     </ClInclude>
-    <ClInclude Include="Cheats\ESP\HWindow.h">
-      <Filter>Features\ESP\HWindow</Filter>
-    </ClInclude>
     <ClInclude Include="Cheats\CheatManager.h">
       <Filter>Features</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\ESP\MyD3dUtils.h">
+      <Filter>Features\ESP\D3d11\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheats\ESP\D3D11\MyD3d11_VMT.h">
+      <Filter>Features\ESP\D3d11</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -153,11 +153,11 @@
     <ClCompile Include="Cheats\Aimbot\AimbotManager.cpp">
       <Filter>Features\Aimbot</Filter>
     </ClCompile>
-    <ClCompile Include="Cheats\ESP\HWindow.cpp">
-      <Filter>Features\ESP\HWindow</Filter>
-    </ClCompile>
     <ClCompile Include="Cheats\CheatManager.cpp">
       <Filter>Features</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheats\ESP\MyD3dUtils.cpp">
+      <Filter>Features\ESP\D3d11\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

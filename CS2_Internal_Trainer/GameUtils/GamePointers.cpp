@@ -214,7 +214,7 @@ void GamePointers::InitializePointers()
 
 	SetSteamOverlayPtr(hGameOver);
 
-	bPointersInit = ArePointersValid() ? true : false;
+	arePointersInit = ArePointersValid() ? true : false;
 }
 
 bool GamePointers::ArePointersValid()
@@ -248,12 +248,12 @@ std::map<std::string, intptr_t> GamePointers::GetPointersState()
 	return pointersState;
 }
 
-bool GamePointers::Get_bPointersInit()
+bool GamePointers::GetArePointersInit()
 {
-	return bPointersInit;
+	return arePointersInit;
 }
 
 void GamePointers::Set_bPointersInit(bool p_bInGamePtrInit)
 {
-	bPointersInit = p_bInGamePtrInit;
+	arePointersInit = p_bInGamePtrInit;
 }

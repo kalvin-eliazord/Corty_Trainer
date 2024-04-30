@@ -6,14 +6,14 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pChain, UINT SyncInterval, UINT Flag
 {
 	if (CheatHKeys::bESP)
 	{
-		if (!gMyD3d11.mDevice || gMyD3d11.mSwapChain != pChain)
-			gMyD3d11.InitD3DDraw(pChain);
+		if (!gMyD3d11.m_device || gMyD3d11.m_swapChain != pChain)
+			gMyD3d11.InitDraw(pChain);
 
 		//enable this to test or debug viewport
 		gMyD3d11.TestRender();
 	}
 
-	return gMyD3d11.tPresentGateway(pChain, SyncInterval, Flags);
+	return gMyD3d11.t_presentGateway(pChain, SyncInterval, Flags);
 }
 
 bool CheatManager::Start()
@@ -21,16 +21,14 @@ bool CheatManager::Start()
 	ConsoleManager::InitConsole();
 	ConsoleManager::PrintCheatOptions();
 
-	//if (!gMyD3d11.Set_oPresent()) return false;
-
 	TrampHook tHook(
 		Pointer::steamOverlay, 
 		reinterpret_cast<intptr_t*>(hkPresent),
 		28); // stolen bytes size
 
-	gMyD3d11.tPresentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
+	gMyD3d11.t_presentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
 
-	Sleep(1500); // Prevent crash when game values aren't loaded yet
+	Sleep(1500); // Prevent crash when game pointers aren't loaded yet
 
 	GamePointers gamePointers{};
 

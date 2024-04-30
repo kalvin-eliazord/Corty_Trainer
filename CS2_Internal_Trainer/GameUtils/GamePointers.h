@@ -11,7 +11,7 @@ class GamePointers
 {
 private:
 	std::map<std::string, intptr_t> pointersState;
-	bool bPointersInit{};
+	bool arePointersInit{};
 	bool ArePointersValid();
 	void SetGameTypeIdPtr(HMODULE hModule);
 	void SetViewAnglesPtr(HMODULE hModule);
@@ -30,7 +30,7 @@ private:
 public:
 	void InitializePointers();
 	bool InitGameTypeIdPtr();
-	bool Get_bPointersInit();
+	bool GetArePointersInit();
 	void Set_bPointersInit(bool p_bInGamePtrInit);
 	std::map<std::string, intptr_t> GetPointersState();
 };
