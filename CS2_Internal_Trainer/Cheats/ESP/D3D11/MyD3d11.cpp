@@ -28,48 +28,6 @@ void MyD3d11::SetOrthoMatrix(D3D11_VIEWPORT pViewport)
 	m_orthoMatrix = DirectX::XMMatrixOrthographicOffCenterLH(0, pViewport.Width, pViewport.Height, 0, 0.0f, 1.0f);
 }
 
-bool MyD3d11::Set_oPresent()
-{
-	DXGI_SWAP_CHAIN_DESC sDesc{ 0 };
-	sDesc.BufferCount = 1;
-	sDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	sDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	sDesc.OutputWindow = GetDesktopWindow();
-	sDesc.Windowed = TRUE;
-	sDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	sDesc.SampleDesc.Count = 1;
-
-	ID3D11Device* device{ nullptr };
-	IDXGISwapChain* swapchain{ nullptr };
-
-	HRESULT hResult{ D3D11CreateDeviceAndSwapChain(
-		nullptr,
-		D3D_DRIVER_TYPE_HARDWARE,
-		nullptr,
-		NULL, nullptr,
-		NULL,
-		D3D11_SDK_VERSION,
-		&sDesc,
-		&swapchain,
-		&device,
-		nullptr,
-		nullptr) };
-
-	if (GetLastError() == 0x594) SetLastError(0); // Ignore error related to output window //TODO: fix this little issue with window handle
-
-	if (FAILED(hResult)) return false;
-
-	void** swapVMT{ *(void***)swapchain };
-
-	// Get Present's address out of VMT
-	o_Present = static_cast<TPresent>(swapVMT[static_cast<UINT>(IDXGISwapChainVMT::Present)]);
-
-	SafeRelease(swapchain);
-	SafeRelease(device);
-
-	return true;
-}
-
 bool MyD3d11::CompileShader(const char* szShader, const char* szEntrypoint, const char* szTarget, ID3D10Blob** compiledShaderBlob)
 {
 	ID3D10Blob* pErrorBlob{ nullptr };
@@ -102,8 +60,6 @@ bool MyD3d11::CompileShaders()
 	// Sets the input layout of the vertex buffer
 	if (!SetInputLayout(compiledShaderBlob))
 		return false;
-
-	//m_context->IASetInputLayout(m_vInputLayout);
 
 	SafeRelease(compiledShaderBlob);
 
@@ -163,8 +119,6 @@ bool MyD3d11::SetConstantBuffer()
 	HRESULT hRes{ m_device->CreateBuffer(&buffer_desc, &subResourceLine, &m_constantBuffer) };
 	if (FAILED(hRes)) return false;
 
-	// m_context->VSSetConstantBuffers(0, 1, &m_constantBuffer); UNUSED -> DONE ON DRAWING
-
 	return true;
 }
 
@@ -176,11 +130,10 @@ bool MyD3d11::SetDeviceContext(IDXGISwapChain* pSwapchain)
 
 	m_device->GetImmediateContext(&m_context);
 
-	// UNUSED -> USING THE RENDER TARGET OF THE GAME
-	//	m_context->OMGetRenderTargets(1, &m_renderTargetView, nullptr);
+	m_context->OMGetRenderTargets(1, &m_renderTargetView, nullptr);
 
-	// m_renderTargetView backup
-	/*if (!m_renderTargetView)
+	// renderTargetView backup
+	if (!m_renderTargetView)
 	{
 		ID3D11Texture2D* backbuffer{ nullptr };
 		hRes = pSwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backbuffer));
@@ -191,7 +144,7 @@ bool MyD3d11::SetDeviceContext(IDXGISwapChain* pSwapchain)
 		if (FAILED(hRes)) return false;
 
 		m_context->OMSetRenderTargets(1, &m_renderTargetView, nullptr);
-	}*/
+	}
 
 	return true;
 }
@@ -217,94 +170,110 @@ void MyD3d11::BeginDraw()
 	SetConstantBuffer();
 }
 
-void MyD3d11::DrawLine(float x, float y, float x2, float y2, D3DCOLORVALUE color)
+void MyD3d11::SetInputAssembler()
 {
-	//start SET for vertexShader
-	// Setup vertices
-	Vertex vertexs[2] = {
-		{ DirectX::XMFLOAT3(x, y, 1.0f), color },
-		{ DirectX::XMFLOAT3(x2, y2, 1.0f),	color },
-	};
-
-	D3D11_BUFFER_DESC buffer_desc_line{ 0 };
-	buffer_desc_line.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	buffer_desc_line.ByteWidth = sizeof(Vertex) * 2;
-	buffer_desc_line.Usage = D3D11_USAGE_DEFAULT;
-
-	D3D11_SUBRESOURCE_DATA subResourceLine{ 0 };
-	subResourceLine.pSysMem = &vertexs;
-
-	m_device->CreateBuffer(&buffer_desc_line, &subResourceLine, &m_vertexBuffer);
-
-	m_context->VSSetConstantBuffers(0, 1, &m_constantBuffer);
-
-	UINT stride{ sizeof(Vertex) };
-	UINT offset{ 0 };
+	const UINT stride{ sizeof(Vertex) };
+	const UINT offset{ 0 };
 
 	m_context->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
+
 	m_context->IASetInputLayout(m_vInputLayout);
-	//end SET for vertexShader
 
-	m_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST); // IDK 
-
-	m_context->VSSetShader(m_vertexShader, nullptr, 0);
-	m_context->PSSetShader(m_pixelShader, nullptr, 0);
-
-	//m_context->RSSetViewports(1, &m_viewport);
-
-	m_context->Draw(2, 0);
-}
-
-void MyD3d11::DrawLineWH(float x, float y, float width, float height, D3DCOLORVALUE color)
-{
-	// Setup vertices
-	Vertex vertexs[2] = {
-	{ DirectX::XMFLOAT3(x,			 y,			 1.0f),	color },
-	{ DirectX::XMFLOAT3(x + width,   y + height, 1.0f),	color },
-	};
-
-	D3D11_BUFFER_DESC buffer_desc_line{ 0 };
-	buffer_desc_line.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	buffer_desc_line.ByteWidth = sizeof(Vertex) * 2;
-	buffer_desc_line.Usage = D3D11_USAGE_DEFAULT;
-
-	D3D11_SUBRESOURCE_DATA subResourceLine{ 0 };
-	subResourceLine.pSysMem = &vertexs;
-
-	m_device->CreateBuffer(&buffer_desc_line, &subResourceLine, &m_vertexBuffer);
-
-	m_context->VSSetConstantBuffers(0, 1, &m_constantBuffer);
-
-	// Make sure the input assembler knows how to process our verts/indices
-	UINT stride = sizeof(Vertex);
-	UINT offset = 0;
-
-	m_context->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
-	m_context->IASetInputLayout(m_vInputLayout);
 	m_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+}
 
-	// Set the shaders we need to render our line
+void MyD3d11::SetLineVBuffer(float x, float y, float x2, float y2, D3DCOLORVALUE pColor)
+{
+	Vertex vertices[2] = {
+	{ DirectX::XMFLOAT3(x, y, 1.0f), pColor },
+	{ DirectX::XMFLOAT3(x2, y2, 1.0f),	pColor },
+	};
+
+	D3D11_BUFFER_DESC buffer_desc_line{ 0 };
+	buffer_desc_line.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	buffer_desc_line.ByteWidth = sizeof(Vertex) * 2;
+	buffer_desc_line.Usage = D3D11_USAGE_DEFAULT;
+
+	D3D11_SUBRESOURCE_DATA subResourceLine{ 0 };
+	subResourceLine.pSysMem = &vertices;
+
+	m_device->CreateBuffer(&buffer_desc_line, &subResourceLine, &m_vertexBuffer);
+}
+
+void MyD3d11::DrawLine(float x, float y, float x2, float y2, D3DCOLORVALUE pColor)
+{
+	// Setup vertices
+	SetLineVBuffer(x, y, x2, y2, pColor);
+
+	// Input Assembler
+	SetInputAssembler();
+
+	// Vertex Shader
+	m_context->VSSetConstantBuffers(0, 1, &m_constantBuffer);
 	m_context->VSSetShader(m_vertexShader, nullptr, 0);
+
+	// Pixel Shader
 	m_context->PSSetShader(m_pixelShader, nullptr, 0);
 
-	// Set viewport to context, unnecessary so far
-	//m_context->OMSetRenderTargets(1, &pRenderTargetView, nullptr);
+	// Output Merger
+	m_context->OMSetRenderTargets(1, &m_renderTargetView, nullptr);
 
-	//m_context->RSSetViewports(1, &m_viewport);
+	// Rasterizer
+	m_context->RSSetViewports(1, &m_viewport);
+
+	m_context->Draw(2, 0);
+}
+void MyD3d11::SetLineWHVBuffer(float pX, float pY, float pWidth, float pHeight, D3DCOLORVALUE pColor)
+{
+	Vertex vertices[2] = {
+		{ DirectX::XMFLOAT3(pX,			   pY,			 1.0f),	pColor },
+		{ DirectX::XMFLOAT3(pX + pWidth,   pY + pHeight, 1.0f),	pColor },
+	};
+
+	D3D11_BUFFER_DESC buffer_desc_line{ 0 };
+	buffer_desc_line.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	buffer_desc_line.ByteWidth = sizeof(Vertex) * 2;
+	buffer_desc_line.Usage = D3D11_USAGE_DEFAULT;
+
+	D3D11_SUBRESOURCE_DATA subResourceLine{ 0 };
+	subResourceLine.pSysMem = &vertices;
+
+	m_device->CreateBuffer(&buffer_desc_line, &subResourceLine, &m_vertexBuffer);
+}
+
+
+void MyD3d11::DrawLineWH(float pX, float pY, float pWidth, float pHeight, D3DCOLORVALUE pColor)
+{
+	// Setup vertices
+	SetLineWHVBuffer(pX,  pY, pWidth, pHeight, pColor);
+
+	// Input Assembler
+	SetInputAssembler();
+
+	// Vertex Shader
+	m_context->VSSetConstantBuffers(0, 1, &m_constantBuffer);
+	m_context->VSSetShader(m_vertexShader, nullptr, 0);
+
+	// Pixel Shader
+	m_context->PSSetShader(m_pixelShader, nullptr, 0);
+	
+	// Output Merger
+	m_context->OMSetRenderTargets(1, &m_renderTargetView, nullptr);
+
+	// Rasterizer
+	m_context->RSSetViewports(1, &m_viewport);
 
 	m_context->Draw(2, 0);
 }
 
-void MyD3d11::DrawBox(float x, float y, float width, float height, D3DCOLORVALUE color)
+void MyD3d11::SetBoxVBuffer(float pX, float pY, float pWidth, float pHeight, D3DCOLORVALUE pColor)
 {
-	// Setup vertices TL, TR, BR, BL
-
-	Vertex vertexs[5] = {
-		{ DirectX::XMFLOAT3(x,			y,			1.0f),		color },
-		{ DirectX::XMFLOAT3(x + width,	y,			1.0f),		color },
-		{ DirectX::XMFLOAT3(x + width,	y + height, 1.0f),		color },
-		{ DirectX::XMFLOAT3(x,			y + height, 1.0f),		color },
-		{ DirectX::XMFLOAT3(x,			y,			1.0f),		color }
+	Vertex vertices[5] = {
+		{ DirectX::XMFLOAT3(pX,				pY,			  1.0f),		pColor },
+		{ DirectX::XMFLOAT3(pX + pWidth,	pY,			  1.0f),		pColor },
+		{ DirectX::XMFLOAT3(pX + pWidth,	pY + pHeight, 1.0f),		pColor },
+		{ DirectX::XMFLOAT3(pX,				pY + pHeight, 1.0f),		pColor },
+		{ DirectX::XMFLOAT3(pX,				pY,			  1.0f),		pColor }
 	};
 
 	D3D11_BUFFER_DESC buffer_desc_line{ 0 };
@@ -313,28 +282,31 @@ void MyD3d11::DrawBox(float x, float y, float width, float height, D3DCOLORVALUE
 	buffer_desc_line.Usage = D3D11_USAGE_DEFAULT;
 
 	D3D11_SUBRESOURCE_DATA subResourceLine{ 0 };
-	subResourceLine.pSysMem = &vertexs;
+	subResourceLine.pSysMem = &vertices;
 
 	m_device->CreateBuffer(&buffer_desc_line, &subResourceLine, &m_vertexBuffer);
+}
 
+void MyD3d11::DrawBox(float pX, float pY, float pWidth, float pHeight, D3DCOLORVALUE pColor)
+{
+	// Setup vertices TL, TR, BR, BL
+	SetBoxVBuffer(pX, pY, pWidth, pHeight, pColor);
+	
+	// Input Assembler
+	SetInputAssembler();
+
+	// Vertex Shader
 	m_context->VSSetConstantBuffers(0, 1, &m_constantBuffer);
-
-	// Make sure the input assembler knows how to process our verts/indices
-	UINT stride = sizeof(Vertex);
-	UINT offset = 0;
-
-	m_context->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
-	m_context->IASetInputLayout(m_vInputLayout);
-	m_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-
-	// Set the shaders we need to render our line
 	m_context->VSSetShader(m_vertexShader, nullptr, 0);
+
+	// Pixel Shader
 	m_context->PSSetShader(m_pixelShader, nullptr, 0);
 
-	// Set viewport to context, unnecessary so far?
-	//m_context->OMSetRenderTargets(1, &pRenderTargetView, nullptr);
+	// Output Merger
+	m_context->OMSetRenderTargets(1, &m_renderTargetView, nullptr);
 
-	//m_context->RSSetViewports(1, &m_viewport);
+	// Rasterizer
+	m_context->RSSetViewports(1, &m_viewport);
 
 	m_context->Draw(5, 0);
 }
@@ -354,7 +326,6 @@ MyD3d11::~MyD3d11()
 {
 	SafeRelease(m_constantBuffer);
 	SafeRelease(m_vertexBuffer);
-	//SafeRelease(m_IndexBuffer); UNUSED
 	SafeRelease(m_vInputLayout);
 	SafeRelease(m_vertexShader);
 	SafeRelease(m_pixelShader);
