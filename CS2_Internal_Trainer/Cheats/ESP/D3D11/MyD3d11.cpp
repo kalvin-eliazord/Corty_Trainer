@@ -9,6 +9,42 @@ void MyD3d11::SafeRelease(auto* pData)
 	}
 }
 
+bool MyD3d11::WorldToScreen(Vector3 pWorldPos, Vector3& pScreenPos, float* pMatrix, int pWinWidth, int pWinHeight)
+{
+	float matrix[4][4];
+
+	memcpy(matrix, pMatrix, 16 * sizeof(float));
+
+	const float mX{ static_cast<float>(pWinWidth) / 2.0f };
+	const float mY { static_cast<float>(pWinHeight) / 2.0f };
+
+	const float w {
+		matrix[0][3] * pWorldPos.x +
+		matrix[1][3] * pWorldPos.y +
+		matrix[2][3] * pWorldPos.z +
+		matrix[3][3] };
+
+	if (w < 0.65f) return false;
+
+	const float x {
+		matrix[0][0] * pWorldPos.x +
+		matrix[1][0] * pWorldPos.y +
+		matrix[2][0] * pWorldPos.z +
+		matrix[3][0] };
+
+	const float y {
+		matrix[0][1] * pWorldPos.x +
+		matrix[1][1] * pWorldPos.y +
+		matrix[2][1] * pWorldPos.z +
+		matrix[3][1] };
+
+	pScreenPos.x = (mX + mX * x / w);
+	pScreenPos.y = (mY - mY * y / w);
+	pScreenPos.z = 0;
+
+	return true;
+}
+
 bool MyD3d11::SetInputLayout(ID3D10Blob* pCompiledShaderBlob)
 {
 	const D3D11_INPUT_ELEMENT_DESC layout[2] = {
@@ -21,6 +57,8 @@ bool MyD3d11::SetInputLayout(ID3D10Blob* pCompiledShaderBlob)
 	const HRESULT hRes{ m_device->CreateInputLayout(layout, numElements, pCompiledShaderBlob->GetBufferPointer(), pCompiledShaderBlob->GetBufferSize(), &m_vInputLayout) };
 
 	if (FAILED(hRes)) return false;
+
+	return true;
 }
 
 void MyD3d11::SetOrthoMatrix(D3D11_VIEWPORT pViewport)
@@ -93,13 +131,11 @@ bool MyD3d11::SetViewport()
 		m_viewport.TopLeftY = static_cast<FLOAT>(m_hRect.top);
 		m_viewport.MinDepth = 0.0f;
 		m_viewport.MaxDepth = 1.0f;
-		m_context->RSSetViewports(1, &m_viewport);
 
 		return true;
 	}
 
 	m_viewport = m_viewports[0];
-	m_context->RSSetViewports(1, &m_viewport);
 
 	return true;
 }
@@ -313,7 +349,7 @@ void MyD3d11::DrawBox(float pX, float pY, float pWidth, float pHeight, D3DCOLORV
 
 void MyD3d11::TestRender()
 {
-	//this easily lets you debug viewport and ortho matrix
+	//this easily lets you debug viewport and ortho pMatrix
 	//it will draw from top left to bottom right if your viewport is correctly setup
 	DrawLine(0, 0, 640, 360, green);
 	DrawLine(0, 0, 640, -360, red);

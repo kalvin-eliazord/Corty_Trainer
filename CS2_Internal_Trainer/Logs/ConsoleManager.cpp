@@ -63,8 +63,8 @@ void ConsoleManager::PrintCheatOptions()
 	system("cls");
 	PrintMyName();
 	std::cout << "[+] F1 to SWITCH targeted part --> [[" << GetTargetedPart() << "]] \n";
-	std::cout << "[+] AIMBOT: RIGHT click " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
-	std::cout << "[+] ESP   : press F8 " << std::boolalpha << "-->[[" << CheatHKeys::bESP << "]] \n";
+	std::cout << "[+] AIMBOT: RIGHT click to SWITCH " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
+	//std::cout << "[+] ESP  : press F8 " << std::boolalpha << "-->[[" << CheatHKeys::bESP << "]] \n"; TO-DO
 	std::cout << "-------------------------------------------------------------- \n";
 	std::cout << "[+] SMOOTH VALUE  : press F3 (-) or press F4 (+) " << "-->[[" << CheatHKeys::smoothValue << "]] \n";
 	std::cout << "[+] FOV           : press F5 (-) or press F6 (+) " << "-->[[" << CheatHKeys::fovValue << "]] \n";

@@ -10,6 +10,7 @@
 #include "MyD3dUtils.h"
 #include "MyShaders.h"
 #include "MyD3d11_VMT.h"
+#include "Vector3.h"
 
 class MyD3d11
 {
@@ -60,10 +61,11 @@ public:
 	bool InitDraw(IDXGISwapChain* pSwapchain);
 
 	//  Drawing
-	void DrawLine(float x, float y, float x2, float y2, D3DCOLORVALUE color);
-	void DrawLineWH(float x, float y, float width, float height, D3DCOLORVALUE color); //uses 1 vertex + width and height
-	void DrawBox(float x, float y, float width, float height, D3DCOLORVALUE color);
 	void TestRender();
+	void DrawLine(float x, float y, float x2, float y2, D3DCOLORVALUE color);
+	void DrawBox(float x, float y, float width, float height, D3DCOLORVALUE color);
+	void DrawLineWH(float x, float y, float width, float height, D3DCOLORVALUE color); //uses 1 vertex + width and height
+	bool WorldToScreen(Vector3 p3dPos, Vector3& pScreenPos, float* pMatrix, int pWinWidth, int pWinHeigh);
 
 	void SafeRelease(auto* pData);
 	~MyD3d11();

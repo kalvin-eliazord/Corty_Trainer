@@ -1,38 +1,39 @@
 #include "CheatManager.h"
 
-static MyD3d11 gMyD3d11;
+//static MyD3d11 g_myD3d11;
 
-HRESULT __stdcall hkPresent(IDXGISwapChain* pChain, UINT SyncInterval, UINT Flags)
-{
-	if (CheatHKeys::bESP)
-	{
-		if (!gMyD3d11.m_device || gMyD3d11.m_swapChain != pChain)
-			gMyD3d11.InitDraw(pChain);
-
-		//enable this to test or debug viewport
-		gMyD3d11.TestRender();
-	}
-
-	return gMyD3d11.t_presentGateway(pChain, SyncInterval, Flags);
-}
+//HRESULT __stdcall hkPresent(IDXGISwapChain* pChain, UINT pSyncInterval, UINT pFlags)
+//{
+//	if (CheatHKeys::bESP)
+//	{
+//		if (!g_myD3d11.m_device || g_myD3d11.m_swapChain != pChain)
+//			g_myD3d11.InitDraw(pChain);
+//
+//		//enable this to test or debug viewport
+//		g_myD3d11.TestRender();
+//	}
+//
+//	return g_myD3d11.t_presentGateway(pChain, pSyncInterval, pFlags);
+//}
 
 bool CheatManager::Start()
 {
 	ConsoleManager::InitConsole();
 	ConsoleManager::PrintCheatOptions();
 
-	TrampHook tHook(
-		Pointer::steamOverlay, 
-		reinterpret_cast<intptr_t*>(hkPresent),
-		28); // stolen bytes size
+	// To-Do: ESP 
+	//TrampHook tHook(
+	//	Pointer::steamOverlay, 
+	//	reinterpret_cast<intptr_t*>(hkPresent),
+	//	28); // stolen bytes size
 
-	gMyD3d11.t_presentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
+	//g_myD3d11.t_presentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
 
 	Sleep(1500); // Prevent crash when game pointers aren't loaded yet
 
 	GamePointers gamePointers{};
 
-	while (!GetAsyncKeyState(VK_DELETE) & 1)
+	while (!(GetAsyncKeyState(VK_DELETE) & 1))
 	{
 		if (CheatHKeys::IsOptionChanged())
 			ConsoleManager::PrintCheatOptions();

@@ -22,7 +22,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 	{
 		ConsoleManager::PrintErrorPtrInit(gamePointers.GetPointersState());
 
-		while (!GetAsyncKeyState(VK_DELETE) & 1) Sleep(5);
+		while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(5);
 	}
 
 	ConsoleManager::DestroyConsole();
