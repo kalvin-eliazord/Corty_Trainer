@@ -26,14 +26,14 @@ bool TargetManager::IsGameDeathMatch(int16_t* pGameTypeId)
 	constexpr int deathmatchId{ 0x27 };
 	constexpr int deathmatchId2{ 0x2B };
 
-	if (*pGameTypeId != deathmatchId &&
-		*pGameTypeId != (deathmatchId + 1) &&
-		*pGameTypeId != deathmatchId2)
+	switch (*pGameTypeId)
 	{
-		return false;
+	case deathmatchId: return true;
+	case (deathmatchId + 1): return true;
+	case (deathmatchId + 2): return true;
+	case (deathmatchId2): return true;
+	default: return false;
 	}
-
-	return true;
 }
 
 bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
