@@ -18,7 +18,7 @@ private:
 	bool SetViewport();
 	bool CompileShaders();
 	bool SetConstantBuffer();
-	void SetInputAssembler();
+	void SetInputAssembler(D3D_PRIMITIVE_TOPOLOGY pPrimitiveTopology);
 	void SetOrthoMatrix(D3D11_VIEWPORT pViewport);
 	bool SetDeviceContext(IDXGISwapChain* pSwapchain);
 	bool SetInputLayout(ID3D10Blob* pCompiledShaderBlob);
@@ -51,10 +51,13 @@ public:
 	// Output Merger
 	ID3D11RenderTargetView* m_renderTargetView { nullptr};
 
+	bool bIsDrawInit;
+
 	// Hooking
-	using TPresent = HRESULT(__stdcall*)(IDXGISwapChain* pThis, UINT SyncInterval, UINT Flags);
-	void* o_Present;
+	using TPresent = HRESULT(*)(IDXGISwapChain* pSwap, UINT pSyncInterval, UINT pFlags);
+	void* o_present;
 	TPresent t_presentGateway;
+	bool SetPresent();
 
 	// Setup graphic pipeline
 	void BeginDraw();
@@ -67,6 +70,6 @@ public:
 	void DrawLineWH(float x, float y, float width, float height, D3DCOLORVALUE color); //uses 1 vertex + width and height
 	bool WorldToScreen(Vector3 p3dPos, Vector3& pScreenPos, float* pMatrix, int pWinWidth, int pWinHeigh);
 
-	void SafeRelease(auto* pData);
+	void SafeRelease(auto*& pData);
 	~MyD3d11();
 };

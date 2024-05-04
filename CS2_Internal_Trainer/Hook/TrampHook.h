@@ -8,6 +8,7 @@ private:
 	bool bHooked{false};
 
 	intptr_t* srcAddr{};
+	intptr_t stolenBytes;
 	intptr_t stolenBSize{};
 
 	intptr_t* dstAddr{};

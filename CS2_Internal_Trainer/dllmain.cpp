@@ -40,8 +40,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 
 		HANDLE hMainThread{ CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)&MainThread, hModule, NULL, nullptr) };
 
-		if (hMainThread)
-			CloseHandle(hMainThread);
+		if (hMainThread) CloseHandle(hMainThread);
 	}
 
 	return TRUE;
