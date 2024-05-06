@@ -38,6 +38,8 @@ This is a cheating functionality that will allow a player to aim at a target aut
 -  Go to your solution directory, then **x64>Release>** you have now your own .dll
    ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/96b7bdb6-6185-4edd-ad60-08161f43fb7c)
 
+## Why "Corty Trainer" ?
+This is my second name.
 
 ## To-do
 - Add ESP features (I'm on it)
