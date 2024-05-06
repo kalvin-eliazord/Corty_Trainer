@@ -1,5 +1,5 @@
-# CS2 Internal Trainer
-An updated dynamic-linked library aimbot written in C++ for the CS2 game.
+# Corty Trainer
+Corty Trainer is an updated dynamic-linked library aimbot written in C++ for the CS2 game.
 
 ## Features
 - Aimbot 
