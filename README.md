@@ -1,5 +1,5 @@
 # Corty Trainer
-Corty Trainer is an updated dynamic-linked library aimbot written in C++ for the CS2 game.
+Corty Trainer is an updated dynamic-linked library **aimbot** written in C++ for the CS2 game.
 
 ## Features
 - Aimbot 
@@ -11,13 +11,21 @@ Corty Trainer is an updated dynamic-linked library aimbot written in C++ for the
 ## Console Preview
 ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/009fe3bb-e23f-43d4-8b50-739d2811cb92)
 
-## What is an aimbot ?
+# FAQ
+- **What is an aimbot ?**
+  
 This is a cheating functionality that will allow a player to aim at a target automatically.
 
-## How to build the .DLL file ?
-- Turn off antivirus
+- **Why It's not working ?**
+
+If the console appears and there is no pointer error, please disable your antivirus and learn how to build the DLL file just below.
+
+- **Why "Corty" Trainer ?**
+  
+This is my second name.
+
+## How to build the DLL
 - Open the solution with MVS 2022 ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/ea1e187b-f25d-4091-9f80-153009a8480c)
-- Select 
 - Go to configuration properties:
 	- Select **Release** mode
    
@@ -35,11 +43,10 @@ This is a cheating functionality that will allow a player to aim at a target aut
    
    	![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/d633a6b0-ee4a-43ef-8d3b-fc03758a61b0)
 
--  Go to your solution directory, then **x64>Release>** you have now your own .dll
+-  Go to your solution directory, then **x64>Release>** you now have your own DLL
    ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/96b7bdb6-6185-4edd-ad60-08161f43fb7c)
 
-## Why "Corty Trainer" ?
-This is my second name.
+
 
 ## To-do
 - Add ESP features (I'm on it)

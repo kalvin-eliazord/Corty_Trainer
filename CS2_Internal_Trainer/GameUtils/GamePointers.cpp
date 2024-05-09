@@ -87,19 +87,6 @@ intptr_t* GamePointers::GetPatternMatch(const char* pPattern, const HMODULE pMod
 	return patternMatch;
 }
 
-void GamePointers::SetSteamOverlayPtr(HMODULE hModule)
-{
-	if (hModule)
-	{
-		intptr_t* patternMatch{ GetPatternMatch(Signature::SteamOverlay, hModule) };
-
-		if (patternMatch)
-			Pointer::steamOverlay = patternMatch;
-	}
-
-	pointersState["SteamOverlay"] = reinterpret_cast<intptr_t>(Pointer::steamOverlay);
-}
-
 void GamePointers::SetGameTypeIdPtr(HMODULE hModule)
 {
 	if (hModule)
@@ -194,7 +181,7 @@ void GamePointers::SetCGameEntityPtr(HMODULE hModule)
 	pointersState["CGameEntity"] = reinterpret_cast<intptr_t>(Pointer::cGameEntity);
 }
 
-void GamePointers::InitializePointers()
+bool GamePointers::InitPtrs()
 {
 	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
 
@@ -210,11 +197,7 @@ void GamePointers::InitializePointers()
 
 	SetGameStateIdPtr(hClientMod);
 
-	const HMODULE hGameOver{ GetModuleHandleW(L"gameoverlayrenderer64.dll") };
-
-	SetSteamOverlayPtr(hGameOver);
-
-	arePointersInit = ArePointersValid() ? true : false;
+	return ArePointersValid();
 }
 
 bool GamePointers::ArePointersValid()
@@ -246,14 +229,4 @@ bool GamePointers::InitGameTypeIdPtr()
 std::map<std::string, intptr_t> GamePointers::GetPointersState()
 {
 	return pointersState;
-}
-
-bool GamePointers::GetArePointersInit()
-{
-	return arePointersInit;
-}
-
-void GamePointers::Set_bPointersInit(bool p_bInGamePtrInit)
-{
-	arePointersInit = p_bInGamePtrInit;
 }
