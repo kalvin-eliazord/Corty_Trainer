@@ -1,8 +1,6 @@
 #pragma once
 #include "Pointer.h"
 #include "Entity.h"
-#include "Pawn.h"
-#include "Controller.h"
 #include "Vector3.h"
 
 namespace LocalPlayer

@@ -1,12 +1,14 @@
-#include "ConsoleManager.h"
+#include "ConsoleCheatMenu.h"
 
-void ConsoleManager::InitConsole()
+void ConsoleCheatMenu::InitConsole()
 {
 	AllocConsole();
 	freopen_s(&file, "CONOUT$", "w", stdout);
+
+	ConsoleCheatMenu::PrintCheatOptions();
 }
 
-void ConsoleManager::DestroyConsole()
+void ConsoleCheatMenu::DestroyConsole()
 {
 	if (file)
 		fclose(file);
@@ -14,7 +16,7 @@ void ConsoleManager::DestroyConsole()
 	FreeConsole();
 }
 
-void ConsoleManager::PrintMyName()
+void ConsoleCheatMenu::PrintMyName()
 {
 	std::cout << R"(
  _____            _           _____         _                 
@@ -29,7 +31,7 @@ void ConsoleManager::PrintMyName()
 	std::cout << "-------------------------------------------------------------- \n";
 }
 
-void ConsoleManager::PrintErrorPtrInit(std::map <std::string, intptr_t > pPointers)
+void ConsoleCheatMenu::PrintErrorPtrInit(const std::map <std::string, intptr_t >& pPointers)
 {
 	if (!file)
 		InitConsole();
@@ -53,22 +55,23 @@ void ConsoleManager::PrintErrorPtrInit(std::map <std::string, intptr_t > pPointe
 	std::cout << "[+] --> press SUPPR to exit <-- \n";
 }
 
-std::string ConsoleManager::GetTargetedPart()
+std::string ConsoleCheatMenu::GetTargetedPart()
 {
 	 return CheatHKeys::bHeadPos ? "HEAD" : "PELVIS";
 }
 
-void ConsoleManager::PrintCheatOptions()
+void ConsoleCheatMenu::PrintCheatOptions()
 {
 	system("cls");
 	PrintMyName();
-	std::cout << "[+] F1 to SWITCH targeted part --> [[" << GetTargetedPart() << "]] \n";
-	std::cout << "[+] AIMBOT: RIGHT click to SWITCH " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
-	//std::cout << "[+] ESP  : press F8 " << std::boolalpha << "-->[[" << CheatHKeys::bESP << "]] \n"; TO-DO
+	std::cout << "[+] TARGETED PART  : F1 --> [[" << GetTargetedPart() << "]] \n";
+	std::cout << "[+] AIMBOT         : RIGHTCLICK " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
+	std::cout << "[+] ESP            : F8 " << std::boolalpha << "-->[[" << CheatHKeys::bESP << "]] \n";
+	std::cout << "[+] TEAMCHECK      : F9 " << std::boolalpha << "-->[[" << CheatHKeys::bTeamCheck << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
-	std::cout << "[+] SMOOTH VALUE  : press F3 (-) or press F4 (+) " << "-->[[" << CheatHKeys::smoothValue << "]] \n";
-	std::cout << "[+] FOV           : press F5 (-) or press F6 (+) " << "-->[[" << CheatHKeys::fovValue << "]] \n";
-	std::cout << "[+] TARGET LOCKING: press F2 " << std::boolalpha << "                    -->[[" << CheatHKeys::bTargetLock << "]] \n";
+	std::cout << "[+] SMOOTH VALUE   : F3 (-) or F4 (+) " << "-->[[" << CheatHKeys::smoothValue << "]] \n";
+	std::cout << "[+] FOV            : F5 (-) or F6 (+) " << "-->[[" << CheatHKeys::fovValue << "]] \n";
+	std::cout << "[+] TARGET LOCKING : F2 " << std::boolalpha << "                    -->[[" << CheatHKeys::bTargetLock << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
 	std::cout << "[+] --> [[ press SUPPR to exit] ] <-- \n";
 }

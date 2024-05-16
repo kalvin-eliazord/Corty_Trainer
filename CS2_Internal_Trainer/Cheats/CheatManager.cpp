@@ -1,57 +1,54 @@
 #include "CheatManager.h"
 
-static MyD3d11 g_myD3d11;
+MyD3D11 g_myD3d11;
 
 HRESULT hkPresent(IDXGISwapChain* pChain, UINT pSyncInterval, UINT pFlags)
 {
+	if (!g_myD3d11.InitDraw(pChain))
+		return g_myD3d11.t_presentGateway(pChain, pSyncInterval, pFlags);
 
-	if (!g_myD3d11.m_device || g_myD3d11.m_swapChain != pChain)
-	{
-		g_myD3d11.bIsDrawInit = g_myD3d11.InitDraw(pChain);
-	}
-	else if (g_myD3d11.bIsDrawInit)
-	{
-		g_myD3d11.BeginDraw();
-
-		g_myD3d11.TestRender();
-	}
+	CheatManager::Run();
 
 	return g_myD3d11.t_presentGateway(pChain, pSyncInterval, pFlags);
 }
 
-bool CheatManager::Start()
+bool CheatManager::InitHook()
 {
-	ConsoleManager::InitConsole();
-	ConsoleManager::PrintCheatOptions();
+	ConsoleCheatMenu::InitConsole();
 
-	g_myD3d11.SetPresent();
+	// Get original Present address with the dummy device method
+	if (!g_myD3d11.SetO_Present()) return false;
 
+	// Hook original Present address
 	TrampHook tHook(
-		reinterpret_cast<intptr_t*>(g_myD3d11.o_present),
+		reinterpret_cast<intptr_t*>(g_myD3d11.o_Present),
 		reinterpret_cast<intptr_t*>(hkPresent),
-		14);   //stolen bytes size
+		14); // Present stolen bytes size
 
-	g_myD3d11.t_presentGateway = reinterpret_cast<MyD3d11::TPresent>(tHook.GetGateway());
+	if (!tHook.IsHooked()) return false;
 
-	Sleep(1500); // Prevent crash when game pointers aren't loaded yet
+	g_myD3d11.t_presentGateway = reinterpret_cast<MyD3D11::T_Present>(tHook.GetGateway());
 
-	GamePointers gamePointers{};
+	while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(5);
 
-	while (!(GetAsyncKeyState(VK_DELETE) & 1))
+	return true;
+}
+
+bool CheatManager::Run()
+{
+	if (CheatHKeys::IsOptionChanged())
+		ConsoleCheatMenu::PrintCheatOptions();
+
+	// IN game
+	if (*Pointer::gameStateId == GameState::inGameId)
 	{
-		if (CheatHKeys::IsOptionChanged())
-			ConsoleManager::PrintCheatOptions();
+		//if (!patterScan.InitGameTypeIdPtr()) return false;
 
-		// IN game
-		if (*Pointer::gameStateId == GameState::inGameId)
-		{
-			if (!gamePointers.InitGameTypeIdPtr()) return false;
-
-			if (CheatHKeys::bAimbot) AimbotManager::Start();
-		}
-
-		Sleep(5);
+		if (CheatHKeys::bAimbot) Aimbot::Start();
+		if (CheatHKeys::bESP)    ESP::Start();
 	}
+	// else (in waiting room)
+	//  ESP draw the box on myself  TODO
 
 	return true;
 }

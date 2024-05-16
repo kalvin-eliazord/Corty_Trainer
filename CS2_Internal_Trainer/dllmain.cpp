@@ -1,30 +1,21 @@
-#include "Windows.h"
+#include <Windows.h>
 #include "CheatManager.h"
-#include "GamePointers.h"
-#include "ConsoleManager.h"
+#include "PatternScan.h"
+#include "ConsoleCheatMenu.h"
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
-	GamePointers gamePointers;
+	PatternScan patternScan;
 
 	// Initialize game pointers used by the cheat
-	const bool bPtrsResult{ gamePointers.InitPtrs() };
-
-	bool bInGamePtrResult{false};
-
-	if (bPtrsResult)
-		bInGamePtrResult = CheatManager::Start();
-
-	// Pointer initialization error
-	if (!bInGamePtrResult)
+	if (!(patternScan.InitPtrs() && CheatManager::InitHook()))
 	{
-		ConsoleManager::PrintErrorPtrInit(gamePointers.GetPointersState());
+		ConsoleCheatMenu::PrintErrorPtrInit(patternScan.GetPointersState());
 
 		while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(5);
 	}
 
-	ConsoleManager::DestroyConsole();
-
+	ConsoleCheatMenu::DestroyConsole();
 	FreeLibraryAndExitThread(hModule, 0);
 
 	return 0;

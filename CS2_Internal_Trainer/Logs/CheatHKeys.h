@@ -7,7 +7,7 @@ namespace CheatHKeys
     inline bool bHeadPos{ true };
     inline bool bAimbot{ false };
     inline bool bESP{ true };
-
+    inline bool bTeamCheck{ false };
     //inline bool bRCS{ true };
 
     inline int smoothValue{ 0 };

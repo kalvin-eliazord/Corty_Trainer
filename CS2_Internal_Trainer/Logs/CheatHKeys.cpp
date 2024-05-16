@@ -44,6 +44,11 @@ bool CheatHKeys::IsOptionChanged()
 		CheatHKeys::bAimbot = !(CheatHKeys::bAimbot);
 		return true;
 	}
+	else if (GetAsyncKeyState(VK_F9) & 1)
+	{
+		CheatHKeys::bTeamCheck = !CheatHKeys::bTeamCheck;
+		return true;
+	}
 
 	return false;
 }

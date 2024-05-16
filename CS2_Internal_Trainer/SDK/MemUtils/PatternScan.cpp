@@ -1,6 +1,6 @@
-#include "GamePointers.h"
+#include "PatternScan.h"
 
-int GamePointers::GetNumberHex(const char* pPattern)
+int PatternScan::GetNumberHex(const char* pPattern)
 {
 	int count{ 0 };
 
@@ -13,7 +13,7 @@ int GamePointers::GetNumberHex(const char* pPattern)
 	return count;
 }
 
-intptr_t* GamePointers::ScanRegion(const char* pPattern, char* pSrc, intptr_t pRegionSize)
+intptr_t* PatternScan::ScanRegion(const char* pPattern, char* pSrc, intptr_t pRegionSize)
 {
 	const int patternLen{ GetNumberHex(pPattern) };
 
@@ -37,7 +37,7 @@ intptr_t* GamePointers::ScanRegion(const char* pPattern, char* pSrc, intptr_t pR
 	return NULL;
 }
 
-intptr_t* GamePointers::SearchGoodModRegion(const char* pPattern, char* pSrc, size_t pSrcSize)
+intptr_t* PatternScan::SearchGoodModRegion(const char* pPattern, char* pSrc, size_t pSrcSize)
 {
 	MEMORY_BASIC_INFORMATION mbi{};
 
@@ -55,7 +55,7 @@ intptr_t* GamePointers::SearchGoodModRegion(const char* pPattern, char* pSrc, si
 	return NULL;
 }
 
-SIZE_T GamePointers::GetModuleSize(HMODULE pModule)
+SIZE_T PatternScan::GetModuleSize(HMODULE pModule)
 {
 	SIZE_T moduleSize{ NULL };
 
@@ -66,7 +66,7 @@ SIZE_T GamePointers::GetModuleSize(HMODULE pModule)
 	return moduleSize;
 }
 
-intptr_t* GamePointers::GetPatternPointer(intptr_t* pPatternMatch)
+intptr_t* PatternScan::GetPatternPointer(intptr_t* pPatternMatch)
 {
 	// In order to extract the offset only we need to add 3 bytes
 	const int32_t patternOffset{ *reinterpret_cast<int_least32_t*>(reinterpret_cast<intptr_t>(pPatternMatch) + 3) };
@@ -77,7 +77,7 @@ intptr_t* GamePointers::GetPatternPointer(intptr_t* pPatternMatch)
 	return patternPointer;
 }
 
-intptr_t* GamePointers::GetPatternMatch(const char* pPattern, const HMODULE pModule)
+intptr_t* PatternScan::GetPatternMatch(const char* pPattern, const HMODULE pModule)
 {
 	SIZE_T moduleSize{ GetModuleSize(pModule) };
 	if (!moduleSize) return nullptr;
@@ -87,7 +87,7 @@ intptr_t* GamePointers::GetPatternMatch(const char* pPattern, const HMODULE pMod
 	return patternMatch;
 }
 
-void GamePointers::SetGameTypeIdPtr(HMODULE hModule)
+void PatternScan::SetGameTypeIdPtr(HMODULE hModule)
 {
 	if (hModule)
 	{
@@ -105,7 +105,7 @@ void GamePointers::SetGameTypeIdPtr(HMODULE hModule)
 	pointersState["GameTypeIdPtr"] = reinterpret_cast<intptr_t>(Pointer::gameTypeId);
 }
 
-void GamePointers::SetGameStateIdPtr(HMODULE hModule)
+void PatternScan::SetGameStateIdPtr(HMODULE hModule)
 {
 	if (hModule)
 	{
@@ -123,7 +123,7 @@ void GamePointers::SetGameStateIdPtr(HMODULE hModule)
 	pointersState["GameStateId"] = reinterpret_cast<intptr_t>(Pointer::gameStateId);
 }
 
-void GamePointers::SetViewAnglesPtr(HMODULE hModule)
+void PatternScan::SetViewAnglesPtr(HMODULE hModule)
 {
 	if (hModule)
 	{
@@ -144,7 +144,7 @@ void GamePointers::SetViewAnglesPtr(HMODULE hModule)
 	pointersState["Yaw"] = reinterpret_cast<intptr_t>(Pointer::lp_Yaw);
 }
 
-void GamePointers::SetLocalPlayerContPtr(HMODULE hModule)
+void PatternScan::SetLocalPlayerContPtr(HMODULE hModule)
 {
 	if (hModule)
 	{
@@ -157,7 +157,7 @@ void GamePointers::SetLocalPlayerContPtr(HMODULE hModule)
 	pointersState["LP_Controller"] = reinterpret_cast<intptr_t>(Pointer::lp_Controller);
 }
 
-void GamePointers::SetEntListBaseAddrPtr(HMODULE hModule)
+void PatternScan::SetEntListBaseAddrPtr(HMODULE hModule)
 {
 	if (hModule)
 	{
@@ -168,7 +168,7 @@ void GamePointers::SetEntListBaseAddrPtr(HMODULE hModule)
 	pointersState["EntityList"] = reinterpret_cast<intptr_t>(Pointer::entityListBase);
 }
 
-void GamePointers::SetCGameEntityPtr(HMODULE hModule)
+void PatternScan::SetCGameEntityPtr(HMODULE hModule)
 {
 	if (hModule)
 	{
@@ -181,7 +181,20 @@ void GamePointers::SetCGameEntityPtr(HMODULE hModule)
 	pointersState["CGameEntity"] = reinterpret_cast<intptr_t>(Pointer::cGameEntity);
 }
 
-bool GamePointers::InitPtrs()
+void PatternScan::SetViewMatrixPtr(HMODULE hModule)
+{
+	if (hModule)
+	{
+		intptr_t* patternMatch{ GetPatternMatch(Signature::ViewMatrix, hModule) };
+
+		if (patternMatch)
+			Pointer::viewMatrix = reinterpret_cast<float*>(GetPatternPointer(patternMatch));
+	}
+
+	pointersState["ViewMatrix"] = reinterpret_cast<intptr_t>(Pointer::viewMatrix);
+}
+
+bool PatternScan::InitPtrs()
 {
 	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
 
@@ -193,6 +206,8 @@ bool GamePointers::InitPtrs()
 
 	SetViewAnglesPtr(hClientMod);
 
+	SetViewMatrixPtr(hClientMod);
+
 	const HMODULE hInputMod{ GetModuleHandleW(L"inputsystem.dll") };
 
 	SetGameStateIdPtr(hClientMod);
@@ -200,7 +215,7 @@ bool GamePointers::InitPtrs()
 	return ArePointersValid();
 }
 
-bool GamePointers::ArePointersValid()
+bool PatternScan::ArePointersValid()
 {
 	if (pointersState.empty()) return false;
 
@@ -213,7 +228,7 @@ bool GamePointers::ArePointersValid()
 	return true;
 }
 
-bool GamePointers::InitGameTypeIdPtr()
+bool PatternScan::InitGameTypeIdPtr()
 {
 	if (Pointer::gameTypeId) return true;
 
@@ -226,7 +241,7 @@ bool GamePointers::InitGameTypeIdPtr()
 	return true;
 }
 
-std::map<std::string, intptr_t> GamePointers::GetPointersState()
+std::map<std::string, intptr_t> PatternScan::GetPointersState()
 {
 	return pointersState;
 }

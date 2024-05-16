@@ -1,13 +1,11 @@
 #pragma once
-#include "Entity.h"
-#include "Controller.h"
-#include "Pawn.h"
 #include "LocalPlayer.h"
+#include "Entity.h"
 #include "CheatHKeys.h"
 #include <vector>
 #include <bitset>
 
-namespace TargetManager
+namespace Aimbot
 {
 	inline Controller* cTargetLocked{ nullptr };
 
@@ -16,7 +14,7 @@ namespace TargetManager
 
 	bool IsTargetInFov(Vector3& pTargetAngle);
 	bool IsGameDeathMatch(int16_t* pGameTypeId);
-	bool IsGoodTarget(Entity* pEntity, int pEntIndex);
+	bool IsGoodTarget(Entity* pEntityPtr, int pEntIndex);
 	bool ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex);
 
 	float GetMagnitude(const Vector3& pVec);
@@ -26,4 +24,8 @@ namespace TargetManager
 	void NormalizeYaw(float& pYaw);
 	void NormalizePitch(float& pPitch);
 	void SetLpAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue);
+
+	bool Start();
+	bool ShotLockedTarget();
+	bool ShotTarget(Controller* pCTarget);
 };

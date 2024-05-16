@@ -3,15 +3,15 @@
 #include "Pointer.h"
 #include <Windows.h>
 #include <Psapi.h>
-#include <cstdint>
 #include <map>
 #include <string>
 
-class GamePointers
+class PatternScan
 {
 private:
 	std::map<std::string, intptr_t> pointersState;
 	bool ArePointersValid();
+	void SetViewMatrixPtr(HMODULE hModule);
 	void SetGameTypeIdPtr(HMODULE hModule);
 	void SetViewAnglesPtr(HMODULE hModule);
 	void SetGameStateIdPtr(HMODULE hModule);
@@ -39,4 +39,5 @@ namespace Signature
 	inline constexpr char InputSystem[]{ "\x48\x8B\?\?\?\?\?\x48\x8D\?\?\?\x45\x33\?\xE8\?\?\?\?\xF2\x0F" };
 	inline constexpr char CPrediction[]{ "\x48\x8D\?\?\?\?\?\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x83\xEC\?\x8B\x0D" };
 	inline constexpr char WeaponList[]{ "\x48\x89\x0D\?\?\?\?\x48\x83\xC4\x28\x48\xFF\?\?\?\?\?\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8B\?\?\?\?\?\x48\x8D\x0D\?\?\?\?\xE9\?\?\?\?\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8D\x0D\?\?\?\?\xE9\?\?\?\?\xCC\xCC\xCC\xCC\x48\x83\xEC\x28" };
+	inline constexpr char ViewMatrix[]{ "\x48\x8D\x0D\?\?\?\?\x48\xC1\xE0\x06" };
 }

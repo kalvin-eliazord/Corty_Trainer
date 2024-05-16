@@ -72,11 +72,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\GameUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)CEntity;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\GameUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)CEntity;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -154,41 +154,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CEntity\BoneJoint.h" />
-    <ClInclude Include="CEntity\Controller.h" />
-    <ClInclude Include="CEntity\Entity.h" />
-    <ClInclude Include="CEntity\LocalPlayer.h" />
-    <ClInclude Include="CEntity\Pawn.h" />
-    <ClInclude Include="CEntity\Vector3.h" />
-    <ClInclude Include="Cheats\Aimbot\AimbotManager.h" />
-    <ClInclude Include="Cheats\Aimbot\TargetManager.h" />
+    <ClInclude Include="Cheats\Aimbot\Aimbot.h" />
     <ClInclude Include="Cheats\CheatManager.h" />
-    <ClInclude Include="Cheats\ESP\D3D11\MyD3d11.h" />
-    <ClInclude Include="Cheats\ESP\D3D11\MyD3d11_VMT.h" />
+    <ClInclude Include="Cheats\ESP\D3D11\MyD3D11.h" />
+    <ClInclude Include="Cheats\ESP\D3D11\MyD3D11_VMT.h" />
+    <ClInclude Include="Cheats\ESP\D3D11\MyD3D_Utils.h" />
     <ClInclude Include="Cheats\ESP\D3D11\MyShaders.h" />
-    <ClInclude Include="Cheats\ESP\MyD3dUtils.h" />
-    <ClInclude Include="GameUtils\GameState.h" />
-    <ClInclude Include="GameUtils\GamePointers.h" />
+    <ClInclude Include="Cheats\ESP\ESP.h" />
     <ClInclude Include="Hook\TrampHook.h" />
     <ClInclude Include="Logs\CheatHKeys.h" />
-    <ClInclude Include="Logs\ConsoleManager.h" />
-    <ClInclude Include="GameUtils\Offset.h" />
-    <ClInclude Include="GameUtils\Pointer.h" />
+    <ClInclude Include="Logs\ConsoleCheatMenu.h" />
+    <ClInclude Include="SDK\MemUtils\Pointer.h" />
+    <ClInclude Include="SDK\BoneJoint.h" />
+    <ClInclude Include="SDK\Entity.h" />
+    <ClInclude Include="SDK\GameState.h" />
+    <ClInclude Include="SDK\LocalPlayer.h" />
+    <ClInclude Include="SDK\MemUtils\Offset.h" />
+    <ClInclude Include="SDK\MemUtils\PatternScan.h" />
+    <ClInclude Include="SDK\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CEntity\Entity.cpp" />
-    <ClCompile Include="CEntity\LocalPlayer.cpp" />
-    <ClCompile Include="CEntity\Vector3.cpp" />
-    <ClCompile Include="Cheats\Aimbot\AimbotManager.cpp" />
-    <ClCompile Include="Cheats\Aimbot\TargetManager.cpp" />
+    <ClCompile Include="Cheats\Aimbot\Aimbot.cpp" />
     <ClCompile Include="Cheats\CheatManager.cpp" />
-    <ClCompile Include="Cheats\ESP\D3D11\MyD3d11.cpp" />
-    <ClCompile Include="Cheats\ESP\MyD3dUtils.cpp" />
+    <ClCompile Include="Cheats\ESP\D3D11\MyD3D11.cpp" />
+    <ClCompile Include="Cheats\ESP\D3D11\MyD3D_Utils.cpp" />
+    <ClCompile Include="Cheats\ESP\ESP.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="GameUtils\GamePointers.cpp" />
     <ClCompile Include="Hook\TrampHook.cpp" />
     <ClCompile Include="Logs\CheatHKeys.cpp" />
-    <ClCompile Include="Logs\ConsoleManager.cpp" />
+    <ClCompile Include="Logs\ConsoleCheatMenu.cpp" />
+    <ClCompile Include="SDK\Entity.cpp" />
+    <ClCompile Include="SDK\LocalPlayer.cpp" />
+    <ClCompile Include="SDK\MemUtils\PatternScan.cpp" />
+    <ClCompile Include="SDK\Vector3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

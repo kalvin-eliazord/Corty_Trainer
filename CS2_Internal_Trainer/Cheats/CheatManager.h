@@ -1,14 +1,15 @@
 #pragma once
-#include "AimbotManager.h"
+#include "Aimbot.h"
+#include "ESP.h"
 #include "CheatHKeys.h"
-#include "ConsoleManager.h"
+#include "ConsoleCheatMenu.h"
 #include "GameState.h"
 #include "TrampHook.h"
-#include "MyD3d11.h"
-#include "GamePointers.h"
+#include "MyD3D11.h"
 #include "Pointer.h"
 
 namespace CheatManager
 {
-	bool Start();
+	bool InitHook();
+	bool Run();
 };

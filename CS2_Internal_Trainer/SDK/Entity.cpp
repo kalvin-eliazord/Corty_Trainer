@@ -8,6 +8,7 @@ Entity::Entity(Controller* pSrc)
 
 void Entity::SetPawnBase()
 {
+	// Thanks Aimstar 
 	intptr_t* cGameEntityBase{ reinterpret_cast<intptr_t*>(
 	reinterpret_cast<intptr_t>(Pointer::cGameEntity) + 0x10) };
 
@@ -30,6 +31,15 @@ Controller* Entity::GetControllerBase()
 	return cBase;
 }
 
+bool Entity::IsDormant()
+{
+	intptr_t gameSceneNodeBase{ *reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(GetPawnBase()) + Offset::GameSceneNode) };
+
+	bool* bDormantPtr{ reinterpret_cast<bool*>(gameSceneNodeBase + Offset::bDormant) };
+
+	return bDormantPtr ? *bDormantPtr : false;
+}
+
 Pawn* Entity::GetPawnBase()
 {
 	return pawnBase;
@@ -49,11 +59,11 @@ std::bitset<64> Entity::GetSpottedId()
 
 intptr_t* Entity::GetBoneArrayBase()
 {
-	intptr_t gameSceneNodePtr{ reinterpret_cast<intptr_t>(pawnBase) + Offset::GameSceneNode };
+	intptr_t gameSceneNodeBase{ reinterpret_cast<intptr_t>(pawnBase) + Offset::GameSceneNode };
 
-	gameSceneNodePtr = *reinterpret_cast<intptr_t*>(gameSceneNodePtr);
+	gameSceneNodeBase = *reinterpret_cast<intptr_t*>(gameSceneNodeBase);
 
-	return *reinterpret_cast<intptr_t**>(gameSceneNodePtr + Offset::BoneArray);
+	return *reinterpret_cast<intptr_t**>(gameSceneNodeBase + Offset::BoneArray);
 }
 
 Vector3 Entity::GetHeadPos()

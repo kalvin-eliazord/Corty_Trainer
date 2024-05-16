@@ -4,7 +4,7 @@
 #include <map>
 #include <vector>
 
-namespace ConsoleManager
+namespace ConsoleCheatMenu
 {
     inline FILE* file{nullptr};
 
@@ -18,5 +18,5 @@ namespace ConsoleManager
     void DestroyConsole();
     void PrintCheatOptions();
     std::string GetTargetedPart();
-    void PrintErrorPtrInit(std::map <std::string, intptr_t > pAddresses);
+    void PrintErrorPtrInit(const std::map <std::string, intptr_t >& pAddresses);
 };

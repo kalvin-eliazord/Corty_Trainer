@@ -1,6 +1,6 @@
-#include "TargetManager.h"
+#include "Aimbot.h"
 
-bool TargetManager::IsTargetInFov(Vector3& pTargetAngle)
+bool Aimbot::IsTargetInFov(Vector3& pTargetAngle)
 {
 	Vector3 localPlayerAngle{ LocalPlayer::GetPawn()->angles };
 
@@ -12,8 +12,8 @@ bool TargetManager::IsTargetInFov(Vector3& pTargetAngle)
 		deltaAngle = localPlayerAngle - pTargetAngle;
 
 	// Checking if target is in FOV
-	if ((deltaAngle.x < CheatHKeys::fovValue) or (-deltaAngle.x > -CheatHKeys::fovValue) &&
-		(deltaAngle.y < CheatHKeys::fovValue) or (-deltaAngle.y > -CheatHKeys::fovValue))
+	if ((deltaAngle.x < CheatHKeys::fovValue) &&
+		(deltaAngle.y < CheatHKeys::fovValue))
 	{
 		return true;
 	}
@@ -21,10 +21,11 @@ bool TargetManager::IsTargetInFov(Vector3& pTargetAngle)
 	return false;
 }
 
-bool TargetManager::IsGameDeathMatch(int16_t* pGameTypeId)
+bool Aimbot::IsGameDeathMatch(int16_t* pGameTypeId)
 {
 	constexpr int deathmatchId{ 0x27 };
 	constexpr int deathmatchId2{ 0x2B };
+	constexpr int deathmatchId3{ 0x1D };
 
 	switch (*pGameTypeId)
 	{
@@ -32,11 +33,12 @@ bool TargetManager::IsGameDeathMatch(int16_t* pGameTypeId)
 	case (deathmatchId + 1): return true;
 	case (deathmatchId + 2): return true;
 	case (deathmatchId2): return true;
+	case (deathmatchId3): return true;
 	default: return false;
 	}
 }
 
-bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
+bool Aimbot::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 {
 	if (!pEntityPtr->GetIsPawnInit())
 		return false;
@@ -54,12 +56,18 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 	if (entityPawn->health < 1)
 		return false;
 
-	// No Team check when there is no team
-	if (!IsGameDeathMatch(Pointer::gameTypeId))
+	if (CheatHKeys::bTeamCheck)
 	{
 		if (lpPawn->team_variable == entityPawn->team_variable)
 			return false;
 	}
+
+	// No Team check when there is no team UNUSED
+	/*if (!IsGameDeathMatch(Pointer::gameTypeId))
+	{
+		if (lpPawn->team_variable == entityPawn->team_variable)
+			return false;
+	}*/
 
 	if (!ImSpottedAndEntitySpotted(pEntityPtr, pEntIndex))
 		return false;
@@ -67,7 +75,7 @@ bool TargetManager::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 	return true;
 }
 
-bool TargetManager::ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex)
+bool Aimbot::ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex)
 {
 	constexpr int localPlayerId{ 0 };
 
@@ -81,7 +89,7 @@ bool TargetManager::ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex)
 	return true;
 }
 
-Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEnt)
+Controller* Aimbot::GetNearestCTarget(std::vector<Controller*> pTargetsEnt)
 {
 	float oldCoef{ FLT_MAX };
 	Controller* nearestCTarget{ nullptr };
@@ -113,7 +121,7 @@ Controller* TargetManager::GetNearestCTarget(std::vector<Controller*> pTargetsEn
 	return nearestCTarget;
 }
 
-std::vector<Controller*> TargetManager::GetCTargets()
+std::vector<Controller*> Aimbot::GetCTargets()
 {
 	intptr_t* entListBasePtr{ Pointer::entityListBase };
 	std::vector<Controller*> cTargetsEntities{};
@@ -134,39 +142,39 @@ std::vector<Controller*> TargetManager::GetCTargets()
 	return cTargetsEntities;
 }
 
-Controller* TargetManager::GetCTarget()
+Controller* Aimbot::GetCTarget()
 {
 	// Get controller targets
-	std::vector<Controller*> targetsEnts{ TargetManager::GetCTargets() };
+	std::vector<Controller*> targetsEnts{ Aimbot::GetCTargets() };
 	if (targetsEnts.empty()) return nullptr;
 
 	if (targetsEnts.size() > 1)
-		return TargetManager::GetNearestCTarget(targetsEnts);
+		return Aimbot::GetNearestCTarget(targetsEnts);
 
 	return targetsEnts[0];
 }
 
-void TargetManager::NormalizePitch(float& pPitch)
+void Aimbot::NormalizePitch(float& pPitch)
 {
 	pPitch = (pPitch < -89.0f) ? -89.0f : pPitch;
 
 	pPitch = (pPitch > 89.f) ? 89.0f : pPitch;
 }
 
-void TargetManager::NormalizeYaw(float& pYaw)
+void Aimbot::NormalizeYaw(float& pYaw)
 {
 	while (pYaw > 180.f) pYaw -= 360.f;
 
 	while (pYaw < -180.f) pYaw += 360.f;
 }
 
-float TargetManager::GetMagnitude(const Vector3& pVec)
+float Aimbot::GetMagnitude(const Vector3& pVec)
 {
 	return ::sqrtf((pVec.x * pVec.x) +
 		(pVec.y * pVec.y) +
 		(pVec.z * pVec.z));
 }
-Vector3 TargetManager::GetTargetAngle(Vector3 pTargetPos)
+Vector3 Aimbot::GetTargetAngle(Vector3 pTargetPos)
 {
 	Vector3 targetAngle{ NULL };
 	Vector3 lpPos{ LocalPlayer::GetPawn()->lastClipCameraPos };
@@ -185,7 +193,7 @@ Vector3 TargetManager::GetTargetAngle(Vector3 pTargetPos)
 	return targetAngle;
 }
 
-void TargetManager::SetLpAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue)
+void Aimbot::SetLpAngleSmooth(Vector3& pTargetAngle, const int pSmoothValue)
 {
 	float* lp_Pitch{ LocalPlayer::GetPitchPtr() };
 	float* lp_Yaw{ LocalPlayer::GetYawPtr() };
@@ -201,4 +209,68 @@ void TargetManager::SetLpAngleSmooth(Vector3& pTargetAngle, const int pSmoothVal
 
 	if (*lp_Yaw != pTargetAngle.y)
 		*lp_Yaw += deltaAngle.y / pSmoothValue;
+}
+bool Aimbot::Start()
+{
+	Controller* cTarget{ Aimbot::GetCTarget() };
+	if (!cTarget) return false;
+
+	// Updating the target only when the feature is off
+	if (!CheatHKeys::bTargetLock)
+		Aimbot::cTargetLocked = cTarget;
+
+	// Target locking feature
+	if (CheatHKeys::bTargetLock && Aimbot::cTargetLocked)
+		ShotLockedTarget();
+	else
+		ShotTarget(cTarget);
+
+	return true;
+}
+
+bool Aimbot::ShotTarget(Controller* pCTarget)
+{
+	Entity entTarget(pCTarget);
+	Vector3 targetAngle{};
+
+	if (CheatHKeys::bHeadPos)
+		targetAngle = Aimbot::GetTargetAngle(entTarget.GetHeadPos());
+	else
+		targetAngle = Aimbot::GetTargetAngle(entTarget.GetPelvisPos());
+
+	if (!Aimbot::IsTargetInFov(targetAngle))
+		return false;
+
+	if (CheatHKeys::smoothValue)
+		Aimbot::SetLpAngleSmooth(targetAngle, CheatHKeys::smoothValue);
+	else
+		LocalPlayer::SetViewAngle(targetAngle);
+
+	return true;
+}
+
+bool Aimbot::ShotLockedTarget()
+{
+	Entity entTargetLocked(Aimbot::cTargetLocked);
+
+	Vector3 targetLockedAngle{};
+
+	if (CheatHKeys::bHeadPos)
+		targetLockedAngle = Aimbot::GetTargetAngle(entTargetLocked.GetHeadPos());
+	else
+		targetLockedAngle = Aimbot::GetTargetAngle(entTargetLocked.GetPelvisPos());
+
+	if (!Aimbot::IsTargetInFov(targetLockedAngle)) 
+		return false;
+
+	if (CheatHKeys::smoothValue)
+		Aimbot::SetLpAngleSmooth(targetLockedAngle, CheatHKeys::smoothValue);
+	else
+		LocalPlayer::SetViewAngle(targetLockedAngle);
+
+	// Locking at target until he die
+	if (entTargetLocked.GetPawnBase()->health < 1)
+		Aimbot::cTargetLocked = nullptr;
+
+	return true;
 }
