@@ -47,13 +47,6 @@ bool ESP::IsGoodTarget(Entity* pCurrEntPtr)
 			return false;
 	}
 
-	// No Team check when there is no team UNUSED
-	/*if (!IsGameDeathMatch(Pointer::gameTypeId))
-	{
-		if (lpPawn->team_variable == currEntPawn->team_variable)
-			return false;
-	}*/
-
 	return true;
 }
 

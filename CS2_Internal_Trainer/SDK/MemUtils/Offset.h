@@ -3,6 +3,7 @@
 
 namespace Offset
 {
+	inline constexpr int32_t GameModeRules{ 0xD88 };
 	inline constexpr int32_t bDormant{ 0xE7 }; // pawnBase + GameSceneNode + bDormant
 	inline constexpr int32_t Lp_Yaw{ 0x5394 };
 	inline constexpr int32_t EntityList{ 0x10 };

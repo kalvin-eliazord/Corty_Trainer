@@ -41,6 +41,9 @@
     <Filter Include="Cheats Features\ESP\D3d11">
       <UniqueIdentifier>{70e8c3e6-db57-4755-a464-88e101053d45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SDK\GameState">
+      <UniqueIdentifier>{76d3c3f2-a2fb-422c-ae2a-373df82ec145}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hook\TrampHook.h">
@@ -82,9 +85,6 @@
     <ClInclude Include="SDK\BoneJoint.h">
       <Filter>SDK\Bone</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\GameState.h">
-      <Filter>SDK</Filter>
-    </ClInclude>
     <ClInclude Include="Cheats\ESP\D3D11\MyD3D_Utils.h">
       <Filter>Cheats Features\ESP\D3d11</Filter>
     </ClInclude>
@@ -96,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="SDK\MemUtils\Pointer.h">
       <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\GameState.h">
+      <Filter>SDK\GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="SDK\MemUtils\PatternScan.cpp">
       <Filter>SDK\MemUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\GameState.cpp">
+      <Filter>SDK\GameState</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -87,24 +87,6 @@ intptr_t* PatternScan::GetPatternMatch(const char* pPattern, const HMODULE pModu
 	return patternMatch;
 }
 
-void PatternScan::SetGameTypeIdPtr(HMODULE hModule)
-{
-	if (hModule)
-	{
-		intptr_t* patternMatch{ GetPatternMatch(Signature::WeaponList, hModule) };
-
-		if (patternMatch)
-		{
-			intptr_t* weaponListBasePtr{ *reinterpret_cast<intptr_t**>(GetPatternPointer(patternMatch)) };
-
-			if (weaponListBasePtr)
-				Pointer::gameTypeId = reinterpret_cast<int16_t*>((reinterpret_cast<intptr_t>(weaponListBasePtr) + Offset::GameTypeId));
-		}
-	}
-
-	pointersState["GameTypeIdPtr"] = reinterpret_cast<intptr_t>(Pointer::gameTypeId);
-}
-
 void PatternScan::SetGameStateIdPtr(HMODULE hModule)
 {
 	if (hModule)
@@ -181,6 +163,19 @@ void PatternScan::SetCGameEntityPtr(HMODULE hModule)
 	pointersState["CGameEntity"] = reinterpret_cast<intptr_t>(Pointer::cGameEntity);
 }
 
+void PatternScan::SetGameRulesPtr(HMODULE hModule)
+{
+	if (hModule)
+	{
+		intptr_t* patternMatch{ GetPatternMatch(Signature::GameRules, hModule) };
+
+		if (patternMatch)
+			Pointer::gameRules = reinterpret_cast<intptr_t*>(GetPatternPointer(patternMatch));
+	}
+
+	pointersState["GameRules"] = reinterpret_cast<intptr_t>(Pointer::gameRules);
+}
+
 void PatternScan::SetViewMatrixPtr(HMODULE hModule)
 {
 	if (hModule)
@@ -224,19 +219,6 @@ bool PatternScan::ArePointersValid()
 		if (!pointer.second)
 			return false;
 	}
-
-	return true;
-}
-
-bool PatternScan::InitGameTypeIdPtr()
-{
-	if (Pointer::gameTypeId) return true;
-
-	const HMODULE hClientMod{ GetModuleHandleW(L"client.dll") };
-
-	SetGameTypeIdPtr(hClientMod);
-
-	if (!ArePointersValid()) return false;
 
 	return true;
 }

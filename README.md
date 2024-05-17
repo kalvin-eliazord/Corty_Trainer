@@ -1,5 +1,5 @@
 # Corty Trainer
-Corty Trainer is an updated dynamic-linked library **aimbot** written in C++ for the CS2 game.
+Corty Trainer is an updated dynamic-linked library **cheat** written in C++ for the CS2 game.
 
 ## Features
 - Aimbot 
@@ -7,7 +7,9 @@ Corty Trainer is an updated dynamic-linked library **aimbot** written in C++ for
 	- Target locking
 	- FOV
 	- Head or Pelvis focus
-
+- ESP
+	- Line Distance
+   
 ## Console Preview
 ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/009fe3bb-e23f-43d4-8b50-739d2811cb92)
 
@@ -45,7 +47,6 @@ This is my second name.
 
 -  Go to your solution directory, then **x64>Release>** you now have your own DLL
    ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/96b7bdb6-6185-4edd-ad60-08161f43fb7c)
-
 
 
 ## To-do

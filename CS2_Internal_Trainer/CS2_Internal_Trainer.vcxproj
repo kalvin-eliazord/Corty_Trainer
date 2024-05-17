@@ -180,6 +180,7 @@
     <ClCompile Include="Cheats\ESP\D3D11\MyD3D_Utils.cpp" />
     <ClCompile Include="Cheats\ESP\ESP.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="SDK\GameState.cpp" />
     <ClCompile Include="Hook\TrampHook.cpp" />
     <ClCompile Include="Logs\CheatHKeys.cpp" />
     <ClCompile Include="Logs\ConsoleCheatMenu.cpp" />

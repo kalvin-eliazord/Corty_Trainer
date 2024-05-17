@@ -13,7 +13,6 @@ namespace Aimbot
 	std::vector<Controller*> GetCTargets();
 
 	bool IsTargetInFov(Vector3& pTargetAngle);
-	bool IsGameDeathMatch(int16_t* pGameTypeId);
 	bool IsGoodTarget(Entity* pEntityPtr, int pEntIndex);
 	bool ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex);
 

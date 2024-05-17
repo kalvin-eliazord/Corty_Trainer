@@ -71,7 +71,7 @@ void ConsoleCheatMenu::PrintCheatOptions()
 	std::cout << "-------------------------------------------------------------- \n";
 	std::cout << "[+] SMOOTH VALUE   : F3 (-) or F4 (+) " << "-->[[" << CheatHKeys::smoothValue << "]] \n";
 	std::cout << "[+] FOV            : F5 (-) or F6 (+) " << "-->[[" << CheatHKeys::fovValue << "]] \n";
-	std::cout << "[+] TARGET LOCKING : F2 " << std::boolalpha << "                    -->[[" << CheatHKeys::bTargetLock << "]] \n";
+	std::cout << "[+] TARGET LOCKING : F2 " << std::boolalpha << "              -->[[" << CheatHKeys::bTargetLock << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
 	std::cout << "[+] --> [[ press SUPPR to exit] ] <-- \n";
 }

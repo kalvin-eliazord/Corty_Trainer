@@ -21,23 +21,6 @@ bool Aimbot::IsTargetInFov(Vector3& pTargetAngle)
 	return false;
 }
 
-bool Aimbot::IsGameDeathMatch(int16_t* pGameTypeId)
-{
-	constexpr int deathmatchId{ 0x27 };
-	constexpr int deathmatchId2{ 0x2B };
-	constexpr int deathmatchId3{ 0x1D };
-
-	switch (*pGameTypeId)
-	{
-	case deathmatchId: return true;
-	case (deathmatchId + 1): return true;
-	case (deathmatchId + 2): return true;
-	case (deathmatchId2): return true;
-	case (deathmatchId3): return true;
-	default: return false;
-	}
-}
-
 bool Aimbot::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 {
 	if (!pEntityPtr->GetIsPawnInit())
@@ -61,13 +44,6 @@ bool Aimbot::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 		if (lpPawn->team_variable == entityPawn->team_variable)
 			return false;
 	}
-
-	// No Team check when there is no team UNUSED
-	/*if (!IsGameDeathMatch(Pointer::gameTypeId))
-	{
-		if (lpPawn->team_variable == entityPawn->team_variable)
-			return false;
-	}*/
 
 	if (!ImSpottedAndEntitySpotted(pEntityPtr, pEntIndex))
 		return false;

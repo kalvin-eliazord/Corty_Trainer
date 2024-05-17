@@ -42,8 +42,6 @@ bool CheatManager::Run()
 	// IN game
 	if (*Pointer::gameStateId == GameState::inGameId)
 	{
-		//if (!patterScan.InitGameTypeIdPtr()) return false;
-
 		if (CheatHKeys::bAimbot) Aimbot::Start();
 		if (CheatHKeys::bESP)    ESP::Start();
 	}

@@ -1,34 +1,35 @@
 #include "TrampHook.h"
 
-TrampHook::TrampHook(intptr_t* pSrcAddr, intptr_t* pDstAddr)
+TrampHook::TrampHook(intptr_t* pSrcAddr, intptr_t* pDstAddr, int pStolenBSize)
 	: srcAddr{ pSrcAddr }
 	, dstAddr{ pDstAddr }
+	, stolenBSize{ pStolenBSize }
 {
-	bHooked = InitGateway(pSrcAddr, pDstAddr);
+	bHooked = InitGateway(pSrcAddr, pDstAddr, pStolenBSize);
 }
 
-bool TrampHook::InitGateway(intptr_t* pSrcAddr, intptr_t* pDstAddr)
+bool TrampHook::InitGateway(intptr_t* pSrcAddr, intptr_t* pDstAddr, int pStolenBSize)
 {
 	// Save source stolen bytes (for unhook later)
 	DWORD oldSrcProtect{};
-	VirtualProtect(pSrcAddr, jmpSize, PAGE_EXECUTE_READWRITE, &oldSrcProtect);
-	memcpy(&stolenBytes, pSrcAddr, jmpSize);
+	VirtualProtect(pSrcAddr, pStolenBSize, PAGE_EXECUTE_READWRITE, &oldSrcProtect);
+	memcpy(&stolenBytes, pSrcAddr, pStolenBSize);
 
 	// NOP original Steam Hook instruction
 	memset(pSrcAddr, 0x90, 5);
-	VirtualProtect(pSrcAddr, jmpSize, oldSrcProtect, &oldSrcProtect);
+	VirtualProtect(pSrcAddr, pStolenBSize, oldSrcProtect, &oldSrcProtect);
 
 	// Alloc Gateway into the game memory
 	gatewayAddr = static_cast<intptr_t*>(VirtualAlloc(
 		NULL,
-		(jmpSize * 2) + sizeof(bool),
+		pStolenBSize + jmpSize,
 		MEM_COMMIT | MEM_RESERVE,
 		PAGE_EXECUTE_READWRITE));
 
 	if (!gatewayAddr) return false;
 
 	// Put stolen bytes into gateway
-	memcpy(gatewayAddr, pSrcAddr, jmpSize);
+	memcpy(gatewayAddr, pSrcAddr, pStolenBSize);
 
 	BYTE jmpSrc[14]
 	{
@@ -42,17 +43,17 @@ bool TrampHook::InitGateway(intptr_t* pSrcAddr, intptr_t* pDstAddr)
 
 	// Put JMP in gateway
 	memcpy(
-		reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(gatewayAddr) + jmpSize)
+		reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(gatewayAddr) + pStolenBSize)
 		, &jmpSrc
 		, jmpSize);
 
-	return HookSource(pSrcAddr, pDstAddr);
+	return HookSource(pSrcAddr, pDstAddr, pStolenBSize);
 }
 
-bool TrampHook::HookSource(intptr_t* pSrcAddr, intptr_t* pDstAddr)
+bool TrampHook::HookSource(intptr_t* pSrcAddr, intptr_t* pDstAddr, int pStolenBSize)
 {
 	DWORD oldProtect{};
-	VirtualProtect(pSrcAddr, jmpSize, PAGE_EXECUTE_READWRITE, &oldProtect);
+	VirtualProtect(pSrcAddr, pStolenBSize, PAGE_EXECUTE_READWRITE, &oldProtect);
 
 	BYTE jmpDst[14]
 	{
@@ -64,12 +65,12 @@ bool TrampHook::HookSource(intptr_t* pSrcAddr, intptr_t* pDstAddr)
 	memcpy(jmpDst + 6, &pDstAddr, 8);
 
 	// NOP stolen bytes
-	memset(pSrcAddr, 0x90, jmpSize);
+	memset(pSrcAddr, 0x90, pStolenBSize);
 
 	// Put JMP in source
 	memcpy(pSrcAddr, jmpDst, jmpSize);
 
-	VirtualProtect(pSrcAddr, jmpSize, oldProtect, &oldProtect);
+	VirtualProtect(pSrcAddr, pStolenBSize, oldProtect, &oldProtect);
 
 	return true;
 }
@@ -89,13 +90,13 @@ void TrampHook::Unhook()
 	if (bHooked)
 	{
 		DWORD oldProtect{};
-		VirtualProtect(srcAddr, jmpSize, PAGE_EXECUTE_READWRITE, &oldProtect);
+		VirtualProtect(srcAddr, stolenBSize, PAGE_EXECUTE_READWRITE, &oldProtect);
 
-		memcpy(srcAddr, &stolenBytes, jmpSize);
+		memcpy(srcAddr, &stolenBytes, stolenBSize);
 
-		VirtualFree(gatewayAddr, 0, MEM_RELEASE); //TODO
+		VirtualFree(gatewayAddr, 0, MEM_RELEASE);
 
-		VirtualProtect(srcAddr, jmpSize, oldProtect, &oldProtect);
+		VirtualProtect(srcAddr, stolenBSize, oldProtect, &oldProtect);
 
 		bHooked = false;
 	}
