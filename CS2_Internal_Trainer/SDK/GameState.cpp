@@ -1,10 +1,22 @@
 #include "GameState.h"
 
-bool GameState::IsGameDeathMatch()
+bool GameState::IsDeathMatch()
 {
-	constexpr intptr_t deathmatchId{ 0x7FFC52B757E0 };
+	const intptr_t deathMatchPtr { GamePointers::ReadMemory(GamePointers::GetGameRulesPtr(), {MyOffset::CS_GameRules::GameModeRules, 0x30}) };
+	return deathMatchPtr ? true : false;
+}
 
-	const intptr_t gameModeRulesId{ *reinterpret_cast<intptr_t*>(reinterpret_cast<intptr_t>(Pointer::gameRules) + Offset::GameModeRules) };
+bool GameState::IsMatchStarted()
+{
+	const int matchStateId { GamePointers::GetMatchStateId()};
 
-	return gameModeRulesId == deathmatchId ? true : false;
+	switch (matchStateId)
+	{
+	case IN_GAME: return true;
+	case IN_LOBBY: return false;
+	case NO_STATE: return false;
+	default: return false;
+	}
+	
+	return false;
 }

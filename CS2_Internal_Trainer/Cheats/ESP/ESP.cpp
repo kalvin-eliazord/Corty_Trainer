@@ -1,74 +1,75 @@
 #include "ESP.h"
 
-std::vector<Controller*> ESP::GetCTargets()
+std::vector<Entity> ESP::GetValidTargets()
 {
-	intptr_t* entListBasePtr{ Pointer::entityListBase };
-	std::vector<Controller*> cTargetsEntities{};
+	std::vector<Entity> cTargets{};
 
 	for (int i{ 0 }; i < 64; ++i)
 	{
-		Entity currEntity(*reinterpret_cast<Controller**>(
-			reinterpret_cast<intptr_t>(entListBasePtr)
-			+ (i + 1)
-			* 0x78));
+		Entity currEntity(*GamePointers::GetEntityPtr(i));
 
 		if (!IsGoodTarget(&currEntity))
 			continue;
 
-		cTargetsEntities.push_back(currEntity.GetControllerBase());
+		cTargets.push_back(currEntity);
 	}
 
-	return cTargetsEntities;
+	return cTargets;
 }
 
 bool ESP::IsGoodTarget(Entity* pCurrEntPtr)
 {
-	if (!pCurrEntPtr->GetIsPawnInit())
+	if (!pCurrEntPtr->IsEntInit())
 		return false;
 
-	Pawn* lpPawn{ LocalPlayer::GetPawn() };
-	if (!lpPawn) return false;
+	if (!LocalPlayer::GetEntity().IsEntInit()) return false;
+	Pawn lpPawn{ LocalPlayer::GetPawn() };
 
-	Pawn* currEntPawn{ pCurrEntPtr->GetPawnBase() };
+	Pawn currEntPawn{ pCurrEntPtr->GetPawnBase() };
 
-	if (lpPawn == currEntPawn)
+	if (LocalPlayer::GetController().sEntName == pCurrEntPtr->GetCBase().sEntName)
 		return false;
 
-	// Entity dead
-	if (currEntPawn->health < 1)
+	if (currEntPawn.iHealth < 1)
 		return false;
 
-	if (pCurrEntPtr->IsDormant())
+	if (currEntPawn.bDormant)
 		return false;
 	
 	if (CheatHKeys::bTeamCheck)
 	{
-		if (lpPawn->team_variable == currEntPawn->team_variable)
+		if (lpPawn.iTeamNum == currEntPawn.iTeamNum)
 			return false;
 	}
 
 	return true;
 }
 
+bool ESP::SnapLineTo(Vector3 pEntPos, float pWinWidth, float pWinHeight)
+{
+	Vector3 currEntScreenPos{};
+	if (!MyD3D_Utils::WorldToScreen(pEntPos, currEntScreenPos, GamePointers::GetViewMatrixPtr(), pWinWidth, pWinHeight))
+		return false;
+
+	g_myD3d11.DrawLine(currEntScreenPos.x, currEntScreenPos.y, pWinWidth / 2, pWinHeight / 2, MyD3D_Utils::blue);
+
+	return true;
+}
+
 bool ESP::Start()
 {
-	std::vector<Controller*> cTargets{ GetCTargets() };
+	std::vector<Entity> cTargets{ GetValidTargets() };
 	if (cTargets.empty()) return false;
 
 	const float winWidth{ g_myD3d11.m_viewport.Width };
 	const float winHeight{ g_myD3d11.m_viewport.Height };
 
-	for (const auto& currTarget : cTargets)
+	for (auto& currTarget : cTargets)
 	{
-		Entity currEnt(currTarget);
-		
-		Vector3 currEntPos { currEnt.GetPawnBase()->lastClipCameraPos };
+		Vector3 currEntPos { currTarget.GetPawnBase().headBonePos};
 
-		Vector3 currEntScreenPos{};
-		if (!MyD3D_Utils::WorldToScreen(currEntPos, currEntScreenPos, Pointer::viewMatrix, winWidth, winHeight))
-			break;
-
-		g_myD3d11.DrawLine(currEntScreenPos.x, currEntScreenPos.y, winWidth/2, winHeight/2, MyD3D_Utils::blue);
+		if (!SnapLineTo(currEntPos, winWidth, winHeight))
+			continue;
 	}
 
 	return true;

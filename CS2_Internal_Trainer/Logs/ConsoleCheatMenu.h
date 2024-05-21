@@ -17,6 +17,6 @@ namespace ConsoleCheatMenu
     void PrintMyName();
     void DestroyConsole();
     void PrintCheatOptions();
-    std::string GetTargetedPart();
-    void PrintErrorPtrInit(const std::map <std::string, intptr_t >& pAddresses);
+    std::string_view GetTargetedPart();
+    void PrintErrorPtrInit(const std::map <std::string_view, intptr_t >& pAddresses);
 };

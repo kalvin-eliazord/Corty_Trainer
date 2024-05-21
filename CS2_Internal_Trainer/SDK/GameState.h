@@ -1,13 +1,19 @@
 #pragma once
 #include <cstdint>
-#include "Pointer.h"
-#include "Offset.h"
+#include "MyOffset.h"
+#include "GamePointers.h"
 
 namespace GameState
 {
-	inline constexpr int16_t inGameId{ 8 };
-	inline constexpr int16_t notInGameId{ 4 };
-	inline int16_t oldGameStateId{ NULL };
+	enum GameStateId
+	{
+		NO_STATE,
+		IN_LOBBY = 4,
+		IN_GAME = 8
+	};
+
 	inline bool bDefaultChange{ false };
-	bool IsGameDeathMatch();
+	static constexpr intptr_t deathmatchId{ 0x7FFC52B757E0 };
+	bool IsDeathMatch();
+	bool IsMatchStarted();
 };

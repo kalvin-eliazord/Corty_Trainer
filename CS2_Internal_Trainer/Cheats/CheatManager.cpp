@@ -39,14 +39,21 @@ bool CheatManager::Run()
 	if (CheatHKeys::IsOptionChanged())
 		ConsoleCheatMenu::PrintCheatOptions();
 
-	// IN game
-	if (*Pointer::gameStateId == GameState::inGameId)
+	if (GameState::IsMatchStarted())
 	{
+		// Removing TeamCheck by default when in DeathMatch
+		if(!CheatHKeys::bInitTeamCheck && CheatHKeys::SetTeamCheckDefaultValue(GameState::IsDeathMatch()))
+			ConsoleCheatMenu::PrintCheatOptions();
+
+		// Cheat Features
 		if (CheatHKeys::bAimbot) Aimbot::Start();
 		if (CheatHKeys::bESP)    ESP::Start();
 	}
-	// else (in waiting room)
-	//  ESP draw the box on myself  TODO
+	else
+	{
+		CheatHKeys::bInitTeamCheck = false;
+		//TODO: ESP->draw the box on myself
+	}
 
 	return true;
 }

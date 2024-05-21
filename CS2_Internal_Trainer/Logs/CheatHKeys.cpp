@@ -29,7 +29,8 @@ bool CheatHKeys::IsOptionChanged()
 		CheatHKeys::fovValue -= 10;
 		return true;
 	}
-	else if (GetAsyncKeyState(VK_F6) & 1)
+	else if (GetAsyncKeyState(VK_F6) & 1 &&
+		CheatHKeys::fovValue < 100)
 	{
 		CheatHKeys::fovValue += 10;
 		return true;
@@ -47,6 +48,18 @@ bool CheatHKeys::IsOptionChanged()
 	else if (GetAsyncKeyState(VK_F9) & 1)
 	{
 		CheatHKeys::bTeamCheck = !CheatHKeys::bTeamCheck;
+		return true;
+	}
+
+	return false;
+}
+
+bool CheatHKeys::SetTeamCheckDefaultValue(bool pIsDeathMatch)
+{
+	if (pIsDeathMatch)
+	{
+		CheatHKeys::bTeamCheck = false;
+		bInitTeamCheck = true;
 		return true;
 	}
 

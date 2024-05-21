@@ -2,37 +2,51 @@
 
 Entity LocalPlayer::GetEntity()
 {
-	static Entity localPlayer(*reinterpret_cast<Controller**>(Pointer::lp_Controller));
-
-	return localPlayer;
+	Entity lpEntityPtr(GamePointers::GetLpControllerPtr());
+	return lpEntityPtr;
 }
 
-Controller* LocalPlayer::GetController()
+Controller LocalPlayer::GetController()
 {
-	return GetEntity().GetControllerBase();
+	return GetEntity().GetCBase();
 }
 
-Pawn* LocalPlayer::GetPawn()
+Pawn LocalPlayer::GetPawn()
 {
 	return GetEntity().GetPawnBase();
 }
 
-float* LocalPlayer::GetPitchPtr()
+Vector3* LocalPlayer::GetViewAnglesPtr()
 {
-	static float* pitchPtr { static_cast<float*>(Pointer::lp_Pitch) };
-
-	return pitchPtr;
+	Vector3* viewAngles{ GamePointers::GetViewAnglesPtr() };
+	return viewAngles;
 }
 
-float* LocalPlayer::GetYawPtr()
+bool LocalPlayer::SetViewAngles(const Vector3& targetAngle)
 {
-	static float* yawPtr { static_cast<float*>(Pointer::lp_Yaw) };
+	Vector3* viewAnglesPtr{ GamePointers::GetViewAnglesPtr() };
 
-	return yawPtr;
+	if (!viewAnglesPtr) return false;
+
+	viewAnglesPtr->x = targetAngle.x;
+	viewAnglesPtr->y = targetAngle.y;
+
+	return true;
 }
 
-void LocalPlayer::SetViewAngle(const Vector3& targetAngle)
+bool LocalPlayer::SetSmoothViewAngles(Vector3 pTargetAngle, const int pSmoothValue)
 {
-	*GetPitchPtr() = targetAngle.x;
-	*GetYawPtr() = targetAngle.y;
+	Vector3* lpViewAngles{ GamePointers::GetViewAnglesPtr() };
+
+	Vector3 deltaAngle{  pTargetAngle - *lpViewAngles };
+
+	Aimbot::NormalizeYaw(deltaAngle.y);
+
+	if (lpViewAngles->x != pTargetAngle.x)
+		lpViewAngles->x += deltaAngle.x / pSmoothValue;
+
+	if (lpViewAngles->y != pTargetAngle.y)
+		lpViewAngles->y += deltaAngle.y / pSmoothValue;
+
+	return true;
 }

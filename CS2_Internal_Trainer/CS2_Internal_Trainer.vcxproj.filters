@@ -26,9 +26,6 @@
     <Filter Include="SDK\MyVector">
       <UniqueIdentifier>{60216af8-acfd-458c-b532-cd64cd5f21ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SDK\MemUtils">
-      <UniqueIdentifier>{04f910de-55ac-41fb-983d-2885ea8a47eb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Cheats Features">
       <UniqueIdentifier>{a4ea7340-a01d-4fcd-9e41-3a57743dd886}</UniqueIdentifier>
     </Filter>
@@ -43,6 +40,9 @@
     </Filter>
     <Filter Include="SDK\GameState">
       <UniqueIdentifier>{76d3c3f2-a2fb-422c-ae2a-373df82ec145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\CS2_Dumper">
+      <UniqueIdentifier>{c747f8e4-6bf7-447d-a52f-6b1b2cba2698}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -88,17 +88,74 @@
     <ClInclude Include="Cheats\ESP\D3D11\MyD3D_Utils.h">
       <Filter>Cheats Features\ESP\D3d11</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\MemUtils\Offset.h">
-      <Filter>SDK\MemUtils</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\MemUtils\PatternScan.h">
-      <Filter>SDK\MemUtils</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\MemUtils\Pointer.h">
-      <Filter>SDK</Filter>
-    </ClInclude>
     <ClInclude Include="SDK\GameState.h">
       <Filter>SDK\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\animationsystem.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\buttons.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\client.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\engine2.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\host.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\interfaces.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\materialsystem2.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\networksystem.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\offsets.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\panorama.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\particles.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\pulse_system.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\rendersystemdx11.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\resourcesystem.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\scenesystem.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\schemasystem.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\server.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\soundsystem.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\vphysics2.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CS2_Dumper\worldrenderer.dll.hpp">
+      <Filter>SDK\CS2_Dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\GamePointers.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\MyOffset.h">
+      <Filter>SDK</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -138,11 +195,11 @@
     <ClCompile Include="Cheats\ESP\D3D11\MyD3D_Utils.cpp">
       <Filter>Cheats Features\ESP\D3d11</Filter>
     </ClCompile>
-    <ClCompile Include="SDK\MemUtils\PatternScan.cpp">
-      <Filter>SDK\MemUtils</Filter>
-    </ClCompile>
     <ClCompile Include="SDK\GameState.cpp">
       <Filter>SDK\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\GamePointers.cpp">
+      <Filter>SDK</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

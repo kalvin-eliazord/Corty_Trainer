@@ -72,11 +72,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)SDK\CS2_Dumper;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)SDK\CS2_Dumper;</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -164,13 +164,32 @@
     <ClInclude Include="Hook\TrampHook.h" />
     <ClInclude Include="Logs\CheatHKeys.h" />
     <ClInclude Include="Logs\ConsoleCheatMenu.h" />
-    <ClInclude Include="SDK\MemUtils\Pointer.h" />
+    <ClInclude Include="SDK\CS2_Dumper\animationsystem.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\buttons.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\client.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\engine2.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\host.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\interfaces.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\materialsystem2.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\networksystem.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\offsets.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\panorama.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\particles.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\pulse_system.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\rendersystemdx11.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\resourcesystem.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\scenesystem.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\schemasystem.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\server.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\soundsystem.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\vphysics2.dll.hpp" />
+    <ClInclude Include="SDK\CS2_Dumper\worldrenderer.dll.hpp" />
     <ClInclude Include="SDK\BoneJoint.h" />
     <ClInclude Include="SDK\Entity.h" />
     <ClInclude Include="SDK\GameState.h" />
     <ClInclude Include="SDK\LocalPlayer.h" />
-    <ClInclude Include="SDK\MemUtils\Offset.h" />
-    <ClInclude Include="SDK\MemUtils\PatternScan.h" />
+    <ClInclude Include="SDK\MyOffset.h" />
+    <ClInclude Include="SDK\GamePointers.h" />
     <ClInclude Include="SDK\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +205,7 @@
     <ClCompile Include="Logs\ConsoleCheatMenu.cpp" />
     <ClCompile Include="SDK\Entity.cpp" />
     <ClCompile Include="SDK\LocalPlayer.cpp" />
-    <ClCompile Include="SDK\MemUtils\PatternScan.cpp" />
+    <ClCompile Include="SDK\GamePointers.cpp" />
     <ClCompile Include="SDK\Vector3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

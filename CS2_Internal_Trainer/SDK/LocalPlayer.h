@@ -1,14 +1,15 @@
 #pragma once
-#include "Pointer.h"
+#include "GamePointers.h"
 #include "Entity.h"
 #include "Vector3.h"
+#include "Aimbot.h"
 
 namespace LocalPlayer
 {
-	Pawn* GetPawn();
+	Pawn GetPawn();
 	Entity GetEntity();
-	float* GetYawPtr();
-	float* GetPitchPtr();
-	Controller* GetController();
-	void SetViewAngle(const Vector3& targetAngle);
+	Controller GetController();
+	Vector3* GetViewAnglesPtr();
+	bool SetViewAngles(const Vector3& targetAngle);
+	bool SetSmoothViewAngles(Vector3 pTargetAngle, const int pSmoothValue);
 };

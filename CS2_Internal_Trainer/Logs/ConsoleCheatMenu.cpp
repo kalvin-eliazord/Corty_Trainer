@@ -31,7 +31,7 @@ void ConsoleCheatMenu::PrintMyName()
 	std::cout << "-------------------------------------------------------------- \n";
 }
 
-void ConsoleCheatMenu::PrintErrorPtrInit(const std::map <std::string, intptr_t >& pPointers)
+void ConsoleCheatMenu::PrintErrorPtrInit(const std::map <std::string_view, intptr_t >& pPointers)
 {
 	if (!file)
 		InitConsole();
@@ -39,9 +39,9 @@ void ConsoleCheatMenu::PrintErrorPtrInit(const std::map <std::string, intptr_t >
 	system("cls");
 	PrintMyName();
 
-	std::cout << "[!] >> Pointer initialization error << \n";
+	std::cout << "[+] >> GamePointers initialization error << \n";
 
-	for (auto pointer : pPointers)
+	for (const auto& pointer : pPointers)
 	{
 		if (!pointer.second)
 			std::cout << "[!] ";
@@ -55,7 +55,7 @@ void ConsoleCheatMenu::PrintErrorPtrInit(const std::map <std::string, intptr_t >
 	std::cout << "[+] --> press SUPPR to exit <-- \n";
 }
 
-std::string ConsoleCheatMenu::GetTargetedPart()
+std::string_view ConsoleCheatMenu::GetTargetedPart()
 {
 	 return CheatHKeys::bHeadPos ? "HEAD" : "PELVIS";
 }
@@ -65,7 +65,7 @@ void ConsoleCheatMenu::PrintCheatOptions()
 	system("cls");
 	PrintMyName();
 	std::cout << "[+] TARGETED PART  : F1 --> [[" << GetTargetedPart() << "]] \n";
-	std::cout << "[+] AIMBOT         : RIGHTCLICK " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
+	std::cout << "[+] AIMBOT         : RCLICK " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
 	std::cout << "[+] ESP            : F8 " << std::boolalpha << "-->[[" << CheatHKeys::bESP << "]] \n";
 	std::cout << "[+] TEAMCHECK      : F9 " << std::boolalpha << "-->[[" << CheatHKeys::bTeamCheck << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
