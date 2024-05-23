@@ -42,7 +42,7 @@ bool CheatManager::Run()
 	if (GameState::IsMatchStarted())
 	{
 		// Removing TeamCheck by default when in DeathMatch
-		if(!CheatHKeys::bInitTeamCheck && CheatHKeys::SetTeamCheckDefaultValue(GameState::IsDeathMatch()))
+		if(!CheatHKeys::bInitTeamCheck && CheatHKeys::SetDefaultTeamCheck(GameState::IsDeathMatch()))
 			ConsoleCheatMenu::PrintCheatOptions();
 
 		// Cheat Features

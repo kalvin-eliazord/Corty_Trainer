@@ -40,21 +40,21 @@ public:
 	ID3D11InputLayout* m_vInputLayout{ nullptr };
 	ID3D11Buffer* m_vertexBuffer{ nullptr };
 	ID3D11Buffer* m_constantBuffer{ nullptr };
-	DirectX::XMMATRIX m_orthoMatrix;
+	DirectX::XMMATRIX m_orthoMatrix{};
 
 	// Rasterizer
-	D3D11_VIEWPORT m_viewport;
-	HWND m_hwnd;
-	RECT m_hRect;
+	D3D11_VIEWPORT m_viewport{};
+	HWND m_hwnd{};
+	RECT m_hRect{};
 
 	// Output Merger
 	ID3D11RenderTargetView* m_renderTargetView { nullptr};
 
-	bool bIsDrawInit;
+	bool bIsDrawInit{false};
 
 	// Hooking
 	using T_Present = HRESULT(*)(IDXGISwapChain* pSwap, UINT pSyncInterval, UINT pFlags);
-	T_Present t_presentGateway;
+	T_Present t_presentGateway{};
 	void* o_Present;
 	bool SetO_Present();
 
@@ -68,7 +68,6 @@ public:
 	void DrawLine(float x, float y, float x2, float y2, D3DCOLORVALUE color);
 	void DrawBox(float x, float y, float width, float height, D3DCOLORVALUE color);
 	void DrawLineWH(float x, float y, float width, float height, D3DCOLORVALUE color);
-	bool WorldToScreen(Vector3 p3dPos, Vector3& pScreenPos, float pMatrix[16], int pWinWidth, int pWinHeigh);
 
 	void SafeRelease(auto*& pData);
 	~MyD3D11();

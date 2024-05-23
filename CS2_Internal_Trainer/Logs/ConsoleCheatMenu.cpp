@@ -39,7 +39,7 @@ void ConsoleCheatMenu::PrintErrorPtrInit(const std::map <std::string_view, intpt
 	system("cls");
 	PrintMyName();
 
-	std::cout << "[+] >> GamePointers initialization error << \n";
+	std::cout << "[+] >> PatternScan initialization error << \n";
 
 	for (const auto& pointer : pPointers)
 	{

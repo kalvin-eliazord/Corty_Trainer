@@ -2,7 +2,7 @@
 
 Entity LocalPlayer::GetEntity()
 {
-	Entity lpEntityPtr(GamePointers::GetLpControllerPtr());
+	Entity lpEntityPtr(MyPointers::GetLpControllerBase());
 	return lpEntityPtr;
 }
 
@@ -18,13 +18,13 @@ Pawn LocalPlayer::GetPawn()
 
 Vector3* LocalPlayer::GetViewAnglesPtr()
 {
-	Vector3* viewAngles{ GamePointers::GetViewAnglesPtr() };
+	Vector3* viewAngles{ MyPointers::GetViewAnglesPtr() };
 	return viewAngles;
 }
 
 bool LocalPlayer::SetViewAngles(const Vector3& targetAngle)
 {
-	Vector3* viewAnglesPtr{ GamePointers::GetViewAnglesPtr() };
+	Vector3* viewAnglesPtr{ MyPointers::GetViewAnglesPtr() };
 
 	if (!viewAnglesPtr) return false;
 
@@ -36,7 +36,7 @@ bool LocalPlayer::SetViewAngles(const Vector3& targetAngle)
 
 bool LocalPlayer::SetSmoothViewAngles(Vector3 pTargetAngle, const int pSmoothValue)
 {
-	Vector3* lpViewAngles{ GamePointers::GetViewAnglesPtr() };
+	Vector3* lpViewAngles{ MyPointers::GetViewAnglesPtr() };
 
 	Vector3 deltaAngle{  pTargetAngle - *lpViewAngles };
 

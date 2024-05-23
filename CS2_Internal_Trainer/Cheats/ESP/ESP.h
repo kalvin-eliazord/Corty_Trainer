@@ -4,7 +4,7 @@
 #include "LocalPlayer.h"
 #include "Entity.h"
 #include "CheatHKeys.h"
-#include "GamePointers.h"
+#include "PatternScan.h"
 #include <vector>
 
 extern MyD3D11 g_myD3d11;

@@ -1,4 +1,5 @@
 #pragma once
+#include "MyPointers.h"
 #include "LocalPlayer.h"
 #include "Entity.h"
 #include "CheatHKeys.h"
@@ -14,7 +15,7 @@ namespace Aimbot
 
 	bool IsTargetInFov(Vector3& pTargetAngle);
 	bool IsGoodTarget(Entity* pEntityPtr, int pEntIndex);
-	bool ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex);
+	bool IsSpotted(Entity* pCurrEnt, int pEntIndex);
 
 	float GetMagnitude(const Vector3& pVec);
 	Vector3 GetTargetAngle(Vector3 pTargetPos);

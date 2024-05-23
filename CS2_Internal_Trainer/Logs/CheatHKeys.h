@@ -12,9 +12,9 @@ namespace CheatHKeys
     //inline bool bRCS{ true };
 
     inline int smoothValue{ 0 };
-    inline int fovValue{ 50 };
+    inline int fovValue{ 25 };
 
     inline bool bInitTeamCheck{ false };
     bool IsOptionChanged();
-    bool SetTeamCheckDefaultValue(bool pIsDeathMatch);
+    bool SetDefaultTeamCheck(bool pIsDeathMatch);
 };

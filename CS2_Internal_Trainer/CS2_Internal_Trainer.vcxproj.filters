@@ -44,6 +44,9 @@
     <Filter Include="SDK\CS2_Dumper">
       <UniqueIdentifier>{c747f8e4-6bf7-447d-a52f-6b1b2cba2698}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SDK\MemUtils">
+      <UniqueIdentifier>{69459702-d89f-47bb-97b2-837acbfe22a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hook\TrampHook.h">
@@ -151,11 +154,17 @@
     <ClInclude Include="SDK\CS2_Dumper\worldrenderer.dll.hpp">
       <Filter>SDK\CS2_Dumper</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\GamePointers.h">
-      <Filter>SDK</Filter>
+    <ClInclude Include="SDK\PatternScan.h">
+      <Filter>SDK\MemUtils</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\MyOffset.h">
-      <Filter>SDK</Filter>
+    <ClInclude Include="SDK\MyOffsets.h">
+      <Filter>SDK\MemUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Peb.h">
+      <Filter>SDK\MemUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\MyPointers.h">
+      <Filter>SDK\MemUtils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -198,8 +207,11 @@
     <ClCompile Include="SDK\GameState.cpp">
       <Filter>SDK\GameState</Filter>
     </ClCompile>
-    <ClCompile Include="SDK\GamePointers.cpp">
-      <Filter>SDK</Filter>
+    <ClCompile Include="SDK\PatternScan.cpp">
+      <Filter>SDK\MemUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\MyPointers.cpp">
+      <Filter>SDK\MemUtils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

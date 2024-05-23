@@ -1,15 +1,17 @@
 #include <Windows.h>
 #include "CheatManager.h"
-#include "GamePointers.h"
+#include "PatternScan.h"
 #include "ConsoleCheatMenu.h"
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
-	if (!(GamePointers::ArePointersInit() && CheatManager::InitHook()))
-	{
-		ConsoleCheatMenu::PrintErrorPtrInit(GamePointers::pointersState);
+	PatternScan patternScan{};
 
-		while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(5);
+	if (!(patternScan.InitPointers() && CheatManager::InitHook()))
+	{
+		ConsoleCheatMenu::PrintErrorPtrInit(patternScan.GetPtrState());
+
+		while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(10);
 	}
 
 	ConsoleCheatMenu::DestroyConsole();

@@ -1,7 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "MyOffset.h"
-#include "GamePointers.h"
+#include "MyPointers.h"
 
 namespace GameState
 {
@@ -13,7 +12,6 @@ namespace GameState
 	};
 
 	inline bool bDefaultChange{ false };
-	static constexpr intptr_t deathmatchId{ 0x7FFC52B757E0 };
 	bool IsDeathMatch();
 	bool IsMatchStarted();
 };

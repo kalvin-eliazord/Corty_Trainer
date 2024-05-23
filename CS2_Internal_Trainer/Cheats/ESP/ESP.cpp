@@ -6,7 +6,7 @@ std::vector<Entity> ESP::GetValidTargets()
 
 	for (int i{ 0 }; i < 64; ++i)
 	{
-		Entity currEntity(*GamePointers::GetEntityPtr(i));
+		Entity currEntity(MyPointers::GetEntityBase(i));
 
 		if (!IsGoodTarget(&currEntity))
 			continue;
@@ -48,7 +48,7 @@ bool ESP::IsGoodTarget(Entity* pCurrEntPtr)
 bool ESP::SnapLineTo(Vector3 pEntPos, float pWinWidth, float pWinHeight)
 {
 	Vector3 currEntScreenPos{};
-	if (!MyD3D_Utils::WorldToScreen(pEntPos, currEntScreenPos, GamePointers::GetViewMatrixPtr(), pWinWidth, pWinHeight))
+	if (!MyD3D_Utils::WorldToScreen(pEntPos, currEntScreenPos, MyPointers::GetViewMatrixPtr(), pWinWidth, pWinHeight))
 		return false;
 
 	g_myD3d11.DrawLine(currEntScreenPos.x, currEntScreenPos.y, pWinWidth / 2, pWinHeight / 2, MyD3D_Utils::blue);

@@ -2,13 +2,13 @@
 
 bool GameState::IsDeathMatch()
 {
-	const intptr_t deathMatchPtr { GamePointers::ReadMemory(GamePointers::GetGameRulesPtr(), {MyOffset::CS_GameRules::GameModeRules, 0x30}) };
+	const intptr_t* deathMatchPtr{ MyPointers::GetDeathMatchRulesPtr() };
 	return deathMatchPtr ? true : false;
 }
 
 bool GameState::IsMatchStarted()
 {
-	const int matchStateId { GamePointers::GetMatchStateId()};
+	const int matchStateId { *MyPointers::GetMatchStateIdPtr()};
 
 	switch (matchStateId)
 	{

@@ -9,5 +9,5 @@ struct BoneJoint
 
 enum Bone
 {
-
+	// TODO
 };

@@ -1,5 +1,5 @@
 #pragma once
-#include "GamePointers.h"
+#include "MyPointers.h"
 #include "Entity.h"
 #include "Vector3.h"
 #include "Aimbot.h"

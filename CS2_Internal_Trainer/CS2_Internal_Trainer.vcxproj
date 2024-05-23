@@ -164,6 +164,8 @@
     <ClInclude Include="Hook\TrampHook.h" />
     <ClInclude Include="Logs\CheatHKeys.h" />
     <ClInclude Include="Logs\ConsoleCheatMenu.h" />
+    <ClInclude Include="SDK\MyPointers.h" />
+    <ClInclude Include="SDK\Peb.h" />
     <ClInclude Include="SDK\CS2_Dumper\animationsystem.dll.hpp" />
     <ClInclude Include="SDK\CS2_Dumper\buttons.hpp" />
     <ClInclude Include="SDK\CS2_Dumper\client.dll.hpp" />
@@ -188,8 +190,8 @@
     <ClInclude Include="SDK\Entity.h" />
     <ClInclude Include="SDK\GameState.h" />
     <ClInclude Include="SDK\LocalPlayer.h" />
-    <ClInclude Include="SDK\MyOffset.h" />
-    <ClInclude Include="SDK\GamePointers.h" />
+    <ClInclude Include="SDK\MyOffsets.h" />
+    <ClInclude Include="SDK\PatternScan.h" />
     <ClInclude Include="SDK\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
@@ -199,13 +201,14 @@
     <ClCompile Include="Cheats\ESP\D3D11\MyD3D_Utils.cpp" />
     <ClCompile Include="Cheats\ESP\ESP.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="SDK\MyPointers.cpp" />
     <ClCompile Include="SDK\GameState.cpp" />
     <ClCompile Include="Hook\TrampHook.cpp" />
     <ClCompile Include="Logs\CheatHKeys.cpp" />
     <ClCompile Include="Logs\ConsoleCheatMenu.cpp" />
     <ClCompile Include="SDK\Entity.cpp" />
     <ClCompile Include="SDK\LocalPlayer.cpp" />
-    <ClCompile Include="SDK\GamePointers.cpp" />
+    <ClCompile Include="SDK\PatternScan.cpp" />
     <ClCompile Include="SDK\Vector3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

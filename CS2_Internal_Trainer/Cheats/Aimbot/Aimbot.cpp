@@ -2,16 +2,15 @@
 
 bool Aimbot::IsTargetInFov(Vector3& pTargetAngle)
 {
-	Vector3 localPlayerAngle{ LocalPlayer::GetPawn().vLastCameraPos };
+	Vector3 localPlayerAngle{ LocalPlayer::GetPawn().vAngEyeAngle };
 
-	Vector3 deltaAngle{ deltaAngle = pTargetAngle - localPlayerAngle };
+	Vector3 deltaAngle{ localPlayerAngle - pTargetAngle };
+
+	const float distFromCursor{ GetMagnitude(deltaAngle) };
 
 	// Checking if target is in FOV
-	if ((deltaAngle.x < CheatHKeys::fovValue) &&
-		(deltaAngle.y < CheatHKeys::fovValue))
-	{
+	if (distFromCursor < CheatHKeys::fovValue)
 		return true;
-	}
 
 	return false;
 }
@@ -36,13 +35,13 @@ bool Aimbot::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 			return false;
 	}
 
-	if (!ImSpottedAndEntitySpotted(pEntityPtr, pEntIndex))
+	if (!IsSpotted(pEntityPtr, pEntIndex))
 		return false;
 
 	return true;
 }
 
-bool Aimbot::ImSpottedAndEntitySpotted(Entity* pCurrEnt, int pEntIndex)
+bool Aimbot::IsSpotted(Entity* pCurrEnt, int pEntIndex)
 {
 	constexpr int localPlayerId{ 0 };
 
@@ -94,7 +93,7 @@ std::vector<Entity> Aimbot::GetValidTargets()
 
 	for (int i{ 0 }; i < 64; ++i)
 	{
-		Entity currEntity(*GamePointers::GetEntityPtr(i));
+		Entity currEntity(MyPointers::GetEntityBase(i));
 
 		if (!IsGoodTarget(&currEntity, i))
 			continue;
@@ -191,8 +190,8 @@ bool Aimbot::ShotTarget(const Entity& pCTarget)
 	else
 		targetAngle = Aimbot::GetTargetAngle(entPawn.pelvisBonePos);
 
-	//if (!Aimbot::IsTargetInFov(targetAngle))
-	//	return false;
+	if (!Aimbot::IsTargetInFov(targetAngle))
+		return false;
 
 	if (CheatHKeys::smoothValue)
 		LocalPlayer::SetSmoothViewAngles(targetAngle, CheatHKeys::smoothValue);

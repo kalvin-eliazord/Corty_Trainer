@@ -1,30 +1,27 @@
 #pragma once
 #include "BoneJoint.h"
-#include "GamePointers.h"
-#include "MyOffset.h"
+#include "MyOffsets.h"
+#include "MyPointers.h"
 #include "Vector3.h"
 #include <string>
 #include <bitset>
-// cs2 dumper
-#include "offsets.hpp"
-#include "client.dll.hpp"
 
 struct Controller
 {
-	int32_t hPawn{ NULL };
+	int32_t hPawn{};
 	std::string sEntName{};
 };
 
 struct Pawn
 {
-	bool bDormant{ NULL };
-	int32_t iTeamNum{ NULL };
-	int32_t iHealth{ NULL };
+	bool bDormant{};
+	int32_t iTeamNum{};
+	int32_t iHealth{};
 	Vector3 headBonePos{};
 	Vector3 pelvisBonePos{};
 	Vector3 vLastCameraPos{};
 	Vector3 vAngEyeAngle{};
-	std::bitset<64> bSpottedMask{ NULL };
+	std::bitset<64> bSpottedMask{};
 };
 
 class Entity
@@ -44,12 +41,12 @@ private:
 	bool SetHealth(intptr_t pPawnAddr);
 	bool SetHeadPos(intptr_t pPawnAddr);
 	bool SetPelvisPos(intptr_t pPawnAddr);
-	bool SetSpottedId(intptr_t pPawnAddr);
+	bool SetSpottedMask(intptr_t pPawnAddr);
 	bool SetIsDormant(intptr_t pPawnAddr);
 	bool SetTeamNum(intptr_t pPawnAddr);
 	bool SetvAngEyeAngle(intptr_t pPawnAddr);
 	bool SetvLastCameraPos(intptr_t pPawnAddr);
-	BoneJoint* GetBoneArrayBase(intptr_t pPawnAddr);
+	intptr_t GetBoneArrayBase(intptr_t pPawnAddr);
 	bool UpdatePawn(intptr_t pPawnAddr);
 
 public:

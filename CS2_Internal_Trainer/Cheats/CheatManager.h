@@ -3,7 +3,7 @@
 #include "ESP.h"
 #include "CheatHKeys.h"
 #include "ConsoleCheatMenu.h"
-#include "GamePointers.h"
+#include "MyPointers.h"
 #include "GameState.h"
 #include "TrampHook.h"
 #include "MyD3D11.h"

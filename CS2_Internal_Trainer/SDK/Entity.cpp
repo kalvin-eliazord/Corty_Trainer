@@ -30,7 +30,7 @@ bool Entity::UpdatePawn(intptr_t pPawnAddr)
 	if (!SetHealth(pPawnAddr)) return false;
 	if (!SetHeadPos(pPawnAddr)) return false;
 	if (!SetPelvisPos(pPawnAddr)) return false;
-	if (!SetSpottedId(pPawnAddr)) return false;
+	if (!SetSpottedMask(pPawnAddr)) return false;
 	if (!SetTeamNum(pPawnAddr)) return false;
 	if (!SetvAngEyeAngle(pPawnAddr)) return false;
 	if (!SetvLastCameraPos(pPawnAddr)) return false;
@@ -40,23 +40,23 @@ bool Entity::UpdatePawn(intptr_t pPawnAddr)
 
 bool Entity::SetHPawn(intptr_t pCBaseAddr)
 {
-	cBase.hPawn = static_cast<int32_t>(GamePointers::ReadMemory(pCBaseAddr, { MyOffset::Controller::hPawn }));
+	cBase.hPawn = MyPointers::ReadInternalMem<int32_t>(pCBaseAddr, { MyOffset::Controller::hPawn });
 
 	return cBase.hPawn ? true : false;
 }
 
 bool Entity::SetPawnBase(intptr_t pCBaseAddr)
 {
-	const intptr_t cGameEntity{ GamePointers::GetGameEntitySystemPtr() + 0x10 };
+	const intptr_t cGameEntity{ MyPointers::GetGameEntitySystemBase() + MyOffset::EntityListPtr};
 	const int32_t pawnListOffset{ 8 * ((cBase.hPawn & 0x7FFF) >> 9) };
 	const int32_t pawnBaseOffset{ 0x78 * (cBase.hPawn & 0x1FF) };
 
 	intptr_t pawnBase{};
 
 	if (pawnListOffset)
-		pawnBase = GamePointers::ReadMemory(cGameEntity, { pawnListOffset, pawnBaseOffset });
+		pawnBase = static_cast<intptr_t>(MyPointers::ReadInternalMem<uintptr_t>(cGameEntity, { pawnListOffset, pawnBaseOffset }));
 	else
-		pawnBase = GamePointers::ReadMemory(*reinterpret_cast<intptr_t*>(cGameEntity), { pawnBaseOffset });
+		pawnBase = static_cast<intptr_t>(MyPointers::ReadInternalMem<uintptr_t>(*reinterpret_cast<intptr_t*>(cGameEntity), { pawnBaseOffset }));
 	
 	if (!pawnBase) return false;
 	if (!UpdatePawn(pawnBase)) return false;
@@ -70,7 +70,6 @@ bool Entity::SetEntName(intptr_t pCBaseAddr)
 	if (!sEntNamePtr) return false;
 
 	const std::string entNameBuffer(sEntNamePtr);
-
 	cBase.sEntName = entNameBuffer;
 
 	return true;
@@ -78,91 +77,51 @@ bool Entity::SetEntName(intptr_t pCBaseAddr)
 
 bool Entity::SetIsDormant(intptr_t pPawnAddr)
 {
-	const intptr_t gameSceneNodeBase{ GamePointers::ReadMemory(pPawnAddr, {MyOffset::Pawn::pGameSceneNode}) };
-
-	bool* bDormantPtr{ nullptr };
-
-	bDormantPtr = reinterpret_cast<bool*>(gameSceneNodeBase + MyOffset::Pawn::bDormant);
-	if (!bDormantPtr) return false;
-
-	pawnBase.bDormant = *bDormantPtr;
+	pawnBase.bDormant = MyPointers::ReadInternalMem<bool>(pPawnAddr,
+		{MyOffset::Pawn::pGameSceneNode, MyOffset::Pawn::bDormant});
 
 	return true;
 }
 
 bool Entity::SetTeamNum(intptr_t pPawnAddr)
 {
-	int32_t* iTeamNumPtr{ nullptr };
-
-	iTeamNumPtr = reinterpret_cast<int32_t*>(pPawnAddr + MyOffset::Pawn::iTeamNum);
-	if (!iTeamNumPtr) return false;
-
-	pawnBase.iTeamNum = *iTeamNumPtr;
-
+	pawnBase.iTeamNum = MyPointers::ReadInternalMem<int32_t>(pPawnAddr, { MyOffset::Pawn::iTeamNum });
 	return true;
 }
 
 bool Entity::SetvAngEyeAngle(intptr_t pPawnAddr)
 {
-	Vector3* vAngEyeAnglePtr{ nullptr };
-
-	vAngEyeAnglePtr = reinterpret_cast<Vector3*>(pPawnAddr + MyOffset::Pawn::vAngEyeAngles);
-	if (!vAngEyeAnglePtr) return false;
-
-	pawnBase.vAngEyeAngle = *vAngEyeAnglePtr;
-
+	pawnBase.vAngEyeAngle = *reinterpret_cast<Vector3*>(pPawnAddr + MyOffset::Pawn::vAngEyeAngles);
 	return true;
 }
 
 bool Entity::SetvLastCameraPos(intptr_t pPawnAddr)
 {
-	Vector3* vLastCameraPosPtr{ nullptr };
-
-	vLastCameraPosPtr = reinterpret_cast<Vector3*>(pPawnAddr + MyOffset::Pawn::vLastClipCameraPos);
-	if (!vLastCameraPosPtr) return false;
-
-	pawnBase.vLastCameraPos = *vLastCameraPosPtr;
-
+	pawnBase.vLastCameraPos = *reinterpret_cast<Vector3*>(pPawnAddr + MyOffset::Pawn::vLastClipCameraPos);
 	return true;
 }
 
-bool Entity::SetSpottedId(intptr_t pPawnAddr)
+bool Entity::SetSpottedMask(intptr_t pPawnAddr)
 {
-	intptr_t* bSpottedMaskPtr{ nullptr };
-
-	bSpottedMaskPtr = reinterpret_cast<intptr_t*>(pPawnAddr + MyOffset::Pawn::bSpottedMask);
-	if (!bSpottedMaskPtr) return false;
-
-	pawnBase.bSpottedMask = *bSpottedMaskPtr;
-
+	pawnBase.bSpottedMask =MyPointers::ReadInternalMem<std::bitset<64>>(pPawnAddr, { MyOffset::Pawn::bSpottedMask });
 	return true;
 }
 
 bool Entity::SetHealth(intptr_t pPawnAddr)
 {
-	int32_t* iHealthPtr{ nullptr };
-
-	iHealthPtr = reinterpret_cast<int32_t*>(pPawnAddr + MyOffset::Pawn::iHealth);
-	if (!iHealthPtr) return false;
-
-	pawnBase.iHealth = *iHealthPtr;
-
+	pawnBase.iHealth = MyPointers::ReadInternalMem<int32_t>(pPawnAddr, { MyOffset::Pawn::iHealth });
 	return true;
 }
 
-BoneJoint* Entity::GetBoneArrayBase(intptr_t pPawnAddr)
+intptr_t Entity::GetBoneArrayBase(intptr_t pPawnAddr)
 {
-	intptr_t gameSceneNodeBase{ GamePointers::ReadMemory(pPawnAddr, {MyOffset::Pawn::pGameSceneNode}) };
-
-	return reinterpret_cast<BoneJoint*>(GamePointers::ReadMemory(gameSceneNodeBase, {MyOffset::Pawn::BoneArray}));
+	return static_cast<intptr_t>(MyPointers::ReadInternalMem<uintptr_t>(pPawnAddr,
+		{MyOffset::Pawn::pGameSceneNode, MyOffset::Pawn::BoneArray}));
 }
 
 bool Entity::SetHeadPos(intptr_t pPawnAddr)
 {
-	BoneJoint* boneJointBase{ GetBoneArrayBase(pPawnAddr) };
-	if (!boneJointBase) return false;
-
-	BoneJoint* headBoneJoint{ reinterpret_cast<BoneJoint*>(reinterpret_cast<intptr_t>(boneJointBase) + (6 * sizeof(BoneJoint))) };
+	BoneJoint* headBoneJoint{ reinterpret_cast<BoneJoint*>(GetBoneArrayBase(pPawnAddr) + (6 * sizeof(BoneJoint))) };
 	if (!headBoneJoint) return false;
 
 	pawnBase.headBonePos = headBoneJoint->pos;
@@ -173,11 +132,10 @@ bool Entity::SetHeadPos(intptr_t pPawnAddr)
 
 bool Entity::SetPelvisPos(intptr_t pPawnAddr)
 {
-	BoneJoint* boneJointBase{ GetBoneArrayBase(pPawnAddr) };
+	BoneJoint* boneJointBase{ reinterpret_cast<BoneJoint*>(GetBoneArrayBase(pPawnAddr)) };
 	if (!boneJointBase) return false;
 
 	pawnBase.pelvisBonePos = boneJointBase->pos;
-
 	return true;
 }
 

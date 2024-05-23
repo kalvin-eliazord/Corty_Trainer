@@ -54,7 +54,7 @@ bool CheatHKeys::IsOptionChanged()
 	return false;
 }
 
-bool CheatHKeys::SetTeamCheckDefaultValue(bool pIsDeathMatch)
+bool CheatHKeys::SetDefaultTeamCheck(bool pIsDeathMatch)
 {
 	if (pIsDeathMatch)
 	{
