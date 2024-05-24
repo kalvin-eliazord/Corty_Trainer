@@ -8,7 +8,7 @@
 
 namespace Aimbot
 {
-	inline Entity* cTargetLocked{ nullptr };
+	inline Entity cTargetLocked{};
 
 	bool GetEntTarget(Entity& pEntityTarget);
 	std::vector<Entity> GetValidTargets();

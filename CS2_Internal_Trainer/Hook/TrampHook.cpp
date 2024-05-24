@@ -8,6 +8,11 @@ TrampHook::TrampHook(intptr_t* pSrcAddr, intptr_t* pDstAddr, int pStolenBSize)
 	bHooked = InitGateway(pSrcAddr, pDstAddr, pStolenBSize);
 }
 
+TrampHook::TrampHook(int pStolenBSize)
+: stolenBSize{ pStolenBSize }
+{
+}
+
 bool TrampHook::InitGateway(intptr_t* pSrcAddr, intptr_t* pDstAddr, int pStolenBSize)
 {
 	// Save source stolen bytes (for unhook later)
@@ -75,7 +80,7 @@ bool TrampHook::HookSource(intptr_t* pSrcAddr, intptr_t* pDstAddr, int pStolenBS
 	return true;
 }
 
-bool TrampHook::IsHooked()
+const bool& TrampHook::GetbHookRef()
 {
 	return bHooked;
 }
@@ -89,16 +94,12 @@ void TrampHook::Unhook()
 {
 	if (bHooked)
 	{
+		bHooked = false;
+
 		DWORD oldProtect{};
 		VirtualProtect(srcAddr, stolenBSize, PAGE_EXECUTE_READWRITE, &oldProtect);
-
 		memcpy(srcAddr, &stolenBytes, stolenBSize);
-
-		VirtualFree(gatewayAddr, 0, MEM_RELEASE);
-
 		VirtualProtect(srcAddr, stolenBSize, oldProtect, &oldProtect);
-
-		bHooked = false;
 	}
 }
 

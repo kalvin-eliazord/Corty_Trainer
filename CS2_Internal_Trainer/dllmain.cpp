@@ -3,6 +3,8 @@
 #include "PatternScan.h"
 #include "ConsoleCheatMenu.h"
 
+extern MyD3D11 g_myD3d11;
+
 DWORD WINAPI MainThread(HMODULE hModule)
 {
 	PatternScan patternScan{};
@@ -14,7 +16,9 @@ DWORD WINAPI MainThread(HMODULE hModule)
 		while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(10);
 	}
 
+	// Cleaning
 	ConsoleCheatMenu::DestroyConsole();
+	VirtualFree(g_myD3d11.t_presentGateway, 0, MEM_RELEASE);
 	FreeLibraryAndExitThread(hModule, 0);
 
 	return 0;

@@ -50,12 +50,12 @@ public:
 	// Output Merger
 	ID3D11RenderTargetView* m_renderTargetView { nullptr};
 
-	bool bIsDrawInit{false};
+	bool bDrawInit{false};
 
 	// Hooking
 	using T_Present = HRESULT(*)(IDXGISwapChain* pSwap, UINT pSyncInterval, UINT pFlags);
 	T_Present t_presentGateway{};
-	void* o_Present;
+	void* o_Present{};
 	bool SetO_Present();
 
 	// Setup graphic pipeline

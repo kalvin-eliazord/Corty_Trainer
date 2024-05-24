@@ -50,7 +50,7 @@ This is my second name.
 
 
 ## To-do
-- Add ESP features (I'm on it)
+- Add ESP Boxes
 - Add Triggerbot
 - Add No Recoil
 - No more hardcoded offset (full pattern scanning)

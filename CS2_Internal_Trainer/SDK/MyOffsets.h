@@ -23,14 +23,14 @@ namespace MyOffset
 
 	namespace Pawn
 	{
-		inline constexpr intptr_t BoneArray{ 0x1E0 }; // Pawn + GameSceneNode + BoneArray
+		inline constexpr intptr_t BoneArray{ cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin }; // GameSceneNode + BoneArray
 		inline constexpr intptr_t iHealth{ cs2_dumper::schemas::client_dll::C_BaseEntity::m_iHealth };
 		inline constexpr intptr_t pGameSceneNode{ cs2_dumper::schemas::client_dll::C_BaseEntity::m_pGameSceneNode };
 		inline constexpr intptr_t iTeamNum{ cs2_dumper::schemas::client_dll::C_BaseEntity::m_iTeamNum };
-		inline constexpr intptr_t vLastClipCameraPos{ cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_vecvLastClipCameraPos };
+		inline constexpr intptr_t vLastClipCameraPos{ cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_vecLastClipCameraPos };
 		inline constexpr intptr_t vAngEyeAngles { cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_angEyeAngles };
 		inline constexpr intptr_t bSpottedMask{ cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_entitySpottedState + cs2_dumper::schemas::client_dll::EntitySpottedState_t::m_bSpottedByMask };
-		inline constexpr intptr_t bDormant{ cs2_dumper::schemas::client_dll::CGameSceneNode::m_bDormant };
+		inline constexpr intptr_t bDormant{ cs2_dumper::schemas::client_dll::CGameSceneNode::m_bDormant }; // GameSceneNode + bDormant
 	};
 
 	namespace Controller

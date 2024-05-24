@@ -20,8 +20,9 @@ public:
 	const intptr_t stolenBSize;
 
 	TrampHook(intptr_t* pSrcAddr, intptr_t* pDstAddr, int pStolenBSize);
+	TrampHook(int pStolenBSize);
 	void Unhook();
-	bool IsHooked();
+	const bool& GetbHookRef();
 	~TrampHook();
 	intptr_t* GetGateway();
 };

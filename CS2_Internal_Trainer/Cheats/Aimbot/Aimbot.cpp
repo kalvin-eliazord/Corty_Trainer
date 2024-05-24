@@ -166,10 +166,10 @@ bool Aimbot::Start()
 
 	// Updating the target only when the feature is off
 	if (!CheatHKeys::bTargetLock)
-		cTargetLocked = &cTarget;
+		cTargetLocked = cTarget;
 
 	// Target locking feature
-	if (CheatHKeys::bTargetLock && cTargetLocked)
+	if (CheatHKeys::bTargetLock)
 		ShotLockedTarget();
 	else
 		ShotTarget(cTarget);
@@ -185,10 +185,12 @@ bool Aimbot::ShotTarget(const Entity& pCTarget)
 
 	Vector3 targetAngle{};
 
-	if (CheatHKeys::bHeadPos)
-		targetAngle = Aimbot::GetTargetAngle(entPawn.headBonePos);
-	else
-		targetAngle = Aimbot::GetTargetAngle(entPawn.pelvisBonePos);
+	targetAngle = Aimbot::GetTargetAngle(entPawn.vLastCameraPos);
+
+	//if (CheatHKeys::bHeadPos) TODO
+	//	targetAngle = Aimbot::GetTargetAngle(entPawn.headBonePos);
+	//else
+	//	targetAngle = Aimbot::GetTargetAngle(entPawn.pelvisBonePos);
 
 	if (!Aimbot::IsTargetInFov(targetAngle))
 		return false;
@@ -203,16 +205,18 @@ bool Aimbot::ShotTarget(const Entity& pCTarget)
 
 bool Aimbot::ShotLockedTarget()
 {
-	Entity entTargetLocked(*Aimbot::cTargetLocked);
+	Entity entTargetLocked(Aimbot::cTargetLocked);
 
 	Pawn entPawnLocked{ entTargetLocked.GetPawnBase() };
 
 	Vector3 targetLockedAngle{};
 
-	if (CheatHKeys::bHeadPos)
-		targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.headBonePos);
-	else
-		targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.pelvisBonePos);
+	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.vLastCameraPos);
+
+	//if (CheatHKeys::bHeadPos) TODO
+	//	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.headBonePos);
+	//else
+	//	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.pelvisBonePos);
 
 	if (!Aimbot::IsTargetInFov(targetLockedAngle)) 
 		return false;
@@ -224,7 +228,7 @@ bool Aimbot::ShotLockedTarget()
 
 	// Locking at target until he die
 	if (entPawnLocked.iHealth < 1)
-		cTargetLocked = nullptr;
+		cTargetLocked = NULL;
 
 	return true;
 }

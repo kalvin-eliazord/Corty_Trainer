@@ -4,10 +4,13 @@ MyD3D11 g_myD3d11;
 
 HRESULT hkPresent(IDXGISwapChain* pChain, UINT pSyncInterval, UINT pFlags)
 {
-	if (!g_myD3d11.InitDraw(pChain))
-		return g_myD3d11.t_presentGateway(pChain, pSyncInterval, pFlags);
+	if (CheatManager::bHookPtr)
+	{
+		if (!g_myD3d11.bDrawInit)
+			g_myD3d11.bDrawInit = g_myD3d11.InitDraw(pChain);
 
-	CheatManager::Run();
+		CheatManager::Run();
+	}
 
 	return g_myD3d11.t_presentGateway(pChain, pSyncInterval, pFlags);
 }
@@ -25,17 +28,20 @@ bool CheatManager::InitHook()
 		reinterpret_cast<intptr_t*>(hkPresent),
 		14); // Present stolen bytes size
 
-	if (!tHook.IsHooked()) return false;
+	bHookPtr = &tHook.GetbHookRef();
+	if (!bHookPtr) return false;
 
 	g_myD3d11.t_presentGateway = reinterpret_cast<MyD3D11::T_Present>(tHook.GetGateway());
 
-	while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(5);
+	while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(10);
 
 	return true;
 }
 
 bool CheatManager::Run()
 {
+	if (!bHookPtr) return false;
+
 	if (CheatHKeys::IsOptionChanged())
 		ConsoleCheatMenu::PrintCheatOptions();
 

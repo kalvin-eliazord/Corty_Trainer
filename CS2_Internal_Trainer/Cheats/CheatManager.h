@@ -10,6 +10,7 @@
 
 namespace CheatManager
 {
+	inline const bool* bHookPtr{};
 	bool InitHook();
 	bool Run();
 };

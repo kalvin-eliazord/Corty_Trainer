@@ -124,8 +124,8 @@ bool Entity::SetHeadPos(intptr_t pPawnAddr)
 	BoneJoint* headBoneJoint{ reinterpret_cast<BoneJoint*>(GetBoneArrayBase(pPawnAddr) + (6 * sizeof(BoneJoint))) };
 	if (!headBoneJoint) return false;
 
-	pawnBase.headBonePos = headBoneJoint->pos;
-	pawnBase.headBonePos.z -= 1.f;
+	//pawnBase.headBonePos = headBoneJoint->pos;
+	//pawnBase.headBonePos.z -= 1.f; TODO
 
 	return true;
 }

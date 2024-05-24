@@ -64,7 +64,7 @@ void ConsoleCheatMenu::PrintCheatOptions()
 {
 	system("cls");
 	PrintMyName();
-	std::cout << "[+] TARGETED PART  : F1 --> [[" << GetTargetedPart() << "]] \n";
+	//std::cout << "[+] TARGETED PART  : F1 --> [[" << GetTargetedPart() << "]] \n"; TODO
 	std::cout << "[+] AIMBOT         : RCLICK " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
 	std::cout << "[+] ESP            : F8 " << std::boolalpha << "-->[[" << CheatHKeys::bESP << "]] \n";
 	std::cout << "[+] TEAMCHECK      : F9 " << std::boolalpha << "-->[[" << CheatHKeys::bTeamCheck << "]] \n";

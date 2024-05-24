@@ -95,13 +95,13 @@ intptr_t PatternScan::GetPatternAddr(char* pRegionAddr, intptr_t pRegionSize, co
 			return reinterpret_cast<intptr_t>(pRegionAddr) + i;
 	}
 
-	return NULL;
+	return 0;
 }
 
 intptr_t PatternScan::GetValidMemRegion(LDR_DATA_TABLE_ENTRY* pLdrEntry, const std::string& pPattern)
 {
 	if (!pLdrEntry || pPattern.empty())
-		return NULL;
+		return 0;
 
 	MEMORY_BASIC_INFORMATION mbi{};
 
@@ -117,7 +117,7 @@ intptr_t PatternScan::GetValidMemRegion(LDR_DATA_TABLE_ENTRY* pLdrEntry, const s
 
 		if (patternRes) return patternRes;
 	}
-	return NULL;
+	return 0;
 }
 
 intptr_t PatternScan::ExtractPointer(intptr_t pPatternResult)
@@ -207,8 +207,8 @@ void PatternScan::SetViewAngles(LDR_DATA_TABLE_ENTRY* pLdrEntry, const std::stri
 			resultPointer = reinterpret_cast<intptr_t*>(*resultPointer);
 
 		// Storing the offset of the pointer
-		const intptr_t CCSGO_Input = reinterpret_cast<intptr_t>(resultPointer) - MyOffset::GPointers::ClientMod;
-		MyOffset::GPointers::ViewAngles = CCSGO_Input - MyOffset::CCSGO_Input::ViewAngles;
+		const intptr_t CCSGO_InputOffset = reinterpret_cast<intptr_t>(resultPointer) - MyOffset::GPointers::ClientMod;
+		MyOffset::GPointers::ViewAngles = CCSGO_InputOffset - MyOffset::CCSGO_Input::ViewAngles;
 	}
 
 	pointersState["ViewAngles"] = reinterpret_cast<intptr_t>(resultPointer);
