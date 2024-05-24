@@ -51,7 +51,7 @@ bool ESP::SnapLineTo(Vector3 pEntPos, float pWinWidth, float pWinHeight)
 	if (!MyD3D_Utils::WorldToScreen(pEntPos, currEntScreenPos, MyPointers::GetViewMatrixPtr(), pWinWidth, pWinHeight))
 		return false;
 
-	g_myD3d11.DrawLine(currEntScreenPos.x, currEntScreenPos.y, pWinWidth / 2, pWinHeight / 2, MyD3D_Utils::blue);
+	g_myD3d11.DrawLine(currEntScreenPos.x, currEntScreenPos.y, pWinWidth/2, pWinHeight, MyD3D_Utils::blue);
 
 	return true;
 }

@@ -40,12 +40,12 @@ bool CheatHKeys::IsOptionChanged()
 		CheatHKeys::bESP = !CheatHKeys::bESP;
 		return true;
 	}
-	else if (GetAsyncKeyState(VK_RBUTTON) & 1)
+	else if (GetAsyncKeyState(VK_F9) & 1)
 	{
 		CheatHKeys::bAimbot = !(CheatHKeys::bAimbot);
 		return true;
 	}
-	else if (GetAsyncKeyState(VK_F9) & 1)
+	else if (GetAsyncKeyState(VK_F10) & 1)
 	{
 		CheatHKeys::bTeamCheck = !CheatHKeys::bTeamCheck;
 		return true;
