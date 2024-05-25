@@ -187,10 +187,10 @@ bool Aimbot::ShotTarget(const Entity& pCTarget)
 
 	targetAngle = Aimbot::GetTargetAngle(entPawn.vLastCameraPos);
 
-	//if (CheatHKeys::bHeadPos) TODO
-	//	targetAngle = Aimbot::GetTargetAngle(entPawn.headBonePos);
-	//else
-	//	targetAngle = Aimbot::GetTargetAngle(entPawn.pelvisBonePos);
+	 if (CheatHKeys::bHeadPos)
+	 	targetAngle = Aimbot::GetTargetAngle(entPawn.headBonePos);
+	 else
+	 	targetAngle = Aimbot::GetTargetAngle(entPawn.pelvisBonePos);
 
 	if (!Aimbot::IsTargetInFov(targetAngle))
 		return false;
@@ -213,10 +213,10 @@ bool Aimbot::ShotLockedTarget()
 
 	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.vLastCameraPos);
 
-	//if (CheatHKeys::bHeadPos) TODO
-	//	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.headBonePos);
-	//else
-	//	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.pelvisBonePos);
+	 if (CheatHKeys::bHeadPos)
+	 	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.headBonePos);
+	 else
+	 	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.pelvisBonePos);
 
 	if (!Aimbot::IsTargetInFov(targetLockedAngle)) 
 		return false;

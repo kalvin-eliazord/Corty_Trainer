@@ -23,7 +23,7 @@ namespace MyOffset
 
 	namespace Pawn
 	{
-		inline constexpr intptr_t BoneArray{ cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin }; // GameSceneNode + BoneArray
+		inline constexpr intptr_t BoneArray{ cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + 0x80 }; // GameSceneNode + BoneArray
 		inline constexpr intptr_t iHealth{ cs2_dumper::schemas::client_dll::C_BaseEntity::m_iHealth };
 		inline constexpr intptr_t pGameSceneNode{ cs2_dumper::schemas::client_dll::C_BaseEntity::m_pGameSceneNode };
 		inline constexpr intptr_t iTeamNum{ cs2_dumper::schemas::client_dll::C_BaseEntity::m_iTeamNum };

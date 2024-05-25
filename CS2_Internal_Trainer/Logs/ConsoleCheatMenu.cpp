@@ -64,7 +64,7 @@ void ConsoleCheatMenu::PrintCheatOptions()
 {
 	system("cls");
 	PrintMyName();
-	//std::cout << "[+] TARGETED PART  : F1 --> [[" << GetTargetedPart() << "]] \n"; TODO
+	std::cout << "[+] TARGETED PART  : [F1] --> [[" << GetTargetedPart() << "]] \n";
 	std::cout << "[+] AIMBOT         : [F9] " << std::boolalpha << "-->[[" << CheatHKeys::bAimbot << "]] \n";
 	std::cout << "[+] ESP            : [F8] " << std::boolalpha << "-->[[" << CheatHKeys::bESP << "]] \n";
 	std::cout << "[+] TEAMCHECK      : [F10] " << std::boolalpha << "-->[[" << CheatHKeys::bTeamCheck << "]] \n";
@@ -73,5 +73,5 @@ void ConsoleCheatMenu::PrintCheatOptions()
 	std::cout << "[+] FOV            : [F5] (-) or F6 (+) " << "-->[[" << CheatHKeys::fovValue << "]] \n";
 	std::cout << "[+] TARGET LOCKING : [F2] " << std::boolalpha << "              -->[[" << CheatHKeys::bTargetLock << "]] \n";
 	std::cout << "-------------------------------------------------------------- \n";
-	std::cout << "[+] --> [[ press SUPPR to exit] ] <-- \n";
+	std::cout << "[+]        --> [[ press SUPPR to exit] ] <-- \n";
 }

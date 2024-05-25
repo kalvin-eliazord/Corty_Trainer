@@ -4,7 +4,8 @@
 struct BoneJoint
 {
 	Vector3 pos{};
-	char padding[0x14];
+	float scale;
+	float rotation[4];
 };
 
 enum Bone

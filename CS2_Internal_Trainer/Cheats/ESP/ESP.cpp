@@ -66,7 +66,7 @@ bool ESP::Start()
 
 	for (auto& currTarget : cTargets)
 	{
-		Vector3 currEntPos { currTarget.GetPawnBase().vLastCameraPos};
+		Vector3 currEntPos { currTarget.GetPawnBase().headBonePos};
 
 		if (!SnapLineTo(currEntPos, winWidth, winHeight))
 			continue;
