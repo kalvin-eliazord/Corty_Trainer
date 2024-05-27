@@ -13,6 +13,5 @@ namespace ESP
 {
 	std::vector<Entity> GetValidTargets();
 	bool IsGoodTarget(Entity* pCurrEntPtr);
-	bool SnapLineTo(Vector3 pEntPos, float pWinWidth, float pWinHeight);
 	bool Start();
 };

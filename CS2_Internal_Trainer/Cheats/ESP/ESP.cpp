@@ -35,23 +35,9 @@ bool ESP::IsGoodTarget(Entity* pCurrEntPtr)
 
 	if (currEntPawn.bDormant)
 		return false;
-	
-	if (CheatHKeys::bTeamCheck)
-	{
-		if (lpPawn.iTeamNum == currEntPawn.iTeamNum)
-			return false;
-	}
 
-	return true;
-}
-
-bool ESP::SnapLineTo(Vector3 pEntPos, float pWinWidth, float pWinHeight)
-{
-	Vector3 currEntScreenPos{};
-	if (!MyD3D_Utils::WorldToScreen(pEntPos, currEntScreenPos, MyPointers::GetViewMatrixPtr(), pWinWidth, pWinHeight))
+	if (CheatHKeys::bTeamCheck && lpPawn.iTeamNum == currEntPawn.iTeamNum)
 		return false;
-
-	g_myD3d11.DrawLine(currEntScreenPos.x, currEntScreenPos.y, pWinWidth/2, pWinHeight, MyD3D_Utils::blue);
 
 	return true;
 }
@@ -66,10 +52,25 @@ bool ESP::Start()
 
 	for (auto& currTarget : cTargets)
 	{
-		Vector3 currEntPos { currTarget.GetPawnBase().headBonePos};
+		Vector3 currBotPos{ currTarget.GetBonePos(Bone::ankle_L) };
+		Vector3 currTopPos{ currTarget.GetBonePos(Bone::head) };
 
-		if (!SnapLineTo(currEntPos, winWidth, winHeight))
+		Vector3 curr2DBot{};
+		Vector3 curr2DTop{};
+
+		if (!MyD3D_Utils::WorldToScreen(currBotPos, curr2DBot, MyPointers::GetViewMatrixPtr(), winWidth, winHeight))
 			continue;
+
+		if (!MyD3D_Utils::WorldToScreen(currTopPos, curr2DTop, MyPointers::GetViewMatrixPtr(), winWidth, winHeight))
+			continue;
+
+		// SnapLine
+		g_myD3d11.DrawLine(curr2DBot.x, curr2DBot.y, winWidth / 2, winHeight, MyD3D_Utils::magenta);
+
+		// Boxe
+		const float height{ ::abs(curr2DTop.y - curr2DBot.y) * 1.25f };
+		const float width{ height / 2.f };
+		g_myD3d11.DrawBox(curr2DTop.x - (width / 2.f), curr2DTop.y - (width / 2.5f), width, height, MyD3D_Utils::magenta);
 	}
 
 	return true;

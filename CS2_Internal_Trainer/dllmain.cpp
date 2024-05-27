@@ -21,10 +21,10 @@ DWORD WINAPI MainThread(HMODULE hModule)
 	}
 
 	// Cleaning
+	Sleep(500);
 	ConsoleCheatMenu::DestroyConsole();
 	VirtualFree(g_myD3d11.t_presentGateway, 0, MEM_RELEASE);
 	FreeLibraryAndExitThread(hModule, 0);
-
 	return 0;
 }
 

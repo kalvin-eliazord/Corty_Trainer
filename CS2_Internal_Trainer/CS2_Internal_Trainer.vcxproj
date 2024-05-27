@@ -186,7 +186,6 @@
     <ClInclude Include="SDK\CS2_Dumper\soundsystem.dll.hpp" />
     <ClInclude Include="SDK\CS2_Dumper\vphysics2.dll.hpp" />
     <ClInclude Include="SDK\CS2_Dumper\worldrenderer.dll.hpp" />
-    <ClInclude Include="SDK\BoneJoint.h" />
     <ClInclude Include="SDK\Entity.h" />
     <ClInclude Include="SDK\GameState.h" />
     <ClInclude Include="SDK\LocalPlayer.h" />

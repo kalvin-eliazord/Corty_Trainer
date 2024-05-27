@@ -20,9 +20,6 @@
     <Filter Include="SDK\LocalPlayer">
       <UniqueIdentifier>{9941c7ff-1164-46f5-ac67-ceeeabba9abd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SDK\Bone">
-      <UniqueIdentifier>{b6cc7f44-d3bf-4ef6-bd0d-49db00a98cc2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SDK\MyVector">
       <UniqueIdentifier>{60216af8-acfd-458c-b532-cd64cd5f21ae}</UniqueIdentifier>
     </Filter>
@@ -84,9 +81,6 @@
     </ClInclude>
     <ClInclude Include="SDK\Vector3.h">
       <Filter>SDK\MyVector</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\BoneJoint.h">
-      <Filter>SDK\Bone</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\ESP\D3D11\MyD3D_Utils.h">
       <Filter>Cheats Features\ESP\D3d11</Filter>

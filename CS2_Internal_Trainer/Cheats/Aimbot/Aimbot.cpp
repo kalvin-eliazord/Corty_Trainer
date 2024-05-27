@@ -29,11 +29,8 @@ bool Aimbot::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 	if (entityPawn.iHealth < 1)
 		return false;
 
-	if (CheatHKeys::bTeamCheck)
-	{
-		if (lpPawn.iTeamNum == entityPawn.iTeamNum)
-			return false;
-	}
+	if (CheatHKeys::bTeamCheck && lpPawn.iTeamNum == entityPawn.iTeamNum)
+		return false;
 
 	if (!IsSpotted(pEntityPtr, pEntIndex))
 		return false;
@@ -140,7 +137,7 @@ float Aimbot::GetMagnitude(const Vector3& pVec)
 }
 Vector3 Aimbot::GetTargetAngle(Vector3 pTargetPos)
 {
-	Vector3 targetAngle{ NULL };
+	Vector3 targetAngle{};
 	Vector3 lpPos{ LocalPlayer::GetPawn().vLastCameraPos };
 
 	const Vector3 deltaPos{ pTargetPos - lpPos };
@@ -148,7 +145,6 @@ Vector3 Aimbot::GetTargetAngle(Vector3 pTargetPos)
 	const float distPos{ GetMagnitude(deltaPos) };
 
 	constexpr float radToDegree{ 57.295776f };
-
 	targetAngle.x = -asinf(deltaPos.z / distPos) * radToDegree;
 	targetAngle.y = atan2f(deltaPos.y, deltaPos.x) * radToDegree;
 
@@ -180,21 +176,19 @@ bool Aimbot::Start()
 bool Aimbot::ShotTarget(const Entity& pCTarget)
 {
 	Entity entTarget(pCTarget);
-
-	Pawn entPawn{ entTarget.GetPawnBase() };
-
 	Vector3 targetAngle{};
 
-	targetAngle = Aimbot::GetTargetAngle(entPawn.vLastCameraPos);
+	// Bone target
+	if (CheatHKeys::bHeadPos)
+		targetAngle = Aimbot::GetTargetAngle(entTarget.GetBonePos(Bone::head));
+	else
+		targetAngle = Aimbot::GetTargetAngle(entTarget.GetBonePos(Bone::pelvis));
 
-	 if (CheatHKeys::bHeadPos)
-	 	targetAngle = Aimbot::GetTargetAngle(entPawn.headBonePos);
-	 else
-	 	targetAngle = Aimbot::GetTargetAngle(entPawn.pelvisBonePos);
-
+	// FOV
 	if (!Aimbot::IsTargetInFov(targetAngle))
 		return false;
 
+	// Smoothing
 	if (CheatHKeys::smoothValue)
 		LocalPlayer::SetSmoothViewAngles(targetAngle, CheatHKeys::smoothValue);
 	else
@@ -206,21 +200,20 @@ bool Aimbot::ShotTarget(const Entity& pCTarget)
 bool Aimbot::ShotLockedTarget()
 {
 	Entity entTargetLocked(Aimbot::cTargetLocked);
-
 	Pawn entPawnLocked{ entTargetLocked.GetPawnBase() };
-
 	Vector3 targetLockedAngle{};
 
-	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.vLastCameraPos);
+	// Bone target
+	if (CheatHKeys::bHeadPos)
+		targetLockedAngle = Aimbot::GetTargetAngle(entTargetLocked.GetBonePos(Bone::head));
+	else
+		targetLockedAngle = Aimbot::GetTargetAngle(entTargetLocked.GetBonePos(Bone::pelvis));
 
-	 if (CheatHKeys::bHeadPos)
-	 	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.headBonePos);
-	 else
-	 	targetLockedAngle = Aimbot::GetTargetAngle(entPawnLocked.pelvisBonePos);
-
-	if (!Aimbot::IsTargetInFov(targetLockedAngle)) 
+	// FOV
+	if (!Aimbot::IsTargetInFov(targetLockedAngle))
 		return false;
 
+	// Smoothing
 	if (CheatHKeys::smoothValue)
 		LocalPlayer::SetSmoothViewAngles(targetLockedAngle, CheatHKeys::smoothValue);
 	else

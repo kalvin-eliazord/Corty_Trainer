@@ -120,21 +120,21 @@ bool MyD3D11::SetConstantBuffer()
 	return true;
 }
 
-bool MyD3D11::SetDeviceContextRenderTarget(IDXGISwapChain* pSwapchain)
+bool MyD3D11::SetDeviceContextRenderTarget()
 {
 	// Get game device
-	HRESULT hRes{ pSwapchain->GetDevice(__uuidof(ID3D11Device), (void**)&m_device) };
+	HRESULT hRes{ m_swapChain->GetDevice(__uuidof(ID3D11Device), (void**)&m_device) };
 	if (FAILED(hRes)) return false;
 
 	m_device->GetImmediateContext(&m_context);
 
 	// Init Render Target View
-	ID3D11Texture2D* backbuffer{ nullptr };
-	hRes = pSwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backbuffer);
+	ID3D11Texture2D* backBuffer{ nullptr };
+	hRes = m_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
 	if (FAILED(hRes)) return false;
 
-	hRes = m_device->CreateRenderTargetView(backbuffer, nullptr, &m_renderTargetView);
-	backbuffer->Release();
+	hRes = m_device->CreateRenderTargetView(backBuffer, nullptr, &m_renderTargetView);
+	backBuffer->Release();
 	if (FAILED(hRes)) return false;
 
 	return true;
@@ -144,7 +144,7 @@ bool MyD3D11::InitDraw(IDXGISwapChain* pSwapchain)
 {
 	m_swapChain = pSwapchain;
 
-	if (!SetDeviceContextRenderTarget(m_swapChain)) return false;
+	if (!SetDeviceContextRenderTarget()) return false;
 
 	if (!CompileShaders()) return false;
 
@@ -166,8 +166,8 @@ bool MyD3D11::SetO_Present()
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.SampleDesc.Count = 1;
 
-	ID3D11Device* pDevice{ nullptr };
-	IDXGISwapChain* pSwapchain{ nullptr };
+	ID3D11Device* device{ nullptr };
+	IDXGISwapChain* swapChain{ nullptr };
 
 	const HRESULT hRes{ D3D11CreateDeviceAndSwapChain(
 		nullptr,
@@ -178,28 +178,22 @@ bool MyD3D11::SetO_Present()
 		0,
 		D3D11_SDK_VERSION,
 		&sd,
-		&pSwapchain,
-		&pDevice,
+		&swapChain,
+		&device,
 		nullptr,
 		nullptr) };
 
 	if (FAILED(hRes)) return false;
 
-	void** pVMT{ *(void***)pSwapchain };
+	void** pVMT{ *reinterpret_cast<void***>(swapChain) };
 
 	// Get Present's address out of vmt
 	o_Present = (T_Present)(pVMT[(UINT)IDXGISwapChainVMT::Present]);
 
-	SafeRelease(pSwapchain);
-	SafeRelease(pDevice);
+	SafeRelease(swapChain);
+	SafeRelease(device);
 
 	return true;
-}
-
-void MyD3D11::BeginDraw()
-{
-	SetViewport();
-	SetConstantBuffer();
 }
 
 void MyD3D11::SetInputAssembler(D3D_PRIMITIVE_TOPOLOGY pPrimitiveTopology)

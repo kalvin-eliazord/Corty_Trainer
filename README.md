@@ -51,8 +51,12 @@ This is my second name.
 
 ## To-do
 - Add ESP Boxes
+- Add ESP player names
+- Add ESP skeleton
 - Add Triggerbot
+- Add complete bone choice
 - Add No Recoil
+- Add a complete menu
 - No more hardcoded offset (full pattern scanning)
 
 ## Disclaimers

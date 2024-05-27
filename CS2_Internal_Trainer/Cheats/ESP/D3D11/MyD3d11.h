@@ -18,8 +18,8 @@ private:
 	bool SetViewport();
 	bool CompileShaders();
 	bool SetConstantBuffer();
+	bool SetDeviceContextRenderTarget();
 	void SetOrthoMatrix(D3D11_VIEWPORT pViewport);
-	bool SetDeviceContextRenderTarget(IDXGISwapChain* pSwapchain);
 	bool SetInputLayout(ID3D10Blob* pCompiledShaderBlob);
 	void SetInputAssembler(D3D_PRIMITIVE_TOPOLOGY pPrimitiveTopology);
 	void SetLineVBuffer(float x, float y, float x2, float y2, D3DCOLORVALUE pColor);
@@ -28,9 +28,10 @@ private:
 	bool CompileShader(const char* szShader, const char* szEntrypoint, const char* szTarget, ID3D10Blob** pBlob);
 
 public:
-	static inline ID3D11Device* m_device{ nullptr };
-	static inline IDXGISwapChain* m_swapChain{ nullptr };
+	ID3D11Device* m_device{ nullptr };
+	IDXGISwapChain* m_swapChain{ nullptr };
 	ID3D11DeviceContext* m_context{ nullptr };
+	bool bDrawInit{ false };
 
 	// Shaders
 	ID3D11PixelShader* m_pixelShader{ nullptr };
@@ -40,7 +41,7 @@ public:
 	ID3D11InputLayout* m_vInputLayout{ nullptr };
 	ID3D11Buffer* m_vertexBuffer{ nullptr };
 	ID3D11Buffer* m_constantBuffer{ nullptr };
-	DirectX::XMMATRIX m_orthoMatrix{};
+	DirectX::XMMATRIX m_orthoMatrix{ nullptr };
 
 	// Rasterizer
 	D3D11_VIEWPORT m_viewport{};
@@ -48,9 +49,7 @@ public:
 	RECT m_hRect{};
 
 	// Output Merger
-	ID3D11RenderTargetView* m_renderTargetView { nullptr};
-
-	bool bDrawInit{false};
+	ID3D11RenderTargetView* m_renderTargetView{ nullptr };
 
 	// Hooking
 	using T_Present = HRESULT(*)(IDXGISwapChain* pSwap, UINT pSyncInterval, UINT pFlags);
@@ -59,7 +58,6 @@ public:
 	bool SetO_Present();
 
 	// Setup graphic pipeline
-	void BeginDraw();
 	bool InitDraw(IDXGISwapChain* pSwapchain);
 	HWND GetSwapHwnd(IDXGISwapChain* pSwapchain);
 
