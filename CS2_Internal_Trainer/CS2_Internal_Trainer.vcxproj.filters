@@ -8,35 +8,8 @@
     <Filter Include="Hook">
       <UniqueIdentifier>{985bc006-a3bb-452f-bd8f-615a30eff199}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Logs">
-      <UniqueIdentifier>{bb4a1223-a56d-473b-afca-f00dec9d0d94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Logs\CheatHKeys">
-      <UniqueIdentifier>{78cb799b-a320-4ee2-9e64-0bec0066bdd9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SDK">
       <UniqueIdentifier>{3dc26f74-e32f-4e67-b66c-124572380352}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SDK\LocalPlayer">
-      <UniqueIdentifier>{9941c7ff-1164-46f5-ac67-ceeeabba9abd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SDK\MyVector">
-      <UniqueIdentifier>{60216af8-acfd-458c-b532-cd64cd5f21ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cheats Features">
-      <UniqueIdentifier>{a4ea7340-a01d-4fcd-9e41-3a57743dd886}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cheats Features\Aimbot">
-      <UniqueIdentifier>{ff6bb25b-7531-46ac-9dcf-d6fd8e56ff69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cheats Features\ESP">
-      <UniqueIdentifier>{a7f72354-e5b1-4258-922c-e67298d1e17d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cheats Features\ESP\D3d11">
-      <UniqueIdentifier>{70e8c3e6-db57-4755-a464-88e101053d45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SDK\GameState">
-      <UniqueIdentifier>{76d3c3f2-a2fb-422c-ae2a-373df82ec145}</UniqueIdentifier>
     </Filter>
     <Filter Include="SDK\CS2_Dumper">
       <UniqueIdentifier>{c747f8e4-6bf7-447d-a52f-6b1b2cba2698}</UniqueIdentifier>
@@ -44,49 +17,52 @@
     <Filter Include="SDK\MemUtils">
       <UniqueIdentifier>{69459702-d89f-47bb-97b2-837acbfe22a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{bb4a1223-a56d-473b-afca-f00dec9d0d94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Features">
+      <UniqueIdentifier>{a4ea7340-a01d-4fcd-9e41-3a57743dd886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Features\Aimbot">
+      <UniqueIdentifier>{ff6bb25b-7531-46ac-9dcf-d6fd8e56ff69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Features\ESP">
+      <UniqueIdentifier>{a7f72354-e5b1-4258-922c-e67298d1e17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Features\ESP\D3d11">
+      <UniqueIdentifier>{70e8c3e6-db57-4755-a464-88e101053d45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hook\TrampHook.h">
       <Filter>Hook</Filter>
     </ClInclude>
-    <ClInclude Include="Logs\ConsoleCheatMenu.h">
-      <Filter>Logs</Filter>
-    </ClInclude>
-    <ClInclude Include="Logs\CheatHKeys.h">
-      <Filter>Logs\CheatHKeys</Filter>
+    <ClInclude Include="Menu\ConsoleMenu.h">
+      <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\Aimbot\Aimbot.h">
-      <Filter>Cheats Features\Aimbot</Filter>
+      <Filter>Features\Aimbot</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\ESP\D3D11\MyShaders.h">
-      <Filter>Cheats Features\ESP\D3d11</Filter>
+      <Filter>Features\ESP\D3d11</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\ESP\D3D11\MyD3D11.h">
-      <Filter>Cheats Features\ESP\D3d11</Filter>
+      <Filter>Features\ESP\D3d11</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\CheatManager.h">
-      <Filter>Cheats Features</Filter>
+      <Filter>Features</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\ESP\D3D11\MyD3D11_VMT.h">
-      <Filter>Cheats Features\ESP\D3d11</Filter>
+      <Filter>Features\ESP\D3d11</Filter>
     </ClInclude>
     <ClInclude Include="Cheats\ESP\ESP.h">
-      <Filter>Cheats Features\ESP</Filter>
+      <Filter>Features\ESP</Filter>
     </ClInclude>
     <ClInclude Include="SDK\Entity.h">
       <Filter>SDK</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\LocalPlayer.h">
-      <Filter>SDK\LocalPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\Vector3.h">
-      <Filter>SDK\MyVector</Filter>
-    </ClInclude>
     <ClInclude Include="Cheats\ESP\D3D11\MyD3D_Utils.h">
-      <Filter>Cheats Features\ESP\D3d11</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\GameState.h">
-      <Filter>SDK\GameState</Filter>
+      <Filter>Features\ESP\D3d11</Filter>
     </ClInclude>
     <ClInclude Include="SDK\CS2_Dumper\animationsystem.dll.hpp">
       <Filter>SDK\CS2_Dumper</Filter>
@@ -160,52 +136,58 @@
     <ClInclude Include="SDK\MyPointers.h">
       <Filter>SDK\MemUtils</Filter>
     </ClInclude>
+    <ClInclude Include="SDK\Vector3.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\LocalPlayer.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\GameState.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="Logs\ConsoleCheatMenu.cpp">
-      <Filter>Logs</Filter>
+    <ClCompile Include="Menu\ConsoleMenu.cpp">
+      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="Hook\TrampHook.cpp">
       <Filter>Hook</Filter>
     </ClCompile>
-    <ClCompile Include="Logs\CheatHKeys.cpp">
-      <Filter>Logs\CheatHKeys</Filter>
-    </ClCompile>
     <ClCompile Include="Cheats\ESP\D3D11\MyD3D11.cpp">
-      <Filter>Cheats Features\ESP\D3d11</Filter>
+      <Filter>Features\ESP\D3d11</Filter>
     </ClCompile>
     <ClCompile Include="Cheats\Aimbot\Aimbot.cpp">
-      <Filter>Cheats Features\Aimbot</Filter>
+      <Filter>Features\Aimbot</Filter>
     </ClCompile>
     <ClCompile Include="Cheats\CheatManager.cpp">
-      <Filter>Cheats Features</Filter>
+      <Filter>Features</Filter>
     </ClCompile>
     <ClCompile Include="Cheats\ESP\ESP.cpp">
-      <Filter>Cheats Features\ESP</Filter>
+      <Filter>Features\ESP</Filter>
     </ClCompile>
     <ClCompile Include="SDK\Entity.cpp">
       <Filter>SDK</Filter>
     </ClCompile>
-    <ClCompile Include="SDK\LocalPlayer.cpp">
-      <Filter>SDK\LocalPlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="SDK\Vector3.cpp">
-      <Filter>SDK\MyVector</Filter>
-    </ClCompile>
     <ClCompile Include="Cheats\ESP\D3D11\MyD3D_Utils.cpp">
-      <Filter>Cheats Features\ESP\D3d11</Filter>
-    </ClCompile>
-    <ClCompile Include="SDK\GameState.cpp">
-      <Filter>SDK\GameState</Filter>
+      <Filter>Features\ESP\D3d11</Filter>
     </ClCompile>
     <ClCompile Include="SDK\PatternScan.cpp">
       <Filter>SDK\MemUtils</Filter>
     </ClCompile>
     <ClCompile Include="SDK\MyPointers.cpp">
       <Filter>SDK\MemUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\Vector3.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\LocalPlayer.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\GameState.cpp">
+      <Filter>SDK</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

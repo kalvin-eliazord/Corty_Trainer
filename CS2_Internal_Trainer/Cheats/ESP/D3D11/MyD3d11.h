@@ -41,7 +41,7 @@ public:
 	ID3D11InputLayout* m_vInputLayout{ nullptr };
 	ID3D11Buffer* m_vertexBuffer{ nullptr };
 	ID3D11Buffer* m_constantBuffer{ nullptr };
-	DirectX::XMMATRIX m_orthoMatrix{ nullptr };
+	DirectX::XMMATRIX m_orthoMatrix{};
 
 	// Rasterizer
 	D3D11_VIEWPORT m_viewport{};

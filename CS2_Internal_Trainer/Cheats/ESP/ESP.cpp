@@ -36,7 +36,7 @@ bool ESP::IsGoodTarget(Entity* pCurrEntPtr)
 	if (currEntPawn.bDormant)
 		return false;
 
-	if (CheatHKeys::bTeamCheck && lpPawn.iTeamNum == currEntPawn.iTeamNum)
+	if (ConsoleMenu::bTeamCheck && lpPawn.iTeamNum == currEntPawn.iTeamNum)
 		return false;
 
 	return true;

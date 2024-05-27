@@ -9,7 +9,7 @@ bool Aimbot::IsTargetInFov(Vector3& pTargetAngle)
 	const float distFromCursor{ GetMagnitude(deltaAngle) };
 
 	// Checking if target is in FOV
-	if (distFromCursor < CheatHKeys::fovValue)
+	if (distFromCursor < ConsoleMenu::fovValue)
 		return true;
 
 	return false;
@@ -29,7 +29,7 @@ bool Aimbot::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 	if (entityPawn.iHealth < 1)
 		return false;
 
-	if (CheatHKeys::bTeamCheck && lpPawn.iTeamNum == entityPawn.iTeamNum)
+	if (ConsoleMenu::bTeamCheck && lpPawn.iTeamNum == entityPawn.iTeamNum)
 		return false;
 
 	if (!IsSpotted(pEntityPtr, pEntIndex))
@@ -161,11 +161,11 @@ bool Aimbot::Start()
 	if (!cTarget.IsEntInit()) return false;
 
 	// Updating the target only when the feature is off
-	if (!CheatHKeys::bTargetLock)
+	if (!ConsoleMenu::bTargetLock)
 		cTargetLocked = cTarget;
 
 	// Target locking feature
-	if (CheatHKeys::bTargetLock)
+	if (ConsoleMenu::bTargetLock)
 		ShotLockedTarget();
 	else
 		ShotTarget(cTarget);
@@ -179,7 +179,7 @@ bool Aimbot::ShotTarget(const Entity& pCTarget)
 	Vector3 targetAngle{};
 
 	// Bone target
-	if (CheatHKeys::bHeadPos)
+	if (ConsoleMenu::bHeadPos)
 		targetAngle = Aimbot::GetTargetAngle(entTarget.GetBonePos(Bone::head));
 	else
 		targetAngle = Aimbot::GetTargetAngle(entTarget.GetBonePos(Bone::pelvis));
@@ -189,8 +189,8 @@ bool Aimbot::ShotTarget(const Entity& pCTarget)
 		return false;
 
 	// Smoothing
-	if (CheatHKeys::smoothValue)
-		LocalPlayer::SetSmoothViewAngles(targetAngle, CheatHKeys::smoothValue);
+	if (ConsoleMenu::smoothValue)
+		LocalPlayer::SetSmoothViewAngles(targetAngle, ConsoleMenu::smoothValue);
 	else
 		LocalPlayer::SetViewAngles(targetAngle);
 
@@ -204,7 +204,7 @@ bool Aimbot::ShotLockedTarget()
 	Vector3 targetLockedAngle{};
 
 	// Bone target
-	if (CheatHKeys::bHeadPos)
+	if (ConsoleMenu::bHeadPos)
 		targetLockedAngle = Aimbot::GetTargetAngle(entTargetLocked.GetBonePos(Bone::head));
 	else
 		targetLockedAngle = Aimbot::GetTargetAngle(entTargetLocked.GetBonePos(Bone::pelvis));
@@ -214,8 +214,8 @@ bool Aimbot::ShotLockedTarget()
 		return false;
 
 	// Smoothing
-	if (CheatHKeys::smoothValue)
-		LocalPlayer::SetSmoothViewAngles(targetLockedAngle, CheatHKeys::smoothValue);
+	if (ConsoleMenu::smoothValue)
+		LocalPlayer::SetSmoothViewAngles(targetLockedAngle, ConsoleMenu::smoothValue);
 	else
 		LocalPlayer::SetViewAngles(targetLockedAngle);
 

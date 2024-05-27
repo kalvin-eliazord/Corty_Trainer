@@ -9,10 +9,12 @@ Corty Trainer is an updated dynamic-linked library **cheat** written in C++ for 
 	- Head or Pelvis focus
 - ESP
 	- SnapLine
-        - Boxe
+ 	- Boxe
+        
    
-## Console Preview
-![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/009fe3bb-e23f-43d4-8b50-739d2811cb92)
+## Preview
+![V4](https://github.com/kalvin-eliazord/Corty_Trainer/assets/61147281/f543cbc1-d757-474f-b5a9-3463b86f0f0f)
+
 
 # FAQ
 - **What is an aimbot ?**
@@ -25,7 +27,7 @@ If the console appears and there is no pointer error, please disable your antivi
 
 - **Why "Corty" Trainer ?**
   
-This is my second name.
+This is my third name.
 
 ## How to build the DLL
 - Open the solution with MVS 2022 ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/ea1e187b-f25d-4091-9f80-153009a8480c)

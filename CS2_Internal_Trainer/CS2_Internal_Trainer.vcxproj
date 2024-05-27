@@ -72,11 +72,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)SDK\CS2_Dumper;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Menu;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)SDK\CS2_Dumper;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Logs;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)SDK\CS2_Dumper;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)Cheats\Aimbot;$(ProjectDir)\Menu;$(ProjectDir)\SDK;$(ProjectDir)Hook;$(ProjectDir)SDK\MemUtils;$(ProjectDir)\Cheats;$(ProjectDir)Cheats\ESP;$(ProjectDir)Cheats\ESP\D3D11;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)Hook;$(ProjectDir)Cheats\ESP;$(ProjectDir)SDK\CS2_Dumper;</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -162,8 +162,7 @@
     <ClInclude Include="Cheats\ESP\D3D11\MyShaders.h" />
     <ClInclude Include="Cheats\ESP\ESP.h" />
     <ClInclude Include="Hook\TrampHook.h" />
-    <ClInclude Include="Logs\CheatHKeys.h" />
-    <ClInclude Include="Logs\ConsoleCheatMenu.h" />
+    <ClInclude Include="Menu\ConsoleMenu.h" />
     <ClInclude Include="SDK\MyPointers.h" />
     <ClInclude Include="SDK\Peb.h" />
     <ClInclude Include="SDK\CS2_Dumper\animationsystem.dll.hpp" />
@@ -203,8 +202,7 @@
     <ClCompile Include="SDK\MyPointers.cpp" />
     <ClCompile Include="SDK\GameState.cpp" />
     <ClCompile Include="Hook\TrampHook.cpp" />
-    <ClCompile Include="Logs\CheatHKeys.cpp" />
-    <ClCompile Include="Logs\ConsoleCheatMenu.cpp" />
+    <ClCompile Include="Menu\ConsoleMenu.cpp" />
     <ClCompile Include="SDK\Entity.cpp" />
     <ClCompile Include="SDK\LocalPlayer.cpp" />
     <ClCompile Include="SDK\PatternScan.cpp" />

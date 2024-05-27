@@ -1,8 +1,7 @@
 #pragma once
 #include "Aimbot.h"
 #include "ESP.h"
-#include "CheatHKeys.h"
-#include "ConsoleCheatMenu.h"
+#include "ConsoleMenu.h"
 #include "MyPointers.h"
 #include "GameState.h"
 #include "TrampHook.h"

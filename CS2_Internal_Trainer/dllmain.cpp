@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include "CheatManager.h"
 #include "PatternScan.h"
-#include "ConsoleCheatMenu.h"
+#include "ConsoleMenu.h"
 
 extern MyD3D11 g_myD3d11;
 
@@ -11,18 +11,18 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
 	if (!patternScan.InitPointers())
 	{
-		ConsoleCheatMenu::PrintErrorPtrInit(patternScan.GetPtrState());
+		ConsoleMenu::PrintErrorPtrInit(patternScan.GetPtrState());
 		while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(10);
 	}
 	else if (!CheatManager::InitHook())
 	{
-		std::cerr << "[!] Hook failed \n";
+		std::cerr << "[!] Hook failed. \n";
 		while (!(GetAsyncKeyState(VK_DELETE) & 1)) Sleep(10);
 	}
 
 	// Cleaning
 	Sleep(500);
-	ConsoleCheatMenu::DestroyConsole();
+	ConsoleMenu::DestroyConsole();
 	VirtualFree(g_myD3d11.t_presentGateway, 0, MEM_RELEASE);
 	FreeLibraryAndExitThread(hModule, 0);
 	return 0;

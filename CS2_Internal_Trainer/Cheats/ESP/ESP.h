@@ -3,7 +3,7 @@
 #include "MyD3D11.h"
 #include "LocalPlayer.h"
 #include "Entity.h"
-#include "CheatHKeys.h"
+#include "ConsoleMenu.h"
 #include "PatternScan.h"
 #include <vector>
 

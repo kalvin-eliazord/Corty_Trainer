@@ -1,6 +1,6 @@
 #include "CheatManager.h"
 
-MyD3D11 g_myD3d11;
+MyD3D11 g_myD3d11{};
 
 HRESULT hkPresent(IDXGISwapChain* pChain, UINT pSyncInterval, UINT pFlags)
 {
@@ -17,7 +17,7 @@ HRESULT hkPresent(IDXGISwapChain* pChain, UINT pSyncInterval, UINT pFlags)
 
 bool CheatManager::InitHook()
 {
-	ConsoleCheatMenu::InitConsole();
+	ConsoleMenu::InitConsole();
 
 	// Get original Present address with the dummy device method
 	if (!g_myD3d11.SetO_Present()) return false;
@@ -42,22 +42,22 @@ bool CheatManager::Run()
 {
 	if (!bHookPtr) return false;
 
-	if (CheatHKeys::IsOptionChanged())
-		ConsoleCheatMenu::PrintCheatOptions();
+	if (ConsoleMenu::IsOptionChanged())
+		ConsoleMenu::PrintCheatOptions();
 
 	if (GameState::IsMatchStarted())
 	{
 		// Removing TeamCheck by default when in DeathMatch
-		if(!CheatHKeys::bInitTeamCheck && CheatHKeys::SetDefaultTeamCheck(GameState::IsDeathMatch()))
-			ConsoleCheatMenu::PrintCheatOptions();
+		if(!ConsoleMenu::bInitTeamCheck && ConsoleMenu::SetDefaultTeamCheck(GameState::IsDeathMatch()))
+			ConsoleMenu::PrintCheatOptions();
 
 		// Cheat Features
-		if (CheatHKeys::bAimbot) Aimbot::Start();
-		if (CheatHKeys::bESP)    ESP::Start();
+		if (ConsoleMenu::bAimbot) Aimbot::Start();
+		if (ConsoleMenu::bESP)    ESP::Start();
 	}
 	else
 	{
-		CheatHKeys::bInitTeamCheck = false;
+		ConsoleMenu::bInitTeamCheck = false;
 		//TODO: ESP->draw the box on myself
 	}
 
