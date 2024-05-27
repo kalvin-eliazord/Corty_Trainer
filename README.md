@@ -8,7 +8,8 @@ Corty Trainer is an updated dynamic-linked library **cheat** written in C++ for 
 	- FOV
 	- Head or Pelvis focus
 - ESP
-	- Line Distance
+	- SnapLine
+        - Boxe
    
 ## Console Preview
 ![image](https://github.com/kalvin-eliazord/CS2_Internal_Trainer/assets/61147281/009fe3bb-e23f-43d4-8b50-739d2811cb92)
@@ -50,7 +51,6 @@ This is my second name.
 
 
 ## To-do
-- Add ESP Boxes
 - Add ESP player names
 - Add ESP skeleton
 - Add Triggerbot
