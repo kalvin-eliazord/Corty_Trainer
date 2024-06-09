@@ -1,5 +1,5 @@
 # Corty Trainer
-Corty Trainer is an updated dynamic-linked library **cheat** written in C++ for the CS2 game.
+Corty Trainer is an up to date dynamic-linked library **cheat** written in C++ for the CS2 game.
 
 ## Features
 - Aimbot 
@@ -54,6 +54,7 @@ This is my third name.
 
 ## To-do
 - Add ESP player names
+- Add RadarHack
 - Add ESP skeleton
 - Add Triggerbot
 - Add complete bone choice
