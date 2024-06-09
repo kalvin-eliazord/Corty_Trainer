@@ -29,6 +29,9 @@ bool Aimbot::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
 	if (entityPawn.iHealth < 1)
 		return false;
 
+	if (entityPawn.bDormant)
+		return false;
+
 	if (ConsoleMenu::bTeamCheck && lpPawn.iTeamNum == entityPawn.iTeamNum)
 		return false;
 
