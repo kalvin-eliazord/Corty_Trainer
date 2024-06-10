@@ -3,8 +3,8 @@
 bool Aimbot::IsTargetInFov(Vector3& pTargetAngle)
 {
 	Vector3 localPlayerAngle{ LocalPlayer::GetPawn().vAngEyeAngle };
-
 	Vector3 deltaAngle{ localPlayerAngle - pTargetAngle };
+	NormalizeYaw(deltaAngle.y);
 
 	const float distFromCursor{ GetMagnitude(deltaAngle) };
 
