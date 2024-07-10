@@ -15,41 +15,14 @@ bool Aimbot::IsTargetInFov(Vector3& pTargetAngle)
 	return false;
 }
 
-bool Aimbot::IsGoodTarget(Entity* pEntityPtr, int pEntIndex)
+bool Aimbot::IsSpotted(Entity pCurrEnt)
 {
-	if (!pEntityPtr->IsEntInit())
-		return false;
-
-	Pawn lpPawn{ LocalPlayer::GetPawn() };
-	Pawn entityPawn{ pEntityPtr->GetPawnBase() };
-
-	if (LocalPlayer::GetController().sEntName == pEntityPtr->GetCBase().sEntName)
-		return false;
-
-	if (entityPawn.iHealth < 1)
-		return false;
-
-	if (entityPawn.bDormant)
-		return false;
-
-	if (ConsoleMenu::bTeamCheck && lpPawn.iTeamNum == entityPawn.iTeamNum)
-		return false;
-
-	if (!IsSpotted(pEntityPtr, pEntIndex))
-		return false;
-
-	return true;
-}
-
-bool Aimbot::IsSpotted(Entity* pCurrEnt, int pEntIndex)
-{
-	constexpr int localPlayerId{ 0 };
-
-	std::bitset<64> lpSpottedId{ LocalPlayer::GetEntity().GetPawnBase().bSpottedMask };
-	std::bitset<64> currEntSpottedId{ pCurrEnt->GetPawnBase().bSpottedMask };
+	Entity localPlayerEnt{ LocalPlayer::GetEntity()};
+	std::bitset<64> lpSpottedId{ localPlayerEnt.GetPawnBase().bSpottedMask };
+	std::bitset<64> currEntSpottedId{ pCurrEnt.GetPawnBase().bSpottedMask };
 
 	// Not spotted by entity AND entity not spotted me
-	if (!(lpSpottedId.test(pEntIndex) || currEntSpottedId.test(localPlayerId)))
+	if (!(lpSpottedId.test(pCurrEnt.GetIndex()) || currEntSpottedId.test(localPlayerEnt.GetIndex())))
 		return false;
 
 	return true;
@@ -87,35 +60,18 @@ Entity Aimbot::GetNearestTarget(std::vector<Entity> pTargetsEnt)
 	return nearestTarget;
 }
 
-std::vector<Entity> Aimbot::GetValidTargets()
+Entity Aimbot::GetEntTarget(const std::vector<Entity>& pTargets)
 {
-	std::vector<Entity> cTargetsEntities{};
+	Entity target{};
 
-	for (int i{ 0 }; i < 64; ++i)
-	{
-		Entity currEntity(MyPointers::GetEntityBase(i));
-
-		if (!IsGoodTarget(&currEntity, i))
-			continue;
-
-		cTargetsEntities.push_back(currEntity);
-	}
-
-	return cTargetsEntities;
-}
-
-bool Aimbot::GetEntTarget(Entity& pEntityTarget)
-{
-	// Get Entities targets
-	std::vector<Entity> targetsEntities{ Aimbot::GetValidTargets() };
-	if (targetsEntities.empty()) return false;
-
-	if (targetsEntities.size() > 1)
-		pEntityTarget = GetNearestTarget(targetsEntities);
+	if (pTargets.size() > 1)
+		target = GetNearestTarget(pTargets);
 	else
-		pEntityTarget = targetsEntities[0];
+		target = pTargets[0];
 
-	return true;
+	if (IsSpotted(target)) return target;
+
+	return Entity();
 }
 
 void Aimbot::NormalizePitch(float& pPitch)
@@ -156,11 +112,11 @@ Vector3 Aimbot::GetTargetAngle(Vector3 pTargetPos)
 	return targetAngle;
 }
 
-bool Aimbot::Start()
+bool Aimbot::Start(const std::vector<Entity>& pTargets)
 {
-	Entity cTarget;
-	GetEntTarget(cTarget);
+	if (pTargets.empty()) return false;
 
+	Entity cTarget{ GetEntTarget(pTargets) };
 	if (!cTarget.IsEntInit()) return false;
 
 	// Updating the target only when the feature is off
@@ -224,7 +180,7 @@ bool Aimbot::ShotLockedTarget()
 
 	// Locking at target until he die
 	if (entPawnLocked.iHealth < 1)
-		cTargetLocked = NULL;
+		cTargetLocked = Entity();
 
 	return true;
 }

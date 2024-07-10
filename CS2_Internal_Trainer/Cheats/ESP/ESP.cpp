@@ -1,51 +1,9 @@
 #include "ESP.h"
 
-std::vector<Entity> ESP::GetValidTargets()
+bool ESP::Start(const std::vector<Entity>& pTargets)
 {
-	std::vector<Entity> cTargets{};
-
-	for (int i{ 0 }; i < 64; ++i)
-	{
-		Entity currEntity(MyPointers::GetEntityBase(i));
-
-		if (!IsGoodTarget(&currEntity))
-			continue;
-
-		cTargets.push_back(currEntity);
-	}
-
-	return cTargets;
-}
-
-bool ESP::IsGoodTarget(Entity* pCurrEntPtr)
-{
-	if (!pCurrEntPtr->IsEntInit())
-		return false;
-
-	if (!LocalPlayer::GetEntity().IsEntInit()) return false;
-	Pawn lpPawn{ LocalPlayer::GetPawn() };
-
-	Pawn currEntPawn{ pCurrEntPtr->GetPawnBase() };
-
-	if (LocalPlayer::GetController().sEntName == pCurrEntPtr->GetCBase().sEntName)
-		return false;
-
-	if (currEntPawn.iHealth < 1)
-		return false;
-
-	if (currEntPawn.bDormant)
-		return false;
-
-	if (ConsoleMenu::bTeamCheck && lpPawn.iTeamNum == currEntPawn.iTeamNum)
-		return false;
-
-	return true;
-}
-
-bool ESP::Start()
-{
-	std::vector<Entity> cTargets{ GetValidTargets() };
-	if (cTargets.empty()) return false;
+	if (pTargets.empty()) return false;
+	auto cTargets{pTargets };
 
 	const float winWidth{ g_myD3d11.m_viewport.Width };
 	const float winHeight{ g_myD3d11.m_viewport.Height };

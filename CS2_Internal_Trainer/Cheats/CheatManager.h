@@ -9,6 +9,8 @@
 
 namespace CheatManager
 {
+	std::vector<Entity> GetValidTargets();
+	bool IsGoodTarget(Entity* pCurrEntPtr);
 	inline const bool* bHookPtr{};
 	bool InitHook();
 	bool Run();

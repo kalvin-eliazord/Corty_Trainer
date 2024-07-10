@@ -15,6 +15,47 @@ HRESULT hkPresent(IDXGISwapChain* pChain, UINT pSyncInterval, UINT pFlags)
 	return g_myD3d11.t_presentGateway(pChain, pSyncInterval, pFlags);
 }
 
+std::vector<Entity> CheatManager::GetValidTargets()
+{
+	std::vector<Entity> cTargetsEntities{};
+
+	for (int i{ 0 }; i < 64; ++i)
+	{
+		Entity currEntity(MyPointers::GetEntityBase(i), i);
+
+		if (!IsGoodTarget(&currEntity)) continue;
+
+		cTargetsEntities.push_back(currEntity);
+	}
+
+	return cTargetsEntities;
+}
+
+bool CheatManager::IsGoodTarget(Entity* pCurrEntPtr)
+{
+	if (!pCurrEntPtr->IsEntInit())
+		return false;
+
+	if (!LocalPlayer::GetEntity().IsEntInit()) return false;
+	Pawn lpPawn{ LocalPlayer::GetPawn() };
+
+	Pawn currEntPawn{ pCurrEntPtr->GetPawnBase() };
+
+	if (LocalPlayer::GetController().sEntName == pCurrEntPtr->GetCBase().sEntName)
+		return false;
+
+	if (currEntPawn.iHealth < 1)
+		return false;
+
+	if (currEntPawn.bDormant)
+		return false;
+
+	if (ConsoleMenu::bTeamCheck && lpPawn.iTeamNum == currEntPawn.iTeamNum)
+		return false;
+
+	return true;
+}
+
 bool CheatManager::InitHook()
 {
 	ConsoleMenu::InitConsole();
@@ -51,9 +92,11 @@ bool CheatManager::Run()
 		if(!ConsoleMenu::bInitTeamCheck && ConsoleMenu::SetDefaultTeamCheck(GameState::IsDeathMatch()))
 			ConsoleMenu::PrintCheatOptions();
 
+		std::vector<Entity> targets{ GetValidTargets()};
+
 		// Cheat Features
-		if (ConsoleMenu::bAimbot) Aimbot::Start();
-		if (ConsoleMenu::bESP)    ESP::Start();
+		if (ConsoleMenu::bAimbot) Aimbot::Start(targets);
+		if (ConsoleMenu::bESP)    ESP::Start(targets);
 	}
 	else
 	{

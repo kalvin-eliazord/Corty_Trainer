@@ -1,5 +1,5 @@
 // Generated using https://github.com/a2x/cs2-dumper
-// 2024-05-17 11:57:17.491581400 UTC
+// 2024-07-02 22:14:16.333089500 UTC
 
 #pragma once
 
@@ -88,7 +88,7 @@ namespace cs2_dumper {
                 constexpr std::ptrdiff_t m_bHasLocalContrastParams = 0xDC; // bool
                 constexpr std::ptrdiff_t m_localConstrastParams = 0xE0; // PostProcessingLocalContrastParameters_t
                 constexpr std::ptrdiff_t m_nColorCorrectionVolumeDim = 0xF4; // int32
-                constexpr std::ptrdiff_t m_colorCorrectionVolumeData = 0xF8; // 
+                constexpr std::ptrdiff_t m_colorCorrectionVolumeData = 0xF8; // CUtlBinaryBlock
                 constexpr std::ptrdiff_t m_bHasColorCorrection = 0x110; // bool
             }
             // Parent: MaterialParam_t
@@ -152,7 +152,7 @@ namespace cs2_dumper {
             // Metadata:
             // MGetKV3ClassDefaults
             namespace MaterialParamBuffer_t {
-                constexpr std::ptrdiff_t m_value = 0x8; // 
+                constexpr std::ptrdiff_t m_value = 0x8; // CUtlBinaryBlock
             }
             // Parent: None
             // Fields count: 14

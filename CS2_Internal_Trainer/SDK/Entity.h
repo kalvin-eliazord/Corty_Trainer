@@ -30,6 +30,8 @@ private:
 	bool isEntInit{ false };
 	intptr_t pawnBaseAddr{0};
 	intptr_t cBaseAddr{0};
+	int iIndex{};
+
 	Pawn pawnBase{};
 	Controller cBase{};
 
@@ -50,12 +52,13 @@ private:
 	bool UpdatePawn();
 
 public:
+	int GetIndex();
 	Pawn GetPawnBase();
 	Controller GetCBase();
 	Vector3 GetBonePos(Bone pBone);
 
 	bool IsEntInit();
-	Entity(intptr_t pCBaseAddr);
+	Entity(intptr_t pCBaseAddr, int pIndex);
 	Entity();
 };
 

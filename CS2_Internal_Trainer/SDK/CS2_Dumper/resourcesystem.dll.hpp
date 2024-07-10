@@ -1,5 +1,5 @@
 // Generated using https://github.com/a2x/cs2-dumper
-// 2024-05-17 11:57:17.491581400 UTC
+// 2024-07-02 22:14:16.333089500 UTC
 
 #pragma once
 
@@ -9,7 +9,7 @@
 namespace cs2_dumper {
     namespace schemas {
         // Module: resourcesystem.dll
-        // Classes count: 59
+        // Classes count: 58
         // Enums count: 2
         namespace resourcesystem_dll {
             // Alignment: 1
@@ -280,20 +280,6 @@ namespace cs2_dumper {
             //
             // Metadata:
             // MResourceTypeForInfoType
-            namespace InfoForResourceTypeCNmGraph {
-            }
-            // Parent: None
-            // Fields count: 0
-            //
-            // Metadata:
-            // MResourceTypeForInfoType
-            namespace InfoForResourceTypeCDACGameDefsData {
-            }
-            // Parent: None
-            // Fields count: 0
-            //
-            // Metadata:
-            // MResourceTypeForInfoType
             namespace InfoForResourceTypeCPanoramaStyle {
             }
             // Parent: None
@@ -308,7 +294,21 @@ namespace cs2_dumper {
             //
             // Metadata:
             // MResourceTypeForInfoType
+            namespace InfoForResourceTypeCNmGraphVariation {
+            }
+            // Parent: None
+            // Fields count: 0
+            //
+            // Metadata:
+            // MResourceTypeForInfoType
             namespace InfoForResourceTypeCCSGOEconItem {
+            }
+            // Parent: None
+            // Fields count: 0
+            //
+            // Metadata:
+            // MResourceTypeForInfoType
+            namespace InfoForResourceTypeCNmGraphDefinition {
             }
             // Parent: None
             // Fields count: 0
@@ -427,13 +427,6 @@ namespace cs2_dumper {
             //
             // Metadata:
             // MResourceTypeForInfoType
-            namespace InfoForResourceTypeCNmGraphDataSet {
-            }
-            // Parent: None
-            // Fields count: 0
-            //
-            // Metadata:
-            // MResourceTypeForInfoType
             namespace InfoForResourceTypeIParticleSystemDefinition {
             }
             // Parent: None
@@ -450,7 +443,7 @@ namespace cs2_dumper {
             // MGetKV3ClassDefaults
             namespace ManifestTestResource_t {
                 constexpr std::ptrdiff_t m_name = 0x0; // CUtlString
-                constexpr std::ptrdiff_t m_child = 0x8; // 
+                constexpr std::ptrdiff_t m_child = 0x8; // CStrongHandle<InfoForResourceTypeManifestTestResource_t>
             }
             // Parent: None
             // Fields count: 0

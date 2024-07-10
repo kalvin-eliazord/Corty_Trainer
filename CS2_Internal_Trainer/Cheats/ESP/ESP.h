@@ -11,7 +11,5 @@ extern MyD3D11 g_myD3d11;
 
 namespace ESP
 {
-	std::vector<Entity> GetValidTargets();
-	bool IsGoodTarget(Entity* pCurrEntPtr);
-	bool Start();
+	bool Start(const std::vector<Entity>& pTargets);
 };

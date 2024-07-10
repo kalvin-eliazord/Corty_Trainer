@@ -1,7 +1,8 @@
 #include "Entity.h"
 
-Entity::Entity(intptr_t pCBaseAddr)
+Entity::Entity(intptr_t pCBaseAddr, int pIndex)
 	: cBaseAddr{ pCBaseAddr }
+	, iIndex{ pIndex }
 {
 	if (cBaseAddr && UpdateController())
 		isEntInit = true;
@@ -125,6 +126,11 @@ Vector3 Entity::GetBonePos(Bone pBone)
 Controller Entity::GetCBase()
 {
 	return cBase;
+}
+
+int Entity::GetIndex()
+{
+	return this->iIndex;
 }
 
 Pawn Entity::GetPawnBase()

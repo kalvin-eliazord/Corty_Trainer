@@ -2,7 +2,7 @@
 
 Entity LocalPlayer::GetEntity()
 {
-	Entity lpEntityPtr(MyPointers::GetLpControllerBase());
+	Entity lpEntityPtr(MyPointers::GetLpControllerBase(), 0);
 	return lpEntityPtr;
 }
 
